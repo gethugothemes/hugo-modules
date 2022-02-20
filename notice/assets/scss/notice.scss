@@ -1,0 +1,83 @@
+.notices {
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  p {
+    padding: 0.7rem;
+    margin-bottom: 0;
+    border-top: 1.9rem solid transparent;
+    &::before {
+      position: absolute;
+      top: 7px;
+      color: #fff;
+      content: "\2139";
+      height: 1.1rem;
+      width: 1.1rem;
+      line-height: 1rem;
+      text-align: center;
+      border-radius: 50%;
+      border: 1px solid #fff;
+      left: 0.7rem;
+    }
+    &::after {
+      position: absolute;
+      top: 2px;
+      color: #fff;
+      left: 2.2rem;
+    }
+  }
+}
+
+.notices.note p {
+  border-color: #6ab0de;
+  background-color: #e3f4ff;
+  &::after {
+    content: "Note";
+  }
+}
+
+.notices.tip p {
+  border-color: #78c578;
+  background-color: #e2ffe2;
+  &::after {
+    content: "Tip";
+  }
+}
+
+.notices.info p {
+  border-color: #f0b37e;
+  background-color: #ffedde;
+  &::after {
+    content: "Info";
+  }
+}
+
+.notices.warning p {
+  border-color: #e06f6c;
+  background-color: #ffdad8;
+  &::after {
+    content: "Warning";
+  }
+}
+
+body.dark {
+  .notices.note p {
+    border-color: rgba(151, 214, 255, 0.8);
+    background-color: rgba(151, 214, 255, 0.15);
+  }
+
+  .notices.tip p {
+    border-color: rgba(150, 255, 150, 0.8);
+    background-color: rgba(150, 255, 150, 0.15);
+  }
+
+  .notices.info p {
+    border-color: rgba(255, 195, 146, 0.8);
+    background-color: rgba(255, 195, 146, 0.15);
+  }
+
+  .notices.warning p {
+    border-color: rgba(255, 145, 140, 0.8);
+    background-color: rgba(255, 145, 140, 0.15);
+  }
+}
