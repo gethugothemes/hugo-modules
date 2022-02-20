@@ -1,0 +1,12 @@
+<div class="accordion border">
+  <div class="accordion-item">
+    <h2 class="accordion-header my-0" id="title-{{.Get 0 | urlize}}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ .Get 0 | sha1}}" aria-expanded="false" aria-controls="{{ .Get 0 | sha1}}">
+        {{ .Get 0 | markdownify }}
+      </button>
+    </h2>
+    <div id="collapse-{{.Get 0 | sha1}}" class="accordion-collapse collapse" aria-labelledby="title-{{.Get 0 | urlize}}">
+      <div class="accordion-body">{{ .Inner | markdownify }}</div>
+    </div>
+  </div>
+</div>
