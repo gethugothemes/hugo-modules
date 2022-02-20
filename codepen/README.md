@@ -1,4 +1,4 @@
-# Button Shortcode
+# Codepen Shortcode
 
 ## Installation for Gethugothemes themes
 

@@ -1,0 +1,35 @@
+{
+  "name": "@gethugothemes/hugo-modules",
+  "version": "1.0.0",
+  "description": "Hugo Modules for gethugothemes.com themes",
+  "homepage": "https://gethugothemes.com/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gethugothemes/hugo-modules.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gethugothemes/hugo-modules/issues"
+  },
+  "scripts": {
+    "serve": "hugo server --disableFastRender --i18n-warnings --navigateToChanged  --templateMetrics --templateMetricsHints --verbose --verboseLog --path-warnings --buildDrafts --buildExpired --buildFuture --watch --enableGitInfo --forceSyncStatic --log true --logFile hugo.log --verbose",
+    "hugo": "hugo --i18n-warnings --templateMetrics --templateMetricsHints --verbose --verboseLog --path-warnings --enableGitInfo --log true --logFile hugo.log --verbose",
+    "update": "hugo mod get -u ./... && hugo mod tidy"
+  },
+  "keywords": [
+    "hugo",
+    "hugo-modules",
+    "hugo-theme"
+  ],
+  "author": {
+    "name": "Mehedi Sharif Titas",
+    "web": "https://gethugothemes.com"
+  },
+  "maintainers": [
+    {
+      "name": "Somrat Sorkar",
+      "email": "abdulmonnafsomrat@gmail.com",
+      "web": "https://somrat.netlify.app"
+    }
+  ]
+}
