@@ -2,6 +2,13 @@
 
 ## Installation for Gethugothemes themes
 
+Add the following code to your module list in the `config/_default/module.toml` file.
+
+```toml
+[[imports]]
+path = "github.com/gethugothemes/hugo-modules/shortcodes/codepen"
+```
+
 Add the following code to your js plugins list in the `config.toml` file.
 
 ```toml
