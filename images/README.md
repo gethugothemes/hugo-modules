@@ -17,7 +17,7 @@ Call it, as a partial in your theme.
 
 ```html
 <!-- logo -->
-{{ partial "images/logo.html" . }}
+{{ partial "logo.html" . }}
 ```
 
 Define the logo in the `config/_default/params.toml` file.
@@ -48,7 +48,7 @@ Call it, as a partial in your theme.
 
 ```html
 <!-- favicon -->
-{{ partialCached "images/favicon" . }}
+{{ partialCached "favicon" . }}
 ```
 
 Define the logo in the `config/_default/params.toml` file.
@@ -66,7 +66,7 @@ favicon = "images/favicon.png"
 Call it, as a partial in your theme.
 
 ```html
-{{ partial "images/image.html" (dict "Src" .Params.image "Size" "100x" "Alt" .Title) }}
+{{ partial "image.html" (dict "Src" .Params.image "Size" "100x" "Alt" .Title) }}
 ```
 
 <hr>
@@ -77,5 +77,5 @@ Call it, as a partial in your theme.
 Call it, as a partial in your theme.
 
 ```html
-{{ partial `images/bg-image.html` (dict `Src` .background_image ) | safeHTMLAttr }}
+{{ partial `bg-image.html` (dict `Src` .background_image ) | safeHTMLAttr }}
 ```
