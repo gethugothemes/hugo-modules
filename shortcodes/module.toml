@@ -6,72 +6,72 @@ extended = true
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/buttons"
 [[imports.mounts]]
-source = "shortcodes/buttons/layouts/shortcodes"
+source = "buttons/layouts/shortcodes"
 target = "layouts/shortcodes"
 
 # codepen
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/codepen"
 [[imports.mounts]]
-source = "shortcodes/codepen/layouts/shortcodes"
+source = "codepen/layouts/shortcodes"
 target = "layouts/shortcodes"
 
 # collapse
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/collapse"
 [[imports.mounts]]
-source = "shortcodes/collapse/layouts/shortcodes"
+source = "collapse/layouts/shortcodes"
 target = "layouts/shortcodes"
 
 # notice
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/notice"
 [[imports.mounts]]
-source = "shortcodes/notice/layouts/shortcodes"
+source = "notice/layouts/shortcodes"
 target = "layouts/shortcodes"
 [[imports.mounts]]
-source = "shortcodes/notice/assets/scss"
+source = "notice/assets/scss"
 target = "assets/scss"
 
 # video
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/video"
 [[imports.mounts]]
-source = "shortcodes/video/layouts/shortcodes"
+source = "video/layouts/shortcodes"
 target = "layouts/shortcodes"
 
 # tabs
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/tabs"
 [[imports.mounts]]
-source = "shortcodes/tabs/layouts/shortcodes"
+source = "tabs/layouts/shortcodes"
 target = "layouts/shortcodes"
 [[imports.mounts]]
-source = "shortcodes/tabs/assets/scss"
+source = "tabs/assets/scss"
 target = "assets/scss"
 
 # image
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/image"
 [[imports.mounts]]
-source = "shortcodes/image/layouts/shortcodes"
+source = "image/layouts/shortcodes"
 target = "layouts/shortcodes"
 [[imports.mounts]]
-source = "shortcodes/image/assets/scss"
+source = "image/assets/scss"
 target = "assets/scss"
 
 # gallery
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/gallery"
 [[imports.mounts]]
-source = "shortcodes/gallery/layouts/shortcodes"
+source = "gallery/layouts/shortcodes"
 target = "layouts/shortcodes"
 [[imports.mounts]]
-source = "shortcodes/gallery/layouts/partials"
+source = "gallery/layouts/partials"
 target = "layouts/partials"
 [[imports.mounts]]
-source = "shortcodes/gallery/assets/scss"
+source = "gallery/assets/scss"
 target = "assets/scss"
 [[imports.mounts]]
-source = "shortcodes/gallery/assets/plugins"
+source = "gallery/assets/plugins"
 target = "assets/plugins"
