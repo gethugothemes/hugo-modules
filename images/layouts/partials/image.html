@@ -67,7 +67,7 @@
 {{ if not $webp }}
 {{ $imageWebp = $image.Resize (string $size) }}
 {{ end }}
-<img loading="lazy" decoding="async" src="{{$imageWebp.RelPermalink}}" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Weight}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
+<img loading="lazy" decoding="async" src="{{$imageWebp.RelPermalink}}" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
 {{ else }}
 
 <!-- image processing for multiple device -->
