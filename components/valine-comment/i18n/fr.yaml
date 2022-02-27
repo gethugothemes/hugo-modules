@@ -1,0 +1,80 @@
+- id: valine_nickname
+  translation: Surnom
+
+- id: valine_mail
+  translation: E-mail
+
+- id: valine_website
+  translation: Website(http://)
+
+- id: valine_comment_placeholder
+  translation: Écrivez votre commentaire ici
+
+- id: valine_nickFail
+  translation: Le pseudonyme ne peut pas être inférieur à 3 octets.
+
+- id: valine_mailFail
+  translation: Merci de confirmer votre adresse e-mail.
+
+- id: valine_emptyComment
+  translation: Pas encore de commentaire.
+
+- id: valine_submit
+  translation: Soumettre
+
+- id: valine_reply
+  translation: Répondre
+
+- id: valine_cancelReply
+  translation: Annuler la réponse
+
+- id: valine_comments
+  translation: commentaires
+
+- id: valine_cancel
+  translation: Annuler
+
+- id: valine_confirm
+  translation: Confirmer
+
+- id: valine_continue
+  translation: Continuez
+
+- id: valine_emptyComment
+  translation: Pas encore de commentaire.
+
+- id: valine_more
+  translation: Charger plus...
+
+- id: valine_preview
+  translation: Aperçu
+
+- id: valine_emoji
+  translation: Emoji
+
+- id: valine_expand
+  translation: Voir plus....
+
+- id: valine_seconds
+  translation: il y a quelques instants
+
+- id: valine_minutes
+  translation: il y a quelques minutes
+
+- id: valine_hours
+  translation: il y a des heures
+
+- id: valine_days
+  translation: il y a quelques jours
+
+- id: valine_now
+  translation: juste maintenant
+
+- id: valine_uploading
+  translation: Téléchargement ...
+
+- id: valine_uploadDone
+  translation: Téléchargement terminé !
+
+- id: valine_busy
+  translation: Soumettre est occupé, veuillez patienter...

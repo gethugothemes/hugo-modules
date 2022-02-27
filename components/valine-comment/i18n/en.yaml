@@ -1,0 +1,80 @@
+- id: valine_nickname
+  translation: Nick Name
+
+- id: valine_mail
+  translation: E-mail
+
+- id: valine_website
+  translation: Website(http://)
+
+- id: valine_comment_placeholder
+  translation: Write your comment here
+
+- id: valine_nickFail
+  translation: NickName cannot be less than 3 bytes.
+
+- id: valine_mailFail
+  translation: Please confirm your email address.
+
+- id: valine_emptyComment
+  translation: No comment yet.
+
+- id: valine_submit
+  translation: Submit
+
+- id: valine_reply
+  translation: Reply
+
+- id: valine_cancelReply
+  translation: Cancel reply
+
+- id: valine_comments
+  translation: Comments
+
+- id: valine_cancel
+  translation: Cancel
+
+- id: valine_confirm
+  translation: Confirm
+
+- id: valine_continue
+  translation: Continue
+
+- id: valine_emptyComment
+  translation: No comment yet.
+
+- id: valine_more
+  translation: Load More...
+
+- id: valine_preview
+  translation: Preview
+
+- id: valine_emoji
+  translation: Emoji
+
+- id: valine_expand
+  translation: See more....
+
+- id: valine_seconds
+  translation: seconds ago
+
+- id: valine_minutes
+  translation: minutes ago
+
+- id: valine_hours
+  translation: hours ago
+
+- id: valine_days
+  translation: days ago
+
+- id: valine_now
+  translation: just now
+
+- id: valine_uploading
+  translation: Uploading ...
+
+- id: valine_uploadDone
+  translation: Upload completed!
+
+- id: valine_busy
+  translation: Submit is busy, please wait...

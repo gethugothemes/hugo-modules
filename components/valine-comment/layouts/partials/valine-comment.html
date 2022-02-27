@@ -1,0 +1,101 @@
+{{ $data:= newScratch}}
+
+{{ if .IsTranslated }}
+{{ $siteLanguages := site.Languages}}
+{{ $pageLang := .Page.Lang}}
+{{ range .Page.AllTranslations }}
+{{ $translation := .}}
+{{ range $siteLanguages }}
+{{ if eq $translation.Lang .Lang }}
+{{ $selected := false }}
+{{ if eq $pageLang .Lang}}
+
+{{ if or (eq $translation.Language "zh-cn") (eq $translation.Language "zh-tw") (eq $translation.Language "en") (eq $translation.Language "ja") }}
+{{ $data.Set "languageName" $translation.Language }}
+{{ else }}
+{{ $data.Set "languageName" "en" }}
+{{ end }}
+
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ with site.Params.valine_comment}}
+{{ if .enable}}
+
+<style type="text/css">
+.vpower, .vempty pre {display: none}
+[data-theme="dark"] .v[data-class="v"] .vinput, [data-theme="dark"] .v[data-class="v"] .veditor, [data-theme="dark"] .v[data-class="v"] p, [data-theme="dark"] .v[data-class="v"] pre code, [data-theme="dark"] .v[data-class="v"] .status-bar, .dark .v[data-class="v"] .vinput, .dark .v[data-class="v"] .veditor, .dark .v[data-class="v"] p, .dark .v[data-class="v"] pre code, .dark .v[data-class="v"] .status-bar, .theme__dark .v[data-class="v"] .vinput, .theme__dark .v[data-class="v"] .veditor, .theme__dark .v[data-class="v"] p, .theme__dark .v[data-class="v"] pre code, .theme__dark .v[data-class="v"] .status-bar, .night .v[data-class="v"] .vinput, .night .v[data-class="v"] .veditor, .night .v[data-class="v"] p, .night .v[data-class="v"] pre code, .night .v[data-class="v"] .status-bar {color: {{site.Params.variables.white | default "white"}}}
+@media (prefers-color-scheme: dark) {.v[data-class="v"] .vinput, .v[data-class="v"] .veditor, .v[data-class="v"] p, .v[data-class="v"] pre code, .v[data-class="v"] .status-bar {color: {{site.Params.variables.black | default "black"}}}}
+.v[data-class="v"] .vwrap .vheader .vinput:focus {border-bottom-color: {{site.Params.variables.color_primary | default "#009183"}}}
+.v[data-class="v"] .vbtn:hover {color: {{site.Params.variables.color_primary | default "#009183"}};border-color: {{site.Params.variables.color_primary | default "#009183"}}}
+.v[data-class="v"] .vempty {padding: 8px}
+</style>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+<div id="vcomment"></div>
+<noscript>Please enable JavaScript to view the comments</noscript>
+
+{{if or (eq .appId "") (eq .appKey "")}}
+<p class="text-center mb-5">"appId" and "appKey" is required, otherwise comment won't work. <br><a href="https://valine.js.org/en/quickstart.html" target="_blank">Get your APP-ID and APP-Key</a></p>
+{{end}}
+
+<script>
+  // 1.Translate Valine
+  var langName = 'language',
+  langMode = {	
+    "nick": "{{i18n `valine_nickname`}}",
+    "mail": "{{i18n `valine_mail`}}",
+    "link": "{{i18n `valine_website`}}",
+    "nickFail":"{{i18n `valine_nickFail`}}",
+    "mailFail":"{{i18n `valine_mailFail`}}",
+    "sofa": "{{i18n `valine_emptyComment`}}",
+    "submit": "{{i18n `valine_submit`}}",
+    "reply": "{{i18n `valine_reply`}}",
+    "cancelReply": "{{i18n `valine_cancelReply`}}",
+    "comments": "{{i18n `valine_comments`}}",
+    "cancel": "{{i18n `valine_cancel`}}",
+    "confirm": "{{i18n `valine_confirm`}}",
+    "continue": "{{i18n `valine_continue`}}",
+    "more": "{{i18n `valine_more`}}",
+    "preview": "{{i18n `valine_preview`}}",
+    "emoji": "{{i18n `valine_emoji`}}",
+    "expand": "{{i18n `valine_expand`}}",
+    "seconds": "{{i18n `valine_seconds`}}",
+    "minutes": "{{i18n `valine_minutes`}}",
+    "hours": "{{i18n `valine_hours`}}",
+    "days": "{{i18n `valine_days`}}",
+    "now": "{{i18n `valine_now`}}",
+    "uploading": "{{i18n `valine_uploading`}}",
+    "uploadDone": "{{i18n `valine_uploadDone`}}",
+    "busy": "{{i18n `valine_busy`}}",
+    "code-98": "Valine initialization failed, please check your version of av-min.js.",
+    "code-99": "Valine initialization failed, Please check the `el` element in the init method.",
+    "code-100": "Valine initialization failed, Please check your appId and appKey.",
+    "code-140": "The total number of API calls today has exceeded the development version limit.",
+    "code-401": "Unauthorized operation, Please check your appId and appKey.",
+    "code-403": "Access denied by API domain white list, Please check your security domain."
+  };
+
+  // 2.Initialize Valine
+  new Valine({
+    el: '#vcomment',
+    appId: '{{.appId}}',
+    appKey: '{{.appKey}}',
+    placeholder: '{{i18n `valine_comment_placeholder`}}',
+    avatar: '{{.avatar}}',
+    pageSize: '{{.pageSize}}',
+    lang: langName,
+    langMode: langMode,
+    visitor: '{{.visitor}}',
+    highlight: '{{.highlight}}',
+    recordIP: '{{.recordIP}}',
+    enableQQ: '{{.enableQQ}}',
+    serverURLs: '{{.serverURLs}}',
+  });
+</script>
+{{ end }}
+{{ end }}
