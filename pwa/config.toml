@@ -7,7 +7,6 @@ home = ["WebAppManifest"]
 [mediaTypes."application/manifest+json"]
 suffixes = ["webmanifest"]
 
-
 ############################ Output Format ###########################
 [outputFormats]
 [outputFormats.WebAppManifest]
