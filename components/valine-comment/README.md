@@ -16,11 +16,11 @@ path = "github.com/gethugothemes/hugo-modules/components/valine-comment"
 Call it, as a partial in your theme.
 
 ```html
-<!-- logo -->
+<!-- valine comment -->
 {{ partial "valine-comment.html" . }}
 ```
 
-configure it in `config.toml`
+Add some following configuration to your `config/_default/params.toml` file.
 
 ```toml
 

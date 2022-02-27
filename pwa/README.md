@@ -16,7 +16,7 @@ path = "github.com/gethugothemes/hugo-modules/pwa"
 Call it, as a partial in your theme footer.
 
 ```html
-<!-- logo -->
+<!-- progressive web app -->
 {{ partial "pwa.html" . }}
 ```
 

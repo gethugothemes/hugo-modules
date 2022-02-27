@@ -1,0 +1,19 @@
+<!-- google site verification -->
+{{ with site.Params.site_verification.google }}
+<meta name="google-site-verification" content="{{ . }}" />
+{{ end }}
+
+<!-- bing site verification -->
+{{ with site.Params.site_verification.bing }}
+<meta name="msvalidate.01" content="{{ . }}" />
+{{ end }}
+
+<!-- baidu site verification -->
+{{ with site.Params.site_verification.baidu }}
+<meta name="baidu-site-verification" content="{{ . }}" />
+{{ end }}
+
+<!-- facebook site verification -->
+{{ with site.Params.site_verification.facebook }}
+<meta name="facebook-domain-verification" content="{{ . }}" />
+{{ end }}

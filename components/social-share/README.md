@@ -22,6 +22,6 @@ Add the following code to your `asstes/scss/style.scss` file.
 Call it, as a partial in your theme.
 
 ```html
-<!-- logo -->
+<!-- social share -->
 {{ partial "social-share.html" . }}
 ```

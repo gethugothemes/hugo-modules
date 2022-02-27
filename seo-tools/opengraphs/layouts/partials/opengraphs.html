@@ -1,0 +1,77 @@
+{{ $description:= site.Params.metadata.description }}
+{{ $imagePath:= site.Params.metadata.image }}
+
+<!-- if multiple images, get the first one -->
+{{ if .Params.images }}
+{{ range first 1 .Params.images }}
+{{ $imagePath = . }}
+{{ end }}
+{{ else if .Params.image }}
+{{ $imagePath = .Params.image }}
+{{ end }}
+
+
+<!-- ######### Opengraph and Twitter image meta ############## -->
+
+<!-- check cdn/static image -->
+{{ if or (hasPrefix $imagePath "http") (fileExists (add `static/` (string $imagePath))) }}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ $imagePath | absURL }}" />
+<meta property="og:image" content="{{ $imagePath | absURL }}" />
+{{ else }} <!-- check cdn/static image -->
+
+<!-- content and assets image path variable -->
+{{ $contentImage:= .Resources.GetMatch (printf "*%s*" $imagePath) }}
+{{ $assetImage:= fileExists (add `assets/` (string $imagePath)) }}
+
+<!-- check image existence -->
+{{ if or $contentImage $assetImage }}
+
+<!-- content or assets folder detection -->
+{{ if $contentImage }}
+{{ .Scratch.Set "image-exists" $contentImage }}
+{{ else if $assetImage }}
+{{ .Scratch.Set "image-exists" (resources.Get $imagePath) }}
+{{ end }}
+
+{{ $image:= .Scratch.Get "image-exists" }}
+
+<!-- image extension -->
+{{ $imageExt:= path.Ext $image }}
+
+<!-- If not SVG  -->
+{{ if ne $imageExt `.svg` }}
+{{ $imageWidth := $image.Width }}
+{{ $imageHeight := $image.Height }}
+{{ if (and (gt $imageWidth 144) (gt $imageHeight 144)) }}
+<meta property="og:image" content="{{ $image.RelPermalink }}" />
+<meta name="twitter:image" content="{{ $image.RelPermalink }}" />
+<meta name="twitter:card" content="summary{{ if (and (gt $imageWidth 300) (gt $imageHeight 157) (not (eq $imageWidth $imageHeight))) }}_large_image{{ end }}">
+{{ end }} <!-- /if image gt 144px -->
+<meta property="og:image:width" content="{{ $imageWidth }}">
+<meta property="og:image:height" content="{{ $imageHeight }}">
+{{ end }} <!-- /if not svg -->
+
+<meta property="og:image:type" content="image/{{ if eq $imageExt `.svg` }}svg+xml{{ else }}{{ replaceRE `^jpg$` `jpeg` $imageExt }}{{ end }}">
+{{ end }} <!-- /if image exist -->
+
+{{ end }} <!-- /check cdn/static image -->
+<!-- ######### /Opengraph and Twitter image meta ############## -->
+
+
+<!-- ######### opengraph others meta ############## -->
+<meta property="og:title" content="{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
+<meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with $description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{.Permalink}}" />
+
+<!-- ########## twitter others meta ############### -->
+<meta name="twitter:title" content="{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
+<meta name="twitter:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with $description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+
+{{ with site.Social.twitter }}
+<meta name="twitter:site" content="@{{ . }}" />
+{{ end }}
+{{ range site.Authors }}
+{{ with .twitter }}<meta name="twitter:creator" content="@{{ . }}" />{{ end }}
+{{ end }}
