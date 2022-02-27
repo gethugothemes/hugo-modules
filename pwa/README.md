@@ -19,3 +19,22 @@ Call it, as a partial in your theme footer.
 <!-- logo -->
 {{ partial "pwa.html" . }}
 ```
+
+Add some following configuration to your `config/_default/config.toml` file.
+
+```toml
+############################# Outputs ##############################
+[outputs]
+home = ["WebAppManifest"]
+
+############################ Media types ############################
+[mediaTypes]
+[mediaTypes."application/manifest+json"]
+suffixes = ["webmanifest"]
+
+############################ Output Format ###########################
+[outputFormats]
+[outputFormats.WebAppManifest]
+mediaType = "application/manifest+json"
+rel = "manifest"
+```
