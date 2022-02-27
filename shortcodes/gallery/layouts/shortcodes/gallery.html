@@ -99,9 +99,9 @@
 
 
 <!-- gallery masonry script -->
-{{ .Page.Scratch.Add "count" 1 }}
-{{ $count:= .Page.Scratch.Get "count" }}
-{{ if eq $count 1 }}
+{{ .Page.Scratch.Add "gallery" 1 }}
+{{ $gallery:= .Page.Scratch.Get "gallery" }}
+{{ if eq $gallery 1 }}
 <script>
   window.addEventListener('load', (e) => {
     // gallery init

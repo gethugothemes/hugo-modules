@@ -20,9 +20,9 @@
 
 
 <!-- tab script -->
-{{ .Page.Scratch.Add "count" 1 }}
-{{ $count:= .Page.Scratch.Get "count" }}
-{{ if eq $count 1 }}
+{{ .Page.Scratch.Add "tabs" 1 }}
+{{ $tabs:= .Page.Scratch.Get "tabs" }}
+{{ if eq $tabs 1 }}
 
 <script>
   (function () {
