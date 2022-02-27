@@ -94,3 +94,29 @@
 {{ else }}
 <strong class="my-3 d-inline-block">Nothing to show in [{{ site.BaseURL }}<span class="text-danger">{{ $folderDir }}</span>] or folder does not exist</strong>
 {{ end }} <!-- end of checking image directory -->
+
+
+
+
+<!-- gallery masonry script -->
+{{ .Page.Scratch.Add "count" 1 }}
+{{ $count:= .Page.Scratch.Get "count" }}
+{{ if eq $count 1 }}
+<script>
+  window.addEventListener('load', (e) => {
+    // gallery init
+    const lightbox = GLightbox();
+    window.setTimeout(() => {
+      // justified gallery init
+      const justify_scale = screen.height * 0.25;
+      let items = document.querySelectorAll('.gallery .gallery-item');
+      Array.prototype.forEach.call(items, item => {
+        let image = item.querySelector('img');
+        let ratio = image.width / image.height;
+        item.style.width = justify_scale * ratio + 'px';
+        item.style.flexGrow = ratio;
+      })
+    }, 200);
+  });
+</script>
+{{ end }}
