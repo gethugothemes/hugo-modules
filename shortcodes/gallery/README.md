@@ -2,18 +2,18 @@
 
 ## Install Module
 
-Add the following code to your js plugins list in the `config.toml` file.
-
-```toml
-[[params.plugins.js]]
-link = "plugins/gallery/glightbox.js"
-```
-
 Add the following code to your module list in the `config/_default/module.toml` file.
 
 ```toml
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/shortcodes/gallery"
+```
+
+Add the following code to your js plugins list in the `config.toml` file.
+
+```toml
+[[params.plugins.js]]
+link = "plugins/glightbox.js"
 ```
 
 Add the following code to your `asstes/scss/style.scss` file.

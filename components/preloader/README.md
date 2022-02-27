@@ -23,11 +23,11 @@ Add the following code to your `asstes/scss/style.scss` file.
 Call it, as a partial in your theme.
 
 ```html
-<!-- logo -->
+<!-- preloader -->
 {{ partial "preloader.html" . }}
 ```
 
-Define the logo in the `config/_default/params.toml` file.
+Define the preloader in the `config/_default/params.toml` file.
 
 ```toml
 # Preloader
