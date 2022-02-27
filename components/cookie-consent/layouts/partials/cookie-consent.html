@@ -2,7 +2,7 @@
 {{ with site.Params.cookies }}
 {{ if .enable }}
 <div id="js-cookie-box" class="cookie-box cookie-box-hide">
-	{{.content | markdownify}}<span id="js-cookie-button" class="btn btn-sm btn-outline-primary ms-2">{{.button}}</span>
+	{{.content | markdownify}}<span id="js-cookie-button" class="btn btn-sm btn-outline-primary">{{.button}}</span>
 </div>
 <script type="application/javascript">
   const cookieBox = document.getElementById('js-cookie-box');
@@ -35,6 +35,10 @@
 
 .cookie-box-hide {
   display: none;
+}
+
+#js-cookie-button{
+  margin-left: 1rem;
 }
 </style>
 {{ end }}
