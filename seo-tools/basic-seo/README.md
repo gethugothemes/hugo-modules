@@ -1,23 +1,23 @@
-# Opengraph with Twitter Card
+# Basic SEO with Opengraph and Twitter Card
 
-## Opengraphs Module
+## Basic Seo Module
 
 Add the following code to your module list in the `config/_default/module.toml` file.
 
 ```toml
 [[imports]]
-path = "github.com/gethugothemes/hugo-modules/seo-tools/opengraphs"
+path = "github.com/gethugothemes/hugo-modules/seo-tools/basic-seo"
 ```
 
 <hr>
 
-## Opengraphs Implementation
+## Basic Seo Implementation
 
 Call it, as a partial in your theme head.
 
 ```html
 <!-- opengraph -->
-{{ partial "opengraphs.html" . }}
+{{ partial "basic-seo.html" . }}
 ```
 
 Add some following configuration to your `config/_default/params.toml` file.

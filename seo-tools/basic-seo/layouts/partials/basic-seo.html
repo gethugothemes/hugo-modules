@@ -1,3 +1,40 @@
+<!-- base url -->
+{{ if or (eq site.BaseURL "/") (eq site.BaseURL "http://localhost:1313/") (eq site.BaseURL "http://examplesite.org/") (eq site.BaseURL "https://examplesite.org/") (eq site.BaseURL "http://examplesite.com/") (eq site.BaseURL "https://examplesite.com/")}}{{else}}
+<base href="{{ .Permalink }}">
+{{ end }}
+
+<!-- meta canonical -->
+<link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
+
+<!-- web manifest -->
+<link rel="manifest" href="{{`manifest.webmanifest` | relURL }}">
+<meta name="msapplication-TileColor" content="{{site.Params.variables.color_primary | default `#ddd`}}">
+<meta name="theme-color" content="{{site.Params.variables.body_color | default `#ffffff` }}">
+
+<!-- multilingual SEO optimizations -->
+{{ if .IsTranslated }}
+{{ range .AllTranslations }}
+<link rel="alternate" hreflang="{{.Lang}}" href="{{ .RelPermalink | absLangURL }}">
+{{ end }}
+<link rel="alternate" hreflang="x-default" href="{{ .RelPermalink | absLangURL }}">
+{{ end }}
+
+<!-- meta keywords -->
+{{ if .Params.keywords }}
+<meta name="keywords" content="{{ delimit .Params.keywords `, ` }}">
+{{ else if site.Params.metadata.keywords }}
+<meta name="keywords" content="{{ delimit site.Params.metadata.keywords `, ` }}">	
+{{ end }}
+
+<!-- meta description -->
+<meta name="description" content="{{ .Params.description | default site.Params.metadata.description }}">
+
+<!-- meta author -->
+{{ with site.Params.metadata.author }}<meta name="author" content="{{ . }}">{{ end }}
+
+<!-- meta hugo version -->
+{{ hugo.Generator }}
+
 {{ $description:= site.Params.metadata.description }}
 {{ $imagePath:= site.Params.metadata.image }}
 
