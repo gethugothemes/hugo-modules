@@ -85,13 +85,13 @@
 
 
 {{ if $logoDarkPath }}
-<img loading="prelaod" decoding="async" class="img-fluid only-light" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_fallback`}}'">
+<img loading="prelaod" decoding="async" class="img-fluid mb-0 only-light" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_fallback`}}'">
 
-<img loading="prelaod" decoding="async" class="img-fluid only-dark" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo_dark`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_dark_fallback`}}'">
+<img loading="prelaod" decoding="async" class="img-fluid mb-0 only-dark" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo_dark`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_dark_fallback`}}'">
 
 {{ else if $logoPath }}
 
-<img loading="prelaod" decoding="async" class="img-fluid" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_fallback`}}'">
+<img loading="prelaod" decoding="async" class="img-fluid mb-0" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_fallback`}}'">
 
 <!-- logo text -->
 {{ else if site.Params.logo_text }}
