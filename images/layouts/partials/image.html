@@ -68,7 +68,18 @@
 {{ $imageWebp = $image.Resize (string $size) }}
 {{ end }}
 <img loading="lazy" decoding="async" src="{{$imageWebp.RelPermalink}}" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
+
+
+<!-- if image size less then 500x and size not defined -->
+{{ else if lt ($image.Width) 500 }}
+{{ $size:= add (add (string $image.Width) "x") (string $image.Height) }}
+{{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Resize (string $size) }}
+{{ end }}
+<img loading="lazy" decoding="async" src="{{$imageWebp.RelPermalink}}" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$image.RelPermalink}}'">
 {{ else }}
+
 
 <!-- image processing for multiple device -->
 {{ $imageFallback:= $image.Resize "1110x" }}
