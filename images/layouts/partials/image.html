@@ -2,6 +2,7 @@
 {{ $image:= . }}
 {{ $class:= .Class }}
 {{ $size:= .Size }}
+{{ $resize:= .Resize | default true}}
 {{ $alt:= .Alt }}
 {{ $context:= .Context | default . }}
 {{ $contentImage:= false }}
@@ -71,7 +72,7 @@
 
 
 <!-- if image size less then 500x and size not defined -->
-{{ else if lt ($image.Width) 500 }}
+{{ else if or (lt ($image.Width) 500) (not $resize) }}
 {{ $size:= add (add (string $image.Width) "x") (string $image.Height) }}
 {{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
 {{ if not $webp }}
