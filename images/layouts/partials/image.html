@@ -115,7 +115,7 @@
 {{ $imageWebp = $image.Resize (string $size) }}
 {{ end }}
 <!-- crop -->
-{{ else if eq $command "Fill" }}
+{{ else if eq $command "Crop" }}
 {{ $imageWebp = $image.Resize (add (string $size) " webp") }}
 {{ if not $webp }}
 {{ $imageWebp = $image.Resize (string $size) }}
