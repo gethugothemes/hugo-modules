@@ -10,7 +10,7 @@
 {{ $height:= index (split $size `x`) 1 }}
 {{ $width:= index (split $size `x`) 0 }}
 {{ $webp:= .Webp | default true }}
-
+{{ $command:= .Command | default "Resize" }}
 
 <!-- check content image  -->
 {{ with $context.Resources }}
@@ -63,10 +63,33 @@
 
 <!-- single image -->
 {{ if $size }}
+<!-- resize -->
 {{ $imageFallback:= $image.Resize $size }}
 {{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
 {{ if not $webp }}
 {{ $imageWebp = $image.Resize (string $size) }}
+{{ end }}
+<!-- fit -->
+{{ if eq $command "Fit" }}
+{{ $imageFallback = $image.Fit $size }}
+{{ $imageWebp = $image.Fit (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Fit (string $size) }}
+{{ end }}
+<!-- fill -->
+{{ else if eq $command "Fill" }}
+{{ $imageFallback = $image.Fill $size }}
+{{ $imageWebp = $image.Fill (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Fill (string $size) }}
+{{ end }}
+<!-- crop -->
+{{ else if eq $command "Crop" }}
+{{ $imageFallback = $image.Crop $size }}
+{{ $imageWebp = $image.Crop (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Crop (string $size) }}
+{{ end }}
 {{ end }}
 <img loading="lazy" decoding="async" src="{{$imageWebp.RelPermalink}}" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
 
@@ -74,9 +97,29 @@
 <!-- if image size less then 500x and size not defined -->
 {{ else if or (lt ($image.Width) 500) (not $resize) }}
 {{ $size:= add (add (string $image.Width) "x") (string $image.Height) }}
+<!-- resize -->
 {{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
 {{ if not $webp }}
 {{ $imageWebp = $image.Resize (string $size) }}
+{{ end }}
+<!-- fit -->
+{{ if eq $command "Fit" }}
+{{ $imageWebp = $image.Resize (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Resize (string $size) }}
+{{ end }}
+<!-- fill -->
+{{ else if eq $command "Fill" }}
+{{ $imageWebp = $image.Resize (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Resize (string $size) }}
+{{ end }}
+<!-- crop -->
+{{ else if eq $command "Fill" }}
+{{ $imageWebp = $image.Resize (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Resize (string $size) }}
+{{ end }}
 {{ end }}
 <img loading="lazy" decoding="async" src="{{$imageWebp.RelPermalink}}" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$image.RelPermalink}}'">
 {{ else }}

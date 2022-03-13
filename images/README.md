@@ -65,8 +65,22 @@ favicon = "images/favicon.png"
 
 Call it, as a partial in your theme.
 
+Available parameters:
+* `Src`: image source
+* `Alt`: image alt text
+* `Size`: image size (example: "100x100")
+* `Class`: image class
+* `Resize`: image resizer | default: true
+* `Webp`: generate webp version | default: true
+* `Context`: image context | default: .
+* `Command`: image resizing command | default: "Resize"
+
 ```html
-{{ partial "image.html" (dict "Src" .Params.image "Size" "100x" "Alt" .Title) }}
+<!-- simple image call -->
+{{ partial "image.html" (dict "Src" .Params.image ) }}
+
+<!-- for content folder image, use .Context -->
+{{ partial "image.html" (dict "Src" .Params.image "Context" .Page ) }}
 ```
 
 <hr>
