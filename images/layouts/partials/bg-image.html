@@ -1,15 +1,40 @@
 {{ $imagePath:= .Src }}
+{{ $image:= . }}
 {{ $size:= .Size | default "cover" }}
 {{ $position:= .Position | default "center center" }}
 {{ $repeat:= .Repeat | default "no-repeat" }}
 {{ $webp:= .Webp | default true }}
+{{ $context:= .Context | default . }}
+{{ $contentImage:= false }}
+{{ $assetImage:= false }}
+
+<!-- check content image  -->
+{{ with $context.Resources }}
+{{ if .GetMatch $imagePath }}
+{{ $contentImage = true }}
+{{ end }}
+{{ end }}
+<!-- /check content image -->
+
+<!-- check asset image -->
+{{ if fileExists (add `assets/` (string $imagePath)) }}
+{{ $assetImage = true }}
+{{ end }}
+<!-- /check asset image -->
 
 {{ if or (hasPrefix $imagePath "http") (fileExists (add `static/` (string $imagePath))) }}
 style="background-image: url({{ $imagePath | absURL }});background-size: {{$size}};background-position: {{$position}};background-repeat: {{$repeat}};"
 
-{{ else }}
+{{ end }}
 
-{{ $image:= resources.Get $imagePath }}
+<!-- check file existence -->
+{{ if or $assetImage $contentImage }}
+
+{{ if $assetImage }}
+{{ $image = resources.Get $imagePath }}
+{{ else if $contentImage }}
+{{ $image = $context.Resources.GetMatch $imagePath }}
+{{ end }}
 
 {{ if $webp }}
 {{ $height:= string $image.Height }}
@@ -20,9 +45,7 @@ style="background-image: url({{ $imagePath | absURL }});background-size: {{$size
 style="background-image: url({{ $imageWebp.RelPermalink }});background-size: {{$size}};background-position: {{$position}};background-repeat: {{$repeat}};"
 
 {{ else }}
-
 style="background-image: url({{ $image.RelPermalink }});background-size: {{$size}};background-position: {{$position}};background-repeat: {{$repeat}};"
-
 {{ end }}
 
 {{ end }}
