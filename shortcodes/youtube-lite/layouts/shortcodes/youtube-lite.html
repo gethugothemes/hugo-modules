@@ -1,0 +1,23 @@
+{{ $videoid:= .Get "id" }}
+{{ $class:= .Get "class" }}
+{{ $params:= .Get "params" }}
+{{ $style:= .Get "style" }}
+
+<lite-youtube videoid="{{$videoid | default (.Get 0)}}" {{with $class}}class="{{.}}"{{end}} params="{{$params}}" {{with $style}}style="{{ . }}"{{end}}></lite-youtube>
+
+<!-- assets -->
+{{ .Page.Scratch.Add "youtubeLight" 1 }}
+{{ $youtubeLight:= .Page.Scratch.Get "youtubeLight" }}
+{{ if eq $youtubeLight 1 }}
+
+<script type="application/javascript">
+{{ $ytLiteScript:= resources.Get "js/youtube-lite.js" | minify }}
+{{ $ytLiteScript.Content | safeJS }}
+</script>
+
+<style type="text/css" >
+{{ $ytLiteStyle:= resources.Get "css/youtube-lite.css" | minify }}
+{{ $ytLiteStyle.Content | safeCSS }}
+</style>
+
+{{ end }}
