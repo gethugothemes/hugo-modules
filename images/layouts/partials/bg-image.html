@@ -1,6 +1,7 @@
 {{ $imagePath:= .Src }}
 {{ $image:= . }}
-{{ $size:= .Size | default "cover" }}
+{{ $size:= .Size }}
+{{ $perspective:= .Perspective | default "cover" }}
 {{ $position:= .Position | default "center center" }}
 {{ $repeat:= .Repeat | default "no-repeat" }}
 {{ $webp:= .Webp | default true }}
@@ -37,15 +38,27 @@ style="background-image: url({{ $imagePath | absURL }});background-size: {{$size
 {{ end }}
 
 {{ if $webp }}
+
+{{ if $size }}
+
+{{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Resize (string $size) }}
+{{ end }}
+style="background-image: url({{ $imageWebp.RelPermalink }});background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};"
+
+{{ else }} <!-- if size -->
+
 {{ $height:= string $image.Height }}
 {{ $width:= string $image.Width }}
 {{ $defaultSize:= add (add $width "x") $height }}
 {{ $imageWebp:= $image.Resize (add $defaultSize " webp") }}
+style="background-image: url({{ $imageWebp.RelPermalink }});background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};"
 
-style="background-image: url({{ $imageWebp.RelPermalink }});background-size: {{$size}};background-position: {{$position}};background-repeat: {{$repeat}};"
+{{ end }} <!-- /if size -->
 
-{{ else }}
-style="background-image: url({{ $image.RelPermalink }});background-size: {{$size}};background-position: {{$position}};background-repeat: {{$repeat}};"
-{{ end }}
+{{ else }} <!-- if not webp -->
+style="background-image: url({{ $image.RelPermalink }});background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};"
+{{ end }} <!-- /if not webp -->
 
-{{ end }}
+{{ end }} <!-- /check file existence -->

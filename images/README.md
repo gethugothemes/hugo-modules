@@ -90,6 +90,15 @@ Available parameters:
 
 Call it, as a partial in your theme.
 
+Available parameters:
+* `Src`: image source
+* `Size`: image size (example: "100x100")
+* `Perspective`: background-size | default: "cover"
+* `Webp`: generate webp version | default: true
+* `Context`: image context | default: .
+* `Position`: background-position | default: "center center"
+* `Repeat`: background-repeat | default: "no-repeat"
+
 ```html
 {{ partial `bg-image.html` (dict `Src` .background_image ) | safeHTMLAttr }}
 ```
