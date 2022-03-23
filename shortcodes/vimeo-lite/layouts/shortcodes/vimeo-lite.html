@@ -1,0 +1,21 @@
+{{ $videoid:= .Get "id" }}
+{{ $class:= .Get "class" }}
+{{ $style:= .Get "style" }}
+{{ $width:= .Get "width" }}
+{{ $attr:= .Get "attr" }}
+
+<div {{with $class}}class="{{.}}"{{end}} style="overflow: hidden;{{with $width}}width:{{.| safeCSS}};{{end}}{{with $style}}{{.| safeCSS }}{{end}}">
+  <lite-vimeo videoid="{{$videoid | default (.Get 0)}}" {{with $attr}}{{ . | safeHTMLAttr }}{{end}}></lite-vimeo>
+</div>
+
+<!-- assets -->
+{{ .Page.Scratch.Add "vimeoLight" 1 }}
+{{ $vimeoLight:= .Page.Scratch.Get "vimeoLight" }}
+{{ if eq $vimeoLight 1 }}
+
+<script type="application/javascript">
+{{ $ytLiteScript:= resources.Get "js/vimeo-lite.js" | minify }}
+{{ $ytLiteScript.Content | safeJS }}
+</script>
+
+{{ end }}
