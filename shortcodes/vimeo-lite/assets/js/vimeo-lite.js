@@ -92,7 +92,7 @@ let LiteVimeoEmbed = /** @class */ (() => {
           padding-bottom: calc(100% / (16 / 9));
         }
 
-        #frame, #fallbackPlaceholder, iframe {
+        #vimeoFrame, #fallbackPlaceholder {
           position: absolute;
           width: 100%;
           height: 100%;
@@ -100,7 +100,7 @@ let LiteVimeoEmbed = /** @class */ (() => {
           top: 0;
         }
 
-        #frame {
+        #vimeoFrame {
           cursor: pointer;
         }
 
@@ -108,7 +108,7 @@ let LiteVimeoEmbed = /** @class */ (() => {
           object-fit: cover;
         }
 
-        #frame::before {
+        #vimeoFrame::before {
           content: '';
           display: block;
           position: absolute;
@@ -134,7 +134,7 @@ let LiteVimeoEmbed = /** @class */ (() => {
           border: 0;
           cursor: pointer;
         }
-        #frame:hover .lvo-playbtn {
+        #vimeoFrame:hover .lvo-playbtn {
           background-color: rgb(98, 175, 237);
           opacity: 1;
         }
@@ -158,7 +158,7 @@ let LiteVimeoEmbed = /** @class */ (() => {
           cursor: unset;
         }
 
-        #frame.lvo-activated::before,
+        #vimeoFrame.lvo-activated::before,
         .lvo-activated .lvo-playbtn {
           display: none;
         }
@@ -172,7 +172,7 @@ let LiteVimeoEmbed = /** @class */ (() => {
         <button class="lvo-playbtn"></button>
       </div>
     `;
-      this.domRefFrame = this.shadowRoot.querySelector("#frame");
+      this.domRefFrame = this.shadowRoot.querySelector("#vimeoFrame");
       this.domRefImg = {
         fallback: this.shadowRoot.querySelector("#fallbackPlaceholder"),
         webp: this.shadowRoot.querySelector("#webpPlaceholder"),
