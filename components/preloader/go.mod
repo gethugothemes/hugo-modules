@@ -1,3 +1,3 @@
 module github.com/gethugothemes/hugo-modules/components/preloader
 
-go 1.17
+go 1.18
