@@ -15,8 +15,8 @@ path = "github.com/gethugothemes/hugo-modules/shortcodes/youtube-lite"
 
 ```md
 <!-- minimal use -->
-{{< youtube-lite VufDd-QL1c0 >}}
+{{< youtube-lite 6FIoOJm3vYA >}}
 
 <!-- extended use -->
-{{< youtube-lite id="VufDd-QL1c0" class="mx-auto" style="width:500px" >}}
+{{< youtube-lite id="6FIoOJm3vYA" class="mx-auto" width="600px" style="" attr="" >}}
 ```
