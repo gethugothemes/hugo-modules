@@ -13,6 +13,13 @@ path = "github.com/gethugothemes/hugo-modules/pwa"
 
 ## PWA Implementation
 
+Call it, as a partial in your theme head.
+
+```html
+<!-- progressive web app -->
+{{ partial "manifest.html" . }}
+```
+
 Call it, as a partial in your theme footer.
 
 ```html
