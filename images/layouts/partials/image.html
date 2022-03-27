@@ -11,6 +11,7 @@
 {{ $width:= index (split $size `x`) 0 }}
 {{ $webp:= .Webp | default true }}
 {{ $command:= .Command | default "Resize" }}
+{{ $placeholder:= .Placeholder | default false }}
 
 <!-- check content image  -->
 {{ with $context.Resources }}
@@ -91,7 +92,13 @@
 {{ $imageWebp = $image.Crop (string $size) }}
 {{ end }}
 {{ end }}
-<img loading="lazy" decoding="async" src="{{$imageWebp.RelPermalink}}" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
+
+<!-- placeholder generate -->
+{{ $placeholderQuality := "40x q20" }}
+{{ $placeholder := $imageWebp.Resize $placeholderQuality }}
+{{ $placeholder = $placeholder | images.Filter (images.GaussianBlur 6) }}
+
+<img loading="lazy" decoding="async" {{ if $placeholder }} src="data:image/jpeg;base64,{{ $placeholder.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" {{ end }} alt="{{.Alt}}" class="{{$class}} {{if $placeholder}} lazy {{end}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
 
 
 <!-- if image size less then 500x and size not defined -->
