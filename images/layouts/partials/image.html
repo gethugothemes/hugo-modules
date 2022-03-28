@@ -12,6 +12,8 @@
 {{ $webp:= .Webp | default true }}
 {{ $command:= .Command | default "Resize" }}
 {{ $placeholder:= .Placeholder | default false }}
+{{ $placeholderQuality:= "40x q20" }}
+{{ $imagePartialCalled:= $context.Scratch.Get "imagePartialCalled" }}
 
 <!-- check content image  -->
 {{ with $context.Resources }}
@@ -93,12 +95,10 @@
 {{ end }}
 {{ end }}
 
-<!-- placeholder generate -->
-{{ $placeholderQuality := "40x q20" }}
-{{ $placeholder := $imageWebp.Resize $placeholderQuality }}
-{{ $placeholder = $placeholder | images.Filter (images.GaussianBlur 6) }}
+<!-- placeholder -->
+{{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
 
-<img loading="lazy" decoding="async" {{ if $placeholder }} src="data:image/jpeg;base64,{{ $placeholder.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" {{ end }} alt="{{.Alt}}" class="{{$class}} {{if $placeholder}} lazy {{end}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
+<img {{ if $placeholder }} src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" loading="lazy" decoding="async" {{ end }} alt="{{.Alt}}" class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" width="{{with $width}}{{.}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{with $height}}{{.}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
 
 
 <!-- if image size less then 500x and size not defined -->
@@ -128,8 +128,13 @@
 {{ $imageWebp = $image.Resize (string $size) }}
 {{ end }}
 {{ end }}
-<img loading="lazy" decoding="async" src="{{$imageWebp.RelPermalink}}" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{if $width}}{{$width}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{if $height}}{{$height}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$image.RelPermalink}}'">
-{{ else }}
+
+<!-- placeholder -->
+{{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+<img {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" loading="lazy" decoding="async" {{ end }} alt="{{.Alt}}" class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" width="{{with $width}}{{.}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{with $height}}{{.}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$image.RelPermalink}}'">
+
+{{ else }} <!-- /if image size less then 500x and size not defined -->
 
 
 <!-- image processing for multiple device -->
@@ -144,12 +149,16 @@
 {{ $imageMD = $image.Resize "600x" }}
 {{ $imageSM = $image.Resize "545x" }}
 {{ end }}
+
+<!-- placeholder -->
+{{ $placeholderImage := ($imageFallback.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
 <picture>
   <source srcset="{{ $imageSM.RelPermalink }}" media="(max-width: 575px)">
   <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 767px)">
   <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 991px)">
   <source srcset="{{ $imageXL.RelPermalink }}">
-  <img loading="lazy" decoding="async" class="{{$class}} img-fluid" src="{{$imageFallback.RelPermalink}}" alt="{{.Alt}}" width="{{$image.Width}}" height="{{$image.Height}}">
+  <img {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageFallback.RelPermalink}} {{else}} loading="lazy" decoding="async" src="{{$imageFallback.RelPermalink}}"{{ end }}class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" alt="{{.Alt}}" width="{{$image.Width}}" height="{{$image.Height}}">
 </picture>
 {{ end }} <!-- end image processing -->
 {{ end }} <!-- end single image -->
