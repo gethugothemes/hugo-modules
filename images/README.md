@@ -74,6 +74,7 @@ Available parameters:
 * `Webp`: generate webp version | default: true
 * `Context`: image context | default: .
 * `Command`: image resizing command | default: "Resize"
+* `Placeholder`: image placeholder | default: false
 
 ```html
 <!-- simple image call -->
@@ -81,6 +82,13 @@ Available parameters:
 
 <!-- for content folder image, use .Context -->
 {{ partial "image.html" (dict "Src" .Params.image "Context" .Page ) }}
+```
+
+If you want to enable placeholder/lazy-loader, then add the following code to your js plugins list in the `config.toml` file.
+
+```toml
+[[params.plugins.js]]
+link = "plugins/lazy-loader.js"
 ```
 
 <hr>

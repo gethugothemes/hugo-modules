@@ -13,7 +13,6 @@
 {{ $command:= .Command | default "Resize" }}
 {{ $placeholder:= .Placeholder | default false }}
 {{ $placeholderQuality:= "40x q20" }}
-{{ $imagePartialCalled:= $context.Scratch.Get "imagePartialCalled" }}
 
 <!-- check content image  -->
 {{ with $context.Resources }}
@@ -98,7 +97,7 @@
 <!-- placeholder -->
 {{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
 
-<img {{ if $placeholder }} src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" loading="lazy" decoding="async" {{ end }} alt="{{.Alt}}" class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" width="{{with $width}}{{.}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{with $height}}{{.}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
+<img {{ if $placeholder }} src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" loading="lazy" decoding="async" {{ end }} alt="{{.Alt}}" class="{{if $placeholder}}identify-lazy lazy{{end}} {{$class}} img-fluid" width="{{with $width}}{{.}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{with $height}}{{.}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
 
 
 <!-- if image size less then 500x and size not defined -->
@@ -132,7 +131,7 @@
 <!-- placeholder -->
 {{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
 
-<img {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" loading="lazy" decoding="async" {{ end }} alt="{{.Alt}}" class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" width="{{with $width}}{{.}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{with $height}}{{.}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$image.RelPermalink}}'">
+<img {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" loading="lazy" decoding="async" {{ end }} alt="{{.Alt}}" class="{{if $placeholder}}identify-lazy lazy{{end}} {{$class}} img-fluid" width="{{with $width}}{{.}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{with $height}}{{.}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$image.RelPermalink}}'">
 
 {{ else }} <!-- /if image size less then 500x and size not defined -->
 
@@ -158,7 +157,7 @@
   <source srcset="{{ $imageMD.RelPermalink }}" media="(max-width: 767px)">
   <source srcset="{{ $imageLG.RelPermalink }}" media="(max-width: 991px)">
   <source srcset="{{ $imageXL.RelPermalink }}">
-  <img {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageFallback.RelPermalink}} {{else}} loading="lazy" decoding="async" src="{{$imageFallback.RelPermalink}}"{{ end }}class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" alt="{{.Alt}}" width="{{$image.Width}}" height="{{$image.Height}}">
+  <img {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageFallback.RelPermalink}} {{else}} loading="lazy" decoding="async" src="{{$imageFallback.RelPermalink}}"{{ end }}class="{{if $placeholder}}identify-lazy lazy{{end}} {{$class}} img-fluid" alt="{{.Alt}}" width="{{$image.Width}}" height="{{$image.Height}}">
 </picture>
 {{ end }} <!-- end image processing -->
 {{ end }} <!-- end single image -->
