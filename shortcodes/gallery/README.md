@@ -58,3 +58,23 @@ link = "plugins/swiper-bundle.css"
 <!-- external link -->
 {{< slider dir="images/gallery" class="your-class" height="400" width="400" webp="false" command="Fit" option="" zoomable="true" >}}
 ```
+
+## Initialize slider into your script
+
+```js
+// gallery slider
+new Swiper(".gallery-slider", {
+  slidesPerView: 1,
+  loop: true,
+  autoHeight: true,
+  spaceBetween: 0,
+  speed: 1500,
+  autoplay: {
+    delay: 5000,
+  },
+  navigation: {
+    nextEl: ".gallery-slider-next",
+    prevEl: ".gallery-slider-prev",
+  },
+});
+```
