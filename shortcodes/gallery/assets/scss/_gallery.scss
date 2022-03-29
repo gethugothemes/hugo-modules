@@ -883,21 +883,21 @@ iframe.wait-autoplay {
       width: 100%;
     }
   }
-  .swiper-button-prev,
-  .swiper-button-next {
+  .gallery-slider-prev,
+  .gallery-slider-next {
     color: white;
     opacity: 0;
     transition: 0.3s;
   }
   &:hover {
-    .swiper-button-prev,
-    .swiper-button-next {
+    .gallery-slider-prev,
+    .gallery-slider-next {
       opacity: 1;
     }
-    .swiper-button-prev {
+    .gallery-slider-prev {
       left: 30px;
     }
-    .swiper-button-next {
+    .gallery-slider-next {
       right: 30px;
     }
   }
