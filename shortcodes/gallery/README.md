@@ -73,8 +73,8 @@ new Swiper(".gallery-slider", {
     delay: 5000,
   },
   navigation: {
-    nextEl: ".gallery-slider-next",
-    prevEl: ".gallery-slider-prev",
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
 });
 ```
