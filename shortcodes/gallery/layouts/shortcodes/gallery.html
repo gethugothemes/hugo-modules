@@ -50,7 +50,7 @@
 {{ $imageExt := path.Ext $image }}
 {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
 
-{{ partial "images/gallery-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
+{{ partial "gallery-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
 {{ $imageHeight:= $scratch.Get "image-height" }}
 {{ $imageWidth:= $scratch.Get "image-width" }}
 
@@ -71,7 +71,7 @@
 {{ else if os.FileExists $staticImage }}
 
 <div class="{{$class}} gallery {{if eq $zoomable `true`}}zoomable{{end}}">
-{{ range (readDir $staticImage)  }}
+	{{ range (readDir $staticImage)  }}
 	{{ if and (ne .Name ".DS_Store") (not .IsDir) }}
 	{{ $image := print "/" $folderDir "/" .Name }}
 	{{ $imageExt := path.Ext $image }}
@@ -87,14 +87,13 @@
 	</div>
 	{{ end }}
 	{{ end }}
-{{ end }}
+	{{ end }}
 </div>
 
 <!-- if directory does not exist -->
 {{ else }}
 <strong class="my-3 d-inline-block">Nothing to show in [{{ site.BaseURL }}<span class="text-danger">{{ $folderDir }}</span>] or folder does not exist</strong>
 {{ end }} <!-- end of checking image directory -->
-
 
 
 
