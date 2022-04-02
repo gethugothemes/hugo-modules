@@ -9,6 +9,13 @@ Add the following code to your module list in the `config/_default/module.toml` 
 path = "github.com/gethugothemes/hugo-modules/images"
 ```
 
+If you want to enable placeholder/lazy-loader, then add the following code to your js plugins list in the `config.toml` file.
+
+```toml
+[[params.plugins.js]]
+link = "plugins/lazy-loader.js"
+```
+
 <hr>
 
 ## Logo Implementation
@@ -84,13 +91,6 @@ Available parameters:
 {{ partial "image.html" (dict "Src" .Params.image "Context" .Page ) }}
 ```
 
-If you want to enable placeholder/lazy-loader, then add the following code to your js plugins list in the `config.toml` file.
-
-```toml
-[[params.plugins.js]]
-link = "plugins/lazy-loader.js"
-```
-
 <hr>
 
 
@@ -99,13 +99,14 @@ link = "plugins/lazy-loader.js"
 Call it, as a partial in your theme.
 
 Available parameters:
-* `Src`: image source
-* `Size`: image size (example: "100x100")
+* `Src`: background-image source
+* `Size`: background-image resize (example: "100x100")
 * `Perspective`: background-size | default: "cover"
 * `Webp`: generate webp version | default: true
 * `Context`: image context | default: .
 * `Position`: background-position | default: "center center"
 * `Repeat`: background-repeat | default: "no-repeat"
+* `Placeholder`: If `Placeholder` is true, then `lazy` class is required to this element. | default: false
 
 ```html
 {{ partial `bg-image.html` (dict `Src` .background_image ) | safeHTMLAttr }}
