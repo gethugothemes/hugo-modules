@@ -8,6 +8,8 @@
 {{ $context:= .Context | default . }}
 {{ $contentImage:= false }}
 {{ $assetImage:= false }}
+{{ $placeholder:= .Placeholder | default false }}
+{{ $placeholderQuality:= "40x q20" }}
 
 <!-- check content image  -->
 {{ with $context.Resources }}
@@ -24,12 +26,10 @@
 <!-- /check asset image -->
 
 {{ if or (hasPrefix $imagePath "http") (fileExists (add `static/` (string $imagePath))) }}
-style="background-image: url({{ $imagePath | absURL }});background-size: {{$size}};background-position: {{$position}};background-repeat: {{$repeat}};"
-
-{{ end }}
+style="background-size: {{$size}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imagePath | absURL }}"{{end}}
 
 <!-- check file existence -->
-{{ if or $assetImage $contentImage }}
+{{ else if or $assetImage $contentImage }}
 
 {{ if $assetImage }}
 {{ $image = resources.Get $imagePath }}
@@ -43,7 +43,11 @@ style="background-image: url({{ $imagePath | absURL }});background-size: {{$size
 {{ if not $webp }}
 {{ $imageWebp = $image.Resize (string $size) }}
 {{ end }}
-style="background-image: url({{ $imageWebp.RelPermalink }});background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};"
+
+<!-- placeholder -->
+{{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+style="background-image: {{if $placeholder}}url(data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}){{else}}{{ $imageWebp.RelPermalink }}{{end}};background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imageWebp.RelPermalink }}"{{end}}
 
 {{ else }} <!-- if not size -->
 
@@ -54,7 +58,11 @@ style="background-image: url({{ $imageWebp.RelPermalink }});background-size: {{$
 {{ if not $webp }}
 {{ $imageWebp = $image.Resize (string $defaultSize) }}
 {{ end }}
-style="background-image: url({{ $imageWebp.RelPermalink }});background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};"
+
+<!-- placeholder -->
+{{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+style="background-image: {{if $placeholder}}url(data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}){{else}}{{ $imageWebp.RelPermalink }}{{end}}; background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imageWebp.RelPermalink }}"{{end}}
 
 {{ end }} <!-- /if size -->
 
