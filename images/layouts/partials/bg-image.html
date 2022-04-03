@@ -47,7 +47,7 @@ style="background-size: {{$size}};background-position: {{$position}};background-
 <!-- placeholder -->
 {{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
 
-style="background-image: {{if $placeholder}}url(data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}){{else}}{{ $imageWebp.RelPermalink }}{{end}};background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imageWebp.RelPermalink }}"{{end}}
+style="background-image: url({{if $placeholder}}data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}{{else}}{{ $imageWebp.RelPermalink }}{{end}});background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imageWebp.RelPermalink }}"{{end}}
 
 {{ else }} <!-- if not size -->
 
@@ -62,7 +62,7 @@ style="background-image: {{if $placeholder}}url(data:image/jpeg;base64,{{ $place
 <!-- placeholder -->
 {{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
 
-style="background-image: {{if $placeholder}}url(data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}){{else}}{{ $imageWebp.RelPermalink }}{{end}}; background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imageWebp.RelPermalink }}"{{end}}
+style="background-image: url({{if $placeholder}}data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}{{else}}{{ $imageWebp.RelPermalink }}{{end}}); background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imageWebp.RelPermalink }}"{{end}}
 
 {{ end }} <!-- /if size -->
 
