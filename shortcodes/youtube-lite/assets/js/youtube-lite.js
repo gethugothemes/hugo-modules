@@ -193,7 +193,7 @@ class LiteYTEmbed extends HTMLElement {
       const wantsNoCookie = this.noCookie ? "-nocookie" : "";
       let embedTarget;
       if (this.playlistId) {
-        embedTarget = `?listType=playlist&list=${this.playlistId}&`;
+        embedTarget = `?rel=0&listType=playlist&list=${this.playlistId}&`;
       } else {
         embedTarget = `${this.videoId}?`;
       }
