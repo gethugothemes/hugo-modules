@@ -193,14 +193,14 @@ class LiteYTEmbed extends HTMLElement {
       const wantsNoCookie = this.noCookie ? "-nocookie" : "";
       let embedTarget;
       if (this.playlistId) {
-        embedTarget = `?rel=0&listType=playlist&list=${this.playlistId}&`;
+        embedTarget = `?listType=playlist&list=${this.playlistId}&`;
       } else {
         embedTarget = `${this.videoId}?`;
       }
       const iframeHTML = `
       <iframe frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
-      src="https://www.youtube${wantsNoCookie}.com/embed/${embedTarget}autoplay=${autoplay}&${this.params}"
+      src="https://www.youtube${wantsNoCookie}.com/embed/${embedTarget}rel=0&autoplay=${autoplay}&${this.params}"
       ></iframe>`;
       this.domRefFrame.insertAdjacentHTML("beforeend", iframeHTML);
       this.domRefFrame.classList.add("activated");
