@@ -1,8 +1,10 @@
+.content img {
+  margin-bottom: 1.5rem;
+}
 img {
   max-width: 100%;
   height: auto;
   display: inline-block;
-  margin-bottom: 1.5rem;
 
   &.img-center {
     display: block;
