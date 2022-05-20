@@ -20,8 +20,8 @@ Add the following code to your `asstes/scss/style.scss` file.
 ## Shortcode Implementation
 
 ```md
-<!-- internal link -->
+<!-- minimal use -->
 {{< image src="images/image.png"  >}}
-<!-- external link -->
+<!-- exclusive use -->
 {{< image src="images/image.png" caption="" alt="alter-text" height="" width="" position="center" command="fill" option="q100" class="img-fluid" title="image title"  webp="false" >}}
 ```
