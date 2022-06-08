@@ -60,7 +60,7 @@
 
 ##### 1 Month for most static resources
 <filesMatch ".(css|jpg|jpeg|png|webp|gif|js|ico|woff|woff2|eot|ttf)$">
-  Header set Cache-Control "max-age=2592000, public"
+  Header set Cache-Control "public, max-age=31536000, immutable"
 </filesMatch>
 
 ##### Enable gzip compression for resources
