@@ -30,16 +30,42 @@
 <!-- meta hugo version -->
 {{ hugo.Generator }}
 
-{{ $description:= site.Params.metadata.description }}
-{{ $imagePath:= site.Params.metadata.image }}
-
-<!-- if multiple images, get the first one -->
-{{ if .Params.images }}
-{{ range first 1 .Params.images }}
-{{ $imagePath = . }}
+<!-- checking og title -->
+{{ $title := site.Title }}
+{{ if .Params.og_title }}
+  {{ $title = .Params.og_title }}
+<!-- checking page title -->
+{{ else if .Title }}
+  {{ $title = .Title }}
+<!-- checking metadata title -->
+{{ else if site.Params.metadata.title }}
+  {{ $title = site.Params.metadata.title }}
 {{ end }}
+
+<!-- checking og description -->
+{{ $description := .Summary }}
+{{ if .Params.og_description }}
+  {{ $description = .Params.og_description }}
+<!-- checking page description -->
+{{ else if .Params.description }}
+  {{ $description = .Params.description }}
+<!-- checking page description -->
+{{ else if site.Params.metadata.description }}
+  {{ $description = site.Params.metadata.description }}
+{{ end }}
+
+<!-- checking og image -->
+{{ $imagePath := site.Params.metadata.image }}
+{{ if .Params.og_image }}
+  {{ $imagePath = .Params.og_image }}
+<!-- checking multiple images -->
+{{ else if .Params.images }}
+  {{ range first 1 .Params.images }}
+  {{ $imagePath = . }}
+  {{ end }}
+<!-- checking single images -->
 {{ else if .Params.image }}
-{{ $imagePath = .Params.image }}
+  {{ $imagePath = .Params.image }}
 {{ end }}
 
 
@@ -92,14 +118,14 @@
 
 
 <!-- ######### opengraph others meta ############## -->
-<meta property="og:title" content="{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
-<meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with $description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{.Permalink}}" />
 
 <!-- ########## twitter others meta ############### -->
-<meta name="twitter:title" content="{{ with .Title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}" />
-<meta name="twitter:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with $description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $description }}" />
 
 {{ with site.Social.twitter }}
 <meta name="twitter:site" content="@{{ . }}" />
