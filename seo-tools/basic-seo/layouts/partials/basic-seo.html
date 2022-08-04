@@ -102,8 +102,8 @@
 {{ $imageWidth := $image.Width }}
 {{ $imageHeight := $image.Height }}
 {{ if (and (gt $imageWidth 144) (gt $imageHeight 144)) }}
-<meta property="og:image" content="{{ $image.RelPermalink }}" />
-<meta name="twitter:image" content="{{ $image.RelPermalink }}" />
+<meta property="og:image" content="{{ $image | absURL }}" />
+<meta name="twitter:image" content="{{ $image | absURL }}" />
 <meta name="twitter:card" content="summary{{ if (and (gt $imageWidth 300) (gt $imageHeight 157) (not (eq $imageWidth $imageHeight))) }}_large_image{{ end }}">
 {{ end }} <!-- /if image gt 144px -->
 <meta property="og:image:width" content="{{ $imageWidth }}">
