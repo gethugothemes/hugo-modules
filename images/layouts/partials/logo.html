@@ -28,9 +28,11 @@
 {{ else }}
 {{ $logoDefaultWidth:= add (string $logoDefaultWidth) "x"}}
 {{ $logoWidth:= $logoWidth | default $logoDefaultWidth }}
-{{ $options := add (string $logoWidth) " webp" }}
+{{ $logoWidth2x:= replace $logoWidth `x` `` }}
+{{ $logoWidth2x = add (string (mul (int $logoWidth2x) 2)) `x` }}
+{{ $options := add (string $logoWidth2x) " webp" }}
 {{ if not $logoWebp }} <!-- if webp false -->
-{{ $options = add (string $logoWidth) " " }}
+{{ $options = add (string $logoWidth2x) " " }}
 {{ end }} <!-- end -->
 
 {{ .Scratch.Set "logo" ($logo.Resize $options).RelPermalink }}
