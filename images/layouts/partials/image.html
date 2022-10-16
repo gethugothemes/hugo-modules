@@ -7,8 +7,9 @@
 {{ $context:= .Context | default . }}
 {{ $contentImage:= false }}
 {{ $assetImage:= false }}
-{{ $height:= index (split $size `x`) 1 }}
-{{ $width:= index (split $size `x`) 0 }}
+{{ $sizeValue:= index (split $size ` `) 0 }}
+{{ $height:= index (split $sizeValue `x`) 1 }}
+{{ $width:= index (split $sizeValue `x`) 0 }}
 {{ $webp:= .Webp | default true }}
 {{ $command:= .Command | default "Resize" }}
 {{ $placeholder:= .Placeholder | default false }}
