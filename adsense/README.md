@@ -13,6 +13,13 @@ path = "github.com/gethugothemes/hugo-modules/adsense"
 
 ## Implementation
 
+Add this configuration to your `config/_default/params.toml` file.
+
+```toml
+# google adsense, see https://www.google.com/adsense/
+google_adsense = "" # example: ca-pub-XXXXXXXXXX
+```
+
 Call it, as a partial in your `script.html` file.
 
 ```html
