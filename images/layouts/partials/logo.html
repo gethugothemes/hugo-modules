@@ -1,12 +1,43 @@
 {{ $logoPath:= site.Params.logo }}
 {{ $logoWebp:= site.Params.logo_webp | default true }}
 {{ $logoDarkPath:= site.Params.logo_dark }}
+{{ $logoText:= site.Params.logo_text }}
 {{ $logoWidth:= replace site.Params.logo_width "px" "x" }}
-{{ $logoDefaultWidth:= "" }}
+{{ $logoDefaultWidth:= site.Params.logo_width }}
 {{ $logoDefaultHeight:= "" }}
+{{ $context:= . }}
+{{ $contentImage:= false }}
+{{ $assetImage:= false }}
+
+<!-- check content image  -->
+{{ with $context.Resources }}
+{{ if .GetMatch $logoPath }}
+{{ $contentImage = true }}
+{{ end }}
+{{ end }}
+<!-- /check content image -->
+
+<!-- check asset image -->
+{{ if fileExists (add `assets/` (string $logoPath)) }}
+{{ $assetImage = true }}
+{{ end }}
+<!-- /check asset image -->
+
+<!-- image static/CDN -->
+{{ if or (hasPrefix $logoPath "http") (fileExists (add `static/` (string $logoPath))) }}
+<img loading="lazy" decoding="async" src="{{ $logoPath | absURL }}" alt="{{$logoText}}" class="img-fluid mb-0 only-light" height="{{$logoDefaultHeight}}" width="{{$logoDefaultWidth}}">
+<img loading="lazy" decoding="async" src="{{ $logoDarkPath | absURL }}" alt="{{$logoText}}" class="img-fluid mb-0 only-dark" height="{{$logoDefaultHeight}}" width="{{$logoDefaultWidth}}">
+{{ else }}
+<!-- /image cdn -->
 
 <!-- checking logo path -->
-{{ if $logoPath }}
+{{ if or $assetImage $contentImage }}
+
+{{ if $assetImage }}
+{{ $logoPath = resources.Get $logoPath }}
+{{ else if $contentImage }}
+{{ $logoPath = $context.Resources.GetMatch $logoPath }}
+{{ end }}
 
 <!-- checking logo existance -->
 {{ if fileExists (add `assets/` $logoPath) }}
@@ -87,13 +118,13 @@
 
 
 {{ if $logoDarkPath }}
-<img loading="preload" decoding="async" class="img-fluid mb-0 only-light" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_fallback`}}'">
+<img loading="preload" decoding="async" class="img-fluid mb-0 only-light" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo`}}" alt="{{ $logoText }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_fallback`}}'">
 
-<img loading="preload" decoding="async" class="img-fluid mb-0 only-dark" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo_dark`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_dark_fallback`}}'">
+<img loading="preload" decoding="async" class="img-fluid mb-0 only-dark" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo_dark`}}" alt="{{ $logoText }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_dark_fallback`}}'">
 
 {{ else if $logoPath }}
 
-<img loading="preload" decoding="async" class="img-fluid mb-0" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo`}}" alt="{{ site.Title }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_fallback`}}'">
+<img loading="preload" decoding="async" class="img-fluid mb-0" width="{{replace $logoWidth `x` `` | default $logoDefaultWidth}}" height="{{$logoDefaultHeight}}" src="{{.Scratch.Get `logo`}}" alt="{{ $logoText }}" onerror="this.onerror=null;this.src='{{.Scratch.Get `logo_fallback`}}'">
 
 <!-- logo text -->
 {{ else if site.Params.logo_text }}
@@ -102,3 +133,5 @@
 {{ else }}
 <strong class="text-danger">`{{$logoPath}}` doesn't exist</strong>
 {{ end }} <!-- / checking logo path -->
+
+{{ end }}
