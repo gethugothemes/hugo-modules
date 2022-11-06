@@ -1,0 +1,18 @@
+<a href="{{ .Destination | safeURL }}"
+
+{{ with .Title}}
+ title="{{ . }}"
+{{ end }}
+
+{{ if strings.HasPrefix .Destination "http" }}
+ target="_blank"
+{{ end }} 
+
+{{ if in .Destination "?class=" }}
+{{ $getClass:= string (index (findRE "class=([^&#]*)" .Destination) 0) }}
+{{ $allClass:= replace $getClass `class=` `` }}
+{{ $class:= replace $allClass `+` ` ` }}
+ class="{{$class}}"
+{{ end }}
+
+>{{ .Text }}</a>
