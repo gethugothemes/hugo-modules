@@ -15,4 +15,4 @@
  class="{{$class}}"
 {{ end }}
 
->{{ .Text | markdownify }}</a>
+>{{ .Text | safeHTML }}</a>
