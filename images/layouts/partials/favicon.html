@@ -1,12 +1,8 @@
 {{ $favicon:= site.Params.favicon }}
 
-<!-- check assets -->
-{{ if fileExists (add `assets/` (string $favicon)) }}
-{{ $favicon = true }}
-{{ end }}
-<!-- /check assets -->
+{{ if $favicon }}
 
-<!-- image static/CDN -->
+<!-- static/CDN -->
 {{ if or (hasPrefix $favicon "http") (fileExists (add `static/` (string $favicon))) }}
 <link rel="shortcut icon" href="{{$favicon | absURL}}" type="image/x-icon">
 <link rel="icon" href="{{$favicon | absURL}}" type="image/x-icon">
@@ -15,8 +11,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="{{$favicon | absURL}}">
 {{ else }}
 
-{{ if $favicon }}
-{{ if fileExists (add `assets/` $favicon) }}
+<!-- assset -->
+{{ if fileExists (add `assets/` (string $favicon)) }}
 {{ $favicon:= resources.Get $favicon }}
 {{ $favicon_16:= $favicon.Resize "16x png"}}
 {{ $favicon_32:= $favicon.Resize "32x png"}}

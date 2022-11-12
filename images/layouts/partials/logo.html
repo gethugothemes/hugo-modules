@@ -40,7 +40,7 @@
 {{ end }}
 
 <!-- checking logo existance -->
-{{ if fileExists (add `assets/` $logoPath) }}
+{{ if fileExists (add `assets/` (string $logoPath)) }}
 {{ $logo:= resources.Get $logoPath }}
 
 <!-- logo extention -->
@@ -83,7 +83,7 @@
 {{ if $logoDarkPath }}
 
 <!-- checking logo existance -->
-{{ if fileExists (add `assets/` $logoDarkPath) }}
+{{ if fileExists (add `assets/` (string $logoDarkPath)) }}
 {{ $logoDark:= resources.Get $logoDarkPath }}
 
 <!-- logo extention -->
