@@ -1,6 +1,6 @@
-{{ $logoPath:= site.Params.logo }}
+{{ $logoPath:= string .Src | default site.Params.logo }}
 {{ $logoWebp:= site.Params.logo_webp | default true }}
-{{ $logoDarkPath:= site.Params.logo_dark }}
+{{ $logoDarkPath:= string .DarkSrc | default site.Params.logo_dark }}
 {{ $logoText:= site.Params.logo_text }}
 {{ $logoWidth:= replace site.Params.logo_width "px" "x" }}
 {{ $logoDefaultWidth:= site.Params.logo_width }}
