@@ -3,6 +3,11 @@
 <base href="{{ .Permalink }}">
 {{ end }}
 
+<!-- meta noindex -->
+{{ if .Params.noindex }}
+<meta name="robots" content="noindex,nofollow" />
+{{ end }}
+
 <!-- meta canonical -->
 <link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
 
