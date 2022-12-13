@@ -2,7 +2,7 @@
 {{ $image:= . }}
 {{ $class:= .Class }}
 {{ $size:= .Size }}
-{{ $resize:= .Resize | default true}}
+{{ $resize:= .Resize | default true }}
 {{ $alt:= .Alt }}
 {{ $context:= .Context | default . }}
 {{ $contentImage:= false }}
@@ -15,153 +15,258 @@
 {{ $placeholder:= .Placeholder | default false }}
 {{ $placeholderQuality:= "40x q20" }}
 
+
 <!-- check content image  -->
 {{ with $context.Resources }}
-{{ if .GetMatch $imagePath }}
-{{ $contentImage = true }}
-{{ end }}
+  {{ if .GetMatch $imagePath }}
+    {{ $contentImage = true }}
+  {{ end }}
 {{ end }}
 <!-- /check content image -->
 
 <!-- check asset image -->
 {{ if fileExists (add `assets/` (string $imagePath)) }}
-{{ $assetImage = true }}
+  {{ $assetImage = true }}
 {{ end }}
 <!-- /check asset image -->
 
-
 <!-- image static/CDN -->
 {{ if or (hasPrefix $imagePath "http") (fileExists (add `static/` (string $imagePath))) }}
-<img loading="lazy" decoding="async" src="{{ $imagePath | absURL }}" alt="{{.Alt}}" class="{{$class}} img-fluid" height="{{$height}}" width="{{$width}}">
+  <img
+    loading="lazy"
+    decoding="async"
+    src="{{ $imagePath | absURL }}"
+    alt="{{ .Alt }}"
+    class="{{ $class }} img-fluid"
+    height="{{ $height }}"
+    width="{{ $width }}" />
 {{ else }}
-<!-- /image cdn -->
+  <!-- /image cdn -->
 
-<!-- check file existence -->
-{{ if or $assetImage $contentImage }}
-
-{{ if $assetImage }}
-{{ $image = resources.Get $imagePath }}
-{{ else if $contentImage }}
-{{ $image = $context.Resources.GetMatch $imagePath }}
-{{ end }}
-
-<!-- image extension -->
-{{ $imageExt := path.Ext $image }}
-
-<!-- image height, width (if not svg) -->
-{{ if eq $imageExt `.svg` }}
-{{ .Scratch.Set "image-height" "" }}
-{{ .Scratch.Set "image-width" "" }}
-{{ else }}
-{{ .Scratch.Set "image-height" $image.Height }}
-{{ .Scratch.Set "image-width" $image.Width }}
-{{ end }}
-{{ $imageHeight:= .Scratch.Get "image-height" }}
-{{ $imageWidth:= .Scratch.Get "image-width" }}
-
-<!-- gif/svg image -->
-{{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
-<img src="{{$image.RelPermalink}}" loading="lazy" decoding="async" alt="{{.Alt}}" class="{{$class}} img-fluid" width="{{$width}}" height="{{$height}}">
-{{ else }}
-
-<!-- single image -->
-{{ if $size }}
-<!-- resize -->
-{{ $imageFallback:= $image.Resize $size }}
-{{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
-{{ if not $webp }}
-{{ $imageWebp = $image.Resize (string $size) }}
-{{ end }}
-<!-- fit -->
-{{ if eq $command "Fit" }}
-{{ $imageFallback = $image.Fit $size }}
-{{ $imageWebp = $image.Fit (add (string $size) " webp") }}
-{{ if not $webp }}
-{{ $imageWebp = $image.Fit (string $size) }}
-{{ end }}
-<!-- fill -->
-{{ else if eq $command "Fill" }}
-{{ $imageFallback = $image.Fill $size }}
-{{ $imageWebp = $image.Fill (add (string $size) " webp") }}
-{{ if not $webp }}
-{{ $imageWebp = $image.Fill (string $size) }}
-{{ end }}
-<!-- crop -->
-{{ else if eq $command "Crop" }}
-{{ $imageFallback = $image.Crop $size }}
-{{ $imageWebp = $image.Crop (add (string $size) " webp") }}
-{{ if not $webp }}
-{{ $imageWebp = $image.Crop (string $size) }}
-{{ end }}
-{{ end }}
-
-<!-- placeholder -->
-{{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
-
-<img {{ if $placeholder }} src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} {{else}} src="{{$imageWebp.RelPermalink}}" loading="lazy" decoding="async" {{ end }} alt="{{.Alt}}" class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" width="{{with $width}}{{.}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{with $height}}{{.}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$imageFallback.RelPermalink}}'">
+  <!-- check file existence -->
+  {{ if or $assetImage $contentImage }}
+    {{ if $assetImage }}
+      {{ $image = resources.Get $imagePath }}
+    {{ else if $contentImage }}
+      {{ $image = $context.Resources.GetMatch $imagePath }}
+    {{ end }}
 
 
-<!-- if image size less then 500x and size not defined -->
-{{ else if or (lt ($image.Width) 500) (not $resize) }}
-{{ $size:= add (add (string $image.Width) "x") (string $image.Height) }}
-<!-- resize -->
-{{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
-{{ if not $webp }}
-{{ $imageWebp = $image.Resize (string $size) }}
-{{ end }}
-<!-- fit -->
-{{ if eq $command "Fit" }}
-{{ $imageWebp = $image.Resize (add (string $size) " webp") }}
-{{ if not $webp }}
-{{ $imageWebp = $image.Resize (string $size) }}
-{{ end }}
-<!-- fill -->
-{{ else if eq $command "Fill" }}
-{{ $imageWebp = $image.Resize (add (string $size) " webp") }}
-{{ if not $webp }}
-{{ $imageWebp = $image.Resize (string $size) }}
-{{ end }}
-<!-- crop -->
-{{ else if eq $command "Crop" }}
-{{ $imageWebp = $image.Resize (add (string $size) " webp") }}
-{{ if not $webp }}
-{{ $imageWebp = $image.Resize (string $size) }}
-{{ end }}
-{{ end }}
-
-<!-- placeholder -->
-{{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
-
-<img {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageWebp.RelPermalink}} alt="placeholder" {{else}} src="{{$imageWebp.RelPermalink}}" loading="lazy" decoding="async" alt="{{.Alt}}" {{ end }} class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" width="{{with $width}}{{.}}{{else}}{{$imageWebp.Width}}{{end}}" height="{{with $height}}{{.}}{{else}}{{$imageWebp.Height}}{{end}}" onerror="this.onerror='null';this.src='{{$image.RelPermalink}}'">
-
-{{ else }} <!-- /if image size less then 500x and size not defined -->
+    <!-- image extension -->
+    {{ $imageExt := path.Ext $image }}
 
 
-<!-- image processing for multiple device -->
-{{ $imageFallback:= $image.Resize "1110x" }}
-{{ $imageXL:= $image.Resize "1110x webp" }}
-{{ $imageLG:= $image.Resize "700x webp" }}
-{{ $imageMD:= $image.Resize "600x webp" }}
-{{ $imageSM:= $image.Resize "545x webp" }}
-{{ if not $webp }}
-{{ $imageXL = $image.Resize "1110x" }}
-{{ $imageLG = $image.Resize "700x" }}
-{{ $imageMD = $image.Resize "600x" }}
-{{ $imageSM = $image.Resize "545x" }}
-{{ end }}
+    <!-- image height, width (if not svg) -->
+    {{ if eq $imageExt `.svg` }}
+      {{ .Scratch.Set "image-height" "" }}
+      {{ .Scratch.Set "image-width" "" }}
+    {{ else }}
+      {{ .Scratch.Set "image-height" $image.Height }}
+      {{ .Scratch.Set "image-width" $image.Width }}
+    {{ end }}
+    {{ $imageHeight:= .Scratch.Get "image-height" }}
+    {{ $imageWidth:= .Scratch.Get "image-width" }}
 
-<!-- placeholder -->
-{{ $placeholderImage := ($imageFallback.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
 
-<picture>
-  <source {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-srcset={{$imageFallback.RelPermalink}} {{else}} srcset="{{ $imageSM.RelPermalink }}" {{end}} media="(max-width: 575px)">
-  <source {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-srcset={{$imageFallback.RelPermalink}} {{else}} srcset="{{ $imageMD.RelPermalink }}" {{end}} media="(max-width: 767px)">
-  <source {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-srcset={{$imageFallback.RelPermalink}} {{else}} srcset="{{ $imageLG.RelPermalink }}" {{end}} media="(max-width: 991px)">
-  <source {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-srcset={{$imageFallback.RelPermalink}} {{else}} srcset="{{ $imageXL.RelPermalink }}" {{end}}>
-  <img {{ if $placeholder }}src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}" data-src={{$imageFallback.RelPermalink}} {{else}} loading="lazy" decoding="async" src="{{$imageFallback.RelPermalink}}"{{ end }}class="{{if $placeholder}}lazy{{end}} {{$class}} img-fluid" alt="{{.Alt}}" width="{{$image.Width}}" height="{{$image.Height}}">
-</picture>
-{{ end }} <!-- end image processing -->
-{{ end }} <!-- end single image -->
-{{ end }} <!-- end check file existance -->
+    <!-- gif/svg image -->
+    {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
+      <img
+        src="{{ $image.RelPermalink }}"
+        loading="lazy"
+        decoding="async"
+        alt="{{ .Alt }}"
+        class="{{ $class }} img-fluid"
+        width="{{ $width }}"
+        height="{{ $height }}" />
+    {{ else }}
+      <!-- single image -->
+      {{ if $size }}
+        <!-- resize -->
+        {{ $imageFallback:= $image.Resize $size }}
+        {{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
+        {{ if not $webp }}
+          {{ $imageWebp = $image.Resize (string $size) }}
+        {{ end }}
+        <!-- fit -->
+        {{ if eq $command "Fit" }}
+          {{ $imageFallback = $image.Fit $size }}
+          {{ $imageWebp = $image.Fit (add (string $size) " webp") }}
+          {{ if not $webp }}
+            {{ $imageWebp = $image.Fit (string $size) }}
+          {{ end }}
+          <!-- fill -->
+        {{ else if eq $command "Fill" }}
+          {{ $imageFallback = $image.Fill $size }}
+          {{ $imageWebp = $image.Fill (add (string $size) " webp") }}
+          {{ if not $webp }}
+            {{ $imageWebp = $image.Fill (string $size) }}
+          {{ end }}
+          <!-- crop -->
+        {{ else if eq $command "Crop" }}
+          {{ $imageFallback = $image.Crop $size }}
+          {{ $imageWebp = $image.Crop (add (string $size) " webp") }}
+          {{ if not $webp }}
+            {{ $imageWebp = $image.Crop (string $size) }}
+          {{ end }}
+        {{ end }}
 
+
+        <!-- placeholder -->
+        {{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+
+        <img
+          {{ if $placeholder }}
+            src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+            data-src={{ $imageWebp.RelPermalink }}
+          {{ else }}
+            src="{{ $imageWebp.RelPermalink }}" loading="lazy" decoding="async"
+          {{ end }}
+
+          alt="{{ .Alt }}"
+          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img-fluid"
+          width="{{ with $width }}
+            {{ . }}
+          {{ else }}
+            {{ $imageWebp.Width }}
+          {{ end }}
+          "
+          height="{{ with $height }}
+            {{ . }}
+          {{ else }}
+            {{ $imageWebp.Height }}
+          {{ end }}
+          "
+          onerror="this.onerror='null';this.src='{{ $imageFallback.RelPermalink }}'" />
+
+        <!-- if image size less then 500x and size not defined -->
+      {{ else if or (lt ($image.Width) 500) (not $resize) }}
+        {{ $size:= add (add (string $image.Width) "x") (string $image.Height) }}
+        <!-- resize -->
+        {{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
+        {{ if not $webp }}
+          {{ $imageWebp = $image.Resize (string $size) }}
+        {{ end }}
+        <!-- fit -->
+        {{ if eq $command "Fit" }}
+          {{ $imageWebp = $image.Resize (add (string $size) " webp") }}
+          {{ if not $webp }}
+            {{ $imageWebp = $image.Resize (string $size) }}
+          {{ end }}
+          <!-- fill -->
+        {{ else if eq $command "Fill" }}
+          {{ $imageWebp = $image.Resize (add (string $size) " webp") }}
+          {{ if not $webp }}
+            {{ $imageWebp = $image.Resize (string $size) }}
+          {{ end }}
+          <!-- crop -->
+        {{ else if eq $command "Crop" }}
+          {{ $imageWebp = $image.Resize (add (string $size) " webp") }}
+          {{ if not $webp }}
+            {{ $imageWebp = $image.Resize (string $size) }}
+          {{ end }}
+        {{ end }}
+
+
+        <!-- placeholder -->
+        {{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+
+        <img
+          {{ if $placeholder }}
+            src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+            data-src={{ $imageWebp.RelPermalink }} alt="placeholder"
+          {{ else }}
+            src="{{ $imageWebp.RelPermalink }}" loading="lazy" decoding="async"
+            alt="{{ .Alt }}"
+          {{ end }}
+
+          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img-fluid"
+          width="{{ with $width }}
+            {{ . }}
+          {{ else }}
+            {{ $imageWebp.Width }}
+          {{ end }}
+          "
+          height="{{ with $height }}
+            {{ . }}
+          {{ else }}
+            {{ $imageWebp.Height }}
+          {{ end }}
+          "
+          onerror="this.onerror='null';this.src='{{ $image.RelPermalink }}'" />
+      {{ else }}
+        <!-- /if image size less then 500x and size not defined -->
+
+        <!-- image processing for multiple device -->
+        {{ $imageFallback:= $image.Resize "1110x" }}
+        {{ $imageXL:= $image.Resize "1110x webp" }}
+        {{ $imageLG:= $image.Resize "700x webp" }}
+        {{ $imageMD:= $image.Resize "600x webp" }}
+        {{ $imageSM:= $image.Resize "545x webp" }}
+        {{ if not $webp }}
+          {{ $imageXL = $image.Resize "1110x" }}
+          {{ $imageLG = $image.Resize "700x" }}
+          {{ $imageMD = $image.Resize "600x" }}
+          {{ $imageSM = $image.Resize "545x" }}
+        {{ end }}
+
+
+        <!-- placeholder -->
+        {{ $placeholderImage := ($imageFallback.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+
+        <picture>
+          <source
+            {{ if $placeholder }}
+              src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+              data-srcset={{ $imageFallback.RelPermalink }}
+            {{ else }}
+              srcset="{{ $imageSM.RelPermalink }}"
+            {{ end }}
+            media="(max-width: 575px)" />
+          <source
+            {{ if $placeholder }}
+              src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+              data-srcset={{ $imageFallback.RelPermalink }}
+            {{ else }}
+              srcset="{{ $imageMD.RelPermalink }}"
+            {{ end }}
+            media="(max-width: 767px)" />
+          <source
+            {{ if $placeholder }}
+              src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+              data-srcset={{ $imageFallback.RelPermalink }}
+            {{ else }}
+              srcset="{{ $imageLG.RelPermalink }}"
+            {{ end }}
+            media="(max-width: 991px)" />
+          <source
+            {{ if $placeholder }}
+              src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+              data-srcset={{ $imageFallback.RelPermalink }}
+            {{ else }}
+              srcset="{{ $imageXL.RelPermalink }}"
+            {{ end }} />
+          <img
+            {{ if $placeholder }}
+              src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
+              data-src={{ $imageFallback.RelPermalink }}
+            {{ else }}
+              loading="lazy" decoding="async"
+              src="{{ $imageFallback.RelPermalink }}"
+            {{ end }}class="{{ if $placeholder }}
+              lazy
+            {{ end }} {{ $class }} img-fluid"
+            alt="{{ .Alt }}"
+            width="{{ $image.Width }}"
+            height="{{ $image.Height }}" />
+        </picture>
+      {{ end }}
+      <!-- end image processing -->
+    {{ end }}
+    <!-- end single image -->
+  {{ end }}
+
+  <!-- end check file existance -->
 {{ end }}

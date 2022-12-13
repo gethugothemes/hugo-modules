@@ -1,5 +1,5 @@
 {{ if site.Params.baidu.enable }}
-{{ with site.Params.baidu.analytics_id }}
+  {{ with site.Params.baidu.analytics_id }}
 <script>
   var _hmt = _hmt || [];
   (function () {
@@ -9,5 +9,5 @@
     s.parentNode.insertBefore(hm, s);
   })();
 </script>
-{{ end }}
+  {{ end }}
 {{ end }}

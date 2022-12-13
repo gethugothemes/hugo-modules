@@ -1,4 +1,8 @@
 <!-- web manifest -->
-<link rel="manifest" href="{{`manifest.webmanifest` | relURL }}">
-<meta name="msapplication-TileColor" content="{{site.Params.variables.color_primary | default `#ddd`}}">
-<meta name="theme-color" content="{{site.Params.variables.body_color | default `#ffffff` }}">
+<link rel="manifest" href="{{ `manifest.webmanifest` | relURL }}" />
+<meta
+  name="msapplication-TileColor"
+  content="{{ site.Params.variables.color_primary | default `#ddd` }}" />
+<meta
+  name="theme-color"
+  content="{{ site.Params.variables.body_color | default `#ffffff` }}" />

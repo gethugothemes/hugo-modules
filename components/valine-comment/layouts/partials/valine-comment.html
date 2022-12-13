@@ -1,30 +1,28 @@
-{{ $data:= newScratch}}
+{{ $data:= newScratch }}
 
 {{ if .IsTranslated }}
-{{ $siteLanguages := site.Languages}}
-{{ $pageLang := .Page.Lang}}
-{{ range .Page.AllTranslations }}
-{{ $translation := .}}
-{{ range $siteLanguages }}
-{{ if eq $translation.Lang .Lang }}
-{{ $selected := false }}
-{{ if eq $pageLang .Lang}}
+  {{ $siteLanguages := site.Languages }}
+  {{ $pageLang := .Page.Lang }}
+  {{ range .Page.AllTranslations }}
+    {{ $translation := . }}
+    {{ range $siteLanguages }}
+      {{ if eq $translation.Lang .Lang }}
+        {{ $selected := false }}
+        {{ if eq $pageLang .Lang }}
+          {{ if or (eq $translation.Language "zh-cn") (eq $translation.Language "zh-tw") (eq $translation.Language "en") (eq $translation.Language "ja") }}
+            {{ $data.Set "languageName" $translation.Language }}
+          {{ else }}
+            {{ $data.Set "languageName" "en" }}
+          {{ end }}
 
-{{ if or (eq $translation.Language "zh-cn") (eq $translation.Language "zh-tw") (eq $translation.Language "en") (eq $translation.Language "ja") }}
-{{ $data.Set "languageName" $translation.Language }}
-{{ else }}
-{{ $data.Set "languageName" "en" }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
 {{ end }}
 
-{{ end }}
-{{ end }}
-{{ end }}
-{{ end }}
-{{ end }}
-
-{{ with site.Params.valine_comment}}
-{{ if .enable}}
-
+{{ with site.Params.valine_comment }}
+  {{ if .enable }}
 <style type="text/css">
 .vpower, .vempty pre {display: none}
 [data-theme="dark"] .v[data-class="v"] .vinput, [data-theme="dark"] .v[data-class="v"] .veditor, [data-theme="dark"] .v[data-class="v"] p, [data-theme="dark"] .v[data-class="v"] pre code, [data-theme="dark"] .v[data-class="v"] .status-bar, .dark .v[data-class="v"] .vinput, .dark .v[data-class="v"] .veditor, .dark .v[data-class="v"] p, .dark .v[data-class="v"] pre code, .dark .v[data-class="v"] .status-bar, .theme__dark .v[data-class="v"] .vinput, .theme__dark .v[data-class="v"] .veditor, .theme__dark .v[data-class="v"] p, .theme__dark .v[data-class="v"] pre code, .theme__dark .v[data-class="v"] .status-bar, .night .v[data-class="v"] .vinput, .night .v[data-class="v"] .veditor, .night .v[data-class="v"] p, .night .v[data-class="v"] pre code, .night .v[data-class="v"] .status-bar {color: {{site.Params.variables.white | default "white"}}}
@@ -34,19 +32,25 @@
 .v[data-class="v"] .vempty {padding: 8px}
 </style>
 
-<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
-<div id="vcomment"></div>
-<noscript>Please enable JavaScript to view the comments</noscript>
+    <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+    <div id="vcomment"></div>
+    <noscript>Please enable JavaScript to view the comments</noscript>
 
-{{if or (eq .appId "") (eq .appKey "")}}
-<p class="text-center mb-5">"appId" and "appKey" is required, otherwise comment won't work. <br><a href="https://valine.js.org/en/quickstart.html" target="_blank">Get your APP-ID and APP-Key</a></p>
-{{end}}
+    {{ if or (eq .appId "") (eq .appKey "") }}
+      <p class="text-center mb-5">
+        "appId" and "appKey" is required, otherwise comment won't work. <br /><a
+          href="https://valine.js.org/en/quickstart.html"
+          target="_blank"
+          >Get your APP-ID and APP-Key</a
+        >
+      </p>
+    {{ end }}
 
 <script>
   // 1.Translate Valine
   var langName = 'language',
-  langMode = {	
+  langMode = {
     "nick": "{{i18n `valine_nickname`}}",
     "mail": "{{i18n `valine_mail`}}",
     "link": "{{i18n `valine_website`}}",
@@ -97,5 +101,5 @@
     serverURLs: '{{.serverURLs}}',
   });
 </script>
-{{ end }}
+  {{ end }}
 {{ end }}

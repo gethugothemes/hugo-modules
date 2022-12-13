@@ -1,5 +1,8 @@
 {{ if site.Params.plausible.enable }}
-{{ with site.Params.plausible.domain }}
-<script defer data-domain="{{ . }}" src="https://plausible.io/js/plausible.js"></script>
-{{ end }}
+  {{ with site.Params.plausible.domain }}
+    <script
+      defer
+      data-domain="{{ . }}"
+      src="https://plausible.io/js/plausible.js"></script>
+  {{ end }}
 {{ end }}

@@ -14,108 +14,142 @@
 {{ $contentImage:= $page.Resources.Match (add (string $folderDir) `/*`) }}
 {{ $staticImage:= print "static/" $folderDir }}
 
+
 <!-- start of checking asset-image -->
 {{ if $assetsImage }}
-<!-- start of image range -->
-<div class="{{$class}} gallery {{if eq $zoomable `true`}}zoomable{{end}}">
-{{ range $assetsImage }}
-{{ $image := resources.Get . }}
-{{ $imageExt := path.Ext $image }}
-{{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+  <!-- start of image range -->
+  <div
+    class="{{ $class }} gallery {{ if eq $zoomable `true` }}zoomable{{ end }}">
+    {{ range $assetsImage }}
+      {{ $image := resources.Get . }}
+      {{ $imageExt := path.Ext $image }}
+      {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+        {{ partial "gallery-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
+        {{ $imageHeight:= $scratch.Get "image-height" }}
+        {{ $imageWidth:= $scratch.Get "image-width" }}
 
-{{ partial "gallery-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
-{{ $imageHeight:= $scratch.Get "image-height" }}
-{{ $imageWidth:= $scratch.Get "image-width" }}
 
-<div class="gallery-item">
-	{{if eq $zoomable `true`}}
-	<a href="{{ $image.RelPermalink }}" class="d-block glightbox">
-		<img src="{{ $scratch.Get `image` }}" class="m-0 img-fluid" alt="{{.Name}}" onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'">
-	</a>
-	{{else}}
-	<img src="{{ $scratch.Get `image` }}" class="m-0 img-fluid" alt="{{.Name}}" onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'">
-	{{end}}
-</div>
-{{ end }}
-{{ end }} <!-- end of image range -->
-</div>
+        <div class="gallery-item">
+          {{ if eq $zoomable `true` }}
+            <a href="{{ $image.RelPermalink }}" class="d-block glightbox">
+              <img
+                src="{{ $scratch.Get `image` }}"
+                class="m-0 img-fluid"
+                alt="{{ .Name }}"
+                onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
+            </a>
+          {{ else }}
+            <img
+              src="{{ $scratch.Get `image` }}"
+              class="m-0 img-fluid"
+              alt="{{ .Name }}"
+              onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
+          {{ end }}
+        </div>
+      {{ end }}
+    {{ end }}
+    <!-- end of image range -->
+  </div>
 
-<!-- start of checking content-image -->
+  <!-- start of checking content-image -->
 {{ else if $contentImage }}
+  <!-- start of image range -->
+  <div
+    class="{{ $class }} gallery {{ if eq $zoomable `true` }}zoomable{{ end }}">
+    {{ range $contentImage }}
+      {{ $image:= $page.Resources.GetMatch (printf "*%s*" .) }}
+      {{ $imageExt := path.Ext $image }}
+      {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+        {{ partial "gallery-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
+        {{ $imageHeight:= $scratch.Get "image-height" }}
+        {{ $imageWidth:= $scratch.Get "image-width" }}
 
-<!-- start of image range -->
-<div class="{{$class}} gallery {{if eq $zoomable `true`}}zoomable{{end}}">
-{{ range $contentImage }}
-{{ $image:= $page.Resources.GetMatch (printf "*%s*" .) }}
-{{ $imageExt := path.Ext $image }}
-{{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
 
-{{ partial "gallery-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
-{{ $imageHeight:= $scratch.Get "image-height" }}
-{{ $imageWidth:= $scratch.Get "image-width" }}
+        <div class="gallery-item">
+          {{ if eq $zoomable `true` }}
+            <a href="{{ $image.RelPermalink }}" class="d-block glightbox">
+              <img
+                src="{{ $scratch.Get `image` }}"
+                class="m-0 img-fluid"
+                alt="{{ .Name }}"
+                onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
+            </a>
+          {{ else }}
+            <img
+              src="{{ $scratch.Get `image` }}"
+              class="m-0 img-fluid"
+              alt="{{ .Name }}"
+              onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
+          {{ end }}
+        </div>
+      {{ end }}
+    {{ end }}
+    <!-- end of image range -->
+  </div>
 
-<div class="gallery-item">
-	{{if eq $zoomable `true`}}
-	<a href="{{ $image.RelPermalink }}" class="d-block glightbox">
-		<img src="{{ $scratch.Get `image` }}" class="m-0 img-fluid" alt="{{.Name}}" onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'">
-	</a>
-	{{else}}
-	<img src="{{ $scratch.Get `image` }}" class="m-0 img-fluid" alt="{{.Name}}" onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'">
-	{{end}}
-</div>
-{{ end }}
-{{ end }} <!-- end of image range -->
-</div>
-
-<!-- start of checking static-image -->
+  <!-- start of checking static-image -->
 {{ else if os.FileExists $staticImage }}
+  <div
+    class="{{ $class }} gallery {{ if eq $zoomable `true` }}zoomable{{ end }}">
+    {{ range (readDir $staticImage) }}
+      {{ if and (ne .Name ".DS_Store") (not .IsDir) }}
+        {{ $image := print "/" $folderDir "/" .Name }}
+        {{ $imageExt := path.Ext $image }}
+        {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+          <div class="gallery-item" data-i="{{ .IsDir }}">
+            {{ if eq $zoomable `true` }}
+              <a href="{{ $image }}" class="d-block glightbox">
+                <img
+                  src="{{ $image }}"
+                  class="m-0 img-fluid"
+                  alt="{{ .Name }}"
+                  height="{{ $height }}"
+                  width="{{ $width }}" />
+              </a>
+            {{ else }}
+              <img
+                src="{{ $image }}"
+                class="m-0 img-fluid"
+                alt="{{ .Name }}"
+                height="{{ $height }}"
+                width="{{ $width }}" />
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
 
-<div class="{{$class}} gallery {{if eq $zoomable `true`}}zoomable{{end}}">
-	{{ range (readDir $staticImage)  }}
-	{{ if and (ne .Name ".DS_Store") (not .IsDir) }}
-	{{ $image := print "/" $folderDir "/" .Name }}
-	{{ $imageExt := path.Ext $image }}
-	{{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
-	<div class="gallery-item" data-i="{{.IsDir}}">
-		{{if eq $zoomable `true`}}
-		<a href="{{ $image }}" class="d-block glightbox">
-			<img src="{{$image}}" class="m-0 img-fluid" alt="{{.Name}}" height="{{$height}}" width="{{$width}}">
-		</a>
-		{{else}}
-		<img src="{{$image}}" class="m-0 img-fluid" alt="{{.Name}}" height="{{$height}}" width="{{$width}}">
-		{{end}}
-	</div>
-	{{ end }}
-	{{ end }}
-	{{ end }}
-</div>
-
-<!-- if directory does not exist -->
+  <!-- if directory does not exist -->
 {{ else }}
-<strong class="my-3 d-inline-block">Nothing to show in [{{ site.BaseURL }}<span class="text-danger">{{ $folderDir }}</span>] or folder does not exist</strong>
-{{ end }} <!-- end of checking image directory -->
+  <strong class="my-3 d-inline-block"
+    >Nothing to show in [{{ site.BaseURL }}<span class="text-danger"
+      >{{ $folderDir }}</span
+    >] or folder does not exist</strong
+  >
+{{ end }}
 
-
+<!-- end of checking image directory -->
 
 <!-- gallery masonry script -->
 {{ .Page.Scratch.Add "gallery" 1 }}
 {{ $gallery:= .Page.Scratch.Get "gallery" }}
 {{ if eq $gallery 1 }}
-<script>
-  window.addEventListener('load', (e) => {
-    // gallery init
-    const lightbox = GLightbox();
-    window.setTimeout(() => {
-      // justified gallery init
-      const justify_scale = screen.height * 0.25;
-      let items = document.querySelectorAll('.gallery .gallery-item');
-      Array.prototype.forEach.call(items, item => {
-        let image = item.querySelector('img');
-        let ratio = image.width / image.height;
-        item.style.width = justify_scale * ratio + 'px';
-        item.style.flexGrow = ratio;
-      })
-    }, 200);
-  });
-</script>
+  <script>
+    window.addEventListener("load", (e) => {
+      // gallery init
+      const lightbox = GLightbox();
+      window.setTimeout(() => {
+        // justified gallery init
+        const justify_scale = screen.height * 0.25;
+        let items = document.querySelectorAll(".gallery .gallery-item");
+        Array.prototype.forEach.call(items, (item) => {
+          let image = item.querySelector("img");
+          let ratio = image.width / image.height;
+          item.style.width = justify_scale * ratio + "px";
+          item.style.flexGrow = ratio;
+        });
+      }, 200);
+    });
+  </script>
 {{ end }}

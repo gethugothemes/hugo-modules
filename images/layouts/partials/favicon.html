@@ -2,27 +2,57 @@
 
 {{ if $favicon }}
 
-<!-- static/CDN -->
-{{ if or (hasPrefix $favicon "http") (fileExists (add `static/` (string $favicon))) }}
-<link rel="shortcut icon" href="{{$favicon | absURL}}" type="image/x-icon">
-<link rel="icon" href="{{$favicon | absURL}}" type="image/x-icon">
-<link rel="icon" type="image/png" sizes="16x16" href="{{$favicon | absURL}}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{$favicon | absURL}}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{$favicon | absURL}}">
-{{ else }}
-
-<!-- assset -->
-{{ if fileExists (add `assets/` (string $favicon)) }}
-{{ $favicon:= resources.Get $favicon }}
-{{ $favicon_16:= $favicon.Resize "16x png"}}
-{{ $favicon_32:= $favicon.Resize "32x png"}}
-{{ $favicon_180:= $favicon.Resize "180x png"}}
-<link rel="shortcut icon" href="{{$favicon_32.RelPermalink}}" type="image/x-icon">
-<link rel="icon" href="{{$favicon_32.RelPermalink}}" type="image/x-icon">
-<link rel="icon" type="image/png" sizes="16x16" href="{{$favicon_16.RelPermalink}}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{$favicon_32.RelPermalink}}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{$favicon_180.RelPermalink}}">
-{{ end }}
-{{ end }}
+  <!-- static/CDN -->
+  {{ if or (hasPrefix $favicon "http") (fileExists (add `static/` (string $favicon))) }}
+    <link
+      rel="shortcut icon"
+      href="{{ $favicon | absURL }}"
+      type="image/x-icon" />
+    <link rel="icon" href="{{ $favicon | absURL }}" type="image/x-icon" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{{ $favicon | absURL }}" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{{ $favicon | absURL }}" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{ $favicon | absURL }}" />
+  {{ else }}
+    <!-- assset -->
+    {{ if fileExists (add `assets/` (string $favicon)) }}
+      {{ $favicon:= resources.Get $favicon }}
+      {{ $favicon_16:= $favicon.Resize "16x png" }}
+      {{ $favicon_32:= $favicon.Resize "32x png" }}
+      {{ $favicon_180:= $favicon.Resize "180x png" }}
+      <link
+        rel="shortcut icon"
+        href="{{ $favicon_32.RelPermalink }}"
+        type="image/x-icon" />
+      <link
+        rel="icon"
+        href="{{ $favicon_32.RelPermalink }}"
+        type="image/x-icon" />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="{{ $favicon_16.RelPermalink }}" />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="{{ $favicon_32.RelPermalink }}" />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="{{ $favicon_180.RelPermalink }}" />
+    {{ end }}
+  {{ end }}
 
 {{ end }}
