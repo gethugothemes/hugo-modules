@@ -77,7 +77,7 @@ function switchTab(tabGroup, tabId) {
 
 // restore tab shortcode from localStorage
 function restoreTabSelections() {
-  var selectionsJSON = window.localStorage.getItem(`tabSelections${tabGroup}`);
+  var selectionsJSON = window.localStorage.getItem(`tabSelections`);
   if (window.localStorage) {
     if (selectionsJSON) {
       tabSelections = JSON.parse(selectionsJSON);
