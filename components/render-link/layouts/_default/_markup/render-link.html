@@ -1,19 +1,18 @@
-<a
-  href="{{ .Destination | safeURL }}"
-  {{ with .Title }}
-    title="{{ . }}"
-  {{ end }}
+<a href="{{ .Destination | safeURL }}"
 
-  {{ if strings.HasPrefix .Destination "http" }}
-    target="_blank"
-  {{ end }}
+{{ with .Title}}
+ title="{{ . }}"
+{{ end }}
 
-  {{ if in .Destination "?class=" }}
-    {{ $getClass:= string (index (findRE "class=([^&#]*)" .Destination) 0) }}
-    {{ $allClass:= replace $getClass `class=` `` }}
-    {{ $class:= replace $allClass `+` ` ` }}
-    class="{{ $class }}"
-  {{ end }}
+{{ if strings.HasPrefix .Destination "http" }}
+ target="_blank"
+{{ end }} 
 
-  >{{ .Text | safeHTML }}</a
->
+{{ if in .Destination "?class=" }}
+{{ $getClass:= string (index (findRE "class=([^&#]*)" .Destination) 0) }}
+{{ $allClass:= replace $getClass `class=` `` }}
+{{ $class:= replace $allClass `+` ` ` }}
+ class="{{$class}}"
+{{ end }}
+
+>{{ .Text | safeHTML }}</a>
