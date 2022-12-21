@@ -14,5 +14,4 @@
 {{ $class:= replace $allClass `+` ` ` }}
  class="{{$class}}"
 {{ end }}
-
->{{- .Text | safeHTML -}}</a>
+>{{.Text | safeHTML}}</a>
