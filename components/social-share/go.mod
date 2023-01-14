@@ -1,3 +1,3 @@
 module github.com/gethugothemes/hugo-modules/components/social-share
 
-go 1.18
+go 1.19
