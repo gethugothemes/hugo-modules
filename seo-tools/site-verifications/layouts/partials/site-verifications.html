@@ -1,22 +1,27 @@
-<!-- google site verification -->
 {{ with site.Params.site_verification.google }}
-  <meta name="google-site-verification" content="{{ . }}" />
+<!-- google site verification -->
+<meta name="google-site-verification" content="{{ . }}" />
 {{ end }}
 
 
-<!-- bing site verification -->
 {{ with site.Params.site_verification.bing }}
-  <meta name="msvalidate.01" content="{{ . }}" />
+<!-- bing site verification -->
+<meta name="msvalidate.01" content="{{ . }}" />
 {{ end }}
 
 
-<!-- baidu site verification -->
 {{ with site.Params.site_verification.baidu }}
-  <meta name="baidu-site-verification" content="{{ . }}" />
+<!-- baidu site verification -->
+<meta name="baidu-site-verification" content="{{ . }}" />
 {{ end }}
 
 
-<!-- facebook site verification -->
 {{ with site.Params.site_verification.facebook }}
-  <meta name="facebook-domain-verification" content="{{ . }}" />
+<!-- facebook site verification -->
+<meta name="facebook-domain-verification" content="{{ . }}" />
+{{ end }}
+
+{{ with site.Params.site_verification.mastodon }}
+<!-- Mastodon site verification -->
+<link rel="me" href="{{ . }}" type="text/html">
 {{ end }}
