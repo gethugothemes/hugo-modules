@@ -29,4 +29,5 @@ google = ""   # Your verification code
 bing = ""     # Your verification code
 baidu = ""    # Your verification code
 facebook = "" # Your verification code
+mastodon = "" # Your verification code
 ```
