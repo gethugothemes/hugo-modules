@@ -24,7 +24,7 @@ Call it, as a partial in your theme.
 
 ```html
 <!-- logo -->
-{{ partial "logo.html" . }}
+{{ partial "logo.html" }}
 ```
 
 Define the logo in the `config/_default/params.toml` file.
