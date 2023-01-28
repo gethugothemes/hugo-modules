@@ -20,11 +20,11 @@ link = "plugins/cookie.js"
 
 ## cookie-consent Implementation
 
-Call it, as a partial in your theme footer.
+Call it, as a partial in your theme. [NOTE: add it into bottom of `script.html` file]
 
 ```html
 <!-- cookie consent -->
-{{ partial "cookie-consent.html" . }}
+{{ partialCached "cookie-consent.html" . }}
 ```
 
 Configure it in the `config/_default/params.toml` file.

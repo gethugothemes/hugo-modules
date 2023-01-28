@@ -11,85 +11,59 @@
 {{ $placeholder:= .Placeholder | default false }}
 {{ $placeholderQuality:= "40x q20" }}
 
-
 <!-- check content image  -->
 {{ with $context.Resources }}
-  {{ if .GetMatch $imagePath }}
-    {{ $contentImage = true }}
-  {{ end }}
+{{ if .GetMatch $imagePath }}
+{{ $contentImage = true }}
+{{ end }}
 {{ end }}
 <!-- /check content image -->
 
 <!-- check asset image -->
 {{ if fileExists (add `assets/` (string $imagePath)) }}
-  {{ $assetImage = true }}
+{{ $assetImage = true }}
 {{ end }}
 <!-- /check asset image -->
 
 {{ if or (hasPrefix $imagePath "http") (fileExists (add `static/` (string $imagePath))) }}
-  style="background-size: {{ $size }};background-position:
-  {{ $position }};background-repeat: {{ $repeat }};"
-  {{ if $placeholder }}data-src="{{ $imagePath | absURL }}"{{ end }}
+style="background-size: {{$size}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imagePath | absURL }}"{{end}}
 
-
-  <!-- check file existence -->
+<!-- check file existence -->
 {{ else if or $assetImage $contentImage }}
-  {{ if $assetImage }}
-    {{ $image = resources.Get $imagePath }}
-  {{ else if $contentImage }}
-    {{ $image = $context.Resources.GetMatch $imagePath }}
-  {{ end }}
 
-  {{ if $size }}
-
-    {{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
-    {{ if not $webp }}
-      {{ $imageWebp = $image.Resize (string $size) }}
-    {{ end }}
-
-
-    <!-- placeholder -->
-    {{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
-
-    style="background-image:
-    url({{ if $placeholder }}
-      data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}
-    {{ else }}
-      {{ $imageWebp.RelPermalink }}
-    {{ end }}
-    );background-size:
-    {{ $perspective }};background-position: {{ $position }};background-repeat:
-    {{ $repeat }};"
-    {{ if $placeholder }}data-src="{{ $imageWebp.RelPermalink }}"{{ end }}
-
-  {{ else }}
-    <!-- if not size -->
-
-    {{ $height:= string $image.Height }}
-    {{ $width:= string $image.Width }}
-    {{ $defaultSize:= add (add $width "x") $height }}
-    {{ $imageWebp:= $image.Resize (add $defaultSize " webp") }}
-    {{ if not $webp }}
-      {{ $imageWebp = $image.Resize (string $defaultSize) }}
-    {{ end }}
-
-
-    <!-- placeholder -->
-    {{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
-
-    style="background-image:
-    url({{ if $placeholder }}
-      data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}
-    {{ else }}
-      {{ $imageWebp.RelPermalink }}
-    {{ end }}
-    );
-    background-size: {{ $perspective }};background-position:
-    {{ $position }};background-repeat: {{ $repeat }};"
-    {{ if $placeholder }}data-src="{{ $imageWebp.RelPermalink }}"{{ end }}
-
-  {{ end }}
-
-  <!-- /if size -->
+{{ if $assetImage }}
+{{ $image = resources.Get $imagePath }}
+{{ else if $contentImage }}
+{{ $image = $context.Resources.GetMatch $imagePath }}
 {{ end }}
-<!-- /check file existence -->
+
+{{ if $size }}
+
+{{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Resize (string $size) }}
+{{ end }}
+
+<!-- placeholder -->
+{{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+style="background-image: url({{if $placeholder}}data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}{{else}}{{ $imageWebp.RelPermalink }}{{end}});background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imageWebp.RelPermalink }}"{{end}}
+
+{{ else }} <!-- if not size -->
+
+{{ $height:= string $image.Height }}
+{{ $width:= string $image.Width }}
+{{ $defaultSize:= add (add $width "x") $height }}
+{{ $imageWebp:= $image.Resize (add $defaultSize " webp") }}
+{{ if not $webp }}
+{{ $imageWebp = $image.Resize (string $defaultSize) }}
+{{ end }}
+
+<!-- placeholder -->
+{{ $placeholderImage := ($imageWebp.Resize $placeholderQuality) | images.Filter (images.GaussianBlur 5) }}
+
+style="background-image: url({{if $placeholder}}data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}{{else}}{{ $imageWebp.RelPermalink }}{{end}}); background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};" {{if $placeholder}}data-src="{{ $imageWebp.RelPermalink }}"{{end}}
+
+{{ end }} <!-- /if size -->
+
+{{ end }} <!-- /check file existence -->
