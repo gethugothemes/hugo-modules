@@ -15,7 +15,7 @@ path = "github.com/gethugothemes/hugo-modules/shortcodes/buttons"
 
 ```md
 <!-- internal link -->
-{{< button "contact" "contact/" >}}
+{{< button label="contact" link="contact/" >}}
 <!-- external link -->
-{{< button "google" "https://google.com/" >}}
+{{< button label="google" link="https://google.com/" >}}
 ```
