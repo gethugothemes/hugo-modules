@@ -21,6 +21,5 @@ link = "plugins/themify-icons/icons.css"
 ## Icon Implementation
 
 ```html
-<!-- cookie consent -->
 <i class="ti-save"></i>
 ```
