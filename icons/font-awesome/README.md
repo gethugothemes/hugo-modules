@@ -33,6 +33,5 @@ _**you can use v5 for font-awesome 5**_
 ## Icon Implementation
 
 ```html
-<!-- cookie consent -->
 <i class="fa-solid fa-search"></i>
 ```
