@@ -6,6 +6,10 @@ img {
   height: auto;
   display: inline-block;
 
+  &.glightbox {
+    cursor: pointer;
+  }
+
   &.img-center {
     display: block;
     margin-left: auto;
