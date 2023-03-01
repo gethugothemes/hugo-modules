@@ -10,6 +10,7 @@
 {{ $command:= .Get "command" | humanize }}
 {{ $option:= .Get "option" }}
 {{ $webp:= .Get "webp" | default true }}
+{{ $zoomable:= .Get "zoomable" | default false }}
 
 
 <!-- image position -->
@@ -40,7 +41,7 @@
         decoding="async"
         src="{{ $imagePath | absURL }}"
         alt="{{ $alt }}"
-        class="{{ $class }}"
+        class="{{ $class }} {{ if eq $zoomable `true` }}glightbox{{ end }}"
         width="{{ $width }}"
         height="{{ $height }}" />
       <figcaption id="caption-{{ $caption | markdownify }}">
@@ -55,7 +56,7 @@
       decoding="async"
       src="{{ $imagePath | absURL }}"
       alt="{{ $alt }}"
-      class="{{ $class }} {{ .Scratch.Get `position` }}"
+      class="{{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}glightbox{{ end }}"
       width="{{ $width }}"
       height="{{ $height }}" />
   {{ end }}
@@ -135,7 +136,7 @@
           title="{{ $title }}"
           loading="lazy"
           decoding="async"
-          class="{{ $class }}"
+          class="{{ $class }} {{ if eq $zoomable `true` }}glightbox{{ end }}"
           width="{{ $width | default $imageWidth }}"
           height="{{ $height | default $imageHeight }}"
           src="{{ .Scratch.Get `image` }}"
@@ -151,7 +152,7 @@
         title="{{ $title }}"
         loading="lazy"
         decoding="async"
-        class="{{ $class }} {{ .Scratch.Get `position` }}"
+        class="{{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}glightbox{{ end }}"
         width="{{ $width | default $imageWidth }}"
         height="{{ $height | default $imageHeight }}"
         src="{{ .Scratch.Get `image` }}"
@@ -168,3 +169,9 @@
   <!-- /check image existance -->
 {{ end }}
 <!-- /check cdn image -->
+
+{{ .Page.Scratch.Add "lightbox" 1 }}
+{{ $lightbox:= .Page.Scratch.Get "lightbox" }}
+{{ if eq $lightbox 1 }}
+<script>window.addEventListener("load", (e) => {const lightbox = GLightbox()});</script>
+{{ end }}
