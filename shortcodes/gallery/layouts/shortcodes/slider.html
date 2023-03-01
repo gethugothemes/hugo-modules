@@ -146,12 +146,8 @@
 <!-- end of slider wrapper -->
 
 <!-- style and scripts -->
-{{ .Page.Scratch.Add "gallerySlider" 1 }}
-{{ $gallerySlider:= .Page.Scratch.Get "gallerySlider" }}
-{{ if eq $gallerySlider 1 }}
-  <script>
-    window.addEventListener("load", (e) => {
-      const lightbox = GLightbox();
-    });
-  </script>
+{{ .Page.Scratch.Add "lightbox" 1 }}
+{{ $lightbox:= .Page.Scratch.Get "lightbox" }}
+{{ if eq $lightbox 1 }}
+<script>window.addEventListener("load", (e) => {const lightbox = GLightbox()});</script>
 {{ end }}
