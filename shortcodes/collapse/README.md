@@ -7,6 +7,12 @@ Add the following code to your module list in the `config/_default/module.toml` 
 path = "github.com/gethugothemes/hugo-modules/shortcodes/collapse"
 ```
 
+Add the following code to your `asstes/scss/style.scss` file.
+
+```scss
+@import 'collapse';
+```
+
 ## Shortcode Implementation
 
 ```md
