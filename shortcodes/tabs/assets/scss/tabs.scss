@@ -11,8 +11,6 @@
   &-content {
     display: block;
     clear: both;
-    padding: 0.5rem;
-    border: 1px solid #acb9c4;
 
     .tab-item {
       display: none;
@@ -24,18 +22,20 @@
   }
 
   &-nav-button {
-    border: 1px solid #acb9c4;
-    border-radius: 0.4rem 0.4rem 0 0;
-    background-color: #eee;
+    border: 1px solid #ddd;
+    background-color: #ddd;
     float: left;
     display: block;
-    position: relative;
     margin-left: 0.4rem;
-    bottom: -1px;
+    margin-bottom: 0.4rem;
+    padding: 0.4rem 1rem;
+    text-transform: capitalize;
 
+    &:hover,
     &.active {
-      background-color: #fff;
-      border-bottom-color: #fff;
+      color: $white;
+      background-color: $color-primary;
+      border-color: $color-primary;
     }
 
     &:first-child {
@@ -47,13 +47,15 @@
 body.dark {
   .tab {
     &-nav-button {
-      border-color: #4e4e4e !important;
-      background-color: #222;
-      color: #fff;
+      border-color: transparent;
+      background-color: $white;
+      color: $black;
 
+      &:hover,
       &.active {
-        background-color: #222;
-        border-bottom-color: #222 !important;
+        color: $white;
+        background-color: $color-primary;
+        border-color: $color-primary;
       }
     }
 

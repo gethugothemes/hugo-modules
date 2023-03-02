@@ -4,7 +4,7 @@
   <div class="tab-nav">
     {{ range $idx, $tab := .Scratch.Get "tabs" }}
     <button data-tab-item="{{ .name }}" data-tab-group="{{ $groupId }}"
-      class="tab-nav-button btn {{ cond (eq $idx 0) `active` ``}}"
+      class="tab-nav-button {{ cond (eq $idx 0) `active` ``}}"
       onclick="switchTab('{{ $groupId }}','{{ .name }}')">{{ .name }}</button>
     {{ end }}
   </div>
