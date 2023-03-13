@@ -1,3 +1,5 @@
+{{ $scratch := newScratch }}
+
 {{ if site.Params.preloader.enable }}
   <div class="preloader">
     <!-- get image path -->
@@ -19,25 +21,24 @@
         {{ if ne $preloader_ext ".gif" }}
           <!-- webp image -->
           {{ $option_webp := add (add (string $preloader_width) "x") " webp" }}
-          {{ .Scratch.Set "preloader" ($preloader.Resize $option_webp).RelPermalink }}
+          {{ $scratch.Set "preloader" ($preloader.Resize $option_webp).RelPermalink }}
           <!-- fallback image -->
           {{ $option := add (string $preloader_width) "x" }}
-          {{ .Scratch.Set "preloader_fallback" ($preloader.Resize $option).RelPermalink }}
+          {{ $scratch.Set "preloader_fallback" ($preloader.Resize $option).RelPermalink }}
 
           <!-- gif image -->
         {{ else }}
-          {{ .Scratch.Set "preloader" $preloader.RelPermalink }}
+          {{ $scratch.Set "preloader" $preloader.RelPermalink }}
         {{ end }}
-
 
         <img
           class="img-fluid"
           loading="preload"
           decoding="async"
-          src="{{ .Scratch.Get `preloader` }}"
+          src="{{ $scratch.Get `preloader` }}"
           aria-label="preloader"
           title="preloader"
-          onerror="this.onerror=null;this.src='{{ .Scratch.Get `preloader_fallback` }}'"
+          onerror="this.onerror=null;this.src='{{ $scratch.Get `preloader_fallback` }}'"
           alt="preloader" />
       {{ end }}
     {{ end }}
