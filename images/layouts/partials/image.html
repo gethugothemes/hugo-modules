@@ -4,6 +4,7 @@
 {{ $size:= .Size }}
 {{ $resize:= .Resize | default true}}
 {{ $alt:= .Alt }}
+{{ $loading:= .Loading | default "lazy" }}
 {{ $context:= .Context | default . }}
 {{ $contentImage:= false }}
 {{ $assetImage:= false }}
@@ -32,7 +33,7 @@
 
 <!-- image static/CDN -->
 {{ if or (hasPrefix $imagePath "http") (fileExists (add `static/` (string $imagePath))) }}
-<img loading="lazy" decoding="async" src="{{ $imagePath | absURL }}" alt="{{.Alt}}" class="{{$class}} img-fluid" height="{{$height}}" width="{{$width}}">
+<img loading="{{.Loading}}" decoding="async" src="{{ $imagePath | absURL }}" alt="{{.Alt}}" class="{{$class}} img-fluid" height="{{$height}}" width="{{$width}}">
 {{ else }}
 <!-- /image cdn -->
 
