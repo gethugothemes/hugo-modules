@@ -37,6 +37,28 @@ style="background-size: {{$size}};background-position: {{$position}};background-
 {{ $image = $context.Resources.GetMatch $imagePath }}
 {{ end }}
 
+<!-- image extension -->
+{{ $imageExt := path.Ext $image }}
+
+<!-- image height, width (if not svg) -->
+{{ if eq $imageExt `.svg` }}
+{{ .Scratch.Set "image-height" "" }}
+{{ .Scratch.Set "image-width" "" }}
+{{ else }}
+{{ .Scratch.Set "image-height" $image.Height }}
+{{ .Scratch.Set "image-width" $image.Width }}
+{{ end }}
+{{ $imageHeight:= .Scratch.Get "image-height" }}
+{{ $imageWidth:= .Scratch.Get "image-width" }}
+
+<!-- gif/svg image -->
+{{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
+
+<!-- placeholder -->
+style="background-image: url({{ $image.RelPermalink }});background-size: {{$perspective}};background-position: {{$position}};background-repeat: {{$repeat}};"
+
+{{ else }}
+
 {{ if $size }}
 
 {{ $imageWebp:= $image.Resize (add (string $size) " webp") }}
@@ -67,3 +89,5 @@ style="background-image: url({{if $placeholder}}data:image/jpeg;base64,{{ $place
 {{ end }} <!-- /if size -->
 
 {{ end }} <!-- /check file existence -->
+
+{{ end }}
