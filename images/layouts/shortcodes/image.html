@@ -41,7 +41,9 @@
         decoding="async"
         src="{{ $imagePath | absURL }}"
         alt="{{ $alt }}"
-        class="{{ $class }} {{ if eq $zoomable `true` }}glightbox{{ end }}"
+        class="ghtm-img {{ $class }} {{ if eq $zoomable `true` }}
+          glightbox
+        {{ end }}"
         width="{{ $width }}"
         height="{{ $height }}" />
       <figcaption id="caption-{{ $caption | markdownify }}">
@@ -56,7 +58,9 @@
       decoding="async"
       src="{{ $imagePath | absURL }}"
       alt="{{ $alt }}"
-      class="{{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}glightbox{{ end }}"
+      class="ghtm-img {{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}
+        glightbox
+      {{ end }}"
       width="{{ $width }}"
       height="{{ $height }}" />
   {{ end }}
@@ -107,6 +111,7 @@
         {{ $options = add (add (add (add (string ($width | default $imageWidth)) "x") (string ($height | default $imageHeight))) " ") (string $option) }}
       {{ end }}
 
+
       <!-- end -->
 
       <!-- image Fit -->
@@ -136,7 +141,9 @@
           title="{{ $title }}"
           loading="lazy"
           decoding="async"
-          class="{{ $class }} {{ if eq $zoomable `true` }}glightbox{{ end }}"
+          class="ghtm-img {{ $class }} {{ if eq $zoomable `true` }}
+            glightbox
+          {{ end }}"
           width="{{ $width | default $imageWidth }}"
           height="{{ $height | default $imageHeight }}"
           src="{{ .Scratch.Get `image` }}"
@@ -152,7 +159,9 @@
         title="{{ $title }}"
         loading="lazy"
         decoding="async"
-        class="{{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}glightbox{{ end }}"
+        class="ghtm-img {{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}
+          glightbox
+        {{ end }}"
         width="{{ $width | default $imageWidth }}"
         height="{{ $height | default $imageHeight }}"
         src="{{ .Scratch.Get `image` }}"
@@ -162,7 +171,7 @@
 
   {{ else }}
     <!-- image not found -->
-    <strong class="text-danger mb-3 d-inline-block"
+    <strong style="color:red; margin-bottom:15px; display:inline-block;"
       >{{ site.BaseURL }}{{ $imagePath }} does not exist</strong
     >
   {{ end }}
@@ -173,5 +182,9 @@
 {{ .Page.Scratch.Add "lightbox" 1 }}
 {{ $lightbox:= .Page.Scratch.Get "lightbox" }}
 {{ if eq $lightbox 1 }}
-<script>window.addEventListener("load", (e) => {const lightbox = GLightbox()});</script>
+  <script>
+    window.addEventListener("load", (e) => {
+      const lightbox = GLightbox();
+    });
+  </script>
 {{ end }}

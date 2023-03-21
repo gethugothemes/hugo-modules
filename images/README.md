@@ -9,6 +9,12 @@ Add the following code to your module list in the `config/_default/module.toml` 
 path = "github.com/gethugothemes/hugo-modules/images"
 ```
 
+Add the following code to your `asstes/scss/main.scss` or `asstes/scss/style.scss` file.
+
+```scss
+@import 'images';
+```
+
 If you want to enable placeholder/lazy-loader, then add the following code to your js plugins list in the `config.toml` file.
 
 ```toml
@@ -48,7 +54,6 @@ logo_text = "Boilerplate"
 
 <hr>
 
-
 ## Favicon Implementation
 
 Call it, as a partial in your theme.
@@ -67,12 +72,12 @@ favicon = "images/favicon.png"
 
 <hr>
 
-
 ## Image Implementation
 
 Call it, as a partial in your theme.
 
 Available parameters:
+
 * `Src`: image source
 * `Alt`: image alt text
 * `Size`: image size (example: "100x100")
@@ -93,12 +98,12 @@ Available parameters:
 
 <hr>
 
-
 ## Background-Image Implementation
 
 Call it, as a partial in your theme.
 
 Available parameters:
+
 * `Src`: background-image source
 * `Size`: background-image resize (example: "100x100")
 * `Perspective`: background-size | default: "cover"
@@ -110,4 +115,15 @@ Available parameters:
 
 ```html
 {{ partial `bg-image.html` (dict `Src` .background_image ) | safeHTMLAttr }}
+```
+
+<hr>
+
+## Shortcode Implementation
+
+```md
+<!-- minimal use -->
+{{< image src="images/image.png"  >}}
+<!-- exclusive use -->
+{{< image src="images/image.png" caption="" alt="alter-text" height="" width="" position="center" command="fill" option="q100" class="img-fluid" title="image title"  webp="false" >}}
 ```
