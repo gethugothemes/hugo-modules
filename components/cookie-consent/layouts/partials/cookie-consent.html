@@ -1,13 +1,12 @@
 <!-- cookie -->
 {{ with site.Params.cookies }}
-  {{ if .enable }}
-    <div id="js-cookie-box" class="cookie-box cookie-box-hide">
-      {{ .content | markdownify }}<span
-        id="js-cookie-button"
-        class="btn btn-sm btn-outline-primary"
-        >{{ .button }}</span
-      >
-    </div>
+{{ if .enable }}
+<div id="js-cookie-box" class="cookie-box cookie-box-hide">
+  {{ .content | markdownify }}
+  <span id="js-cookie-button" class="btn btn-sm btn-outline-primary">{{ .button }}</span>
+</div>
+
+<!-- cookie script -->
 <script type="application/javascript">
   const cookieBox = document.getElementById('js-cookie-box');
   const cookieButton = document.getElementById('js-cookie-button');
@@ -22,28 +21,26 @@
   }
 </script>
 
-    <!-- cookie style -->
-    <style>
-      .cookie-box {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        text-align: center;
-        z-index: 9999;
-        padding: 1rem 2rem;
-        background: rgb(71, 71, 71);
-        transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
-        color: #fdfdfd;
-      }
-
-      .cookie-box-hide {
-        display: none;
-      }
-
-      #js-cookie-button {
-        margin-left: 1rem;
-      }
-    </style>
-  {{ end }}
+<!-- cookie style -->
+<style>
+  .cookie-box {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    z-index: 9999;
+    padding: 1rem 2rem;
+    background: rgb(71, 71, 71);
+    transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+    color: #fdfdfd;
+  }
+  .cookie-box-hide {
+    display: none;
+  }
+  #js-cookie-button {
+    margin-left: 1rem;
+  }
+</style>
+{{ end }}
 {{ end }}
