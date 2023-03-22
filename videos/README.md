@@ -16,7 +16,8 @@ path = "github.com/gethugothemes/hugo-modules/videos"
 <hr>
 
 ## Local/Remote Video
-#### Using Partial
+
+### Using Partial
 
 ```md
 <!-- minimal use -->
@@ -26,7 +27,7 @@ path = "github.com/gethugothemes/hugo-modules/videos"
 {{ partial "video.html" (dict "Src" "videos/demo.mp4" "Width" "500" "Height" "auto" "Autoplay" "false" "Loop" "false" "Muted" "false" "Controls" "true" "Class" "ght-video") }}
 ```
 
-#### Using Shortcode
+### Using Shortcode
 
 ```md
 <!-- minimal use -->
@@ -35,15 +36,17 @@ path = "github.com/gethugothemes/hugo-modules/videos"
 <!-- extended use -->
 {{< video src="videos/demo.mp4" width="500" height="auto" autoplay="false" loop="false" muted="false" controls="true" class="" >}}
 ```
+
 **Available parameters/options:**
-* `src`: video source
-* `width`: video width
-* `height`: video height
-* `autoplay`: autoplay video | default: "false"
-* `loop`: loop video after end | default: "false"
-* `muted`: play video without sound | default: "false"
-* `controls`: video controller | default: "true"
-* `class`: video class
+
+- `src`: video source
+- `width`: video width
+- `height`: video height
+- `autoplay`: autoplay video | default: "false"
+- `loop`: loop video after end | default: "false"
+- `muted`: play video without sound | default: "false"
+- `controls`: video controller | default: "true"
+- `class`: video class
 
 <hr>
 
@@ -56,7 +59,7 @@ To add Youtube video as a Partial or Shortcode, add this plugin to your `config.
 link = "plugins/youtube-lite.js"
 ```
 
-#### Using Partial
+### Using Partial
 
 ```md
 <!-- minimal use -->
@@ -66,7 +69,7 @@ link = "plugins/youtube-lite.js"
 {{ partial "youtube-lite.html" (dict "Id" "6FIoOJm3vYA" "Class" "mx-auto"  "Width" "600px" "Style" "" "Attr" "") }}
 ```
 
-#### Using Shortcode
+### Using Shortcode
 
 ```md
 <!-- minimal use -->
@@ -75,12 +78,14 @@ link = "plugins/youtube-lite.js"
 <!-- extended use -->
 {{< youtube-lite id="6FIoOJm3vYA" class="mx-auto" width="600px" style="" attr="" >}}
 ```
+
 **Available parameters/options:**
-* `id`: YouTube video Id (ex: youtube.com/watch?v=`FeHiF0XQ8VQ`)
-* `class`: video class
-* `width`: video width
-* `style`: add custom style
-* `attr`: add custom attribute
+
+- `id`: YouTube video Id (ex: youtube.com/watch?v=`FeHiF0XQ8VQ`)
+- `class`: video class
+- `width`: video width
+- `style`: add custom style
+- `attr`: add custom attribute
 
 <hr>
 
@@ -93,8 +98,7 @@ To add Vimeo video as a Partial or Shortcode, add this plugin to your `config.to
 link = "plugins/vimeo-lite.js"
 ```
 
-
-#### Using Partial
+### Using Partial
 
 ```md
 <!-- minimal use -->
@@ -104,7 +108,7 @@ link = "plugins/vimeo-lite.js"
 {{ partial "vimeo-lite.html" (dict "Id" "805124764" "Class" "mx-auto"  "Width" "600px" "Style" "" "Attr" "") }}
 ```
 
-#### Using Shortcode
+### Using Shortcode
 
 ```md
 <!-- minimal use -->
@@ -113,9 +117,11 @@ link = "plugins/vimeo-lite.js"
 <!-- extended use -->
 {{< vimeo-lite id="364402896" class="mx-auto" width="600px" style="" attr="" >}}
 ```
+
 **Available parameters/options:**
-* `id`: YouTube video Id (ex: vimeo.com/`805124764`)
-* `class`: video class
-* `width`: video width
-* `style`: add custom style
-* `attr`: add custom attribute
+
+- `id`: YouTube video Id (ex: vimeo.com/`805124764`)
+- `class`: video class
+- `width`: video width
+- `style`: add custom style
+- `attr`: add custom attribute
