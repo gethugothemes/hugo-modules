@@ -1,8 +1,8 @@
 # Video Modules
 
-- Local or Remote video - [Read ↆ](https://github.com/gethugothemes/hugo-modules/edit/master/shortcodes/video/README.md#video-implementation-localremote)
-- Youtube Video [Read ↆ](https://github.com/gethugothemes/hugo-modules/edit/master/shortcodes/video/README.md#youtube-video-implementation-lite-and-fast)
-- Vimeo Video [Read ↆ](https://github.com/gethugothemes/hugo-modules/edit/master/shortcodes/video/README.md#vimeo-video-implementation-lite-and-fast)
+- Local or Remote video - [Read ↆ](https://github.com/gethugothemes/hugo-modules/tree/master/videos#localremote-video)
+- Youtube Video [Read ↆ](https://github.com/gethugothemes/hugo-modules/tree/master/videos#youtube-video-lite-and-fast)
+- Vimeo Video [Read ↆ](https://github.com/gethugothemes/hugo-modules/tree/master/videos#vimeo-video-lite-and-fast)
 
 ## Installation
 
