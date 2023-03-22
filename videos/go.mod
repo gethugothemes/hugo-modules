@@ -1,3 +1,3 @@
 module github.com/gethugothemes/hugo-modules/videos
 
-go 1.19
+go 1.20
