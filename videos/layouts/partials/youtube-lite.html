@@ -1,0 +1,14 @@
+{{ $videoid:= .Id }}
+{{ $class:= .Class }}
+{{ $style:= .Style }}
+{{ $width:= .Width }}
+{{ $attr:= .Attr }}
+
+<div
+  {{ with $class }}class="{{ . }}"{{ end }}
+  style="overflow: hidden;{{ with $width }} width:{{ .| safeCSS }};
+  {{ end }}{{ with $style }}{{ .| safeCSS }}{{ end }}">
+  <youtube-lite
+    videoid="{{ $videoid }}"
+    {{ with $attr }}{{ . | safeHTMLAttr }}{{ end }}></youtube-lite>
+</div>

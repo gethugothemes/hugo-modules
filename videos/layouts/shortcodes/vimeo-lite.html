@@ -1,0 +1,10 @@
+{{ $videoid:= .Get "id" }}
+{{ $class:= .Get "class" }}
+{{ $style:= .Get "style" }}
+{{ $width:= .Get "width" }}
+{{ $attr:= .Get "attr" }}
+
+<div {{ with $class }}class="{{ . }}" {{ end }} 
+  style="overflow:hidden; {{ with $width }} width:{{ .| safeCSS }}; {{ end }} {{ with $style }}{{ .| safeCSS }}{{ end }}">
+  <vimeo-lite videoid="{{ $videoid | default (.Get 0) }}" {{ with $attr }}{{ . | safeHTMLAttr }}{{ end }}></vimeo-lite>
+</div>

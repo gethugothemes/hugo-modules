@@ -1,0 +1,38 @@
+{{ $Scratch := newScratch }}
+{{ $videoPath:= string .Src }}
+{{ $width:= .Width }}
+{{ $height:= .Height }}
+{{ $autoplay:= .Autoplay | default `false` }}
+{{ $loop:= .Loop | default `false` }}
+{{ $muted:= .Muted | default `false` }}
+{{ $controls:= .Controls | default `true` }}
+{{ $class:= .Class }}
+
+<!-- checking cdn -->
+{{ if hasPrefix $videoPath "http" }}
+  {{ $Scratch.Set "video_path" $videoPath }}
+
+  <!-- checking assets -->
+{{ else if fileExists (add `assets/` $videoPath) }}
+  {{ $Scratch.Set "video_path" (resources.Get $videoPath).RelPermalink }}
+
+  <!-- checking content/static -->
+{{ else }}
+  {{ $Scratch.Set "video_path" (print "/" $videoPath) }}
+{{ end }}
+
+{{ $videoPath = $Scratch.Get "video_path" }}
+
+{{ if $videoPath }}
+  <video
+    {{ with $width }}width="{{ . }}"{{ end }}
+    {{ with $height }}height="{{ . }}"{{ end }}
+    {{ if eq $autoplay `true` }}autoplay{{ end }}
+    {{ if eq $loop `true` }}loop{{ end }}
+    {{ if eq $muted `true` }}muted{{ end }}
+    {{ if eq $controls `true` }}controls{{ end }}
+    class="{{ $class }}" style="max-width:100%">
+    <source src="{{ $videoPath }}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+{{ end }}
