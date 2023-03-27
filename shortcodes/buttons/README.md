@@ -13,6 +13,13 @@ path = "github.com/gethugothemes/hugo-modules/shortcodes/buttons"
 
 ## Shortcode Implementation
 
+Available parameters:
+
+* `label`: button label
+* `link`: button link (internal or external)
+* `style`: button style `outline`/`solid` (default: `solid`)
+* `class`: custom class
+
 ```md
 <!-- internal link -->
 {{< button label="contact" link="contact/" >}}
