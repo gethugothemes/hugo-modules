@@ -11,9 +11,12 @@
   justify-content: center;
 }
 
+.ghtm-img {
+  max-width: 100%;
+  height: auto;
+}
+
 // dark mode
-body.dark {
-  .preloader {
-    background-color: #181818;
-  }
+.dark .preloader {
+  background-color: #181818;
 }
