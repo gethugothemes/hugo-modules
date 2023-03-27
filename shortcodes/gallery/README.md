@@ -16,7 +16,7 @@ Add the following code to your js plugins list in the `config.toml` file.
 link = "plugins/glightbox.js"
 ```
 
-Add the following code to your `asstes/scss/style.scss` file.
+Add the following code to your `asstes/scss/main.scss` or `asstes/scss/style.scss` file.
 
 ```scss
 @import 'gallery';
@@ -36,6 +36,7 @@ Add the following code to your `asstes/scss/style.scss` file.
 ```
 
 ### Slider
+
 **Note:** You must need to add swiper slider to use this shortcode.
 
 Add the following code to your js plugins list in the `config.toml` file.
