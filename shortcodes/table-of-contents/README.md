@@ -1,4 +1,6 @@
-# Table Of Contents Shortcode
+# Table Of Contents Shortcode (DEPRICATED)
+
+use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents>
 
 ## Install Module
 

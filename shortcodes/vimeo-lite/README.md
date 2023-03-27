@@ -1,4 +1,6 @@
-# Vimeo Lite Shortcode
+# Vimeo Lite Shortcode (DEPRICATED)
+
+use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/videos>
 
 ## Installation
 

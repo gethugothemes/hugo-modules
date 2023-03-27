@@ -1,4 +1,6 @@
-# Youtube Lite Shortcode
+# Youtube Lite Shortcode (DEPRICATED)
+
+use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/videos>
 
 ## Installation for Gethugothemes themes
 
