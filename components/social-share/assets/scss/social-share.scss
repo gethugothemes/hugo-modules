@@ -2,7 +2,10 @@
 .ghtm-share {
   border-radius: 0.25rem;
   transition: 25ms ease-out;
-  padding: 0.5em 0.75em;
+  height: 2.5rem;
+  width: 2.5rem;
+  text-align: center;
+  line-height: 2.7rem;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
@@ -24,169 +27,150 @@
   svg {
     width: 1em;
     height: 1em;
-    margin: 0 0.4rem 0 0;
-    vertical-align: middle;
+    margin: 0;
   }
 }
 
 .ghtm-share-twitter {
   background-color: #55acee;
-  border-color: #55acee;
+
   &:hover {
     background-color: #2795e9;
-    border-color: #2795e9;
   }
 }
 
 .ghtm-share-pinterest {
   background-color: #bd081c;
-  border-color: #bd081c;
+
   &:hover {
     background-color: #8c0615;
-    border-color: #8c0615;
   }
 }
 
 .ghtm-share-facebook {
   background-color: #3b5998;
-  border-color: #3b5998;
+
   &:hover {
     background-color: #2d4373;
-    border-color: #2d4373;
   }
 }
 
 .ghtm-share-tumblr {
   background-color: #35465c;
-  border-color: #35465c;
+
   &:hover {
     background-color: #222d3c;
-    border-color: #222d3c;
   }
 }
 
 .ghtm-share-reddit {
   background-color: #5f99cf;
-  border-color: #5f99cf;
+
   &:hover {
     background-color: #3a80c1;
-    border-color: #3a80c1;
   }
 }
 
 .ghtm-share-google {
   background-color: #dd4b39;
-  border-color: #dd4b39;
+
   &:hover {
     background-color: #c23321;
-    border-color: #c23321;
   }
 }
 
 .ghtm-share-linkedin {
   background-color: #0077b5;
-  border-color: #0077b5;
+
   &:hover {
     background-color: #046293;
-    border-color: #046293;
   }
 }
 
 .ghtm-share-email {
   background-color: #777;
-  border-color: #777;
+
   &:hover {
     background-color: #5e5e5e;
-    border-color: #5e5e5e;
   }
 }
 
 .ghtm-share-whatsapp {
   background-color: #25d366;
-  border-color: #25d366;
+
   &:hover {
     background-color: #1da851;
-    border-color: #1da851;
   }
 }
 
 .ghtm-share-hackernews {
   background-color: #ff6600;
-  border-color: #ff6600;
+
   &:hover {
     background-color: #fb6200;
-    border-color: #fb6200;
   }
 }
 
 .ghtm-share-vk {
   background-color: #507299;
-  border-color: #507299;
+
   &:hover {
     background-color: #43648c;
-    border-color: #43648c;
   }
 }
 
 .ghtm-share-facebook {
   background-color: #3b5998;
-  border-color: #3b5998;
+
   &:hover {
     background-color: #2d4373;
-    border-color: #2d4373;
   }
 }
 
 .ghtm-share-twitter {
   background-color: #55acee;
-  border-color: #55acee;
+
   &:hover {
     background-color: #2795e9;
-    border-color: #2795e9;
   }
 }
 
 .ghtm-share-google {
   background-color: #dd4b39;
-  border-color: #dd4b39;
+
   &:hover {
     background-color: #c23321;
-    border-color: #c23321;
   }
 }
 
 .ghtm-share-email {
   background-color: #777777;
-  border-color: #777777;
+
   &:hover {
     background-color: #5e5e5e;
-    border-color: #5e5e5e;
   }
 }
 
 .ghtm-share-reddit {
   background-color: #5f99cf;
-  border-color: #5f99cf;
+
   &:hover {
     background-color: #3a80c1;
-    border-color: #3a80c1;
   }
 }
 
 .ghtm-share-whatsapp {
   background-color: #25d366;
-  border-color: #25d366;
+
   &:hover {
     background-color: #1da851;
-    border-color: #1da851;
   }
 }
 
 .ghtm-share-telegram {
   background-color: #54a9eb;
-  border-color: #54a9eb;
+
   &:hover {
     background-color: #4b97d1;
-    border-color: #4b97d1;
   }
 }
