@@ -1,46 +1,55 @@
 <!-- cookie -->
 {{ with site.Params.cookies }}
-{{ if .enable }}
-<div id="js-cookie-box" class="cookie-box cookie-box-hide">
-  {{ .content | markdownify }}
-  <span id="js-cookie-button" class="btn btn-sm btn-outline-primary">{{ .button }}</span>
-</div>
+  {{ if .enable }}
+    <div id="ghtm-cookie-box" class="ghtm-cookie-box ghtm-cookie-box-hide">
+      {{ .content | markdownify }}
+      <button
+        id="ghtm-cookie-button"
+        class="ghtm-cookie-box-button btn btn-sm btn-outline-primary">
+        {{ .button }}
+      </button>
+    </div>
 
-<!-- cookie script -->
-<script type="application/javascript">
-  const cookieBox = document.getElementById('js-cookie-box');
-  const cookieButton = document.getElementById('js-cookie-button');
-  if (!Cookies.get('cookie-box')) {
-    cookieBox.classList.remove('cookie-box-hide');
-    cookieButton.onclick = function () {
-      Cookies.set('cookie-box', true, {
-        expires: {{ .expire_days }}
-      });
-      cookieBox.classList.add('cookie-box-hide');
-    };
-  }
-</script>
+    <!-- cookie script -->
+    <script type="application/javascript">
+      const cookieBox = document.getElementById('ghtm-cookie-box');
+      const cookieButton = document.getElementById('ghtm-cookie-button');
+      if (!Cookies.get('cookie-consent')) {
+        cookieBox.classList.remove('ghtm-cookie-box-hide');
+        cookieButton.onclick = function () {
+          Cookies.set('cookie-consent', true, {
+            expires: {{ .expire_days }}
+          });
+          cookieBox.classList.add('ghtm-cookie-box-hide');
+        };
+      }
+    </script>
 
-<!-- cookie style -->
-<style>
-  .cookie-box {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    text-align: center;
-    z-index: 9999;
-    padding: 1rem 2rem;
-    background: rgb(71, 71, 71);
-    transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
-    color: #fdfdfd;
-  }
-  .cookie-box-hide {
-    display: none;
-  }
-  #js-cookie-button {
-    margin-left: 1rem;
-  }
-</style>
-{{ end }}
+    <!-- cookie style -->
+    <style>
+      .ghtm-cookie-box {
+        position: fixed;
+        left: 2rem;
+        bottom: 2rem;
+        z-index: 9999;
+        padding: 1.5rem;
+        background-color: #fff;
+        max-width: calc(100% - 4rem);
+        width: 25rem;
+        box-shadow: 1px 0px 10px 7px rgba(154, 154, 154, 0.11);
+        border-radius: inherit;
+      }
+      .ghtm-cookie-box-hide {
+        display: none;
+      }
+      .ghtm-cookie-box-button {
+        display: block;
+        margin-top: 1rem;
+      }
+
+      .dark .ghtm-cookie-box {
+        background-color: #222;
+      }
+    </style>
+  {{ end }}
 {{ end }}
