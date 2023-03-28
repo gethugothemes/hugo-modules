@@ -1,0 +1,24 @@
+{{ with .Inner }}{{/* don't do anything, just call it */}}{{ end }}
+{{ $groupId := default "default" (.Get 0) }}
+
+
+<div class="ghtm-tab" data-tab-group="{{ $groupId }}">
+  <ul class="ghtm-tab-nav">
+    {{ range $idx, $tab := .Scratch.Get "tabs" }}
+      <li
+        class="ghtm-tab-nav-item {{ cond (eq $idx 0) `active` `` }}"
+        data-tab="{{ .name | urlize }}">
+        {{ .name }}
+      </li>
+    {{ end }}
+  </ul>
+  <div class="ghtm-tab-content">
+    {{ range $idx, $tab := .Scratch.Get "tabs" }}
+      <div
+        class="ghtm-tab-content-panel {{ cond (eq $idx 0) `active` `` }}"
+        data-tab="{{ .name | urlize }}">
+        {{ .content  | markdownify }}
+      </div>
+    {{ end }}
+  </div>
+</div>
