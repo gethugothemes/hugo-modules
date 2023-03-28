@@ -33,7 +33,7 @@
             <a
               href="{{ $image.RelPermalink }}"
               style="display: block;"
-              class="ghtm-glightbox">
+              class="glightbox">
               <img
                 src="{{ $scratch.Get `image` }}"
                 class="ghtm-img"
@@ -73,7 +73,7 @@
             <a
               href="{{ $image.RelPermalink }}"
               style="display: block;"
-              class="ghtm-glightbox">
+              class="glightbox">
               <img
                 src="{{ $scratch.Get `image` }}"
                 class="ghtm-img"
@@ -105,10 +105,7 @@
         {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
           <div class="ghtm-gallery-item" data-i="{{ .IsDir }}">
             {{ if $zoomable }}
-              <a
-                href="{{ $image }}"
-                style="display: block;"
-                class="ghtm-glightbox">
+              <a href="{{ $image }}" style="display: block;" class="glightbox">
                 <img
                   src="{{ $image }}"
                   class="ghtm-img"
