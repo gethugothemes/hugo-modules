@@ -1,0 +1,163 @@
+<!-- get value from params -->
+{{ $folderDir:= .Dir }}
+{{ $class:= .Class }}
+{{ $height:= replace (replace (.Height) "px" "") "x" "" }}
+{{ $width:= replace (replace (.Width) "px" "") "x" "" }}
+{{ $webp:= .Webp | default true }}
+{{ $command:= .Command }}
+{{ $option:= .Option }}
+{{ $zoomable:= .Zoomable | default true }}
+
+{{ $scratch := newScratch }}
+{{ $page:= .Page }}
+{{ $assetsImage:= resources.Match (add (string $folderDir) `/*`) }}
+{{ $contentImage:= $page.Resources.Match (add (string $folderDir) `/*`) }}
+{{ $staticImage:= print "static/" $folderDir }}
+
+
+<!-- strat of slider wrapper -->
+<div class="swiper ghtm-gallery-slider {{ $class }}">
+  <div class="swiper-wrapper">
+    <!-- start of checking asset-image -->
+    {{ if $assetsImage }}
+      <!-- start of image range -->
+      {{ range $assetsImage }}
+        {{ $image := resources.Get . }}
+        {{ $imageExt := path.Ext $image }}
+        {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+
+          {{ partial "image-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
+          {{ $imageHeight:= $scratch.Get "image-height" }}
+          {{ $imageWidth:= $scratch.Get "image-width" }}
+
+
+          <div class="swiper-slide {{ if $zoomable }}zoomable{{ end }}">
+            {{ if $zoomable }}
+              <a
+                href="{{ $image.RelPermalink }}"
+                class="ghtm-glightbox"
+                style="display: block;">
+                <img
+                  src="{{ $scratch.Get `image` }}"
+                  class="ghtm-img"
+                  style="margin: 0"
+                  alt="{{ .Name }}"
+                  onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
+              </a>
+            {{ else }}
+              <img
+                src="{{ $scratch.Get `image` }}"
+                class="ghtm-img"
+                style="margin: 0"
+                alt="{{ .Name }}"
+                onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ end }}
+
+
+      <!-- end of image range -->
+
+      <!-- start of checking content-image -->
+    {{ else if $contentImage }}
+
+      <!-- start of image range -->
+      {{ range $contentImage }}
+        {{ $image:= $page.Resources.GetMatch (printf "*%s*" .) }}
+        {{ $imageExt := path.Ext $image }}
+        {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+
+          {{ partial "image-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
+          {{ $imageHeight:= $scratch.Get "image-height" }}
+          {{ $imageWidth:= $scratch.Get "image-width" }}
+
+
+          <div class="swiper-slide {{ if $zoomable }}zoomable{{ end }}">
+            <div class="ghtm-gallery-item">
+              {{ if $zoomable }}
+                <a
+                  href="{{ $image.RelPermalink }}"
+                  class="ghtm-glightbox"
+                  style="display: block;">
+                  <img
+                    src="{{ $scratch.Get `image` }}"
+                    class="ghtm-img"
+                    style="margin: 0"
+                    alt="{{ .Name }}"
+                    onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
+                </a>
+              {{ else }}
+                <img
+                  src="{{ $scratch.Get `image` }}"
+                  class="ghtm-img"
+                  style="margin: 0"
+                  alt="{{ .Name }}"
+                  onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      {{ end }}
+
+
+      <!-- end of image range -->
+
+      <!-- start of checking static-image -->
+    {{ else if os.FileExists $staticImage }}
+
+      {{ range (readDir $staticImage) }}
+        {{ if and (ne .Name ".DS_Store") (not .IsDir) }}
+          {{ $image := print "/" $folderDir "/" .Name }}
+          {{ $imageExt := path.Ext $image }}
+          {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+            <div
+              class="swiper-slide {{ if $zoomable }}
+                zoomable
+              {{ end }}">
+              <div class="ghtm-gallery-item" data-i="{{ .IsDir }}">
+                {{ if $zoomable }}
+                  <a
+                    href="{{ $image }}"
+                    class="ghtm-glightbox"
+                    style="display: block;">
+                    <img
+                      src="{{ $image }}"
+                      class="ghtm-img"
+                      style="margin: 0"
+                      alt="{{ .Name }}"
+                      height="{{ $height }}"
+                      width="{{ $width }}" />
+                  </a>
+                {{ else }}
+                  <img
+                    src="{{ $image }}"
+                    class="ghtm-img"
+                    style="margin: 0"
+                    alt="{{ .Name }}"
+                    height="{{ $height }}"
+                    width="{{ $width }}" />
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+    {{ else }}
+      <!-- if directory does not exist -->
+      <strong style="display: inline-block; margin-top:15px">
+        Nothing to show in [{{ site.BaseURL }}<span style="color:red">
+          {{ $folderDir }}
+        </span>
+        ] or folder does not exist
+      </strong>
+    {{ end }}
+    <!-- end of checking image directory -->
+  </div>
+
+  <!-- navigation buttons -->
+  <span class="swiper-button-prev"></span>
+  <span class="swiper-button-next"></span>
+</div>
+<!-- end of slider wrapper -->

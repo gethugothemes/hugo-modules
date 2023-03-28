@@ -1,0 +1,67 @@
+{{ $command := .Command }}
+{{ $image := .Image }}
+{{ $option := .Option }}
+{{ $height:= .Height }}
+{{ $width:= .Width }}
+{{ $webp:= .Webp | default true }}
+{{ $zoomable:= .Zoomable | default true }}
+{{ $context:= .Context | default . }}
+{{ $scratch := newScratch }}
+{{ $imageExt := path.Ext $image }}
+
+{{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+  <!-- image height, width (if not svg) -->
+  {{ if eq $imageExt `.svg` }}
+    {{ $context.Set "image-height" "" }}
+    {{ $context.Set "image-width" "" }}
+  {{ else }}
+    {{ $context.Set "image-height" $image.Height }}
+    {{ $context.Set "image-width" $image.Width }}
+  {{ end }}
+  {{ $imageHeight:= $context.Get "image-height" }}
+  {{ $imageWidth:= $context.Get "image-width" }}
+
+
+  <!-- start of checking .gif and .svg -->
+  {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
+    {{ $context.Set `image` $image.RelPermalink }}
+  {{ else }}
+    <!-- else of checking .gif and .svg -->
+
+    <!-- image processing -->
+    {{ $option:= "" }}
+
+
+    <!-- if webp false -->
+    {{ if or (eq $webp "false") (eq $webp false) }}
+      {{ $option = add (add (add (add (string ($width | default $imageWidth)) "x") (string ($height | default $imageHeight))) " ") (string $option) }}
+    {{ else }}
+      {{ $option = add (add (add (add (string ($width | default $imageWidth)) "x") (string ($height | default $imageHeight))) " webp ") (string $option) }}
+    {{ end }}
+
+
+    <!-- end -->
+
+    <!-- start of if not .gif and .svg -->
+    <!-- start of image command -->
+    <!-- if Fit -->
+    {{ if eq $command `Fit` }}
+      {{ $context.Set `image` ($image.Fit $option).RelPermalink }}
+      {{ $context.Set `imageFallback` ($image.Fit (replace $option `webp` ``)).RelPermalink }}
+      <!-- if Fill -->
+    {{ else if eq $command `Fill` }}
+      {{ $context.Set `image` ($image.Fill $option).RelPermalink }}
+      {{ $context.Set `imageFallback` ($image.Fill (replace $option `webp` ``)).RelPermalink }}
+      <!-- if Resize -->
+    {{ else }}
+      {{ $context.Set `image` ($image.Resize $option).RelPermalink }}
+      {{ $context.Set `imageFallback` ($image.Resize (replace $option `webp` ``)).RelPermalink }}
+    {{ end }}
+
+
+    <!-- end of image command -->
+  {{ end }}
+
+
+  <!-- end of checking .gif and .svg -->
+{{ end }}
