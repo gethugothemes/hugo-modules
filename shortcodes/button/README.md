@@ -1,6 +1,4 @@
-# Buttons Shortcode (DEPRICATED)
-
-use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/button>
+# Button Shortcode
 
 ## Install Module
 
@@ -8,7 +6,7 @@ Add the following code to your module list in the `config/_default/module.toml` 
 
 ```toml
 [[imports]]
-path = "github.com/gethugothemes/hugo-modules/shortcodes/buttons"
+path = "github.com/gethugothemes/hugo-modules/shortcodes/button"
 ```
 
 <hr>

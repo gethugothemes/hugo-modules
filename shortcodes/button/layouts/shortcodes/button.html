@@ -1,5 +1,7 @@
 {{ $label:= .Get 0 }}
 {{ $link:= .Get 1 }}
+{{ $style:= .Get 2 }}
+{{ $class:= .Get 3 }}
 
 {{ range $i, $e:= .Params }}
   {{ if eq $i "label" }}{{ $label = $e }}{{ end }}
@@ -12,7 +14,11 @@
 
 <a
   href="{{ $link | absLangURL }}"
-  class="btn btn-primary text-white"
+  class="btn {{ if eq $style `outline` }}
+    btn-outline-primary
+  {{ else }}
+    btn-primary
+  {{ end }} {{ $class }}"
   {{ if strings.HasPrefix $link `http` }}
     target="_blank" rel="noopener"
   {{ end }}>
