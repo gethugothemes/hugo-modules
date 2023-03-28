@@ -1,4 +1,4 @@
-.ghtm-accordion-item {
+.ghtm-accordion {
   background-color: #fff;
 }
 
@@ -24,10 +24,10 @@
   padding: 0 1rem;
 }
 
-.ghtm-accordion-item.active .ghtm-accordion-icon {
+.ghtm-accordion.active .ghtm-accordion-icon {
   transform: rotate(180deg);
 }
 
-.ghtm-accordion-item.active .ghtm-accordion-content {
+.ghtm-accordion.active .ghtm-accordion-content {
   max-height: 100vh;
 }
