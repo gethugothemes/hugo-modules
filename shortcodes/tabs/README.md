@@ -1,4 +1,6 @@
-# Tab Shortcode
+# Tab Shortcode (DEPRICATED)
+
+use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/tab>
 
 ## Installation for Gethugothemes themes
 
