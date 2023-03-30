@@ -1,9 +1,8 @@
-// main script
+// accordion script
 (function () {
   "use strict";
 
-  // Get all the accordion buttons
-  const ghtmAccordion = document.querySelectorAll(".ghtm-accordion-header");
+  const ghtmAccordion = document.querySelectorAll("[data-accordion]");
   ghtmAccordion.forEach((header) => {
     header.addEventListener("click", () => {
       const accordionItem = header.parentElement;
