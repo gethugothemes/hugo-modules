@@ -3,7 +3,7 @@
 
 
 <div class="ghtm-tab" data-tab-group="{{ $groupId }}">
-  <ul class="ghtm-tab-nav">
+  <ul class="ghtm-tab-nav" data-tab-nav>
     {{ range $idx, $tab := .Scratch.Get "tabs" }}
       <li
         class="ghtm-tab-nav-item {{ cond (eq $idx 0) `active` `` }}"
@@ -12,11 +12,11 @@
       </li>
     {{ end }}
   </ul>
-  <div class="ghtm-tab-content">
+  <div class="ghtm-tab-content" data-tab-content>
     {{ range $idx, $tab := .Scratch.Get "tabs" }}
       <div
         class="ghtm-tab-content-panel {{ cond (eq $idx 0) `active` `` }}"
-        data-tab="{{ .name | urlize }}">
+        data-tab-panel="{{ .name | urlize }}">
         {{ .content  | markdownify }}
       </div>
     {{ end }}

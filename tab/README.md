@@ -51,15 +51,21 @@ Third Tab
 
 ```html
 <div class="ghtm-tab" data-tab-group="tab-group-name">
-  <ul class="ghtm-tab-nav">
+  <ul class="ghtm-tab-nav" data-tab-nav>
     <li class="ghtm-tab-nav-item active" data-tab="0">Tab 1</li>
     <li class="ghtm-tab-nav-item" data-tab="1">Tab 2</li>
     <li class="ghtm-tab-nav-item" data-tab="2">Tab 3</li>
   </ul>
-  <div class="ghtm-tab-content">
-    <div class="ghtm-tab-content-panel active" data-tab="0">Tab 1 content</div>
-    <div class="ghtm-tab-content-panel" data-tab="1">Tab 2 content</div>
-    <div class="ghtm-tab-content-panel" data-tab="2">Tab 3 content</div>
+  <div class="ghtm-tab-content" data-tab-content>
+    <div class="ghtm-tab-content-panel active" data-tab-panel="0">
+      Tab 1 content
+    </div>
+    <div class="ghtm-tab-content-panel" data-tab-panel="1">
+      Tab 2 content
+    </div>
+    <div class="ghtm-tab-content-panel" data-tab-panel="2">
+      Tab 3 content
+    </div>
   </div>
 </div>
 ```
