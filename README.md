@@ -4,8 +4,11 @@
  * [Adsense](https://github.com/gethugothemes/hugo-modules/tree/master/adsense)
  * [Gallery Slider](https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider)
  * [Gzip Caching](https://github.com/gethugothemes/hugo-modules/tree/master/gzip-caching)
+ * [Images](https://github.com/gethugothemes/hugo-modules/tree/master/images)
+ * [Videos](https://github.com/gethugothemes/hugo-modules/tree/master/videos)
+ * [Tab](https://github.com/gethugothemes/hugo-modules/tree/master/tab)
+ * [Table Of Contents](https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents)
  * [PWA - Progressive Web App](https://github.com/gethugothemes/hugo-modules/tree/master/pwa)
- 
  
  
  * [Components](https://github.com/gethugothemes/hugo-modules/tree/master/components)
@@ -23,16 +26,20 @@
  
    * [Site Verifications](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/site-verifications)
    * [Matomo Analytics](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/matomo-analytics)
+   * [Google Tag Manager](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/google-tag-manager)
+   * [Basic SEO](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo)
+   * [Plausible Analytics](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/plausible-analytics)
+   * [Counter Analytics](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/counter-analytics)
+   * [Baidu Analytics](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/baidu-analytics)
    
    
  * [Shortcodes](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes)
    * [Button](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/button)
-   * [Buttons](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/buttons)
+   * [Codepen](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/codepen)
+   * [Notice](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/notice)
+ 
    
  * [Icons](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools)
    * [Font Awesome Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/font-awesome)
    * [Themify Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/themify-icons)
    
- * [Tab](https://github.com/gethugothemes/hugo-modules/tree/master/tab)
-
- 
