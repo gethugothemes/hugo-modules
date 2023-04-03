@@ -1,4 +1,7 @@
-# Hugo Modules
+# List of Gethugothemes Hugo Modules
+
+Check out each module page for instructions on how to use it.
+
 
  * [Accordion](https://github.com/gethugothemes/hugo-modules/tree/master/accordion)
  * [Adsense](https://github.com/gethugothemes/hugo-modules/tree/master/adsense)
