@@ -1,6 +1,12 @@
-# List of Gethugothemes Hugo Modules
+# Hugo Modules Created By Gethugothemes 
 
-Check out each module page for instructions on how to use it.
+We developed 30+ Hugo modules to enhance [our Hugo themes ](https://gethugothemes.com/) and make them more powerful and flexible. As we grew, we realized these modules could be useful for the entire Hugo community. So, we made them open source to make it easier for others to create high-quality websites with Hugo. <br>
+**Our goal is to help developers create beautiful, functional, and efficient sites with Hugo.** 
+
+We're proud to be part of the [ Hugo community ](https://gohugo.io/)  and will continue to develop high-quality [Hugo Themes ](https://gethugothemes.com/) and modules. Explore our modules and use them for your own projects for free.
+
+**Check out each module page for instructions on how to use it.**
+
 
 
  * [Accordion](https://github.com/gethugothemes/hugo-modules/tree/master/accordion)
@@ -46,3 +52,4 @@ Check out each module page for instructions on how to use it.
    * [Font Awesome Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/font-awesome)
    * [Themify Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/themify-icons)
    
+If you face any issues while using our modules or have any questions, don't hesitate to [ get in touch with us. ](https://gethugothemes.com/contact)
