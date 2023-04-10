@@ -23,7 +23,7 @@
     decoding="async"
     src="{{ $logoPath | absURL }}"
     alt="{{ $logoText }}"
-    class="ghtm-img ghtm-logo-light"
+    class="img logo-light"
     height="{{ $logoDefaultHeight }}"
     width="{{ $logoDefaultWidth }}" />
   <img
@@ -31,7 +31,7 @@
     decoding="async"
     src="{{ $logoDarkPath | absURL }}"
     alt="{{ $logoText }}"
-    class="ghtm-img ghtm-logo-dark"
+    class="img logo-dark"
     height="{{ $logoDefaultHeight }}"
     width="{{ $logoDefaultWidth }}" />
 {{ else }}
@@ -134,7 +134,7 @@
     <img
       loading="preload"
       decoding="async"
-      class="ghtm-img ghtm-logo-light"
+      class="img logo-light"
       width="{{ replace $logoWidth `x` `` | default $logoDefaultWidth }}"
       height="{{ $logoDefaultHeight }}"
       src="{{ $scratch.Get `logo` }}"
@@ -144,7 +144,7 @@
     <img
       loading="preload"
       decoding="async"
-      class="ghtm-img ghtm-logo-dark"
+      class="img logo-dark"
       width="{{ replace $logoWidth `x` `` | default $logoDefaultWidth }}"
       height="{{ $logoDefaultHeight }}"
       src="{{ $scratch.Get `logo_dark` }}"
@@ -154,7 +154,7 @@
     <img
       loading="preload"
       decoding="async"
-      class="ghtm-logo"
+      class="logo"
       width="{{ replace $logoWidth `x` `` | default $logoDefaultWidth }}"
       height="{{ $logoDefaultHeight }}"
       src="{{ $scratch.Get `logo` }}"

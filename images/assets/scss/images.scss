@@ -1,10 +1,10 @@
-.ghtm-img {
+.img {
   max-width: 100%;
   height: auto;
 }
 
 // logo
-.ghtm-logo {
+.logo {
   &-light {
     display: initial;
   }
@@ -12,7 +12,7 @@
     display: none;
   }
 }
-.dark .ghtm-logo {
+.dark .logo {
   &-light {
     display: none;
   }

@@ -41,7 +41,7 @@
         decoding="async"
         src="{{ $imagePath | absURL }}"
         alt="{{ $alt }}"
-        class="ghtm-img {{ $class }} {{ if eq $zoomable `true` }}
+        class="img {{ $class }} {{ if eq $zoomable `true` }}
           glightbox
         {{ end }}"
         width="{{ $width }}"
@@ -58,7 +58,7 @@
       decoding="async"
       src="{{ $imagePath | absURL }}"
       alt="{{ $alt }}"
-      class="ghtm-img {{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}
+      class="img {{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}
         glightbox
       {{ end }}"
       width="{{ $width }}"
@@ -141,7 +141,7 @@
           title="{{ $title }}"
           loading="lazy"
           decoding="async"
-          class="ghtm-img {{ $class }} {{ if eq $zoomable `true` }}
+          class="img {{ $class }} {{ if eq $zoomable `true` }}
             glightbox
           {{ end }}"
           width="{{ $width | default $imageWidth }}"
@@ -159,7 +159,7 @@
         title="{{ $title }}"
         loading="lazy"
         decoding="async"
-        class="ghtm-img {{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}
+        class="img {{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}
           glightbox
         {{ end }}"
         width="{{ $width | default $imageWidth }}"

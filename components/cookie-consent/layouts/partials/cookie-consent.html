@@ -1,33 +1,33 @@
 <!-- cookie -->
 {{ with site.Params.cookies }}
   {{ if .enable }}
-    <div id="ghtm-cookie-box" class="ghtm-cookie-box ghtm-cookie-box-hide">
+    <div id="cookie-box" class="cookie-box cookie-box-hide">
       {{ .content | markdownify }}
       <button
-        id="ghtm-cookie-button"
-        class="ghtm-cookie-box-button btn btn-sm btn-outline-primary">
+        id="cookie-button"
+        class="cookie-box-button btn btn-sm btn-outline-primary">
         {{ .button }}
       </button>
     </div>
 
     <!-- cookie script -->
     <script type="application/javascript">
-      const cookieBox = document.getElementById('ghtm-cookie-box');
-      const cookieButton = document.getElementById('ghtm-cookie-button');
+      const cookieBox = document.getElementById('cookie-box');
+      const cookieButton = document.getElementById('cookie-button');
       if (!Cookies.get('cookie-consent')) {
-        cookieBox.classList.remove('ghtm-cookie-box-hide');
+        cookieBox.classList.remove('cookie-box-hide');
         cookieButton.onclick = function () {
           Cookies.set('cookie-consent', true, {
             expires: {{ .expire_days }}
           });
-          cookieBox.classList.add('ghtm-cookie-box-hide');
+          cookieBox.classList.add('cookie-box-hide');
         };
       }
     </script>
 
     <!-- cookie style -->
     <style>
-      .ghtm-cookie-box {
+      .cookie-box {
         position: fixed;
         left: 2rem;
         bottom: 2rem;
@@ -39,15 +39,15 @@
         box-shadow: 1px 0px 10px 7px rgba(154, 154, 154, 0.11);
         border-radius: inherit;
       }
-      .ghtm-cookie-box-hide {
+      .cookie-box-hide {
         display: none;
       }
-      .ghtm-cookie-box-button {
+      .cookie-box-button {
         display: block;
         margin-top: 1rem;
       }
 
-      .dark .ghtm-cookie-box {
+      .dark .cookie-box {
         background-color: #222;
       }
     </style>

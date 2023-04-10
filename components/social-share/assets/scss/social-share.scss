@@ -1,5 +1,5 @@
 /*! Social sharing buttons from Sharingbuttons.io */
-.ghtm-share {
+.share {
   border-radius: 0.25rem;
   transition: 25ms ease-out;
   height: 2.5rem;
@@ -9,19 +9,19 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
-.ghtm-share-link,
-.ghtm-share-icon {
+.share-link,
+.share-icon {
   display: inline-block;
 }
 
-.ghtm-share-link {
+.share-link {
   text-decoration: none;
   color: #fff;
   margin: 0.5em;
 }
 
 /* Non solid icons get a stroke */
-.ghtm-share-icon {
+.share-icon {
   fill: #fff;
   stroke: none;
   svg {
@@ -31,7 +31,7 @@
   }
 }
 
-.ghtm-share-twitter {
+.share-twitter {
   background-color: #55acee;
 
   &:hover {
@@ -39,7 +39,7 @@
   }
 }
 
-.ghtm-share-pinterest {
+.share-pinterest {
   background-color: #bd081c;
 
   &:hover {
@@ -47,7 +47,7 @@
   }
 }
 
-.ghtm-share-facebook {
+.share-facebook {
   background-color: #3b5998;
 
   &:hover {
@@ -55,7 +55,7 @@
   }
 }
 
-.ghtm-share-tumblr {
+.share-tumblr {
   background-color: #35465c;
 
   &:hover {
@@ -63,7 +63,7 @@
   }
 }
 
-.ghtm-share-reddit {
+.share-reddit {
   background-color: #5f99cf;
 
   &:hover {
@@ -71,7 +71,7 @@
   }
 }
 
-.ghtm-share-google {
+.share-google {
   background-color: #dd4b39;
 
   &:hover {
@@ -79,7 +79,7 @@
   }
 }
 
-.ghtm-share-linkedin {
+.share-linkedin {
   background-color: #0077b5;
 
   &:hover {
@@ -87,7 +87,7 @@
   }
 }
 
-.ghtm-share-email {
+.share-email {
   background-color: #777;
 
   &:hover {
@@ -95,7 +95,7 @@
   }
 }
 
-.ghtm-share-whatsapp {
+.share-whatsapp {
   background-color: #25d366;
 
   &:hover {
@@ -103,7 +103,7 @@
   }
 }
 
-.ghtm-share-hackernews {
+.share-hackernews {
   background-color: #ff6600;
 
   &:hover {
@@ -111,7 +111,7 @@
   }
 }
 
-.ghtm-share-vk {
+.share-vk {
   background-color: #507299;
 
   &:hover {
@@ -119,7 +119,7 @@
   }
 }
 
-.ghtm-share-facebook {
+.share-facebook {
   background-color: #3b5998;
 
   &:hover {
@@ -127,7 +127,7 @@
   }
 }
 
-.ghtm-share-twitter {
+.share-twitter {
   background-color: #55acee;
 
   &:hover {
@@ -135,7 +135,7 @@
   }
 }
 
-.ghtm-share-google {
+.share-google {
   background-color: #dd4b39;
 
   &:hover {
@@ -143,7 +143,7 @@
   }
 }
 
-.ghtm-share-email {
+.share-email {
   background-color: #777777;
 
   &:hover {
@@ -151,7 +151,7 @@
   }
 }
 
-.ghtm-share-reddit {
+.share-reddit {
   background-color: #5f99cf;
 
   &:hover {
@@ -159,7 +159,7 @@
   }
 }
 
-.ghtm-share-whatsapp {
+.share-whatsapp {
   background-color: #25d366;
 
   &:hover {
@@ -167,7 +167,7 @@
   }
 }
 
-.ghtm-share-telegram {
+.share-telegram {
   background-color: #54a9eb;
 
   &:hover {

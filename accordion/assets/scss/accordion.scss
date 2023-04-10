@@ -1,8 +1,8 @@
-.ghtm-accordion {
+.accordion {
   background-color: #fff;
 }
 
-.ghtm-accordion-header {
+.accordion-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,23 +11,23 @@
   font-size: 1.6rem;
 }
 
-.ghtm-accordion-icon {
+.accordion-icon {
   width: 0.78em;
   height: 0.78em;
   transform: rotate(0deg);
   transition: transform 0.2s ease;
 }
 
-.ghtm-accordion-content {
+.accordion-content {
   max-height: 0;
   overflow: hidden;
   padding: 0 1rem;
 }
 
-.ghtm-accordion.active .ghtm-accordion-icon {
+.accordion.active .accordion-icon {
   transform: rotate(180deg);
 }
 
-.ghtm-accordion.active .ghtm-accordion-content {
+.accordion.active .accordion-content {
   max-height: 100vh;
 }

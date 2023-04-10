@@ -2,20 +2,20 @@
 {{ $groupId := default "default" (.Get 0) }}
 
 
-<div class="ghtm-tab" data-tab-group="{{ $groupId }}">
-  <ul class="ghtm-tab-nav" data-tab-nav>
+<div class="tab" data-tab-group="{{ $groupId }}">
+  <ul class="tab-nav" data-tab-nav>
     {{ range $idx, $tab := .Scratch.Get "tabs" }}
       <li
-        class="ghtm-tab-nav-item {{ cond (eq $idx 0) `active` `` }}"
+        class="tab-nav-item {{ cond (eq $idx 0) `active` `` }}"
         data-tab="{{ .name | urlize }}">
         {{ .name }}
       </li>
     {{ end }}
   </ul>
-  <div class="ghtm-tab-content" data-tab-content>
+  <div class="tab-content" data-tab-content>
     {{ range $idx, $tab := .Scratch.Get "tabs" }}
       <div
-        class="ghtm-tab-content-panel {{ cond (eq $idx 0) `active` `` }}"
+        class="tab-content-panel {{ cond (eq $idx 0) `active` `` }}"
         data-tab-panel="{{ .name | urlize }}">
         {{ .content  | markdownify }}
       </div>

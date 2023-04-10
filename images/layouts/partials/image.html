@@ -38,7 +38,7 @@
     decoding="async"
     src="{{ $imagePath | absURL }}"
     alt="{{ .Alt }}"
-    class="{{ $class }} ghtm-img"
+    class="{{ $class }} img"
     height="{{ $height }}"
     width="{{ $width }}" />
 {{ else }}
@@ -76,7 +76,7 @@
         loading="lazy"
         decoding="async"
         alt="{{ .Alt }}"
-        class="{{ $class }} ghtm-img"
+        class="{{ $class }} img"
         width="{{ $width }}"
         height="{{ $height }}" />
     {{ else }}
@@ -125,7 +125,7 @@
           {{ end }}
 
           alt="{{ .Alt }}"
-          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} ghtm-img"
+          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
           width="{{- with $width -}}
             {{- . -}}
           {{- else -}}
@@ -138,7 +138,8 @@
             {{- $imageWebp.Height -}}
           {{- end -}}
           "
-          onerror="this.onerror='null';this.src='{{ $imageFallback.RelPermalink }}'" />
+          onerror="this.onerror='null';this.src='{{ $imageFallback.RelPermalink }}
+          '" />
 
         <!-- if image size less then 500x and size not defined -->
       {{ else if or (lt ($image.Width) 500) (not $resize) }}
@@ -182,7 +183,7 @@
             alt="{{ .Alt }}"
           {{ end }}
 
-          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} ghtm-img"
+          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
           width="{{- with $width -}}
             {{- . -}}
           {{- else -}}
@@ -258,7 +259,7 @@
               src="{{ $imageFallback.RelPermalink }}"
             {{ end }}class="{{ if $placeholder }}
               lazy
-            {{ end }} {{ $class }} ghtm-img"
+            {{ end }} {{ $class }} img"
             alt="{{ .Alt }}"
             width="{{ $image.Width }}"
             height="{{ $image.Height }}" />

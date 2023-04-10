@@ -16,7 +16,7 @@
 
 
 <!-- strat of slider wrapper -->
-<div class="swiper ghtm-gallery-slider {{ $class }}">
+<div class="swiper gallery-slider {{ $class }}">
   <div class="swiper-wrapper">
     <!-- start of checking asset-image -->
     {{ if $assetsImage }}
@@ -40,7 +40,7 @@
                 style="display: block;">
                 <img
                   src="{{ $scratch.Get `image` }}"
-                  class="ghtm-img"
+                  class="img"
                   style="margin: 0"
                   alt="{{ .Name }}"
                   onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
@@ -48,7 +48,7 @@
             {{ else }}
               <img
                 src="{{ $scratch.Get `image` }}"
-                class="ghtm-img"
+                class="img"
                 style="margin: 0"
                 alt="{{ .Name }}"
                 onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
@@ -76,7 +76,7 @@
 
           <div
             class="swiper-slide {{ if eq $zoomable `true` }}zoomable{{ end }}">
-            <div class="ghtm-gallery-item">
+            <div class="gallery-item">
               {{ if eq $zoomable `true` }}
                 <a
                   href="{{ $image.RelPermalink }}"
@@ -84,7 +84,7 @@
                   style="display: block;">
                   <img
                     src="{{ $scratch.Get `image` }}"
-                    class="ghtm-img"
+                    class="img"
                     style="margin: 0"
                     alt="{{ .Name }}"
                     onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
@@ -92,7 +92,7 @@
               {{ else }}
                 <img
                   src="{{ $scratch.Get `image` }}"
-                  class="ghtm-img"
+                  class="img"
                   style="margin: 0"
                   alt="{{ .Name }}"
                   onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
@@ -117,7 +117,7 @@
               class="swiper-slide {{ if eq $zoomable `true` }}
                 zoomable
               {{ end }}">
-              <div class="ghtm-gallery-item" data-i="{{ .IsDir }}">
+              <div class="gallery-item" data-i="{{ .IsDir }}">
                 {{ if eq $zoomable `true` }}
                   <a
                     href="{{ $image }}"
@@ -125,7 +125,7 @@
                     style="display: block;">
                     <img
                       src="{{ $image }}"
-                      class="ghtm-img"
+                      class="img"
                       style="margin: 0"
                       alt="{{ .Name }}"
                       height="{{ $height }}"
@@ -134,7 +134,7 @@
                 {{ else }}
                   <img
                     src="{{ $image }}"
-                    class="ghtm-img"
+                    class="img"
                     style="margin: 0"
                     alt="{{ .Name }}"
                     height="{{ $height }}"

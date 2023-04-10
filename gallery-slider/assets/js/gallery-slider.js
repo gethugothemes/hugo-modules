@@ -6,7 +6,7 @@
   // justified gallery init
   window.setTimeout(() => {
     const justify_scale = screen.height * 0.25;
-    let items = document.querySelectorAll(".ghtm-gallery-item");
+    let items = document.querySelectorAll(".gallery-item");
     Array.prototype.forEach.call(items, (item) => {
       let image = item.querySelector("img");
       let ratio = image.width / image.height;
@@ -16,7 +16,7 @@
   }, 200);
 
   // gallery slider
-  new Swiper(".ghtm-gallery-slider", {
+  new Swiper(".gallery-slider", {
     slidesPerView: 1,
     loop: true,
     autoHeight: true,

@@ -18,7 +18,7 @@
 <!-- start of checking asset-image -->
 {{ if $assetsImage }}
   <!-- start of image range -->
-  <div class="{{ $class }} ghtm-gallery {{ if $zoomable }}zoomable{{ end }}">
+  <div class="{{ $class }} gallery {{ if $zoomable }}zoomable{{ end }}">
     {{ range $assetsImage }}
       {{ $image := resources.Get . }}
       {{ $imageExt := path.Ext $image }}
@@ -28,7 +28,7 @@
         {{ $imageWidth:= $scratch.Get "image-width" }}
 
 
-        <div class="ghtm-gallery-item">
+        <div class="gallery-item">
           {{ if $zoomable }}
             <a
               href="{{ $image.RelPermalink }}"
@@ -36,7 +36,7 @@
               class="glightbox">
               <img
                 src="{{ $scratch.Get `image` }}"
-                class="ghtm-img"
+                class="img"
                 style="margin: 0;"
                 alt="{{ .Name }}"
                 onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
@@ -44,7 +44,7 @@
           {{ else }}
             <img
               src="{{ $scratch.Get `image` }}"
-              class="ghtm-img"
+              class="img"
               style="margin: 0;"
               alt="{{ .Name }}"
               onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
@@ -58,7 +58,7 @@
   <!-- start of checking content-image -->
 {{ else if $contentImage }}
   <!-- start of image range -->
-  <div class="{{ $class }} ghtm-gallery {{ if $zoomable }}zoomable{{ end }}">
+  <div class="{{ $class }} gallery {{ if $zoomable }}zoomable{{ end }}">
     {{ range $contentImage }}
       {{ $image:= $page.Resources.GetMatch (printf "*%s*" .) }}
       {{ $imageExt := path.Ext $image }}
@@ -68,7 +68,7 @@
         {{ $imageWidth:= $scratch.Get "image-width" }}
 
 
-        <div class="ghtm-gallery-item">
+        <div class="gallery-item">
           {{ if $zoomable }}
             <a
               href="{{ $image.RelPermalink }}"
@@ -76,7 +76,7 @@
               class="glightbox">
               <img
                 src="{{ $scratch.Get `image` }}"
-                class="ghtm-img"
+                class="img"
                 style="margin: 0;"
                 alt="{{ .Name }}"
                 onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
@@ -84,7 +84,7 @@
           {{ else }}
             <img
               src="{{ $scratch.Get `image` }}"
-              class="ghtm-img"
+              class="img"
               style="margin: 0;"
               alt="{{ .Name }}"
               onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
@@ -97,18 +97,18 @@
 
   <!-- start of checking static-image -->
 {{ else if os.FileExists $staticImage }}
-  <div class="{{ $class }} ghtm-gallery {{ if $zoomable }}zoomable{{ end }}">
+  <div class="{{ $class }} gallery {{ if $zoomable }}zoomable{{ end }}">
     {{ range (readDir $staticImage) }}
       {{ if and (ne .Name ".DS_Store") (not .IsDir) }}
         {{ $image := print "/" $folderDir "/" .Name }}
         {{ $imageExt := path.Ext $image }}
         {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
-          <div class="ghtm-gallery-item" data-i="{{ .IsDir }}">
+          <div class="gallery-item" data-i="{{ .IsDir }}">
             {{ if $zoomable }}
               <a href="{{ $image }}" style="display: block;" class="glightbox">
                 <img
                   src="{{ $image }}"
-                  class="ghtm-img"
+                  class="img"
                   style="margin: 0;"
                   alt="{{ .Name }}"
                   height="{{ $height }}"
@@ -117,7 +117,7 @@
             {{ else }}
               <img
                 src="{{ $image }}"
-                class="ghtm-img"
+                class="img"
                 style="margin: 0;"
                 alt="{{ .Name }}"
                 height="{{ $height }}"
