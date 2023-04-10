@@ -21,6 +21,9 @@ Add the following code to your js plugins list in the `config.toml` file.
 ```toml
 [[params.plugins.js]]
 link = "plugins/glightbox/glightbox.js"
+
+[[params.plugins.js]]
+link = "js/gallery-slider.js"
 ```
 
 Add the following code to your `asstes/scss/main.scss` or `asstes/scss/style.scss` file.
