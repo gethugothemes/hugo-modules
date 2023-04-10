@@ -6,6 +6,8 @@
 {{ $muted:= .Get `muted` | default `false` }}
 {{ $controls:= .Get `controls` | default `true` }}
 {{ $class:= .Get `class` }}
+{{ $poster:= .Get `poster` }}
+
 
 <!-- checking cdn -->
 {{ if hasPrefix $videoPath "http" }}
@@ -30,7 +32,9 @@
     {{ if eq $loop `true` }}loop{{ end }}
     {{ if eq $muted `true` }}muted{{ end }}
     {{ if eq $controls `true` }}controls{{ end }}
-    class="embed-responsive {{ $class }}">
+    {{ with $poster }}poster="{{ . }}"{{ end }}
+    class="{{ $class }}"
+    style="max-width:100%">
     <source src="{{ $videoPath }}" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
