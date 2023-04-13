@@ -1,0 +1,20 @@
+{{ $btnLabel:= .Get "btn-label" }}
+{{ $btnClass:= .Get "btn-class" }}
+{{ $bodyClass:= .Get "body-class" }}
+
+{{ range $i, $e:= .Params }}
+  {{ if eq $i "btn-label" }}{{ $btnLabel = $e }}{{ end }}
+{{ end }}
+
+
+<button class="btn btn-primary {{ $btnClass }}" data-modal-open>
+  {{ $btnLabel }}
+</button>
+
+<div class="modal" data-modal>
+  <div class="modal-overlay" data-modal-close data-modal-overlay></div>
+  <div class="modal-content {{ $bodyClass }}">
+    {{ .Inner | markdownify }}
+    <button class="modal-close" data-modal-close>&times;</button>
+  </div>
+</div>

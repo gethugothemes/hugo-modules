@@ -1,0 +1,16 @@
+{{ $btnLabel:= .BtnLabel }}
+{{ $btnClass:= .BtnClass }}
+{{ $bodyClass:= .BodyClass }}
+
+
+<button class="btn btn-primary {{ $btnClass }}" data-modal-open>
+  {{ $btnLabel }}
+</button>
+
+<div class="modal" data-modal>
+  <div class="modal-overlay" data-modal-close data-modal-overlay></div>
+  <div class="modal-content {{ $bodyClass }}">
+    {{ .Content | markdownify }}
+    <button class="modal-close" data-modal-close>&times;</button>
+  </div>
+</div>

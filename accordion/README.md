@@ -30,7 +30,7 @@ link = "js/accordion.js"
 Available parameters:
 
 * `Title`: Accordion title
-* `Content`: Accordion title
+* `Content`: Accordion content
 * `Class`: Accordion item class
 * `HeaderClass`: Accordion header item class
 * `BodyClass`: Accordion body item class
