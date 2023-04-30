@@ -1,4 +1,4 @@
-# 30+ Hugo Modules Created By Gethugothemes
+# 30+ Powerful Hugo Modules Created By [Gethugothemes](https://gethugothemes.com/) 
 
 We developed these [30+ Hugo modules](https://gethugothemes.com/hugo-modules) to enhance our Hugo themes and make them more powerful and flexible. These modules are powering our [56+ Hugo themes.](https://gethugothemes.com/) 
 
@@ -7,11 +7,9 @@ We developed these [30+ Hugo modules](https://gethugothemes.com/hugo-modules) to
 According to the [official Hugo documentation](https://gohugo.io/hugo-modules/),
 > Hugo Modules are the core building blocks in Hugo. A module can be your main project or a smaller module providing one or more of the 7 component types defined in Hugo: static, content, layouts, data, assets, i18n, and archetypes.
 
-Explore our 30+ Hugo modules and use them for your own projects for free.
-
 ## List of Modules
 
-Check out each module page for instructions on how to use it.
+Explore our 30+ Hugo modules and use them for your own projects for free. Check out each module page for instructions on how to use it.
 
 * [Accordion](https://github.com/gethugothemes/hugo-modules/tree/master/accordion)
 * [Adsense](https://github.com/gethugothemes/hugo-modules/tree/master/adsense)
@@ -62,16 +60,16 @@ Check out each module page for instructions on how to use it.
 | **Logbook** |  **Copper** | **56+ Themes Bundle** |
 
   
-## Why You Should Use These Hugo Modules? 
+## Why You Should Use These Hugo Modules
 
 By using these Hugo Modules, you can quickly and easily add advanced functionality to your Hugo projects without having to write all the code yourself. With over 30 modules available, you can choose the ones that best suit your needs and combine them in any way you like to create a custom website that stands out from the crowd.
 
-## How You Could Be Benefited Using These Hugo Modules? 
+## How You Could Be Benefited Using These Hugo Modules
 
 These Hugo Modules can save you time and effort by providing pre-built, tested, and well-documented code that you can use to add new features to your Hugo projects. By leveraging the power of these modules, you can build more complex and dynamic Hugo websites with ease, without having to start from scratch.
 
 
-## Why We Released This as Open Source?
+## Why We Released This As Open Source
 
  We realized these modules could be useful for the entire Hugo community. 
 
@@ -83,6 +81,13 @@ We use GitHub Issues as the official bug tracker for our Hugo Modules. Before su
 
 If you face any issues while using our modules or have any questions, don't hesitate to [get in touch with us.](https://gethugothemes.com/contact)
 
+## Contributing Code to Hugo Modules
+
+We welcome contributions from the community to help us improve and expand this project. If you would like to contribute code to Hugo Modules, please follow these steps:
+
+1. Fork this repo.
+2. Make your changes.
+4. Submit a pull request to the main branch.
 
 ## License
 
