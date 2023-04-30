@@ -71,8 +71,6 @@ These Hugo Modules can save you time and effort by providing pre-built, tested, 
 
 ## Why We Released This As Open Source
 
- We realized these modules could be useful for the entire Hugo community. 
-
 We released this project as open source because we believe in the power of collaboration and sharing. By making our code available to the wider community, we hope to contribute to the growth and development of the Hugo ecosystem. We also welcome feedback, suggestions, and contributions from the community to help us improve and expand this project over time.
 
 ## Reporting Issues
