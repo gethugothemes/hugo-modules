@@ -1,27 +1,20 @@
-# 30+ Powerful Hugo Modules Created By [Gethugothemes](https://gethugothemes.com/) 
+<h1 align=center> 🔥 Exclusive Hugo Modules (30+ modules)</h1>  
+<p align=center>Power up your Hugo website with 30+ robust Hugo modules. We developed these exclusive Hugo modules to enhance our Hugo themes and now we're making them open source for the community </p>
 
-We developed these [30+ Hugo modules](https://gethugothemes.com/hugo-modules) to enhance our Hugo themes and make them more powerful and flexible. These modules are powering our [56+ Hugo themes.](https://gethugothemes.com/) Add advanced functionality to your Hugo projects without having to start from scratch. Save time and effort! 
-
-
-## What is Hugo Modules? 
-
-According to the [official Hugo documentation](https://gohugo.io/hugo-modules/),
-> Hugo Modules are the core building blocks in Hugo. A module can be your main project or a smaller module providing one or more of the 7 component types defined in Hugo: static, content, layouts, data, assets, i18n, and archetypes.
-
-## List of Modules
+## ⚡ List of Modules
 
 Explore our 30+ Hugo modules and use them for your own projects for free. Check out each module page for instructions on how to use it.
 
-* [Accordion](https://github.com/gethugothemes/hugo-modules/tree/master/accordion)
-* [Adsense](https://github.com/gethugothemes/hugo-modules/tree/master/adsense)
-* [Gallery Slider](https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider)
-* [Gzip Caching](https://github.com/gethugothemes/hugo-modules/tree/master/gzip-caching)
-* [Images](https://github.com/gethugothemes/hugo-modules/tree/master/images)
-* [Videos](https://github.com/gethugothemes/hugo-modules/tree/master/videos)
-* [Tab](https://github.com/gethugothemes/hugo-modules/tree/master/tab)
-* [Modal](https://github.com/gethugothemes/hugo-modules/tree/master/modal)
-* [Table Of Contents](https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents)
-* [PWA - Progressive Web App](https://github.com/gethugothemes/hugo-modules/tree/master/pwa)
+1. [Accordion](https://github.com/gethugothemes/hugo-modules/tree/master/accordion)
+2. [Adsense](https://github.com/gethugothemes/hugo-modules/tree/master/adsense)
+3. [Gallery Slider](https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider)
+4. [Gzip Caching](https://github.com/gethugothemes/hugo-modules/tree/master/gzip-caching)
+5. [Images](https://github.com/gethugothemes/hugo-modules/tree/master/images)
+6. [Videos](https://github.com/gethugothemes/hugo-modules/tree/master/videos)
+7. [Tab](https://github.com/gethugothemes/hugo-modules/tree/master/tab)
+8. [Modal](https://github.com/gethugothemes/hugo-modules/tree/master/modal)
+9. [Table Of Contents](https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents)
+10. [PWA - Progressive Web App](https://github.com/gethugothemes/hugo-modules/tree/master/pwa)
 
 * [Components](https://github.com/gethugothemes/hugo-modules/tree/master/components)
 
@@ -53,32 +46,22 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
   * [Themify Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/themify-icons)
   
   
-## Our Hugo Modules Powered Themes
-| [![Bigspring](https://demo.gethugothemes.com/thumbnails/bigspring.png)](https://gethugothemes.com/products/bigspring/) | [![Reader](https://demo.gethugothemes.com/thumbnails/reader.png)](https://gethugothemes.com/products/reader/) | [![Agico](https://demo.gethugothemes.com/thumbnails/agico.png)](https://gethugothemes.com/products/agico/) |
-|:---:|:---:|:---:|
-| **Bigspring** | **Reader** | **Agico** |
-| [![Logbook](https://demo.gethugothemes.com/thumbnails/logbook.png)](https://gethugothemes.com/products/logbook/) | [![Copper](https://demo.gethugothemes.com/thumbnails/copper.png)](https://gethugothemes.com/products/copper/) | [![Mega-Bundle-HUGO](https://demo.gethugothemes.com/thumbnails/bundle.png?)](https://gethugothemes.com/bundle/?utm_source=hugo_modules_github&utm_medium=referral&utm_campaign=github_theme_readme) |
-| **Logbook** |  **Copper** | **56+ Themes Bundle** |
+## 📘 Benefits of Using Exclusive Hugo Modules
+ - Save time and effort by utilizing pre-built, tested, and well-documented code. </br>
+ - Add advanced functionality to your Hugo projects without having to write all the code yourself. </br>
+ - Build more complex and dynamic Hugo websites with ease, without having to start from scratch. </br>
+ - Choose from over 30 powerful modules to find the ones that best suit your needs.</br>
 
-  
-## Benefits of Using Our Hugo Modules
+## 🌐 Why We Released This As Open Source
+"Our 'Exclusive Hugo Modules' are a set of custom-built Hugo modules that were originally developed to enhance the functionality of our themes and serve our clients' projects. We found that by leveraging these modules, we were able to save a lot of time and effort. After continuously developing these modules, they have become more mature and powerful.
 
-- Save time and effort by utilizing pre-built, tested, and well-documented code.
-- Add advanced functionality to your Hugo projects without having to write all the code yourself. 
-- Build more complex and dynamic Hugo websites with ease, without having to start from scratch.
-- Choose from over 30 powerful modules to find the ones that best suit your needs.
+We believe in the power of open source software and in contributing back to the community. That's why we decided to make our amazing tool available to everyone. We welcome feedback, suggestions, and contributions from the community to help us improve and expand this project over time."
 
-## Why We Released This As Open Source
-
-We released this project as open source because we believe in the power of collaboration and sharing. By making our code available to the wider community, we hope to contribute to the growth and development of the Hugo ecosystem. We also welcome feedback, suggestions, and contributions from the community to help us improve and expand this project over time.
-
-## Reporting Issues
+## 🐞 Reporting Issues
 
 We use GitHub Issues as the official bug tracker for our Hugo Modules. Before submitting a report, please search [existing issues](https://github.com/gethugothemes/hugo-modules/issues) to see if your problem or idea has already been addressed. If not, feel free to [open a new issue](https://github.com/gethugothemes/hugo-modules/issues). 
 
-If you face any issues while using our modules or have any questions, don't hesitate to [get in touch with us.](https://gethugothemes.com/contact)
-
-## Contributing Code to Hugo Modules
+## 🪴 Contributing Code to Hugo Modules
 
 We welcome contributions from the community to help us improve and expand this project. If you would like to contribute code to Hugo Modules, please follow these steps:
 
@@ -86,15 +69,15 @@ We welcome contributions from the community to help us improve and expand this p
 2. Make your changes.
 4. Submit a pull request to the main branch.
 
+## Our Hugo Modules Powered Themes
+| [![Bigspring](https://demo.gethugothemes.com/thumbnails/bigspring.png)](https://gethugothemes.com/products/bigspring/) | [![Reader](https://demo.gethugothemes.com/thumbnails/reader.png)](https://gethugothemes.com/products/reader/) | [![Agico](https://demo.gethugothemes.com/thumbnails/agico.png)](https://gethugothemes.com/products/agico/) |
+|:---:|:---:|:---:|
+| **Bigspring** | **Reader** | **Agico** |
+| [![Logbook](https://demo.gethugothemes.com/thumbnails/logbook.png)](https://gethugothemes.com/products/logbook/) | [![Copper](https://demo.gethugothemes.com/thumbnails/copper.png)](https://gethugothemes.com/products/copper/) | [![Mega-Bundle-HUGO](https://demo.gethugothemes.com/thumbnails/bundle.png?)](https://gethugothemes.com/bundle/?utm_source=hugo_modules_github&utm_medium=referral&utm_campaign=github_theme_readme) |
+| **Logbook** |  **Copper** | **56+ Themes Bundle** |
+
 ## License
 
 This project is licensed under the [MIT License](https://github.com/gethugothemes/hugo-modules/blob/master/LICENSE).
 
 Copyright &copy; Developed by [Gethugothemes](https://gethugothemes.com)
-
-## Need Custom Development Services?
-
-We help businesses create fast, performance-focused and secure websites with Hugo. We have been a part of the Hugo community for the last 5 years and during this time, we have helped more than 60 businesses create their websites with Hugo.
-
-If you need a custom theme, theme customization, or complete website development services from scratch you can [Hire Us](https://gethugothemes.com/services). 
-
