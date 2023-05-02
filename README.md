@@ -5,16 +5,16 @@
 
 Explore our 30+ Hugo modules and use them for your own projects for free. Check out each module page for instructions on how to use it.
 
-1. [Accordion](https://github.com/gethugothemes/hugo-modules/tree/master/accordion)
-2. [Adsense](https://github.com/gethugothemes/hugo-modules/tree/master/adsense)
-3. [Gallery Slider](https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider)
-4. [Gzip Caching](https://github.com/gethugothemes/hugo-modules/tree/master/gzip-caching)
-5. [Images](https://github.com/gethugothemes/hugo-modules/tree/master/images)
-6. [Videos](https://github.com/gethugothemes/hugo-modules/tree/master/videos)
-7. [Tab](https://github.com/gethugothemes/hugo-modules/tree/master/tab)
-8. [Modal](https://github.com/gethugothemes/hugo-modules/tree/master/modal)
-9. [Table Of Contents](https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents)
-10. [PWA - Progressive Web App](https://github.com/gethugothemes/hugo-modules/tree/master/pwa)
+* [Accordion](https://github.com/gethugothemes/hugo-modules/tree/master/accordion)
+* [Adsense](https://github.com/gethugothemes/hugo-modules/tree/master/adsense)
+* [Gallery Slider](https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider)
+* [Gzip Caching](https://github.com/gethugothemes/hugo-modules/tree/master/gzip-caching)
+* [Images](https://github.com/gethugothemes/hugo-modules/tree/master/images)
+* [Videos](https://github.com/gethugothemes/hugo-modules/tree/master/videos)
+* [Tab](https://github.com/gethugothemes/hugo-modules/tree/master/tab)
+* [Modal](https://github.com/gethugothemes/hugo-modules/tree/master/modal)
+* [Table Of Contents](https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents)
+* [PWA - Progressive Web App](https://github.com/gethugothemes/hugo-modules/tree/master/pwa)
 
 * [Components](https://github.com/gethugothemes/hugo-modules/tree/master/components)
 
@@ -53,9 +53,9 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
  - Choose from over 30 powerful modules to find the ones that best suit your needs.</br>
 
 ## 🌐 Why We Released This As Open Source
-"Our 'Exclusive Hugo Modules' are a set of custom-built Hugo modules that were originally developed to enhance the functionality of our themes and serve our clients' projects. We found that by leveraging these modules, we were able to save a lot of time and effort. After continuously developing these modules, they have become more mature and powerful.
+Our 'Exclusive Hugo Modules' are a set of custom-built Hugo modules that were originally developed to enhance the functionality of our themes and serve our clients' projects. We found that by leveraging these modules, we were able to save a lot of time and effort. After continuously developing these modules, they have become more mature and powerful.
 
-We believe in the power of open source software and in contributing back to the community. That's why we decided to make our amazing tool available to everyone. We welcome feedback, suggestions, and contributions from the community to help us improve and expand this project over time."
+We believe in the power of open source software and in contributing back to the community. That's why we decided to make our amazing tool available to everyone. We welcome feedback, suggestions, and contributions from the community to help us improve and expand this project over time.
 
 ## 🐞 Reporting Issues
 
@@ -69,14 +69,14 @@ We welcome contributions from the community to help us improve and expand this p
 2. Make your changes.
 4. Submit a pull request to the main branch.
 
-## Our Hugo Modules Powered Themes
+## 🚀 Our Hugo Modules Powered Themes
 | [![Bigspring](https://demo.gethugothemes.com/thumbnails/bigspring.png)](https://gethugothemes.com/products/bigspring/) | [![Reader](https://demo.gethugothemes.com/thumbnails/reader.png)](https://gethugothemes.com/products/reader/) | [![Agico](https://demo.gethugothemes.com/thumbnails/agico.png)](https://gethugothemes.com/products/agico/) |
 |:---:|:---:|:---:|
 | **Bigspring** | **Reader** | **Agico** |
 | [![Logbook](https://demo.gethugothemes.com/thumbnails/logbook.png)](https://gethugothemes.com/products/logbook/) | [![Copper](https://demo.gethugothemes.com/thumbnails/copper.png)](https://gethugothemes.com/products/copper/) | [![Mega-Bundle-HUGO](https://demo.gethugothemes.com/thumbnails/bundle.png?)](https://gethugothemes.com/bundle/?utm_source=hugo_modules_github&utm_medium=referral&utm_campaign=github_theme_readme) |
 | **Logbook** |  **Copper** | **56+ Themes Bundle** |
 
-## License
+## 📝 License
 
 This project is licensed under the [MIT License](https://github.com/gethugothemes/hugo-modules/blob/master/LICENSE).
 
