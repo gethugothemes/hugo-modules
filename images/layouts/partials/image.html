@@ -138,8 +138,7 @@
             {{- $imageWebp.Height -}}
           {{- end -}}
           "
-          onerror="this.onerror='null';this.src='{{ $imageFallback.RelPermalink }}
-          '" />
+          onerror="this.onerror='null';this.src='{{ $imageFallback.RelPermalink }}';" />
 
         <!-- if image size less then 500x and size not defined -->
       {{ else if or (lt ($image.Width) 500) (not $resize) }}
@@ -196,7 +195,7 @@
             {{- $imageWebp.Height -}}
           {{- end -}}
           "
-          onerror="this.onerror='null';this.src='{{ $image.RelPermalink }}'" />
+          onerror="this.onerror='null';this.src='{{ $image.RelPermalink }}';" />
       {{ else }}
         <!-- /if image size less then 500x and size not defined -->
 
