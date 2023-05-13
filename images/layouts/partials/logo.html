@@ -4,7 +4,7 @@
 {{ $logoText:= site.Params.logo_text }}
 {{ $logoWidth:= add (replace site.Params.logo_width "px" "") "x" }}
 {{ $logoDefaultWidth:= site.Params.logo_width }}
-{{ $logoDefaultHeight:= "" }}
+{{ $logoDefaultHeight:= "auto" }}
 {{ $context:= . }}
 {{ $assetImage:= false }}
 {{ $scratch := newScratch }}
