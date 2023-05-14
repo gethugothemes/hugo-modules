@@ -73,7 +73,7 @@
     {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
       <img
         src="{{ $image.RelPermalink }}"
-        loading="lazy"
+        loading="{{$loading}}"
         decoding="async"
         alt="{{ .Alt }}"
         class="{{ $class }} img"
@@ -121,7 +121,7 @@
             src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
             data-src={{ $imageWebp.RelPermalink }}
           {{ else }}
-            src="{{ $imageWebp.RelPermalink }}" loading="lazy" decoding="async"
+            src="{{ $imageWebp.RelPermalink }}" loading="{{$loading}}" decoding="async"
           {{ end }}
 
           alt="{{ .Alt }}"
@@ -178,7 +178,7 @@
             src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
             data-src={{ $imageWebp.RelPermalink }} alt="placeholder"
           {{ else }}
-            src="{{ $imageWebp.RelPermalink }}" loading="lazy" decoding="async"
+            src="{{ $imageWebp.RelPermalink }}" loading="{{$loading}}" decoding="async"
             alt="{{ .Alt }}"
           {{ end }}
 
@@ -254,7 +254,7 @@
               src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
               data-src={{ $imageFallback.RelPermalink }}
             {{ else }}
-              loading="lazy" decoding="async"
+              loading="{{$loading}}" decoding="async"
               src="{{ $imageFallback.RelPermalink }}"
             {{ end }}class="{{ if $placeholder }}
               lazy
