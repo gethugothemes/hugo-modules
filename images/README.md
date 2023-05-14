@@ -37,13 +37,16 @@ Define the logo in the `config/_default/params.toml` file.
 
 ```toml
 # logo
-logo = "images/favicon.png"
+logo = "images/logo.png"
 # logo_dark only used when theme has a dark mode
-logo_dark = "images/favicon.png"
+logo_dark = "images/logo_darkmode.png"
 
 # use `px` or `x` with logo_width, example: "100px".
 # Note: logo_width is not work with .svg file
 logo_width = "100px"
+
+# default logo height is the image height that you provided
+logo_height = "80px"
 
 # if logo_webp set false, it will not generate WEBP version of logo
 logo_webp = true # default is true

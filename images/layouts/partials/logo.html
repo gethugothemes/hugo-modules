@@ -1,101 +1,96 @@
 {{ $logoPath:= .Src | default site.Params.logo }}
-{{ $logoWebp:= site.Params.logo_webp | default true }}
 {{ $logoDarkPath:= .DarkSrc | default site.Params.logo_dark }}
-{{ $logoText:= site.Params.logo_text }}
-{{ $logoWidth:= add (replace site.Params.logo_width "px" "") "x" }}
-{{ $logoDefaultWidth:= site.Params.logo_width }}
+{{ $logoText:= .LogoText | default site.Params.logo_text }}
+{{ $logoWebp:= site.Params.logo_webp | default true }}
+{{ $logoWidth:= replace site.Params.logo_width "px" "" }}
+{{ $logoHeight:= replace site.Params.logo_height "px" "" }}
+{{ $logoDefaultWidth:= "" }}
 {{ $logoDefaultHeight:= "" }}
 {{ $context:= . }}
 {{ $assetImage:= false }}
-{{ $scratch := newScratch }}
+{{ $staticImage:= false }}
+{{ $scratch:= newScratch }}
 
 
 <!-- check asset image -->
-{{ if fileExists (add `assets/` (string $logoPath)) }}
+{{ if and $logoPath (fileExists (add `assets/` (string $logoPath))) }}
   {{ $assetImage = true }}
 {{ end }}
 <!-- /check asset image -->
 
-<!-- image static/CDN -->
-{{ if or (hasPrefix $logoPath "http") (fileExists (add `static/` (string $logoPath))) }}
-  <img
-    loading="lazy"
-    decoding="async"
-    src="{{ $logoPath | absURL }}"
-    alt="{{ $logoText }}"
-    class="img logo-light"
-    height="{{ $logoDefaultHeight }}"
-    width="{{ $logoDefaultWidth }}" />
-  <img
-    loading="lazy"
-    decoding="async"
-    src="{{ $logoDarkPath | absURL }}"
-    alt="{{ $logoText }}"
-    class="img logo-dark"
-    height="{{ $logoDefaultHeight }}"
-    width="{{ $logoDefaultWidth }}" />
-{{ else }}
-  <!-- /image cdn -->
+<!-- check static/CDN image -->
+{{ if and $logoPath (or (hasPrefix $logoPath "http") (fileExists (add `static/` (string $logoPath)))) }}
+  {{ $staticImage = true }}
+{{ end }}
+<!-- /check static/CDN image -->
 
-  <!-- checking logo path -->
-  {{ if $assetImage }}
-    {{ $logoPath = resources.Get $logoPath }}
+{{ if $staticImage }}
+  <!-- image static/CDN -->
+  {{ if $logoDarkPath }}
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="{{ $logoPath | absURL }}"
+      alt="{{ $logoText }}"
+      class="img logo-light"
+      height="{{ $logoHeight | default `auto` }}"
+      width="{{ $logoWidth | default `auto` }}" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="{{ $logoDarkPath | absURL }}"
+      alt="{{ $logoText }}"
+      class="img logo-dark"
+      height="{{ $logoHeight | default `auto` }}"
+      width="{{ $logoWidth | default `auto` }}" />
+  {{ else }}
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="{{ $logoPath | absURL }}"
+      alt="{{ $logoText }}"
+      class="img"
+      height="{{ $logoHeight | default `auto` }}"
+      width="{{ $logoWidth | default `auto` }}" />
+  {{ end }}
+
+{{ else if $assetImage }}
+
+  <!-- asset image -->
+  {{ $logo:= resources.Get $logoPath }}
+  {{ $logoExt := path.Ext $logo }}
 
 
-    <!-- checking logo existance -->
-    {{ if fileExists (add `assets/` (string $logoPath)) }}
-      {{ $logo:= resources.Get $logoPath }}
-
-
-      <!-- logo extention -->
-      {{ $logoExt := path.Ext $logo }}
-
-
-      <!-- logo height, width (if not svg) -->
-      {{ if ne $logoExt `.svg` }}
-        {{ $logoDefaultWidth = $logo.Width }}
-        {{ $logoDefaultHeight = $logo.Height }}
-      {{ end }}
-
-
-      <!-- checking gif/svg -->
-      {{ if or (eq $logoExt ".gif") (eq $logoExt ".svg") }}
-        {{ $scratch.Set "logo" $logo.RelPermalink }}
-        <!-- logo processing to webp -->
-      {{ else }}
-        {{ $logoDefaultWidth:= add (string $logoDefaultWidth) "x" }}
-        {{ $logoWidth:= $logoWidth | default $logoDefaultWidth }}
-        {{ $logoWidth2x:= replace $logoWidth `x` `` }}
-        {{ $logoWidth2x = add (string (mul (int $logoWidth2x) 2)) `x` }}
-        {{ $options := add (string $logoWidth2x) " webp" }}
-        {{ if not $logoWebp }}
-          <!-- if webp false -->
-          {{ $options = add (string $logoWidth2x) " " }}
-        {{ end }}
-        <!-- end -->
-        {{ $scratch.Set "logo" ($logo.Resize $options).RelPermalink }}
-        <!-- logo fallback -->
-        {{ $scratch.Set "logo_fallback" ($logo.Resize $logoWidth).RelPermalink }}
-      {{ end }}
-      <!-- /checking gif/svg -->
-    {{ else }}
-      {{ warnf "%q not found" $logoPath }}
-      {{ $logoPath = false }}
-    {{ end }}
-    <!-- / checking logo existance -->
+  <!-- logo height, width (if not svg) -->
+  {{ if ne $logoExt `.svg` }}
+    {{ $logoDefaultWidth = $logo.Width }}
+    {{ $logoDefaultHeight = $logo.Height }}
   {{ end }}
 
 
-  <!-- / checking logo path -->
+  <!-- checking gif/svg -->
+  {{ if or (eq $logoExt ".gif") (eq $logoExt ".svg") }}
+    {{ $scratch.Set "logo" $logo.RelPermalink }}
+    <!-- logo processing to webp -->
+  {{ else }}
+    {{ $logoWidth2x:= add (string (mul (int $logoWidth | default $logoDefaultWidth) 2)) `x` }}
+    {{ $options:= add (string $logoWidth2x) " webp" }}
+    {{ if not $logoWebp }}
+      <!-- if webp false -->
+      {{ $options = add (string $logoWidth2x) " " }}
+    {{ end }}
+    <!-- end -->
+    {{ $scratch.Set "logo" ($logo.Resize $options).RelPermalink }}
+    <!-- logo fallback -->
+    {{ $scratch.Set "logo_fallback" ($logo.Resize $logoWidth2x).RelPermalink }}
+  {{ end }}
+  <!-- /checking gif/svg -->
 
-  <!-- ########### Dark logo code ################ -->
+  <!-- checking logo dark -->
   {{ if $logoDarkPath }}
-    <!-- checking logo existance -->
+    <!-- checking logo dark existance -->
     {{ if fileExists (add `assets/` (string $logoDarkPath)) }}
       {{ $logoDark:= resources.Get $logoDarkPath }}
-
-
-      <!-- logo extention -->
       {{ $logoDarkExt := path.Ext $logoDark }}
 
 
@@ -104,69 +99,62 @@
         {{ $scratch.Set "logo_dark" $logoDark.RelPermalink }}
         <!-- logo processing to webp -->
       {{ else }}
-        {{ $logoDefaultWidth:= add (string $logoDefaultWidth) "x" }}
-        {{ $logoDarkWidth:= $logoWidth | default $logoDefaultWidth }}
-        {{ $options := add (string $logoDarkWidth) " webp" }}
+        {{ $logoWidth2x:= add (string (mul (int $logoWidth | default $logoDefaultWidth) 2)) `x` }}
+        {{ $options:= add (string $logoWidth2x) " webp" }}
         {{ if not $logoWebp }}
           <!-- if webp false -->
-          {{ $options = add (string $logoDarkWidth) " " }}
+          {{ $options = add (string $logoWidth2x) " " }}
         {{ end }}
         <!-- end -->
 
         {{ $scratch.Set "logo_dark" ($logoDark.Resize $options).RelPermalink }}
         <!-- logo fallback -->
-        {{ $scratch.Set "logo_dark_fallback" ($logoDark.Resize $logoDarkWidth).RelPermalink }}
+        {{ $scratch.Set "logo_dark_fallback" ($logoDark.Resize $logoWidth2x).RelPermalink }}
       {{ end }}
       <!-- /checking gif/svg -->
     {{ else }}
       {{ warnf "%q not found" $logoDarkPath }}
       {{ $logoDarkPath = false }}
     {{ end }}
-    <!-- / checking logo existance -->
   {{ end }}
-
-
-  <!-- / checking logo path -->
-
-  <!-- ########### /Dark logo code ################ -->
+  <!-- / checking logo dark -->
 
   {{ if $logoDarkPath }}
     <img
-      loading="preload"
+      fetchpriority="high"
       decoding="async"
       class="img logo-light"
-      width="{{ replace $logoWidth `x` `` | default $logoDefaultWidth }}"
-      height="{{ $logoDefaultHeight }}"
+      width="{{ $logoWidth | default $logoDefaultWidth }}"
+      height="{{ $logoHeight | default $logoDefaultHeight }}"
       src="{{ $scratch.Get `logo` }}"
       alt="{{ $logoText }}"
-      onerror="this.onerror=null;this.src='{{ $scratch.Get `logo_fallback` }}'" />
+      onerror="this.onerror=null;this.src='{{ $scratch.Get `logo_fallback` }}';" />
 
     <img
-      loading="preload"
+      fetchpriority="high"
       decoding="async"
       class="img logo-dark"
-      width="{{ replace $logoWidth `x` `` | default $logoDefaultWidth }}"
-      height="{{ $logoDefaultHeight }}"
+      width="{{ $logoWidth | default $logoDefaultWidth }}"
+      height="{{ $logoHeight | default $logoDefaultHeight }}"
       src="{{ $scratch.Get `logo_dark` }}"
       alt="{{ $logoText }}"
-      onerror="this.onerror=null;this.src='{{ $scratch.Get `logo_dark_fallback` }}'" />
-  {{ else if $logoPath }}
+      onerror="this.onerror=null;this.src='{{ $scratch.Get `logo_dark_fallback` }}';" />
+  {{ else }}
     <img
-      loading="preload"
+      fetchpriority="high"
       decoding="async"
-      class="logo"
-      width="{{ replace $logoWidth `x` `` | default $logoDefaultWidth }}"
-      height="{{ $logoDefaultHeight }}"
+      class="img"
+      width="{{ $logoWidth | default $logoDefaultWidth }}"
+      height="{{ $logoHeight | default $logoDefaultHeight }}"
       src="{{ $scratch.Get `logo` }}"
       alt="{{ $logoText }}"
       onerror="this.onerror=null;this.src='{{ $scratch.Get `logo_fallback` }}'" />
-
-    <!-- logo text -->
-  {{ else if site.Params.logo_text }}
-    {{ site.Params.logo_text | markdownify }}
-    <!-- logo title -->
-  {{ else }}
-    <strong>`{{ $logoPath }}` doesn't exist</strong>
   {{ end }}
   <!-- / checking logo path -->
+{{ else if $logoText }}
+  <!-- logo text -->
+  {{ $logoText }}
+{{ else }}
+  <!-- logo title -->
+  {{ site.Title }}
 {{ end }}
