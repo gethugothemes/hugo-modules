@@ -20,7 +20,22 @@ Add the following code to your js plugins list in the `config.toml` file.
 ```html
 [[params.plugins.js]]
 link = "js/search.js"
+```
 
+Add some following configuration to your `config/_default/config.toml` file.
+
+```toml
+############################# Outputs ##############################
+[outputs]
+home = ["SearchIndex"]
+
+############################ Output Format ###########################
+[outputFormats]
+[outputFormats.SearchIndex]
+mediaType = "application/json"
+baseName = "searchindex"
+isPlainText = true
+notAlternative = true
 ```
 
 <hr>

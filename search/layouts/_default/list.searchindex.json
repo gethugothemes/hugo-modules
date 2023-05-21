@@ -1,0 +1,34 @@
+{{ $include_sections := site.Params.search.include_sections | default site.Params.mainSections }}
+{{ $totalPagesLength := len (where site.RegularPages "Section" "in" $include_sections) }}
+
+[{{ range $i, $e := (where site.RegularPages "Section" "in" $include_sections) }}
+{{- if not .Params.ignoreSearch -}}
+
+{{ $date:= time.Format ":date_long" .PublishDate }}
+{{ $title:= .Title }}
+
+{{ if .Params.image }}
+  {{ $.Scratch.Set "image" .Params.image }}
+{{ else if .Params.images }}
+  {{ range first 1 .Params.images }}
+  {{ $.Scratch.Set "image" (partial "image" (dict "Src" . "Size" "80x80" "Command" "Fill" "Alt" $title)) }}
+  {{ end }}
+{{ end }}
+
+{{ $image:= $.Scratch.Get "image" }}
+
+{
+  "section": "{{.Section | humanize}}",
+  "slug": "{{ .RelPermalink }}",
+  "title": "{{ htmlEscape .Title }}",
+  "description": "{{ htmlEscape .Description}}",
+  "date": "{{ $date }}",
+  "image": {{$image | jsonify}},
+  "searchKeyword": "{{ htmlEscape .Params.search_keyword }}",
+  "categories": "{{if .Params.categories}}{{ delimit .Params.categories `, ` }}{{end}}",
+  "tags": "{{if .Params.tags}}{{ delimit .Params.tags `, ` }}{{end}}",
+  "content": {{ $e.Plain | jsonify }}
+}{{- if ne $i (sub $totalPagesLength 1) -}},{{- end -}}
+
+{{ end }}
+{{ end }}]
