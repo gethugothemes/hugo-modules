@@ -81,3 +81,7 @@ empty_results_placeholder = "Type something to search.." # i18n is `empty_search
 or
 {{ partial "search.html" }}
 ```
+
+-----------------------------
+
+NOTE : Use `Ctrl + K` or `Command + K` to Search, `ESC` to close, `ArrowUp` and `ArrowDown` key to navigate and `Enter` key to select.
