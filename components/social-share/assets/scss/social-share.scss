@@ -1,33 +1,32 @@
-/*! Social sharing buttons from Sharingbuttons.io */
-.share {
-  border-radius: 0.25rem;
-  transition: 25ms ease-out;
-  height: 2.5rem;
-  width: 2.5rem;
-  text-align: center;
-  line-height: 2.7rem;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-}
-
-.share-link,
-.share-icon {
+.share-title {
   display: inline-block;
+  margin-right: 0.3em;
 }
 
 .share-link {
+  border-radius: 0.25rem;
+  transition: 25ms ease-out;
+  height: 2.5em;
+  width: 2.5em;
+  line-height: 2.5em;
+  text-align: center;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   text-decoration: none;
   color: #fff;
   margin: 0.5em;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-/* Non solid icons get a stroke */
 .share-icon {
   fill: #fff;
   stroke: none;
+  display: block;
+  height: 100%;
   svg {
     width: 1em;
-    height: 1em;
-    margin: 0;
+    height: 100%;
+    margin: auto;
   }
 }
 
