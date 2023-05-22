@@ -6,8 +6,8 @@
 <script>
   let indexURL = {{ "searchindex.json" | absLangURL }};
   let includeSectionsInSearch = {{ site.Params.search.include_sections | default site.Params.mainSections }};
-  let no_results_for = {{ i18n "no_results_for" | default "No results for"}};
-  let empty_search_results_placeholder = {{ i18n "empty_search_results_placeholder" | default site.Params.search.empty_results_placeholder }};
+  let no_results_for = {{ i18n `no_results_for` | default "No results for"}};
+  let empty_search_results_placeholder = {{ i18n `empty_search_results_placeholder` | default site.Params.search.empty_results_placeholder }};
 </script>
 
 <div
@@ -21,6 +21,7 @@
   aria-hidden="true"
   style="--color-primary: {{site.Params.search.primary_color | default `#7f0ec6`}}"
 >
+
   <div class="search-modal-content">
     <form class="search-input-body">
       <label for="doSearch">
@@ -31,7 +32,7 @@
     </form>
     <div class="search-modal-body">
       <div id="search-result"></div>
-      <label class="empty-search-result" for="doSearch">{{ i18n "search_modal_initial_placeholder" | default site.Params.search.empty_results_placeholder }}</label>
+      <label class="empty-search-result" for="doSearch">{{ i18n `empty_search_results_placeholder` | default site.Params.search.empty_results_placeholder }}</label>
     </div>
     <div class="search-modal-footer">
       <span><kbd><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" style="margin-top:-2px" viewBox="0 0 16 16"><path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"/></svg></kbd><kbd><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16"><path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/></svg></kbd> to navigate</span>
