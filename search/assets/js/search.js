@@ -6,14 +6,10 @@ const searchModalInput = document.querySelector('#doSearch');
 const emptySearchResult = document.querySelector('.empty-search-result');
 const openSearchModal = document.querySelectorAll('[data-target="search-modal"]');
 const closeSearchModal = document.querySelectorAll('[data-target="close-search-modal"]');
+const searchIcon = document.querySelector(".search-input-body label svg[type='search']");
+const searchIconReset = document.querySelector(".search-input-body label svg[type='reset']");
 let searchModalVisible = hasSearchModal && searchModal.classList.contains('show') ? true : false;
 let jsonData = [];
-
-// options
-const image = searchModal.getAttribute('data-image');
-const description = searchModal.getAttribute('data-description');
-const tags = searchModal.getAttribute('data-tags');
-const categories = searchModal.getAttribute('data-categories');
 
 const loadJsonData = async () => {
 	try {
@@ -25,8 +21,11 @@ const loadJsonData = async () => {
 };
 
 if (hasSearchModal) {
-	const searchIcon = document.querySelector(".search-input-body label svg[type='search']");
-	const searchIconReset = document.querySelector(".search-input-body label svg[type='reset']");
+	// options
+	const image = searchModal.getAttribute('data-image');
+	const description = searchModal.getAttribute('data-description');
+	const tags = searchModal.getAttribute('data-tags');
+	const categories = searchModal.getAttribute('data-categories');
 	
 	searchModalInput.addEventListener("input", (e) => {
 		const searchString = e.target.value.toLowerCase();
@@ -65,14 +64,6 @@ if (hasSearchModal) {
 					el.categories?.toLowerCase().match(regex)
 				);
 			});
-		});
-	
-		searchIconReset.addEventListener("click", () => {
-			searchModalInput.value = "";
-			searchIcon.style.display = "initial";
-			searchIconReset.style.display = "none";
-			emptySearchResult.innerHTML = empty_search_results_placeholder;
-			searchResult.innerHTML = "";
 		});
 
 		displayResult(searchItem, searchString);
@@ -213,6 +204,15 @@ if (hasSearchModal) {
 
 // ========================================================================================
 
+// Reset Serach
+const resetSearch = () => {
+	searchModalInput.value = "";
+	searchIcon.style.display = "initial";
+	searchIconReset.style.display = "none";
+	emptySearchResult.innerHTML = empty_search_results_placeholder;
+	searchResult.innerHTML = "";
+};
+
 // Body Scroll
 const enableBodyScroll = () => {
 	setTimeout(() => {
@@ -238,6 +238,7 @@ const closeModal = () => {
 	searchModal.classList.remove('show');
 	enableBodyScroll();
 	searchModalVisible = false;
+	resetSearch();
 }
 
 // Trigger Search Modal Show/Hide Events
@@ -246,6 +247,11 @@ if (hasSearchModal) {
 	if (searchModalVisible) {
 		showModal();
 	}
+
+	// Trigger Reset Search
+	searchIconReset.addEventListener("click", () => {
+		resetSearch();
+	});
 
 	// Open Search Modal with click
 	openSearchModal.forEach((el) => {

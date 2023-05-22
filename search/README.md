@@ -45,19 +45,28 @@ notAlternative = true
 [search]
 enable = true
 primary_color = "#ce8460"
-modal_class = "custom-search-modal-class"
-include_sections = ["post", "shop"] # if `include_sections` is empty then section are come from `mainSections`
+include_sections = ["post", "shop"] # if `include_sections` is empty, then section's will come from `mainSections`
 
 show_image = true
 show_description = true
 show_tags = true
 show_categories = true
 
-modal_show_onload = false
-input_placeholder = "Search Gethugothemes .."
-empty_results_placeholder = "Type something to search.."
+input_placeholder = "Search Gethugothemes .." # i18n is `search_input_placeholder`
+empty_results_placeholder = "Type something to search.." # i18n is `empty_search_results_placeholder`
 ```
 
+## i18n
+```yaml
+- id: search_input_placeholder
+  translation: Search Logbook ..
+
+- id: no_results_for
+  translation: No results for
+
+- id: empty_search_results_placeholder
+  translation: Type something to search..
+```
 
 <hr>
 
@@ -68,5 +77,7 @@ empty_results_placeholder = "Type something to search.."
 <button type="button" data-target="search-modal">Search</button>
 {{ end }}
 
-{{ partial "search.html" . }}
+{{ partial "search.html" (dict "Class" "custom-class-name") }}
+or
+{{ partial "search.html" }}
 ```
