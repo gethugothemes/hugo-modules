@@ -1,13 +1,12 @@
 {{ with .Inner }}{{/* don't do anything, just call it */}}{{ end }}
 {{ $groupId := default "default" (.Get 0) }}
 
-
 <div class="tab" data-tab-group="{{ $groupId }}">
   <ul class="tab-nav" data-tab-nav>
     {{ range $idx, $tab := .Scratch.Get "tabs" }}
       <li
         class="tab-nav-item {{ cond (eq $idx 0) `active` `` }}"
-        data-tab="{{ .name | urlize }}">
+        data-tab="{{ .name | urlize }}" tabindex="{{ cond (eq $idx 0) `0` `-1` }}">
         {{ .name }}
       </li>
     {{ end }}
