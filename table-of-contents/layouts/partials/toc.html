@@ -1,4 +1,5 @@
-<details class="table-of-content">
+{{ $class:= .Class }}
+<details class="table-of-content {{$class}}">
   <summary>
     {{ with i18n "toc" }}
       {{ . }}
