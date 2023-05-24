@@ -86,19 +86,17 @@ Add this code to where you want to place the search Button or Link
 {{ with site.Params.search }}
 {{ if .enable }}
   {{ if .search_page }}
-  <a class="search-btn" href="{{`search` | relLangURL}}">Search Link</a>
+  <a href="{{`search` | relLangURL}}">Search Link</a>
   {{ else }}
-  <button class="search-btn" data-target="search-modal">Search Button</button>
+  <button data-target="search-modal">Search Button</button>
   {{ end }}
 {{ end }}
 {{ end }}
 ```
 
-and Add this partial to your `header.html` or after the body opening tag
+and Add this partial to your `header.html` or inside your base template
 ```html
-{{ partial "search.html" (dict "Class" "custom-class-name" "Context" .) }}
-or
-{{ partial "search.html" (dict "Context" .) }}
+{{ partial "search.html" (dict "Context" . "Class" "custom-class-name") }}
 ```
 
 ### To use Search in a Page
