@@ -28,6 +28,13 @@ const loadJsonData = async () => {
 
 if (hasSearchWrapper) {
 
+	// disable enter key on searchInput
+	searchInput.addEventListener("keypress", (e) => {
+		if (e.keyCode == 13) {
+			e.preventDefault();
+		}
+	});
+
 	// options
 	const image = searchWrapper.getAttribute('data-image');
 	const description = searchWrapper.getAttribute('data-description');
@@ -39,9 +46,10 @@ if (hasSearchWrapper) {
 	// get search string from url
 	const urlParams = new URLSearchParams(window.location.search);
 	const urlSearchString = urlParams.get('s');
+	
 	if (urlSearchString != null) {
 		searchString = urlSearchString.replace(/\+/g, ' ');
-		searchInput.value = searchString;
+		searchInput.value = urlSearchString;
 		searchIcon.style.display = "none";
 		searchIconReset.style.display = "initial";
 	}
@@ -61,7 +69,7 @@ if (hasSearchWrapper) {
 
 	// doSearch
 	const doSearch = async (searchString) => {
-		if (searchString != "") {
+		if (searchString != "" && urlSearchString != null) {
 			searchIcon.style.display = "none";
 			searchIconReset.style.display = "initial";
 			emptySearchResult.innerHTML = `<div class="no-result-found">
