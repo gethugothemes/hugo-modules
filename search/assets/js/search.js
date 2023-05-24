@@ -57,9 +57,9 @@ if (hasSearchWrapper) {
   const urlParams = new URLSearchParams(window.location.search);
   const urlSearchString = urlParams.get("s");
 
-  if (urlSearchString != null) {
+  if (urlSearchString !== null) {
     searchString = urlSearchString.replace(/\+/g, " ");
-    searchInput.value = urlSearchString;
+    searchInput.value = searchString;
     searchIcon.style.display = "none";
     searchIconReset.style.display = "initial";
   }
@@ -80,12 +80,12 @@ if (hasSearchWrapper) {
   // dom content loaded
   document.addEventListener("DOMContentLoaded", async () => {
     await loadJsonData();
-    doSearch(urlSearchString);
+    doSearch(searchString);
   });
 
   // doSearch
   const doSearch = async (searchString) => {
-    if (searchString != "" && urlSearchString != null) {
+    if (searchString !== "") {
       searchIcon.style.display = "none";
       searchIconReset.style.display = "initial";
       emptySearchResult.innerHTML = `<div class="no-result-found">

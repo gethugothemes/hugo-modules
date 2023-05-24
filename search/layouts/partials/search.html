@@ -25,7 +25,7 @@
           aria-hidden="true"
           style="--color-primary: {{ site.Params.search.primary_color | default `#7f0ec6` }}">
           <div class="search-wrapper-content">
-            <form class="search-input-body">
+            <div class="search-input-body">
               <label for="doSearch">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@
                 aria-label="Search"
                 aria-describedby="Search"
                 autofocus />
-            </form>
+            </div>
             <div class="search-wrapper-footer">
               <span
                 ><kbd
@@ -121,7 +121,7 @@
         aria-hidden="true"
         style="--color-primary: {{ site.Params.search.primary_color | default `#7f0ec6` }}">
         <div class="search-wrapper-content">
-          <form class="search-input-body">
+          <div class="search-input-body">
             <label for="doSearch" style="margin-top:-2px">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@
               aria-label="Search"
               autocomplete="off"
               aria-describedby="Search" />
-          </form>
+          </div>
           <div class="search-wrapper-body">
             <div id="search-result"></div>
             <label class="empty-search-result" for="doSearch"
