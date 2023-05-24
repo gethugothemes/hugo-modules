@@ -1,13 +1,19 @@
 const body = document.body;
+const searchWrapper = document.querySelector('.search-wrapper');
 const searchModal = document.querySelector('.search-modal');
+const searchPage = document.querySelector('.search-page');
+const searchFooter = document.querySelector('.search-wrapper-footer');
 const searchResult = document.getElementById('search-result');
-const hasSearchModal = searchModal !== null;
-const searchModalInput = document.querySelector('#doSearch');
+const searchResultItemTemplate = document.getElementById("search-result-item-template");
+const hasSearchWrapper = searchWrapper != null;
+const hasSearchModal = searchModal != null;
+const searchInput = document.querySelector('#doSearch');
 const emptySearchResult = document.querySelector('.empty-search-result');
 const openSearchModal = document.querySelectorAll('[data-target="search-modal"]');
 const closeSearchModal = document.querySelectorAll('[data-target="close-search-modal"]');
 const searchIcon = document.querySelector(".search-input-body label svg[type='search']");
 const searchIconReset = document.querySelector(".search-input-body label svg[type='reset']");
+const searchResultInfo = document.querySelector(".search-result-info");
 let searchModalVisible = hasSearchModal && searchModal.classList.contains('show') ? true : false;
 let jsonData = [];
 
@@ -20,16 +26,41 @@ const loadJsonData = async () => {
 	}
 };
 
-if (hasSearchModal) {
+if (hasSearchWrapper) {
+
 	// options
-	const image = searchModal.getAttribute('data-image');
-	const description = searchModal.getAttribute('data-description');
-	const tags = searchModal.getAttribute('data-tags');
-	const categories = searchModal.getAttribute('data-categories');
+	const image = searchWrapper.getAttribute('data-image');
+	const description = searchWrapper.getAttribute('data-description');
+	const tags = searchWrapper.getAttribute('data-tags');
+	const categories = searchWrapper.getAttribute('data-categories');
 	
-	searchModalInput.addEventListener("input", (e) => {
-		const searchString = e.target.value.toLowerCase();
+	let searchString = "";
+
+	// get search string from url
+	const urlParams = new URLSearchParams(window.location.search);
+	const urlSearchString = urlParams.get('s');
+	if (urlSearchString != null) {
+		searchString = urlSearchString.replace(/\+/g, ' ');
+		searchInput.value = searchString;
+		searchIcon.style.display = "none";
+		searchIconReset.style.display = "initial";
+	}
+	
+	searchInput.addEventListener("input", (e) => {
+		searchString = e.target.value.toLowerCase();
+		window.history.replaceState({}, '', `${window.location.origin}${window.location.pathname}?s=${searchString.replace(/ /g, '+')}`);
 		
+		doSearch(searchString);
+	});
+
+	// dom content loaded
+	document.addEventListener('DOMContentLoaded', async () => {
+		await loadJsonData();
+		doSearch(urlSearchString);
+	});
+
+	// doSearch
+	const doSearch = async (searchString) => {
 		if (searchString != "") {
 			searchIcon.style.display = "none";
 			searchIconReset.style.display = "initial";
@@ -69,8 +100,8 @@ if (hasSearchModal) {
 		displayResult(searchItem, searchString);
 
 		// Navigate with arrow keys
-		if (searchString != "") {
-			const resItems = searchResult.querySelectorAll('.search-result-item a');
+		if (searchString != "" && searchPage == null) {
+			const resItems = searchResult.querySelectorAll('.search-result-item [data-result-item]');
 			let selectedIndex = -1;
 
 			const selectItem = (index) => {
@@ -104,81 +135,119 @@ if (hasSearchModal) {
 				}
 			};
 
-			searchModalInput.addEventListener('keydown', handleKeyDown);
+			searchInput.addEventListener('keydown', handleKeyDown);
 			selectItem(0);
 		}
-	});
+	};
 
 	const displayResult = (searchItems, searchString) => {
-		const htmlString = searchItems.map((item) => {
-			const contentValue = item.data.filter((d) => d.content.toLowerCase().includes(searchString)).map((innerItem) =>  {
-				const position = innerItem.content.toLowerCase().indexOf(searchString.toLowerCase());
-				let matches = innerItem.content.substring(position, searchString.length + position);
-				let matchesAfter = innerItem.content.substring(searchString.length + position, searchString.length + position + 80);
-				const highlighted = innerItem.content.replace(innerItem.content, '<mark>' + matches + '</mark>' + matchesAfter);
-				return highlighted;
-			});
-
+		const generateSearchResultHTML = (item) => {
+			const contentValue = item.data
+				.filter((d) => d.content.toLowerCase().includes(searchString))
+				.map((innerItem) => {
+					const position = innerItem.content.toLowerCase().indexOf(searchString.toLowerCase());
+					let matches = innerItem.content.substring(position, searchString.length + position);
+					let matchesAfter = innerItem.content.substring(searchString.length + position, searchString.length + position + 80);
+					const highlighted = innerItem.content.replace(innerItem.content, '<mark>' + matches + '</mark>' + matchesAfter);
+					return highlighted;
+				});
+		
 			const highlightResult = (content) => {
 				const regex = new RegExp(searchString, "gi");
 				return content.replace(regex, (match) => `<u>${match}</u>`);
 			};
-			
-			return`
-			<div class="search-result-item">
-				<p class="section-name">${item.section}</p>
-				${item.data.filter((d) => 
-					d.title.toLowerCase().includes(searchString) || 
-					(description == "true" ? d.description?.toLowerCase().includes(searchString) : "") || 
-					d.searchKeyword.toLowerCase().includes(searchString) || 
-					(tags == "true" ? d.tags?.toLowerCase().includes(searchString) : "") || 
-					(categories == "true" ? d.categories?.toLowerCase().includes(searchString) : "") || 
-					d.content.toLowerCase().includes(searchString)).map((innerItem) => 
-						`<a href="${innerItem.slug}">
-							
-							${image == "true" ? `
-							<div class="flex-shrink-0">
-								${innerItem.image}
-							</div>` : ''}
+		
+			const filteredItems = item.data.filter((d) =>
+				d.title.toLowerCase().includes(searchString) ||
+				(description === "true" ? d.description?.toLowerCase().includes(searchString) : "") ||
+				d.searchKeyword.toLowerCase().includes(searchString) ||
+				(tags === "true" ? d.tags?.toLowerCase().includes(searchString) : "") ||
+				(categories === "true" ? d.categories?.toLowerCase().includes(searchString) : "") ||
+				d.content.toLowerCase().includes(searchString)
+			);
 
-							<div class="flex-grow-1">
-								<p class="search-title">${highlightResult(innerItem.title)}</p>
-								${description == "true" ? `<p class="search-description">${highlightResult(innerItem.description)}</p>` : ''}
-								<p class="search-content">${contentValue}</p>
+			// pull template from hugo templarte definition
+			let templateDefinition = (searchResultItemTemplate != null) ? searchResultItemTemplate.innerHTML : `
+			<a data-result-item href="#{slug}">
+				<div class="fs-0">
+					#{image}
+				</div>
+				<div class="fg-1">
+					<p class="search-title">#{title}</p>
+					<p class="search-description">#{description}</p>
+					<p class="search-content">#{content}</p>
+					<div class="search-info">
+						<div>
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-top:-2px">
+								<path d="M11 0H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2 2 2 0 0 0 2-2V4a2 2 0 0 0-2-2 2 2 0 0 0-2-2zm2 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1V3zM2 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2z"/>
+							</svg>
+							#{categories}
+						</div>
+						<div>
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+								<path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
+								<path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
+							</svg>
+							#{tags}
+						</div>
+					</div>
+				</div>
+			</a>` ;
+		
+			const renderedItems = filteredItems.map((innerItem) => {
+				let output = renderResult(templateDefinition, {
+					slug: innerItem.slug,
+					date: innerItem.date,
+					description: description == "true" ? highlightResult(innerItem.description) : "",
+					title: highlightResult(innerItem.title),
+					image: image == "true" ? innerItem.image : "",
+					tags: tags == "true" ? highlightResult(innerItem.tags) : "nomatch",
+					categories: categories == "true" ? highlightResult(innerItem.categories) : "nomatch",
+					content: contentValue
+				});
+				return output;
+			}
+			).join("");
+		
+			return `
+				<div class="search-result-item">
+					<p class="section-name">${item.section}</p>
+					${renderedItems}
+				</div>`;
+		};
 
-								${tags || categories == "true" ? `
-								<div class="search-info ${(!innerItem.categories || !innerItem.tags) ? "hidden" : "" }">
-									
-									${categories == "true" ? `
-									<div class="${(categories != "true" || !innerItem.categories) ? "hidden" : "" }">
-										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-top:-2px">
-											<path d="M11 0H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2 2 2 0 0 0 2-2V4a2 2 0 0 0-2-2 2 2 0 0 0-2-2zm2 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1V3zM2 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2z"/>
-										</svg>
-										${highlightResult(innerItem.categories)}
-									</div>
-									` : ""}
+		const filteredItemsLength = searchItems.reduce((totalLength, item) => {
+			const filteredItems = item.data.filter((d) =>
+				d.title.toLowerCase().includes(searchString) ||
+				(description === "true" ? d.description?.toLowerCase().includes(searchString) : "") ||
+				d.searchKeyword.toLowerCase().includes(searchString) ||
+				(tags === "true" ? d.tags?.toLowerCase().includes(searchString) : "") ||
+				(categories === "true" ? d.categories?.toLowerCase().includes(searchString) : "") ||
+				d.content.toLowerCase().includes(searchString)
+			);
+		
+			return totalLength + filteredItems.length;
+		}, 0);
+		
+		// count time start
+		const startTime = performance.now();
 
-									${tags == "true" ? `
-									<div class="${(tags != "true" || !innerItem.tags) ? "hidden" : "" }">
-										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-											<path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
-											<path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
-										</svg>
-										${highlightResult(innerItem.tags)}
-									</div>
-									` : ""}
-
-								</div>
-								` : ''}
-							</div>
-						</a>`
-					).join("")}
-			</div>`
-		}).join("");
+		// Render Result into HTML
+		const htmlString = searchItems.map(generateSearchResultHTML).join("");
 		searchResult.innerHTML = htmlString;
 
-		const sectionName = document.querySelectorAll('.section-name');
+		// count time end
+		const endTime = performance.now();
 
+		// count total-result and time
+		let totalResults = `<em>${filteredItemsLength}</em> results`;
+		let totalTime = ((endTime - startTime) / 1000).toFixed(3);
+		totalTime = `- in <em>${totalTime}</em> seconds`;
+
+		searchResultInfo.innerHTML = filteredItemsLength > 0 ? `${totalResults} ${totalTime}` : "";
+
+		// hide sectionName if un-available result
+		const sectionName = document.querySelectorAll('.section-name');
 		if (sectionName.length > 0) {
 			// hide sectionName if there is no result
 			sectionName.forEach((el) => {
@@ -186,7 +255,7 @@ if (hasSearchModal) {
 					el.style.display = "none";
 				}
 			});
-
+	
 			// show emptySearchResult if there is no result
 			const values = Object.values(sectionName);
 			const showEmptyRes = values.every((el) => {
@@ -198,15 +267,53 @@ if (hasSearchModal) {
 				emptySearchResult.style.display = "";
 			}
 		}
+
+		// hide tag/category if un-available result
+		const searchInfo = document.querySelectorAll('.search-info > div');
+		if (searchInfo.length > 0) {
+			// hide tag/category if there is no result
+			searchInfo.forEach((el) => {
+				if (el.innerText.includes("nomatch") || el.innerText == "") {
+					el.classList.add("hidden");
+				}
+			});
+		}
+
 	};
 	loadJsonData();
+}
+
+// Render Result Template
+const renderResult = (templateString, data) => {
+  var conditionalMatches, conditionalPattern, copy;
+  conditionalPattern = /\#\{\s*isset ([a-zA-Z]*) \s*\}(.*)\#\{\s*end\s*}/g;
+  // since loop below depends on re.lastInxdex, we use a copy to capture any manipulations whilst inside the loop
+  copy = templateString;
+  while ((conditionalMatches = conditionalPattern.exec(templateString)) !== null) {
+    if (data[conditionalMatches[1]]) {
+      // if valid key, remove conditionals, leave contents.
+      copy = copy.replace(conditionalMatches[0], conditionalMatches[2]);
+    } else {
+      // if not valid, remove entire section
+      copy = copy.replace(conditionalMatches[0], '');
+    }
+  }
+  templateString = copy;
+  //now any conditionals removed we can do simple substitution
+  var key, find, re;
+  for (key in data) {
+    find = '\\#\\{\\s*' + key + '\\s*\\}';
+    re = new RegExp(find, 'g');
+    templateString = templateString.replace(re, data[key]);
+  }
+  return templateString;
 }
 
 // ========================================================================================
 
 // Reset Serach
 const resetSearch = () => {
-	searchModalInput.value = "";
+	searchInput.value = "";
 	searchIcon.style.display = "initial";
 	searchIconReset.style.display = "none";
 	emptySearchResult.innerHTML = empty_search_results_placeholder;
@@ -229,20 +336,24 @@ const disableBodyScroll = () => {
 
 // Show/Hide Search Modal
 const showModal = () => {
-	searchModal.classList.add('show');
+	searchWrapper.classList.add('show');
 	window.setTimeout(() => document.querySelector('#doSearch').focus(), 100);
-	disableBodyScroll();
-	searchModalVisible = true;
+	if (hasSearchModal) {
+		disableBodyScroll();
+		searchModalVisible = true;
+	}
 };
 const closeModal = () => {
-	searchModal.classList.remove('show');
-	enableBodyScroll();
-	searchModalVisible = false;
+	searchWrapper.classList.remove('show');
 	resetSearch();
+	if (hasSearchModal) {
+		enableBodyScroll();
+		searchModalVisible = false;
+	}
 }
 
 // Trigger Search Modal Show/Hide Events
-if (hasSearchModal) {
+if (hasSearchWrapper) {
 	// Show Search Modal on page load
 	if (searchModalVisible) {
 		showModal();
@@ -268,8 +379,8 @@ if (hasSearchModal) {
 	});
 	
 	// Close modal on click outside modal-body
-	searchModal.addEventListener('click', function (e) {
-		if (e.target.classList.contains('search-modal')) {
+	searchWrapper.addEventListener('click', function (e) {
+		if (e.target.classList.contains('search-wrapper')) {
 			closeModal();
 		}
 	});
