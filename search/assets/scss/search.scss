@@ -1,3 +1,6 @@
+.search-wrapper svg {
+  display: inline-block;
+}
 .search-modal {
   position: fixed;
   height: 100%;
@@ -5,7 +8,7 @@
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999999;
-  transition: .2s;
+  transition: 0.2s;
   opacity: 0;
   visibility: hidden;
 }
@@ -30,7 +33,7 @@
   border-radius: 4px;
   height: 52px;
   padding: 0 15px 0 40px;
-  transition: .25s;
+  transition: 0.25s;
   outline: none;
 }
 .search-input-body input:focus {
@@ -43,7 +46,7 @@
 }
 .search-input-body label svg[type="reset"] {
   display: none;
-  transition: .1s;
+  transition: 0.1s;
 }
 .search-input-body label svg[type="reset"]:hover {
   color: var(--color-primary);
@@ -157,7 +160,7 @@
 .search-content {
   display: -webkit-box;
   -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 6px 0;
 }
@@ -193,10 +196,14 @@
 .search-wrapper-footer kbd {
   color: #777;
   background-color: #eee;
-  padding: 2px 4px;
   font-size: 14px;
   border-radius: 3px;
   margin-right: 3px;
+  padding: 2px 4px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
 }
 .search-wrapper-footer span:not(:last-child) {
   margin-right: 16px;
