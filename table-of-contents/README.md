@@ -38,6 +38,10 @@ ordered = true
 
 ## Use it as a Partial
 
+available parameters:
+
+* class = "your-class"
+
 ```html
-{{ partial "toc.html" . }}
+{{ partial "toc.html" }}
 ```

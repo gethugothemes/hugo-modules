@@ -1,5 +1,4 @@
 .accordion {
-  background-color: #fff;
   border: 1px solid #ccc;
 }
 
@@ -8,14 +7,15 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  cursor: pointer;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
+  width: 100%;
+  font-weight: bold;
 }
 
 .accordion-icon {
   width: 0.78em;
   height: 0.78em;
-  transform: rotate(0deg);
+  transform: rotate(-90deg);
   transition: transform 0.2s ease;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .accordion.active .accordion-icon {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
 }
 
 .accordion.active .accordion-content {
