@@ -136,9 +136,9 @@ if (hasSearchWrapper) {
 
     // Navigate with arrow keys
     if (searchString != "") {
-      const resItems = searchResult.forEach((el) => {
-        el.querySelectorAll(".search-result-item [data-result-item]");
-      });
+      const resItems = searchResult[0].querySelectorAll(
+        ".search-result-item [data-result-item]"
+      );
       let selectedIndex = -1;
 
       const selectItem = (index) => {
