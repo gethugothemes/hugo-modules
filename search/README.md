@@ -117,12 +117,12 @@ or customise the search page
 {{ with site.Params.search }}
   {{ if .enable }}
     <script id="search-result-item-template" type="text/x-js-template">
-      <a data-result-item href="#{slug}">
+      <div class="search-result-item" data-result-item>
         <div class="fs-0">
           #{image}
         </div>
         <div class="fg-1">
-          <p class="search-title">#{title}</p>
+          <a href="#{slug}" class="search-title">#{title}</a>
           <p class="search-description">#{description}</p>
           <p class="search-content">#{content}</p>
           <div class="search-info">
@@ -141,10 +141,10 @@ or customise the search page
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </script>
     <div
-      class="search-wrapper search-page {{ $class }} container"
+      class="search-wrapper search-page container"
       data-image="{{ site.Params.search.show_image | default false }}"
       data-description="{{ site.Params.search.show_description | default true }}"
       data-tags="{{ site.Params.search.show_tags | default true }}"

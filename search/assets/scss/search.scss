@@ -1,6 +1,8 @@
 .search-wrapper svg {
   display: inline-block;
+  background-color: transparent;
 }
+
 .search-modal {
   position: fixed;
   height: 100%;
@@ -150,6 +152,9 @@
 .search-result-item:first-child .section-name:not(:empty) {
   margin-top: -15px;
 }
+.search-result-item {
+  position: relative;
+}
 .search-title {
   font-size: 18px;
   color: black;
@@ -157,6 +162,16 @@
   line-height: 1.35;
   font-weight: bold;
 }
+.search-title::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  content: "";
+}
+
 .search-content {
   display: -webkit-box;
   -webkit-line-clamp: 1;
