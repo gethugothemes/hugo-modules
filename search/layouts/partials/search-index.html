@@ -1,0 +1,8 @@
+
+<!-- search index -->
+<script>
+  let indexURL = {{ "searchindex.json" | absLangURL }};
+  let includeSectionsInSearch = {{ site.Params.search.include_sections | default site.Params.mainSections }};
+  let no_results_for = {{ i18n `no_results_for` | default "0 results for"}};
+  let empty_search_results_placeholder = {{ i18n `empty_search_results_placeholder`}};
+</script>

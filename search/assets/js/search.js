@@ -1,16 +1,15 @@
 const body = document.body;
 const searchWrapper = document.querySelector(".search-wrapper");
 const searchModal = document.querySelector(".search-modal");
-const searchPage = document.querySelector(".search-page");
 const searchFooter = document.querySelector(".search-wrapper-footer");
-const searchResult = document.getElementById("search-result");
+const searchResult = document.querySelectorAll("[data-search-result]");
 const searchResultItemTemplate = document.getElementById(
   "search-result-item-template"
 );
 const hasSearchWrapper = searchWrapper != null;
 const hasSearchModal = searchModal != null;
-const searchInput = document.querySelector("#doSearch");
-const emptySearchResult = document.querySelector(".empty-search-result");
+const searchInput = document.querySelectorAll("[data-search-input]");
+const emptySearchResult = document.querySelectorAll(".empty-search-result");
 const openSearchModal = document.querySelectorAll(
   '[data-target="search-modal"]'
 );
@@ -39,10 +38,12 @@ const loadJsonData = async () => {
 
 if (hasSearchWrapper) {
   // disable enter key on searchInput
-  searchInput.addEventListener("keypress", (e) => {
-    if (e.keyCode == 13) {
-      e.preventDefault();
-    }
+  searchInput.forEach((el) => {
+    el.addEventListener("keypress", (e) => {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+      }
+    });
   });
 
   // options
@@ -59,22 +60,26 @@ if (hasSearchWrapper) {
 
   if (urlSearchString !== null) {
     searchString = urlSearchString.replace(/\+/g, " ");
-    searchInput.value = searchString;
+    searchInput.forEach((el) => {
+      el.value = searchString;
+    });
     searchIcon.style.display = "none";
     searchIconReset.style.display = "initial";
   }
 
-  searchInput.addEventListener("input", (e) => {
-    searchString = e.target.value.toLowerCase();
-    window.history.replaceState(
-      {},
-      "",
-      `${window.location.origin}${
-        window.location.pathname
-      }?s=${searchString.replace(/ /g, "+")}`
-    );
+  searchInput.forEach((el) => {
+    el.addEventListener("input", (e) => {
+      searchString = e.target.value.toLowerCase();
+      window.history.replaceState(
+        {},
+        "",
+        `${window.location.origin}${
+          window.location.pathname
+        }?s=${searchString.replace(/ /g, "+")}`
+      );
 
-    doSearch(searchString);
+      doSearch(searchString);
+    });
   });
 
   // dom content loaded
@@ -88,12 +93,16 @@ if (hasSearchWrapper) {
     if (searchString !== "") {
       searchIcon.style.display = "none";
       searchIconReset.style.display = "initial";
-      emptySearchResult.innerHTML = `<div class="no-result-found">
-			<svg width="42" height="42" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.10368 33.9625C9.90104 36.2184 13.2988 37.6547 16.9158 38.0692C21.6958 38.617 26.5063 37.3401 30.3853 34.4939C30.4731 34.6109 30.5668 34.7221 30.6721 34.8304L41.9815 46.1397C42.5323 46.6909 43.2795 47.0007 44.0587 47.001C44.838 47.0013 45.5854 46.692 46.1366 46.1412C46.6878 45.5904 46.9976 44.8432 46.9979 44.064C46.9981 43.2847 46.6888 42.5373 46.138 41.9861L34.8287 30.6767C34.7236 30.5704 34.6107 30.4752 34.4909 30.3859C37.3352 26.5046 38.6092 21.6924 38.0579 16.912C37.6355 13.2498 36.1657 9.81322 33.8586 6.9977L31.7805 9.09214C34.0157 11.9274 35.2487 15.4472 35.2487 19.0942C35.2487 21.2158 34.8308 23.3167 34.0189 25.2769C33.207 27.2371 32.0169 29.0181 30.5167 30.5184C29.0164 32.0186 27.2354 33.2087 25.2752 34.0206C23.315 34.8325 21.2141 35.2504 19.0925 35.2504C16.9708 35.2504 14.8699 34.8325 12.9098 34.0206C11.5762 33.4682 10.3256 32.7409 9.18992 31.8599L7.10368 33.9625ZM28.9344 6.28152C26.1272 4.12516 22.671 2.93792 19.0925 2.93792C14.8076 2.93792 10.6982 4.64009 7.66829 7.66997C4.6384 10.6999 2.93623 14.8093 2.93623 19.0942C2.93623 21.2158 3.35413 23.3167 4.16605 25.2769C4.72475 26.6257 5.4625 27.8897 6.35716 29.0358L4.2702 31.1391C1.35261 27.548 -0.165546 23.0135 0.00974294 18.3781C0.19158 13.5695 2.18233 9.00695 5.58371 5.60313C8.98509 2.19932 13.5463 0.205307 18.3547 0.0200301C22.9447 -0.156832 27.4369 1.32691 31.0132 4.18636L28.9344 6.28152Z" fill="currentColor"/><path d="M3.13672 39.1367L38.3537 3.64355" stroke="black" stroke-width="3" stroke-linecap="round"/></svg><p>${no_results_for} "<b>${searchString}</b>"</p></div>`;
+      emptySearchResult.forEach((el) => {
+        el.innerHTML = `<div class="no-result-found">
+        <svg width="42" height="42" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.10368 33.9625C9.90104 36.2184 13.2988 37.6547 16.9158 38.0692C21.6958 38.617 26.5063 37.3401 30.3853 34.4939C30.4731 34.6109 30.5668 34.7221 30.6721 34.8304L41.9815 46.1397C42.5323 46.6909 43.2795 47.0007 44.0587 47.001C44.838 47.0013 45.5854 46.692 46.1366 46.1412C46.6878 45.5904 46.9976 44.8432 46.9979 44.064C46.9981 43.2847 46.6888 42.5373 46.138 41.9861L34.8287 30.6767C34.7236 30.5704 34.6107 30.4752 34.4909 30.3859C37.3352 26.5046 38.6092 21.6924 38.0579 16.912C37.6355 13.2498 36.1657 9.81322 33.8586 6.9977L31.7805 9.09214C34.0157 11.9274 35.2487 15.4472 35.2487 19.0942C35.2487 21.2158 34.8308 23.3167 34.0189 25.2769C33.207 27.2371 32.0169 29.0181 30.5167 30.5184C29.0164 32.0186 27.2354 33.2087 25.2752 34.0206C23.315 34.8325 21.2141 35.2504 19.0925 35.2504C16.9708 35.2504 14.8699 34.8325 12.9098 34.0206C11.5762 33.4682 10.3256 32.7409 9.18992 31.8599L7.10368 33.9625ZM28.9344 6.28152C26.1272 4.12516 22.671 2.93792 19.0925 2.93792C14.8076 2.93792 10.6982 4.64009 7.66829 7.66997C4.6384 10.6999 2.93623 14.8093 2.93623 19.0942C2.93623 21.2158 3.35413 23.3167 4.16605 25.2769C4.72475 26.6257 5.4625 27.8897 6.35716 29.0358L4.2702 31.1391C1.35261 27.548 -0.165546 23.0135 0.00974294 18.3781C0.19158 13.5695 2.18233 9.00695 5.58371 5.60313C8.98509 2.19932 13.5463 0.205307 18.3547 0.0200301C22.9447 -0.156832 27.4369 1.32691 31.0132 4.18636L28.9344 6.28152Z" fill="currentColor"/><path d="M3.13672 39.1367L38.3537 3.64355" stroke="black" stroke-width="3" stroke-linecap="round"/></svg><p>${no_results_for} "<b>${searchString}</b>"</p></div>`;
+      });
     } else {
       searchIcon.style.display = "initial";
       searchIconReset.style.display = "none";
-      emptySearchResult.innerHTML = empty_search_results_placeholder;
+      emptySearchResult.forEach((el) => {
+        el.innerHTML = empty_search_results_placeholder;
+      });
     }
 
     let filteredJSON = includeSectionsInSearch.map((section) => {
@@ -126,10 +135,10 @@ if (hasSearchWrapper) {
     displayResult(searchItem, searchString);
 
     // Navigate with arrow keys
-    if (searchString != "" && searchPage == null) {
-      const resItems = searchResult.querySelectorAll(
-        ".search-result-item [data-result-item]"
-      );
+    if (searchString != "") {
+      const resItems = searchResult.forEach((el) => {
+        el.querySelectorAll(".search-result-item [data-result-item]");
+      });
       let selectedIndex = -1;
 
       const selectItem = (index) => {
@@ -149,30 +158,34 @@ if (hasSearchWrapper) {
       };
 
       const handleKeyDown = (event) => {
-        if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-          event.preventDefault();
+        if (searchItem.length !== 0) {
+          if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+            event.preventDefault();
 
-          if (event.key === "ArrowUp") {
-            selectedIndex =
-              selectedIndex > 0 ? selectedIndex - 1 : resItems.length - 1;
-          } else if (event.key === "ArrowDown") {
-            selectedIndex =
-              selectedIndex < resItems.length - 1 ? selectedIndex + 1 : 0;
-          }
+            if (event.key === "ArrowUp") {
+              selectedIndex =
+                selectedIndex > 0 ? selectedIndex - 1 : resItems.length - 1;
+            } else if (event.key === "ArrowDown") {
+              selectedIndex =
+                selectedIndex < resItems.length - 1 ? selectedIndex + 1 : 0;
+            }
 
-          selectItem(selectedIndex);
-        } else if (event.key === "Enter") {
-          event.preventDefault();
+            selectItem(selectedIndex !== -1 ? selectedIndex : -1);
+          } else if (event.key === "Enter") {
+            event.preventDefault();
 
-          if (selectedIndex !== -1) {
-            const selectedLink = resItems[selectedIndex].getAttribute("href");
-            window.location.href = selectedLink;
+            if (selectedIndex !== -1) {
+              const selectedLink = resItems[selectedIndex].getAttribute("href");
+              window.location.href = selectedLink;
+            }
           }
         }
       };
 
-      searchInput.addEventListener("keydown", handleKeyDown);
-      selectItem(0);
+      searchInput.forEach((el) => {
+        el.addEventListener("keydown", handleKeyDown);
+      });
+      selectItem(-1);
     }
   };
 
@@ -305,7 +318,9 @@ if (hasSearchWrapper) {
 
     // Render Result into HTML
     const htmlString = searchItems.map(generateSearchResultHTML).join("");
-    searchResult.innerHTML = htmlString;
+    searchResult.forEach((el) => {
+      el.innerHTML = htmlString;
+    });
 
     // count time end
     const endTime = performance.now();
@@ -320,24 +335,26 @@ if (hasSearchWrapper) {
 
     // hide sectionName if un-available result
     const sectionName = document.querySelectorAll(".section-name");
-    if (sectionName.length > 0) {
-      // hide sectionName if there is no result
-      sectionName.forEach((el) => {
-        if (el.nextElementSibling == null) {
-          el.style.display = "none";
-        }
-      });
-
-      // show emptySearchResult if there is no result
-      const values = Object.values(sectionName);
-      const showEmptyRes = values.every((el) => {
-        return el.style.display === "none";
-      });
-      if (showEmptyRes == true) {
-        emptySearchResult.style.display = "block";
-      } else {
-        emptySearchResult.style.display = "";
+    // show emptySearchResult if there is no result
+    const values = Object.values(sectionName);
+    const showEmptyRes = values.every((el) => {
+      return el.style.display === "none";
+    });
+    // hide sectionName if there is no result
+    sectionName.forEach((el) => {
+      if (el.nextElementSibling === null) {
+        el.style.display = "none";
       }
+    });
+
+    if (!showEmptyRes) {
+      emptySearchResult.forEach((el) => {
+        el.style.display = "none";
+      });
+    } else {
+      emptySearchResult.forEach((el) => {
+        el.style.display = "block";
+      });
     }
 
     // hide tag/category if un-available result
@@ -386,11 +403,17 @@ const renderResult = (templateString, data) => {
 
 // Reset Serach
 const resetSearch = () => {
-  searchInput.value = "";
+  searchInput.forEach((el) => {
+    el.value = "";
+  });
   searchIcon.style.display = "initial";
   searchIconReset.style.display = "none";
-  emptySearchResult.innerHTML = empty_search_results_placeholder;
-  searchResult.innerHTML = "";
+  emptySearchResult.forEach((el) => {
+    el.innerHTML = empty_search_results_placeholder;
+  });
+  searchResult.forEach((el) => {
+    el.innerHTML = "";
+  });
 };
 
 // Body Scroll
@@ -410,7 +433,10 @@ const disableBodyScroll = () => {
 // Show/Hide Search Modal
 const showModal = () => {
   searchWrapper.classList.add("show");
-  window.setTimeout(() => document.querySelector("#doSearch").focus(), 100);
+  window.setTimeout(
+    () => document.querySelector("[data-search-input]").focus(),
+    100
+  );
   if (hasSearchModal) {
     disableBodyScroll();
     searchModalVisible = true;
