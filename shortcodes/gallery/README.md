@@ -1,4 +1,4 @@
-# Gallery and Slider Shortcode (DEPRICATED)
+# Gallery and Slider Shortcode (DEPRECATED)
 
 use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider>
 

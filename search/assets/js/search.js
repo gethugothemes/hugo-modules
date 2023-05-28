@@ -401,7 +401,7 @@ const renderResult = (templateString, data) => {
 
 // ========================================================================================
 
-// Reset Serach
+// Reset Search
 const resetSearch = () => {
   searchInput.forEach((el) => {
     el.value = "";

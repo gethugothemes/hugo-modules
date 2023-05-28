@@ -88,7 +88,7 @@
 
   <!-- checking logo dark -->
   {{ if $logoDarkPath }}
-    <!-- checking logo dark existance -->
+    <!-- checking logo dark existence -->
     {{ if fileExists (add `assets/` (string $logoDarkPath)) }}
       {{ $logoDark:= resources.Get $logoDarkPath }}
       {{ $logoDarkExt := path.Ext $logoDark }}

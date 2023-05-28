@@ -1,4 +1,4 @@
-# Table Of Contents Shortcode (DEPRICATED)
+# Table Of Contents Shortcode (DEPRECATED)
 
 use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents>
 

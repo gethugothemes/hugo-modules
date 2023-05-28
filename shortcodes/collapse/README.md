@@ -1,4 +1,4 @@
-# Bootstrap Accordion/Collapse Shortcode (DEPRICATED)
+# Bootstrap Accordion/Collapse Shortcode (DEPRECATED)
 
 use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/accordion>
 

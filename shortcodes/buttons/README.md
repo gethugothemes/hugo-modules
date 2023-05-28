@@ -1,4 +1,4 @@
-# Buttons Shortcode (DEPRICATED)
+# Buttons Shortcode (DEPRECATED)
 
 use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/button>
 
