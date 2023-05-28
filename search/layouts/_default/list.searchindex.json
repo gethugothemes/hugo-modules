@@ -1,28 +1,23 @@
 {{- $include_sections := site.Params.search.include_sections | default site.Params.mainSections -}}
 {{- $totalPagesLength := len (where site.RegularPages "Section" "in" $include_sections) -}}
 
-{{- $searchPage := site.Params.search.search_page | default false -}}
-{{- $imageSize := "100x100" -}}
-{{- $imageCommand := "Fill" -}}
-{{- if $searchPage -}}
-  {{- $imageSize = "300x" -}}
-  {{- $imageCommand = "Resize" -}}
-{{- end -}}
-
 [{{- range $i, $e := (where site.RegularPages "Section" "in" $include_sections) -}}
 {{- if not .Params.ignoreSearch -}}
 
 {{- $date:= time.Format ":date_long" .PublishDate -}}
 
 {{- if .Params.image -}}
-  {{- $.Scratch.Set "image" (partial "searchImage" (dict "Src" . "Size" $imageSize "Command" $imageCommand)) -}}
+  {{- $.Scratch.Set "image" (partial "searchImage" (dict "Src" .Params.image "Size" "420x" "Command" "Resize")) -}}
+  {{- $.Scratch.Set "imageSM" (partial "searchImage" (dict "Src" .Params.image "Size" "100x100" "Command" "Fill")) -}}
 {{- else if .Params.images -}}
   {{- range first 1 .Params.images -}}
-  {{- $.Scratch.Set "image" (partial "searchImage" (dict "Src" . "Size" $imageSize "Command" $imageCommand)) -}}
+  {{- $.Scratch.Set "image" (partial "searchImage" (dict "Src" . "Size" "420x" "Command" "Resize")) -}}
+  {{- $.Scratch.Set "imageSM" (partial "searchImage" (dict "Src" . "Size" "100x100" "Command" "Fill")) -}}
   {{- end -}}
 {{- end -}}
 
 {{- $image:= $.Scratch.Get "image" -}}
+{{- $imageSM:= $.Scratch.Get "imageSM" -}}
 
 {
   "section": "{{.Section | humanize}}",
@@ -31,6 +26,7 @@
   "description": "{{- htmlEscape .Description}}",
   "date": "{{- $date -}}",
   "image": {{$image | jsonify}},
+  "imageSM": {{$imageSM | jsonify}},
   "searchKeyword": "{{- htmlEscape .Params.search_keyword -}}",
   "categories": "{{- if .Params.categories -}}{{- delimit .Params.categories `, ` -}}{{- end -}}",
   "tags": "{{- if .Params.tags -}}{{- delimit .Params.tags `, ` -}}{{- end -}}",
