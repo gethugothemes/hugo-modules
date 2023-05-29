@@ -5,12 +5,13 @@
 
 Explore our 30+ Hugo modules and use them for your own projects for free. Check out each module page for instructions on how to use it.
 
+* [Images](https://github.com/gethugothemes/hugo-modules/tree/master/images)
+* [Gallery Slider](https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider)
+* [Search](https://github.com/gethugothemes/hugo-modules/tree/master/search)
+* [Videos](https://github.com/gethugothemes/hugo-modules/tree/master/videos)
 * [Accordion](https://github.com/gethugothemes/hugo-modules/tree/master/accordion)
 * [Adsense](https://github.com/gethugothemes/hugo-modules/tree/master/adsense)
-* [Gallery Slider](https://github.com/gethugothemes/hugo-modules/tree/master/gallery-slider)
 * [Gzip Caching](https://github.com/gethugothemes/hugo-modules/tree/master/gzip-caching)
-* [Images](https://github.com/gethugothemes/hugo-modules/tree/master/images)
-* [Videos](https://github.com/gethugothemes/hugo-modules/tree/master/videos)
 * [Tab](https://github.com/gethugothemes/hugo-modules/tree/master/tab)
 * [Modal](https://github.com/gethugothemes/hugo-modules/tree/master/modal)
 * [Table Of Contents](https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents)
