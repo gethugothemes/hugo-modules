@@ -10,11 +10,4 @@
 {{ end }}
 
 
-<a
-  href="{{ $link | absLangURL }}"
-  class="btn btn-primary text-white"
-  {{ if strings.HasPrefix $link `http` }}
-    target="_blank" rel="noopener"
-  {{ end }}>
-  {{ $label }}
-</a>
+<a href="{{ $link | absLangURL }}" class="btn btn-primary text-white" {{ if strings.HasPrefix $link `http` }} target="_blank" rel="noopener" {{ end }}> {{ $label }}</a>
