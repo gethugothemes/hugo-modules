@@ -1,4 +1,4 @@
-# Custom Video Shortcode (DEPRICATED)
+# Custom Video Shortcode (DEPRECATED)
 
 use this new version instead <https://github.com/gethugothemes/hugo-modules/tree/master/videos>
 
