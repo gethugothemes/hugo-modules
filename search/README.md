@@ -117,7 +117,7 @@ or customise the search page
 {{ with site.Params.search }}
   {{ if .enable }}
     <script id="search-result-item-template" type="text/x-js-template">
-      <div class="search-result-item" data-result-item>
+      <div class="search-result-item">
         <div class="fs-0">
           #{image}
         </div>
@@ -144,7 +144,7 @@ or customise the search page
       </div>
     </script>
     <div
-      class="search-wrapper search-page container"
+      class="search-wrapper search-page {{ $class }}"
       data-image="{{ site.Params.search.show_image | default false }}"
       data-description="{{ site.Params.search.show_description | default true }}"
       data-tags="{{ site.Params.search.show_tags | default true }}"
@@ -153,6 +153,7 @@ or customise the search page
       <div class="search-wrapper-content">
         <div class="search-input-body">
           <input
+            id="search-input"
             type="text"
             class="!px-4"
             data-search-input
@@ -162,14 +163,20 @@ or customise the search page
             autocomplete="off"
             autofocus />
         </div>
+        <span class="search-result-info"></span>
         <div class="search-wrapper-body">
-          <div data-search-result></div>
-          <label class="empty-search-result" for="doSearch">
+          <div class="search-result" data-search-result></div>
+          <label class="search-result-empty" for="search-input">
             {{ i18n `empty_search_results_placeholder` }}
           </label>
         </div>
       </div>
     </div>
+    <script>
+      // Remove Search Modal if it is a Search Page
+      const removeSearchModal = document.querySelector('.search-modal');
+      if (removeSearchModal) {removeSearchModal.remove()}
+    </script>
   {{ end }}
 {{ end }}
 ```

@@ -16,14 +16,14 @@
       style="--color-primary: {{ site.Params.search.primary_color | default `#7f0ec6` }}">
       <div class="search-wrapper-content">
         <div class="search-input-body">
-          <label for="doSearch" style="margin-top:-2px">
+          <label for="search-modal-input" style="margin-top:-1px">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
               height="18"
               width="18"
-              style="border: 0; padding:0"
-              type="search">
+              class="search-icon"
+              data-type="search">
               <path
                 fill="currentColor"
                 d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
@@ -33,25 +33,27 @@
               viewBox="0 0 512 512"
               height="18"
               width="18"
-              type="reset">
+              class="search-reset"
+              data-type="reset">
               <path
                 fill="currentColor"
                 d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
             </svg>
           </label>
           <input
+            id="search-modal-input"
             type="text"
-            placeholder="{{ i18n `search_input_placeholder` | default .input_placeholder }}"
-            aria-label="Search"
-            autocomplete="off"
             data-search-input
-            aria-describedby="Search" />
+            autocomplete="off"
+            aria-label="Search"
+            aria-describedby="Search"
+            placeholder="{{ i18n `search_input_placeholder` | default .input_placeholder }}" />
         </div>
         <div class="search-wrapper-body">
-          <div data-search-result></div>
-          <label class="empty-search-result" for="doSearch"
-            >{{ i18n `empty_search_results_placeholder` | default site.Params.search.empty_results_placeholder }}</label
-          >
+          <div class="search-result" data-search-result></div>
+          <label class="search-result-empty" for="search-modal-input">
+            {{ i18n `empty_search_results_placeholder` | default site.Params.search.empty_results_placeholder }}
+          </label>
         </div>
         <div class="search-wrapper-footer">
           <span>
@@ -73,7 +75,7 @@
                 width="14"
                 height="14"
                 fill="currentColor"
-                style="margin-bottom:-2px;"
+                style="margin-top:1px;"
                 viewBox="0 0 16 16">
                 <path
                   d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
@@ -85,8 +87,8 @@
             <kbd>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="11"
-                height="11"
+                width="12"
+                height="12"
                 fill="currentColor"
                 style="display:inline-block;"
                 viewBox="0 0 16 16">
