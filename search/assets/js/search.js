@@ -135,7 +135,7 @@ if (hasSearchWrapper) {
     displayResult(searchItem, searchString);
 
     // Navigate with arrow keys
-    if (searchString != "") {
+    if (searchModal && searchString != "") {
       let resItems;
       resItems = searchResult[0].querySelectorAll(".search-result-item");
       let selectedIndex = -1;
@@ -174,7 +174,9 @@ if (hasSearchWrapper) {
             event.preventDefault();
 
             if (selectedIndex !== -1) {
-              const selectedLink = resItems[selectedIndex].getAttribute("href");
+              let selectedLink = resItems[selectedIndex]
+                .getElementsByClassName("search-title")[0]
+                .getAttribute("href");
               window.location.href = selectedLink;
             }
           }
