@@ -26,7 +26,6 @@ const searchResultInfo = document.querySelector(".search-result-info");
 let searchModalVisible =
   hasSearchModal && searchModal.classList.contains("show") ? true : false;
 let jsonData = [];
-let selectedIndex = -1;
 
 const loadJsonData = async () => {
   try {
@@ -136,9 +135,10 @@ if (hasSearchWrapper) {
     displayResult(searchItem, searchString);
 
     // Navigate with arrow keys
-    if (searchModal && searchString != "") {
+    if (searchString != "") {
       let resItems;
       resItems = searchResult[0].querySelectorAll(".search-result-item");
+      let selectedIndex = -1;
 
       const selectItem = (index) => {
         if (index >= 0 && index < resItems.length) {
@@ -168,14 +168,13 @@ if (hasSearchWrapper) {
               selectedIndex =
                 selectedIndex < resItems.length - 1 ? selectedIndex + 1 : 0;
             }
+
             selectItem(selectedIndex !== -1 ? selectedIndex : -1);
           } else if (event.key === "Enter") {
             event.preventDefault();
 
             if (selectedIndex !== -1) {
-              const selectedLink = resItems[selectedIndex]
-                .getElementsByClassName("search-title")[0]
-                .getAttribute("href");
+              const selectedLink = resItems[selectedIndex].getAttribute("href");
               window.location.href = selectedLink;
             }
           }
@@ -189,7 +188,6 @@ if (hasSearchWrapper) {
     }
   };
 
-  // displayResult
   const displayResult = (searchItems, searchString) => {
     const generateSearchResultHTML = (item) => {
       const contentValue = item.data
@@ -401,7 +399,6 @@ const renderResult = (templateString, data) => {
 
 // Reset Serach
 const resetSearch = () => {
-  selectedIndex = -1;
   searchIcon && (searchIcon.style.display = "initial");
   searchIconReset && (searchIconReset.style.display = "none");
   searchInput.forEach((el) => {
