@@ -118,10 +118,10 @@ or customise the search page
   {{ if .enable }}
     <script id="search-result-item-template" type="text/x-js-template">
       <div class="search-result-item">
-        <div class="fs-0">
+        <div class="search-image">
           #{image}
         </div>
-        <div class="fg-1">
+        <div class="search-content-block">
           <a href="#{slug}" class="search-title">#{title}</a>
           <p class="search-description">#{description}</p>
           <p class="search-content">#{content}</p>
