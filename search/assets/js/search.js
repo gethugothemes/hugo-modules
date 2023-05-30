@@ -143,10 +143,7 @@ if (hasSearchWrapper) {
       const selectItem = (index) => {
         if (index >= 0 && index < resItems.length) {
           for (let i = 0; i < resItems.length; i++) {
-            resItems[i].setAttribute(
-              "aria-selected",
-              i === index ? "true" : "false"
-            );
+            resItems[i].classList.toggle("search-item-selected", i === index);
           }
           selectedIndex = index;
           resItems[index].scrollIntoView({
@@ -240,10 +237,10 @@ if (hasSearchWrapper) {
           ? searchResultItemTemplate.innerHTML
           : `
           <div class="search-result-item">
-          <div class="fs-0">
+          <div class="search-image">
             #{image}
           </div>
-          <div class="fg-1">
+          <div class="search-content-block">
             <a href="#{slug}" class="search-title">#{title}</a>
             <p class="search-description">#{description}</p>
             <p class="search-content">#{content}</p>
