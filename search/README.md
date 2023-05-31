@@ -80,7 +80,7 @@ There are two search types.
 | 1. As a Popup      | 2. Within a Page |
 | :-----------: | :-----------: |
 | ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/daf67039-f84c-4799-95b8-4d647e0f535f)| ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/84ab4cc1-e8fd-460c-95f1-e5432b8b792b) |
-| [Live Preview](https://demo.gethugothemes.com/bookworm/)| [Live Preview](https://demo.gethugothemes.com/logbook/) |
+| [Live Example](https://demo.gethugothemes.com/bookworm/)| [Live Example](https://demo.gethugothemes.com/logbook/) |
 
 ## Use it as a modal
 
