@@ -103,6 +103,9 @@
 .search-image {
   flex-shrink: 0;
 }
+.search-title {
+  transition: 0s;
+}
 .search-image:empty {
   display: none;
 }
