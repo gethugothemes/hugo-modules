@@ -78,8 +78,9 @@ show_categories = true
 
 There are two search types.
 | 1. As a Popup      | 2. Within a Page |
-| ----------- | ----------- |
+| :-----------: | :-----------: |
 | ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/daf67039-f84c-4799-95b8-4d647e0f535f)| ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/84ab4cc1-e8fd-460c-95f1-e5432b8b792b) |
+| [Live Preview](https://demo.gethugothemes.com/bookworm/)| [Live Preview](https://demo.gethugothemes.com/logbook/) |
 
 ## Use it as a modal
 
@@ -101,18 +102,21 @@ NOTE : Use `Ctrl + K` or `Command + K` to Search, `ESC` to close, `ArrowUp` and 
 
 ### Use it as a page
 
-Add this partial inside your search page
+Use this as your search input component
 
 ```html
-{{ partial "search-page.html" (dict "Context" . "Class" "your-custom-class") }}
-```
-
-and Use this as your search input component
-```html
+{{ if site.Params.search.enable }}
 <form action="{{ `search`| relLangURL }}">
   <input name="s" type="search" placeholder="{{ i18n `search_input_placeholder`}}">
   <button type="submit">Search</button>
 </form>
+{{ end }}
+```
+
+and Add this partial inside your search page
+
+```html
+{{ partial "search-page.html" (dict "Context" . "Class" "your-custom-class") }}
 ```
 
 <hr>
