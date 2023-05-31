@@ -86,10 +86,8 @@ There are two search types.
 Add this code to where you want to place the search Button or Link
 
 ```html
-{{ with site.Params.search }}
-{{ if .enable }}
+{{ if site.Params.search.enable }}
   <button data-target="search-modal">Search Button</button>
-{{ end }}
 {{ end }}
 ```
 
@@ -107,6 +105,14 @@ Add this partial inside your search page
 
 ```html
 {{ partial "search-page.html" (dict "Context" . "Class" "your-custom-class") }}
+```
+
+and Use this as your search input component
+```html
+<form action="{{ `search`| relLangURL }}">
+  <input name="s" type="search" placeholder="{{ i18n `search_input_placeholder`}}">
+  <button type="submit">Search</button>
+</form>
 ```
 
 <hr>
