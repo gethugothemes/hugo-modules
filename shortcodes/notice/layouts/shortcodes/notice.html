@@ -1,5 +1,3 @@
-<div
-  class="notices {{ .Get 0 }}"
-  {{ if len .Params | eq 2 }}id="{{ .Get 1 }}"{{ end }}>
+<div class="notices {{ .Get 0 }}" {{ if len .Params | eq 2 }}id="{{ .Get 1 }}"{{ end }}>
   <p>{{ .Inner | markdownify }}</p>
 </div>
