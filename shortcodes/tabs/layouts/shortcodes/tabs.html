@@ -3,15 +3,12 @@
 <div class="tab-panel">
   <div class="tab-nav">
     {{ range $idx, $tab := .Scratch.Get "tabs" }}
-    <button data-tab-item="{{ .name }}" data-tab-group="{{ $groupId }}"
-      class="tab-nav-button {{ cond (eq $idx 0) `active` ``}}"
-      onclick="switchTab('{{ $groupId }}','{{ .name }}')">{{ .name }}</button>
+    <button data-tab-item="{{ .name }}" data-tab-group="{{ $groupId }}" class="tab-nav-button {{ cond (eq $idx 0) `active` ``}}" onclick="switchTab('{{ $groupId }}','{{ .name }}')">{{ .name }}</button>
     {{ end }}
   </div>
   <div class="tab-content">
     {{ range $idx, $tab := .Scratch.Get "tabs" }}
-    <div data-tab-item="{{ .name }}" data-tab-group="{{ $groupId }}" 
-    class="tab-item {{ cond (eq $idx 0) `active` ``}}">
+    <div data-tab-item="{{ .name }}" data-tab-group="{{ $groupId }}" class="tab-item {{ cond (eq $idx 0) `active` ``}}">
       {{ .content  | markdownify }}
     </div>
     {{ end }}
