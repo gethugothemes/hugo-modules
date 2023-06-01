@@ -12,15 +12,4 @@
 {{ end }}
 
 
-<a
-  href="{{ $link | absLangURL }}"
-  class="btn {{ if eq $style `outline` }}
-    btn-outline-primary
-  {{ else }}
-    btn-primary
-  {{ end }} {{ $class }}"
-  {{ if strings.HasPrefix $link `http` }}
-    target="_blank" rel="noopener"
-  {{ end }}>
-  {{ $label }}
-</a>
+<a href="{{ $link | absLangURL }}" class="btn {{ if eq $style `outline` }}btn-outline-primary{{ else }}btn-primary{{ end }} {{ $class }}" {{ if strings.HasPrefix $link `http` }} target="_blank" rel="noopener"{{ end }}>{{ $label }}</a>
