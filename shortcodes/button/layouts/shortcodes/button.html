@@ -11,5 +11,13 @@
   {{ if eq $i "link" }}{{ $link = $e }}{{ end }}
 {{ end }}
 
+{{ range $i, $e:= .Params }}
+  {{ if eq $i "style" }}{{ $style = $e }}{{ end }}
+{{ end }}
+
+{{ range $i, $e:= .Params }}
+  {{ if eq $i "class" }}{{ $class = $e }}{{ end }}
+{{ end }}
+
 
 <a href="{{ $link | absLangURL }}" class="btn {{ if eq $style `outline` }}btn-outline-primary{{ else }}btn-primary{{ end }} {{ $class }}" {{ if strings.HasPrefix $link `http` }} target="_blank" rel="noopener"{{ end }}>{{ $label }}</a>
