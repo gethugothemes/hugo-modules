@@ -1,83 +1,56 @@
-.notices {
-  margin: 2rem 0;
-  position: relative;
-  overflow: hidden;
-  p {
-    padding: 0.7rem;
-    margin-bottom: 0;
-    border-top: 1.9rem solid transparent;
-    &::before {
-      position: absolute;
-      top: 7px;
-      color: #fff;
-      content: "\2139";
-      height: 1.1rem;
-      width: 1.1rem;
-      line-height: 1rem;
-      text-align: center;
-      border-radius: 50%;
-      border: 1px solid #fff;
-      left: 0.7rem;
-    }
-    &::after {
-      position: absolute;
-      top: 2px;
-      color: #fff;
-      left: 2.2rem;
-    }
-  }
+.notice {
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
 }
 
-.notices.note p {
-  border-color: #6ab0de;
-  background-color: #e3f4ff;
-  &::after {
-    content: "Note";
-  }
+.notice-head {
+  display: flex;
+  align-items: center;
 }
 
-.notices.tip p {
-  border-color: #78c578;
-  background-color: #e2ffe2;
-  &::after {
-    content: "Tip";
-  }
+.notice-head svg {
+  margin-right: 0.75rem;
 }
 
-.notices.info p {
-  border-color: #f0b37e;
-  background-color: #ffedde;
-  &::after {
-    content: "Info";
-  }
+.notice-head p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1;
 }
 
-.notices.warning p {
-  border-color: #e06f6c;
-  background-color: #ffdad8;
-  &::after {
-    content: "Warning";
-  }
+.notice-body {
+  margin-top: 0.75rem;
 }
 
-body.dark {
-  .notices.note p {
-    border-color: rgba(151, 214, 255, 0.8);
-    background-color: rgba(151, 214, 255, 0.15);
-  }
+.notice-body p {
+  margin: 0;
+}
 
-  .notices.tip p {
-    border-color: rgba(150, 255, 150, 0.8);
-    background-color: rgba(150, 255, 150, 0.15);
-  }
+.notice.note {
+  color: #1b83e2;
+  border-color: currentColor;
+}
 
-  .notices.info p {
-    border-color: rgba(255, 195, 146, 0.8);
-    background-color: rgba(255, 195, 146, 0.15);
-  }
+.notice.tip {
+  color: #40d294;
+  border-color: currentColor;
+}
 
-  .notices.warning p {
-    border-color: rgba(255, 145, 140, 0.8);
-    background-color: rgba(255, 145, 140, 0.15);
-  }
+.notice.info {
+  color: #e3a72c;
+  border-color: currentColor;
+}
+
+.notice.warning {
+  color: #db2c23;
+  border-color: currentColor;
+}
+
+// darkmode
+.dark .notice-head p {
+  color: #d1d5db;
 }
