@@ -2,8 +2,8 @@
 {{ $logoDarkPath:= .DarkSrc | default site.Params.logo_darkmode }}
 {{ $logoText:= .LogoText | default site.Params.logo_text }}
 {{ $logoWebp:= site.Params.logo_webp | default true }}
-{{ $logoWidth:= replace site.Params.logo_width "px" "" }}
-{{ $logoHeight:= replace site.Params.logo_height "px" "" }}
+{{ $logoWidth:= site.Params.logo_width | replaceRE "px|x" "" }}
+{{ $logoHeight:= site.Params.logo_height | replaceRE "px|x" "" }}
 {{ $logoDefaultWidth:= "" }}
 {{ $logoDefaultHeight:= "" }}
 {{ $context:= . }}
