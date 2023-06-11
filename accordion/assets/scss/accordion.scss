@@ -23,6 +23,7 @@
   max-height: 0;
   overflow: hidden;
   padding: 0 1rem;
+  transition: max-height 0.3s ease;
 }
 
 .accordion.active .accordion-icon {
@@ -30,5 +31,5 @@
 }
 
 .accordion.active .accordion-content {
-  max-height: 100vh;
+  max-height: var(--max-height);
 }
