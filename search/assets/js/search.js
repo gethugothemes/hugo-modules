@@ -3,28 +3,17 @@ const searchWrapper = document.querySelector(".search-wrapper");
 const searchModal = document.querySelector(".search-modal");
 const searchFooter = document.querySelector(".search-wrapper-footer");
 const searchResult = document.querySelectorAll("[data-search-result]");
-const searchResultItemTemplate = document.getElementById(
-  "search-result-item-template"
-);
+const searchResultItemTemplate = document.getElementById("search-result-item-template");
 const hasSearchWrapper = searchWrapper != null;
 const hasSearchModal = searchModal != null;
 const searchInput = document.querySelectorAll("[data-search-input]");
 const emptySearchResult = document.querySelectorAll(".search-result-empty");
-const openSearchModal = document.querySelectorAll(
-  '[data-target="search-modal"]'
-);
-const closeSearchModal = document.querySelectorAll(
-  '[data-target="close-search-modal"]'
-);
-const searchIcon = document.querySelector(
-  ".search-input-body label svg[data-type='search']"
-);
-const searchIconReset = document.querySelector(
-  ".search-input-body label svg[data-type='reset']"
-);
+const openSearchModal = document.querySelectorAll('[data-target="search-modal"]');
+const closeSearchModal = document.querySelectorAll('[data-target="close-search-modal"]');
+const searchIcon = document.querySelector(".search-input-body label svg[data-type='search']");
+const searchIconReset = document.querySelector(".search-input-body label svg[data-type='reset']");
 const searchResultInfo = document.querySelector(".search-result-info");
-let searchModalVisible =
-  hasSearchModal && searchModal.classList.contains("show") ? true : false;
+let searchModalVisible = hasSearchModal && searchModal.classList.contains("show") ? true : false;
 let jsonData = [];
 
 const loadJsonData = async () => {
@@ -45,6 +34,22 @@ if (hasSearchWrapper) {
       }
     });
   });
+
+  // Capitalize First Letter
+  const capitalizeFirstLetter = (string) => {
+    return string
+      .replace(/^[\s_]+|[\s_]+$/g, "")
+      .replace(/[_\s]+/g, " ")
+      .replace(/^[a-z]/, function (m) {
+        return m.toUpperCase();
+      });
+  };
+
+  // String to URL
+  const urlize = (string) => {
+    let lowercaseText = string.trim().replace(/[\s_]+/g, '-').toLowerCase();
+    return encodeURIComponent(lowercaseText);
+  }
 
   // options
   const image = searchWrapper.getAttribute("data-image");
@@ -73,8 +78,7 @@ if (hasSearchWrapper) {
       window.history.replaceState(
         {},
         "",
-        `${window.location.origin}${
-          window.location.pathname
+        `${window.location.origin}${window.location.pathname
         }?s=${searchString.replace(/ /g, "+")}`
       );
 
@@ -107,10 +111,12 @@ if (hasSearchWrapper) {
 
     let filteredJSON = includeSectionsInSearch.map((section) => {
       const data = jsonData.filter(
-        (item) => item.section.toLowerCase() === section.toLowerCase()
+        (item) => urlize(item.section) === urlize(section)
       );
+
+      const sectionName = section.replace(/[-_]/g, " ");
       return {
-        section: section[0].toUpperCase() + section.slice(1).toLowerCase(),
+        section: capitalizeFirstLetter(sectionName),
         data,
       };
     });
