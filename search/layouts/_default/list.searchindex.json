@@ -1,7 +1,18 @@
-{{- $include_sections := site.Params.search.include_sections | default site.Params.mainSections -}}
-{{- $totalPagesLength := len (where site.RegularPages "Section" "in" $include_sections) -}}
+{{- $allSections := slice -}}
+{{- range site.Home.Sections -}}
+  {{- $allSections = $allSections | append .Section -}}
+{{- end -}}
 
-[{{- range $i, $e := (where site.RegularPages "Section" "in" $include_sections) -}}
+{{- $include_all_sections := site.Params.search.include_all_sections -}}
+
+{{- $search_sections := $allSections -}}
+{{- if not $include_all_sections -}}
+{{- $search_sections = site.Params.search.include_sections | default site.Params.mainSections -}}
+{{- end -}}
+
+{{- $totalPagesLength := len (where site.RegularPages "Section" "in" $search_sections) -}}
+
+[{{- range $i, $e := (where site.RegularPages "Section" "in" $search_sections) -}}
 {{- if not .Params.ignoreSearch -}}
 
 {{- $date:= time.Format ":date_long" .PublishDate -}}

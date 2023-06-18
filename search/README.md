@@ -53,6 +53,7 @@ notAlternative = true
 enable = true
 primary_color = "#ce8460"
 include_sections = ["post", "shop"] # if `include_sections` empty, then section's will come from `mainSections`
+include_all_sections = false # if `include_all_sections` is true, then comment out the `include_sections`
 show_image = true
 show_description = true
 show_tags = true
