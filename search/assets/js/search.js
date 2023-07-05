@@ -259,9 +259,7 @@ if (hasSearchWrapper) {
           ? searchResultItemTemplate.innerHTML
           : `
           <div class="search-result-item">
-          <div class="search-image">
-            #{image}
-          </div>
+          <div class="search-image">#{image}</div>
           <div class="search-content-block">
             <a href="#{slug}" class="search-title">#{title}</a>
             <p class="search-description">#{description}</p>
