@@ -22,7 +22,7 @@ If you want to enable placeholder/lazy-loader, then add the following code to yo
 link = "plugins/lazy-loader.js"
 ```
 
-<hr>
+---
 
 ## Logo Implementation
 
@@ -55,7 +55,7 @@ logo_webp = true # default is true
 logo_text = "Boilerplate"
 ```
 
-<hr>
+---
 
 ## Favicon Implementation
 
@@ -73,7 +73,7 @@ Define the logo in the `config/_default/params.toml` file.
 favicon = "images/favicon.png"
 ```
 
-<hr>
+---
 
 ## Image Implementation
 
@@ -99,7 +99,7 @@ Available parameters:
 {{ partial "image.html" (dict "Src" .Params.image "Context" .Page ) }}
 ```
 
-<hr>
+---
 
 ## Background-Image Implementation
 
@@ -120,13 +120,24 @@ Available parameters:
 {{ partial `bg-image.html` (dict `Src` .background_image ) | safeHTMLAttr }}
 ```
 
-<hr>
+---
 
 ## Shortcode Implementation
 
+Available parameters:
+
+* `src`: image source
+* `caption`: image caption
+* `alt`: image alt text
+* `height`: image height
+* `width`: image width
+* `position`: image position | available: "center", "left", "right", "float-left", "float-right"
+* `command`: image resizing command | available: "Fit", "Fill", "Resize" | default: "Resize"
+* `option`: image resizing option
+* `class`: image custom class
+* `title`: image title
+* `webp`: generate webp version | default: true
+
 ```md
-<!-- minimal use -->
-{{< image src="images/image.png"  >}}
-<!-- exclusive use -->
-{{< image src="images/image.png" caption="" alt="alter-text" height="" width="" position="center" command="fill" option="q100" class="img-fluid" title="image title"  webp="false" >}}
+{{< image src="images/image.png" >}}
 ```
