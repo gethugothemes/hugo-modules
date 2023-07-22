@@ -169,7 +169,9 @@
   margin-top: 15px;
   font-size: 18px;
 }
-.search-modal .search-result-group:first-child .search-result-group-title:not(:empty) {
+.search-modal
+  .search-result-group:first-child
+  .search-result-group-title:not(:empty) {
   margin-top: -15px;
 }
 .search-result-item {
@@ -332,4 +334,15 @@
 }
 .search-page .search-input-body input {
   padding: 0 20px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

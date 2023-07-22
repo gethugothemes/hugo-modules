@@ -11,12 +11,12 @@
       data-tags="{{ site.Params.search.show_tags | default true }}"
       data-categories="{{ site.Params.search.show_categories | default true }}"
       tabindex="-1"
-      aria-labelledby="Search Modal"
       aria-hidden="true"
       style="--color-primary: {{ site.Params.search.primary_color | default `#7f0ec6` }}">
       <div class="search-wrapper-content">
         <div class="search-input-body">
           <label for="search-modal-input" style="margin-top:-1px">
+            <span class="sr-only">search icon</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -46,14 +46,13 @@
             data-search-input
             autocomplete="off"
             aria-label="Search"
-            aria-describedby="Search"
             placeholder="{{ i18n `search_input_placeholder` | default .input_placeholder }}" />
         </div>
         <div class="search-wrapper-body">
           <div class="search-result" data-search-result></div>
-          <label class="search-result-empty" for="search-modal-input">
+          <span class="search-result-empty">
             {{ i18n `empty_search_results_placeholder` | default site.Params.search.empty_results_placeholder }}
-          </label>
+          </span>
         </div>
         <div class="search-wrapper-footer">
           <span>

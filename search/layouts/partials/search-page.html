@@ -47,16 +47,15 @@
             data-search-input
             placeholder="{{ i18n `search_input_placeholder` | default .input_placeholder }}"
             aria-label="Search"
-            aria-describedby="Search"
             autocomplete="off"
             autofocus />
         </div>
         <span class="search-result-info"></span>
         <div class="search-wrapper-body">
           <div class="search-result" data-search-result></div>
-          <label class="search-result-empty" for="search-input">
+          <span class="search-result-empty">
             {{ i18n `empty_search_results_placeholder` }}
-          </label>
+          </span>
         </div>
       </div>
     </div>
