@@ -74,6 +74,7 @@ link = "plugins/swiper/swiper-bundle.css"
 Available parameters:
 
 * `Dir`: gallery directory
+* `Srcs`: slice of image URLs (alternative to `Dir`)
 * `Class`: gallery custom class
 * `Height`: gallery image processing height
 * `Width`: gallery image processing width
