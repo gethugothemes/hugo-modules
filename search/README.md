@@ -85,10 +85,9 @@ Add the following translations to your `i18n/*.yaml` files if you use multilangu
 ## Search Style
 
 There are two search types.
-| 1. As a Popup      | 2. Within a Page |
+| 1. As a Popup | 2. Within a Page |
 | :-----------: | :-----------: |
-| ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/daf67039-f84c-4799-95b8-4d647e0f535f)| ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/84ab4cc1-e8fd-460c-95f1-e5432b8b792b) |
-| [Live Example](https://demo.gethugothemes.com/bookworm/)| [Live Example](https://demo.gethugothemes.com/logbook/) |
+| ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/daf67039-f84c-4799-95b8-4d647e0f535f) | ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/84ab4cc1-e8fd-460c-95f1-e5432b8b792b) |
 
 ### Use it as a modal
 
@@ -106,29 +105,18 @@ and Add this partial to your `header.html` or inside your base template
 {{ partial "search-modal.html" (dict "Context" . "Class" "your-custom-class") }}
 ```
 
-NOTE: Use `Ctrl + K` or `Command + K` to Search, `ESC` to close, `ArrowUp` and `ArrowDown` key to navigate and `Enter` key to select.
+NOTE: Use `Ctrl + K` or `Command + K` to Search, `ESC` to close, `ArrowUp` and `ArrowDown` keys to navigate, and `Enter` keys to select.
 
 
 ### Use it as a page
 
-Use this as your search input component
-
-```html
-{{ if site.Params.search.enable }}
-<form action="{{ `search`| relLangURL }}">
-  <input name="s" type="search" placeholder="{{ i18n `search_input_placeholder`}}">
-  <button type="submit">Search</button>
-</form>
-{{ end }}
-```
-
-and Add the default partial inside your search page
+Add the default partial inside your search page
 
 ```html
 {{ partial "search-page.html" (dict "Context" . "Class" "your-custom-class") }}
 ```
 
-or customize the search page (don't remove any class names)
+Or customize the search page (don't remove any class names)
 
 ```html
 {{ with site.Params.search }}
