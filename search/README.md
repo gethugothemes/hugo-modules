@@ -149,12 +149,12 @@ Or customize the search page (don't remove any class names)
       </div>
     </script>
     <div
-      class="search-wrapper search-page {{ $class }}"
-      data-image="{{ site.Params.search.show_image | default false }}"
-      data-description="{{ site.Params.search.show_description | default true }}"
-      data-tags="{{ site.Params.search.show_tags | default true }}"
-      data-categories="{{ site.Params.search.show_categories | default true }}"
-      style="--color-primary: {{ site.Params.search.primary_color | default `#7f0ec6` }}">
+      class="search-wrapper search-page"
+      data-image="{{ .show_image | default false }}"
+      data-description="{{ .show_description | default true }}"
+      data-tags="{{ .show_tags | default true }}"
+      data-categories="{{ .show_categories | default true }}"
+      style="--color-primary: {{ .primary_color | default `#7f0ec6` }}">
       <div class="search-wrapper-content">
         <div class="search-input-body">
           <input
