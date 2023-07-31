@@ -1,6 +1,10 @@
 # Search
 
-## Implementation
+## Implementations
+
+Implement the search module to your site by following the process:
+
+### Add Module
 
 Add the following code to your module list in the `config/_default/module.toml` file.
 
@@ -21,14 +25,14 @@ Add the following code to your `head.html` file.
 {{ partial "search-index.html" . }}
 ```
 
-Add the following code to your js plugins list in the `config.toml` file.
+Add the following code to your js plugin list in the `config.toml` file.
 
 ```html
 [[params.plugins.js]]
 link = "js/search.js"
 ```
 
-Add some following configuration to your `config/_default/config.toml` file.
+Add the following configuration to your `config/_default/config.toml` file.
 
 ```toml
 ############################# Outputs ##############################
@@ -44,15 +48,16 @@ isPlainText = true
 notAlternative = true
 ```
 
-<hr>
 
-## Options
+### Configure Search
+
+Add the following configuration to your `config/_default/params.toml` file. You can just customize the params value according to your requirements.
 
 ```toml
 [search]
 enable = true
 primary_color = "#ce8460"
-include_sections = ["post", "shop"] # if `include_sections` empty, then section's will come from `mainSections`
+include_sections = ["post", "shop"] # if `include_sections` empty, then sections will come from the `mainSections`
 include_all_sections = false # if `include_all_sections` is true, then comment out the `include_sections`
 show_image = true
 show_description = true
@@ -60,7 +65,9 @@ show_tags = true
 show_categories = true
 ```
 
-## i18n
+### i18n Translation
+
+Add the following translations to your `i18n/*.yaml` files if you use multilanguage on your site.
 
 ```yaml
 - id: search_input_placeholder
@@ -70,10 +77,10 @@ show_categories = true
   translation: No results for
 
 - id: empty_search_results_placeholder
-  translation: Type something to search..
+  translation: Type something to search...
 ```
 
-<hr>
+---
 
 ## Search Style
 
@@ -83,7 +90,7 @@ There are two search types.
 | ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/daf67039-f84c-4799-95b8-4d647e0f535f)| ![image](https://github.com/gethugothemes/hugo-modules/assets/87603786/84ab4cc1-e8fd-460c-95f1-e5432b8b792b) |
 | [Live Example](https://demo.gethugothemes.com/bookworm/)| [Live Example](https://demo.gethugothemes.com/logbook/) |
 
-## Use it as a modal
+### Use it as a modal
 
 Add this code to where you want to place the search Button or Link
 
@@ -99,7 +106,8 @@ and Add this partial to your `header.html` or inside your base template
 {{ partial "search-modal.html" (dict "Context" . "Class" "your-custom-class") }}
 ```
 
-NOTE : Use `Ctrl + K` or `Command + K` to Search, `ESC` to close, `ArrowUp` and `ArrowDown` key to navigate and `Enter` key to select.
+NOTE: Use `Ctrl + K` or `Command + K` to Search, `ESC` to close, `ArrowUp` and `ArrowDown` key to navigate and `Enter` key to select.
+
 
 ### Use it as a page
 
@@ -114,15 +122,13 @@ Use this as your search input component
 {{ end }}
 ```
 
-and Add this partial inside your search page
+and Add the default partial inside your search page
 
 ```html
 {{ partial "search-page.html" (dict "Context" . "Class" "your-custom-class") }}
 ```
 
-<hr>
-
-or customise the search page
+or customize the search page (don't remove any class names)
 
 ```html
 {{ with site.Params.search }}
