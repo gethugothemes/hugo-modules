@@ -4,6 +4,7 @@
 {{ $height:= replace (replace (.Height) "px" "") "x" "" }}
 {{ $width:= replace (replace (.Width) "px" "") "x" "" }}
 {{ $webp:= .Webp | default true }}
+{{ $resize:= .Resize }}
 {{ $command:= .Command }}
 {{ $option:= .Option }}
 {{ $zoomable:= .Zoomable | default true }}

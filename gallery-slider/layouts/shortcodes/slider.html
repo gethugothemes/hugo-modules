@@ -4,6 +4,7 @@
 {{ $height:= replace (replace (.Get "height") "px" "") "x" "" }}
 {{ $width:= replace (replace (.Get "width") "px" "") "x" "" }}
 {{ $webp:= .Get "webp" | default false }}
+{{ $resize:= .Get "resize" }}
 {{ $command:= .Get "command" }}
 {{ $option:= .Get "option" }}
 {{ $zoomable:= .Get "zoomable" | default true }}

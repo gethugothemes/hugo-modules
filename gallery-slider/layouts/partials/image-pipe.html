@@ -4,6 +4,7 @@
 {{ $height:= .Height }}
 {{ $width:= .Width }}
 {{ $webp:= .Webp | default true }}
+{{ $resize:= .Resize | default true }}
 {{ $zoomable:= .Zoomable | default true }}
 {{ $context:= .Context | default . }}
 {{ $scratch := newScratch }}
@@ -44,18 +45,22 @@
 
     <!-- start of if not .gif and .svg -->
     <!-- start of image command -->
-    <!-- if Fit -->
-    {{ if eq $command `Fit` }}
-      {{ $context.Set `image` ($image.Fit $option).RelPermalink }}
-      {{ $context.Set `imageFallback` ($image.Fit (replace $option `webp` ``)).RelPermalink }}
-      <!-- if Fill -->
-    {{ else if eq $command `Fill` }}
-      {{ $context.Set `image` ($image.Fill $option).RelPermalink }}
-      {{ $context.Set `imageFallback` ($image.Fill (replace $option `webp` ``)).RelPermalink }}
-      <!-- if Resize -->
+    {{ if eq $resize `false` }}
+      {{ $context.Set `image` $image.RelPermalink }}
     {{ else }}
-      {{ $context.Set `image` ($image.Resize $option).RelPermalink }}
-      {{ $context.Set `imageFallback` ($image.Resize (replace $option `webp` ``)).RelPermalink }}
+      <!-- if Fit -->
+      {{ if eq $command `Fit` }}
+        {{ $context.Set `image` ($image.Fit $option).RelPermalink }}
+        {{ $context.Set `imageFallback` ($image.Fit (replace $option `webp` ``)).RelPermalink }}
+      <!-- if Fill -->
+      {{ else if eq $command `Fill` }}
+        {{ $context.Set `image` ($image.Fill $option).RelPermalink }}
+        {{ $context.Set `imageFallback` ($image.Fill (replace $option `webp` ``)).RelPermalink }}
+      <!-- if Resize -->
+      {{ else }}
+        {{ $context.Set `image` ($image.Resize $option).RelPermalink }}
+        {{ $context.Set `imageFallback` ($image.Resize (replace $option `webp` ``)).RelPermalink }}
+      {{ end }}
     {{ end }}
 
 

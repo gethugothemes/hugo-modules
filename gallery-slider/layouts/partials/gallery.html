@@ -4,6 +4,7 @@
 {{ $height:= replace (replace (.Height) "px" "") "x" "" }}
 {{ $width:= replace (replace (.Width) "px" "") "x" "" }}
 {{ $webp:= .Webp | default true }}
+{{ $resize:= .Resize }}
 {{ $command:= .Command }}
 {{ $option:= .Option }}
 {{ $zoomable:= .Zoomable | default true }}
@@ -23,7 +24,7 @@
       {{ $image := resources.Get . }}
       {{ $imageExt := path.Ext $image }}
       {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
-        {{ partial "image-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
+        {{ partial "image-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable "Resize" $resize) }}
         {{ $imageHeight:= $scratch.Get "image-height" }}
         {{ $imageWidth:= $scratch.Get "image-width" }}
 
@@ -63,7 +64,7 @@
       {{ $image:= $page.Resources.GetMatch (printf "*%s*" .) }}
       {{ $imageExt := path.Ext $image }}
       {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
-        {{ partial "image-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
+        {{ partial "image-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable "Resize" $resize) }}
         {{ $imageHeight:= $scratch.Get "image-height" }}
         {{ $imageWidth:= $scratch.Get "image-width" }}
 
