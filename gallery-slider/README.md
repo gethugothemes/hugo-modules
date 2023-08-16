@@ -45,6 +45,7 @@ Available parameters:
 * `Height`: gallery image processing height
 * `Width`: gallery image processing width
 * `Webp`: generate webp version | default: true
+* `Resize`: image resizer | default: true
 * `Command`: image resizing command | default: "Fit"
 * `Option`: image processing custom options
 * `Zoomable`: image zoomable option | default: true
@@ -79,6 +80,7 @@ Available parameters:
 * `Height`: gallery image processing height
 * `Width`: gallery image processing width
 * `Webp`: generate webp version | default: true
+* `Resize`: image resizer | default: true
 * `Command`: image resizing command | default: "Fit"
 * `Option`: image processing custom options
 * `Zoomable`: image zoomable option | default: true
@@ -100,6 +102,7 @@ Available parameters:
 * `height`: gallery image processing height
 * `width`: gallery image processing width
 * `webp`: generate webp version | default: true
+* `resize`: image resizer | default: true
 * `command`: image resizing command | default: "Fit"
 * `option`: image processing custom options
 * `zoomable`: image zoomable option | default: true
@@ -133,6 +136,7 @@ Available parameters:
 * `height`: gallery image processing height
 * `width`: gallery image processing width
 * `webp`: generate webp version | default: true
+* `resize`: image resizer | default: true
 * `command`: image resizing command | default: "Fit"
 * `option`: image processing custom options
 * `zoomable`: image zoomable option | default: true
