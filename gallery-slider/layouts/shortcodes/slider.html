@@ -4,7 +4,6 @@
 {{ $height:= replace (replace (.Get "height") "px" "") "x" "" }}
 {{ $width:= replace (replace (.Get "width") "px" "") "x" "" }}
 {{ $webp:= .Get "webp" | default false }}
-{{ $loading:= .Get "loading" | default "lazy" }}
 {{ $resize:= .Get "resize" }}
 {{ $command:= .Get "command" }}
 {{ $option:= .Get "option" }}
@@ -41,7 +40,6 @@
                 class="glightbox"
                 style="display: block;">
                 <img
-                  loading="{{ $loading }}"
                   src="{{ $scratch.Get `image` }}"
                   class="img"
                   style="margin: 0"
@@ -50,7 +48,6 @@
               </a>
             {{ else }}
               <img
-                loading="{{ $loading }}"
                 src="{{ $scratch.Get `image` }}"
                 class="img"
                 style="margin: 0"
@@ -87,7 +84,6 @@
                   class="glightbox"
                   style="display: block;">
                   <img
-                    loading="{{ $loading }}"
                     src="{{ $scratch.Get `image` }}"
                     class="img"
                     style="margin: 0"
@@ -96,7 +92,6 @@
                 </a>
               {{ else }}
                 <img
-                  loading="{{ $loading }}"
                   src="{{ $scratch.Get `image` }}"
                   class="img"
                   style="margin: 0"
@@ -130,7 +125,6 @@
                     class="glightbox"
                     style="display: block;">
                     <img
-                      loading="{{ $loading }}"
                       src="{{ $image }}"
                       class="img"
                       style="margin: 0"
@@ -140,7 +134,6 @@
                   </a>
                 {{ else }}
                   <img
-                    loading="{{ $loading }}"
                     src="{{ $image }}"
                     class="img"
                     style="margin: 0"

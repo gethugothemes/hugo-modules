@@ -4,7 +4,6 @@
 {{ $height:= replace (replace (.Height) "px" "") "x" "" }}
 {{ $width:= replace (replace (.Width) "px" "") "x" "" }}
 {{ $webp:= .Webp | default true }}
-{{ $loading:= .Loading | default "lazy" }}
 {{ $resize:= .Resize }}
 {{ $command:= .Command }}
 {{ $option:= .Option }}
@@ -41,7 +40,6 @@
                 class="glightbox"
                 style="display: block;">
                 <img
-                  loading="{{ $loading }}"
                   src="{{ $scratch.Get `image` }}"
                   class="img"
                   style="margin: 0"
@@ -50,7 +48,6 @@
               </a>
             {{ else }}
               <img
-                loading="{{ $loading }}"
                 src="{{ $scratch.Get `image` }}"
                 class="img"
                 style="margin: 0"
@@ -86,7 +83,6 @@
                   class="glightbox"
                   style="display: block;">
                   <img
-                    loading="{{ $loading }}"
                     src="{{ $scratch.Get `image` }}"
                     class="img"
                     style="margin: 0"
@@ -95,7 +91,6 @@
                 </a>
               {{ else }}
                 <img
-                  loading="{{ $loading }}"
                   src="{{ $scratch.Get `image` }}"
                   class="img"
                   style="margin: 0"
@@ -129,7 +124,6 @@
                     class="glightbox"
                     style="display: block;">
                     <img
-                      loading="{{ $loading }}"
                       src="{{ $image }}"
                       class="img"
                       style="margin: 0"
@@ -139,7 +133,6 @@
                   </a>
                 {{ else }}
                   <img
-                    loading="{{ $loading }}"
                     src="{{ $image }}"
                     class="img"
                     style="margin: 0"
@@ -173,7 +166,6 @@
                 class="glightbox"
                 style="display: block;">
                 <img
-                  loading="{{ $loading }}"
                   src="{{ $scratch.Get `image` }}"
                   class="img"
                   style="margin: 0"
@@ -182,7 +174,6 @@
               </a>
             {{ else }}
               <img
-                loading="{{ $loading }}"
                 src="{{ $scratch.Get `image` }}"
                 class="img"
                 style="margin: 0"
