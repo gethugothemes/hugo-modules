@@ -23,6 +23,7 @@ Call it, as a partial in your theme.
 
 Available parameters:
 
+* `Context`: .
 * `Class`: wrapper class
 * `Title`: share title
 * `Facebook`: share facebook | default true
@@ -34,5 +35,5 @@ Available parameters:
 
 ```html
 <!-- social share -->
-{{ partial "social-share.html" (dict "class" "your-class") }}
+{{ partial "social-share.html" (dict "Context" .) }}
 ```
