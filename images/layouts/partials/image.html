@@ -38,7 +38,7 @@
     decoding="async"
     src="{{ $imagePath | absURL }}"
     alt="{{ .Alt }}"
-    class="{{ $class }} img"
+    class="img {{ $class }}"
     height="{{ $height }}"
     width="{{ $width }}" />
 {{ else }}
@@ -76,7 +76,7 @@
         loading="{{$loading}}"
         decoding="async"
         alt="{{ .Alt }}"
-        class="{{ $class }} img"
+        class="img {{ $class }}"
         width="{{ $width }}"
         height="{{ $height }}" />
     {{ else }}
@@ -125,7 +125,7 @@
           {{ end }}
 
           alt="{{ .Alt }}"
-          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
+          class="img {{ if $placeholder }}lazy{{ end }} {{ $class }}"
           width="{{- with $width -}}
             {{- . -}}
           {{- else -}}
@@ -182,7 +182,7 @@
             alt="{{ .Alt }}"
           {{ end }}
 
-          class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
+          class="img {{ if $placeholder }}lazy{{ end }} {{ $class }}"
           width="{{- with $width -}}
             {{- . -}}
           {{- else -}}
@@ -256,9 +256,9 @@
             {{ else }}
               loading="{{$loading}}" decoding="async"
               src="{{ $imageFallback.RelPermalink }}"
-            {{ end }}class="{{ if $placeholder }}
+            {{ end }}class="img {{ if $placeholder }}
               lazy
-            {{ end }} {{ $class }} img"
+            {{ end }} {{ $class }}"
             alt="{{ .Alt }}"
             width="{{ $image.Width }}"
             height="{{ $image.Height }}" />
