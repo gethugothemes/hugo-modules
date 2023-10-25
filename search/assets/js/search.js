@@ -61,7 +61,7 @@ if (hasSearchWrapper) {
 
   // get search string from url
   const urlParams = new URLSearchParams(window.location.search);
-  const urlSearchString = urlParams.get("s");
+  const urlSearchString = ( urlParams.get("s") ? encodeURIComponent( urlParams.get("s") ) : null );
 
   if (urlSearchString !== null) {
     searchString = urlSearchString.replace(/\+/g, " ");
