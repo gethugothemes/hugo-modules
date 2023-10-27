@@ -87,11 +87,10 @@
     {{ $imageExt := path.Ext $image }}
 
 
-    <!-- image height, width (if not svg) -->
-    {{ if eq $imageExt `.svg` }}
-      {{ .Scratch.Set "image-height" "" }}
-      {{ .Scratch.Set "image-width" "" }}
-    {{ else }}
+    <!-- image height, width -->
+    {{ .Scratch.Set "image-height" "" }}
+    {{ .Scratch.Set "image-width" "" }}
+    {{ if not (or $height $width) }}
       {{ .Scratch.Set "image-height" $image.Height }}
       {{ .Scratch.Set "image-width" $image.Width }}
     {{ end }}
@@ -102,6 +101,8 @@
     <!-- checking gif/svg image -->
     {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
       {{ .Scratch.Set `image` $image.RelPermalink }}
+      {{ .Scratch.Set `image-height` $height }}
+      {{ .Scratch.Set `image-width`  $width }}
     {{ else }}
       <!-- image processing -->
       {{ $options:= add (add (add (add (string ($width | default $imageWidth)) "x") (string ($height | default $imageHeight))) " webp ") (string $option) }}
@@ -116,17 +117,21 @@
 
       <!-- image Fit -->
       {{ if eq $command `Fit` }}
-        {{ .Scratch.Set `image` ($image.Fit $options).RelPermalink }}
+        {{ .Scratch.Set `newimage`  ($image.Fit $options) }}
         {{ .Scratch.Set `fallback` ($image.Fit (replace $options `webp` ``)).RelPermalink }}
         <!-- image Fill -->
       {{ else if eq $command `Fill` }}
-        {{ .Scratch.Set `image` ($image.Fill $options).RelPermalink }}
+        {{ .Scratch.Set `newimage`  ($image.Fill $options) }}
         {{ .Scratch.Set `fallback` ($image.Fill (replace $options `webp` ``)).RelPermalink }}
         <!-- image Resize -->
       {{ else }}
-        {{ .Scratch.Set `image` ($image.Resize $options).RelPermalink }}
+        {{ .Scratch.Set `newimage`  ($image.Resize $options) }}
+        <!-- {{ .Scratch.Set `image` ($image.Resize $options).RelPermalink }} -->
         {{ .Scratch.Set `fallback` ($image.Resize (replace $options `webp` ``)).RelPermalink }}
       {{ end }}
+      {{ .Scratch.Set `image` (.Scratch.Get `newimage`).RelPermalink }}
+      {{ .Scratch.Set `image-height` (.Scratch.Get `newimage`).Height }}
+      {{ .Scratch.Set `image-width`  (.Scratch.Get `newimage`).Width }}
 
     {{ end }}
     <!-- /checking gif/svg image -->
@@ -144,8 +149,8 @@
           class="img {{ $class }} {{ if eq $zoomable `true` }}
             glightbox
           {{ end }}"
-          width="{{ $width | default $imageWidth }}"
-          height="{{ $height | default $imageHeight }}"
+          width="{{ .Scratch.Get `image-width` }}"
+          height="{{ .Scratch.Get `image-height` }}"
           src="{{ .Scratch.Get `image` }}"
           alt="{{ $alt }}"
           onerror="this.onerror='null';this.src='{{ .Scratch.Get `fallback` }}'" />
@@ -162,8 +167,8 @@
         class="img {{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}
           glightbox
         {{ end }}"
-        width="{{ $width | default $imageWidth }}"
-        height="{{ $height | default $imageHeight }}"
+        width="{{ .Scratch.Get `image-width` }}"
+        height="{{ .Scratch.Get `image-height` }}"
         src="{{ .Scratch.Get `image` }}"
         alt="{{ $alt }}"
         onerror="this.onerror='null';this.src='{{ .Scratch.Get `fallback` }}'" />
