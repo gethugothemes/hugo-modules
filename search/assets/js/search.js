@@ -217,11 +217,11 @@ if (hasSearchWrapper) {
         });
 
       const highlightResult = (content) => {
-        const regex = new RegExp(searchString, "gi");
+        const regex = new RegExp(searchString, "i");
         return content.replace(regex, (match) => `<u>${match}</u>`);
       };
       const highlightResultContent = (content) => {
-        const regex = new RegExp(searchString, "gi");
+        const regex = new RegExp(searchString, "i");
         const matchIndex = content.search(regex);
 
         if (matchIndex >= 0) {
@@ -229,7 +229,7 @@ if (hasSearchWrapper) {
           const lastWord = content.slice(0, matchIndex).split(" ").pop();
 
           return matchedContent.replace(
-            new RegExp(searchString, "i"),
+            regex,
             (match) => lastWord + `<mark>${match}</mark>`
           );
         }
