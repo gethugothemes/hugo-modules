@@ -229,7 +229,7 @@ if (hasSearchWrapper) {
           const lastWord = content.slice(0, matchIndex).split(" ").pop();
 
           return matchedContent.replace(
-            regex,
+            new RegExp(searchString, "i"),
             (match) => lastWord + `<mark>${match}</mark>`
           );
         }
