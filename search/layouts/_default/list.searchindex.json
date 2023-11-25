@@ -18,12 +18,12 @@
 {{- $date:= time.Format ":date_long" .PublishDate -}}
 
 {{- if .Params.image -}}
-  {{- $.Scratch.Set "image" (partial "searchImage" (dict "Src" .Params.image "Size" "420x" "Command" "Resize")) -}}
-  {{- $.Scratch.Set "imageSM" (partial "searchImage" (dict "Src" .Params.image "Size" "100x100" "Command" "Fill")) -}}
+  {{- $.Scratch.Set "image" (partial "searchImage" (dict "Context" .Page "Src" .Params.image "Size" "420x" "Command" "Resize")) -}}
+  {{- $.Scratch.Set "imageSM" (partial "searchImage" (dict "Context" .Page "Src" .Params.image "Size" "100x100" "Command" "Fill")) -}}
 {{- else if .Params.images -}}
   {{- range first 1 .Params.images -}}
-  {{- $.Scratch.Set "image" (partial "searchImage" (dict "Src" . "Size" "420x" "Command" "Resize")) -}}
-  {{- $.Scratch.Set "imageSM" (partial "searchImage" (dict "Src" . "Size" "100x100" "Command" "Fill")) -}}
+  {{- $.Scratch.Set "image" (partial "searchImage" (dict "Context" .Page "Src" . "Size" "420x" "Command" "Resize")) -}}
+  {{- $.Scratch.Set "imageSM" (partial "searchImage" (dict "Context" .Page "Src" . "Size" "100x100" "Command" "Fill")) -}}
   {{- end -}}
 {{- end -}}
 
