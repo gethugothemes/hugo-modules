@@ -96,6 +96,7 @@
     {{ end }}
     {{ $imageHeight:= .Scratch.Get "image-height" }}
     {{ $imageWidth:= .Scratch.Get "image-width" }}
+    {{ .Scratch.Set `caption-name` (replaceRE `[^-a-zA-Z0-9]` `` (replace $caption ` ` `-`)) }}
 
 
     <!-- checking gif/svg image -->
@@ -142,36 +143,49 @@
         class="{{ .Scratch.Get `position` }}"
         role="group"
         aria-describedby="caption-{{ $caption | markdownify }}">
-        <img
-          title="{{ $title }}"
-          loading="lazy"
-          decoding="async"
-          class="img {{ $class }} {{ if eq $zoomable `true` }}
-            glightbox
-          {{ end }}"
-          width="{{ .Scratch.Get `image-width` }}"
-          height="{{ .Scratch.Get `image-height` }}"
-          src="{{ .Scratch.Get `image` }}"
-          alt="{{ $alt }}"
-          onerror="this.onerror='null';this.src='{{ .Scratch.Get `fallback` }}'" />
-        <figcaption id="caption-{{ $caption | markdownify }}">
+      {{ if eq $zoomable `true` }}
+        <a
+          href="{{ $image.RelPermalink }}"
+          class="glightbox" data-glightbox="description: .caption-{{ .Scratch.Get `caption-name` }}">
+      {{ end }}
+          <img
+            title="{{ $title }}"
+            loading="lazy"
+            decoding="async"
+            class="img {{ $class }}"
+            width="{{ .Scratch.Get `image-width` }}"
+            height="{{ .Scratch.Get `image-height` }}"
+            src="{{ .Scratch.Get `image` }}"
+            alt="{{ $alt }}"
+            onerror="this.onerror='null';this.src='{{ .Scratch.Get `fallback` }}'" />
+      {{ if eq $zoomable `true` }}
+        </a>
+      {{ end }}
+        <figcaption id="caption-{{ $caption | markdownify }}" class="caption-{{ .Scratch.Get `caption-name` }}">
           {{ $caption | markdownify }}
         </figcaption>
       </figure>
     {{ else }}
       <!-- image tag -->
-      <img
-        title="{{ $title }}"
-        loading="lazy"
-        decoding="async"
-        class="img {{ $class }} {{ .Scratch.Get `position` }} {{ if eq $zoomable `true` }}
-          glightbox
-        {{ end }}"
-        width="{{ .Scratch.Get `image-width` }}"
-        height="{{ .Scratch.Get `image-height` }}"
-        src="{{ .Scratch.Get `image` }}"
-        alt="{{ $alt }}"
-        onerror="this.onerror='null';this.src='{{ .Scratch.Get `fallback` }}'" />
+      {{ if eq $zoomable `true` }}
+        <a
+          href="{{ $image.RelPermalink }}"
+          style="display: block;"
+          class="glightbox">
+      {{ end }}
+          <img
+            title="{{ $title }}"
+            loading="lazy"
+            decoding="async"
+            class="img {{ $class }} {{ .Scratch.Get `position` }}"
+            width="{{ .Scratch.Get `image-width` }}"
+            height="{{ .Scratch.Get `image-height` }}"
+            src="{{ .Scratch.Get `image` }}"
+            alt="{{ $alt }}"
+            onerror="this.onerror='null';this.src='{{ .Scratch.Get `fallback` }}'" />
+      {{ if eq $zoomable `true` }}
+        </a>
+      {{ end }}
     {{ end }}
 
   {{ else }}
