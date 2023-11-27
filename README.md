@@ -41,26 +41,28 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
   * [Button](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/button)
   * [Codepen](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/codepen)
   * [Notice](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/notice)
+  * [Cloak Contact](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/cloak-contact)
 
 * [Icons](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools)
   * [Font Awesome Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/font-awesome)
   * [Themify Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/themify-icons)
   
-  
 ## 📘 Benefits of Using Exclusive Hugo Modules
- - Save time and effort by utilizing pre-built, tested, and well-documented code. </br>
- - Add advanced functionality to your Hugo projects without having to write all the code yourself. </br>
- - Build more complex and dynamic Hugo websites with ease, without having to start from scratch. </br>
- - Choose from over 30 powerful modules to find the ones that best suit your needs.</br>
+
+* Save time and effort by utilizing pre-built, tested, and well-documented code. </br>
+* Add advanced functionality to your Hugo projects without having to write all the code yourself. </br>
+* Build more complex and dynamic Hugo websites with ease, without having to start from scratch. </br>
+* Choose from over 30 powerful modules to find the ones that best suit your needs.</br>
 
 ## 🌐 Why We Released This As Open Source
+
 Our 'Exclusive Hugo Modules' are a set of custom-built Hugo modules that were originally developed to enhance the functionality of our themes and serve our clients' projects. We found that by leveraging these modules, we were able to save a lot of time and effort. After continuously developing these modules, they have become more mature and powerful.
 
 We believe in the power of open source software and in contributing back to the community. That's why we decided to make our amazing tool available to everyone. We welcome feedback, suggestions, and contributions from the community to help us improve and expand this project over time.
 
 ## 🐞 Reporting Issues
 
-We use GitHub Issues as the official bug tracker for our Hugo Modules. Before submitting a report, please search [existing issues](https://github.com/gethugothemes/hugo-modules/issues) to see if your problem or idea has already been addressed. If not, feel free to [open a new issue](https://github.com/gethugothemes/hugo-modules/issues). 
+We use GitHub Issues as the official bug tracker for our Hugo Modules. Before submitting a report, please search [existing issues](https://github.com/gethugothemes/hugo-modules/issues) to see if your problem or idea has already been addressed. If not, feel free to [open a new issue](https://github.com/gethugothemes/hugo-modules/issues).
 
 ## 🪴 Contributing Code to Hugo Modules
 
@@ -71,6 +73,7 @@ We welcome contributions from the community to help us improve and expand this p
 4. Submit a pull request to the main branch.
 
 ## 🚀 Our Hugo Modules Powered Themes
+
 | [![Bigspring](https://demo.gethugothemes.com/thumbnails/bigspring.png)](https://gethugothemes.com/products/bigspring/) | [![Reader](https://demo.gethugothemes.com/thumbnails/reader.png)](https://gethugothemes.com/products/reader/) | [![Agico](https://demo.gethugothemes.com/thumbnails/agico.png)](https://gethugothemes.com/products/agico/) |
 |:---:|:---:|:---:|
 | **Bigspring** | **Reader** | **Agico** |
