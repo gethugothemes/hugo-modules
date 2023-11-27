@@ -1,0 +1,60 @@
+{{ $address := .Get "address" | default (.Get 0) }}
+{{ $checkAddress := findRE `@` $address }}
+{{ $pickProtocol:= "" }}
+{{ if gt (len $checkAddress) 0 }}
+  {{ $pickProtocol = "mailto" }}
+{{ else }}
+  {{ $pickProtocol = "tel" }}
+{{ end }}
+{{ $protocol := .Get "protocol" | default $pickProtocol }}
+{{ $class := .Get "class" }}
+{{ $display := .Get "display" }}
+{{ $parts := split $address "@" }}
+{{ $username := (index $parts 0) }}
+{{ $domain := (index $parts 1) | default "" }}
+{{ $query := .Get "query" | default "" }}
+
+{{/* generate uniq ID for each contact */}}
+{{ $uniqID := $address | sha1 }}
+
+{{/* if js disabled, then display using css */}}
+<style>
+  #span-{{ $uniqID }}.cloakcontact:before {
+    content:{{ with $domain }}attr(data-domain) "\0040" {{ end }}attr(data-username);
+    unicode-bidi:bidi-override;
+    direction:rtl;
+  }
+</style>
+
+
+<span
+  class="cloakcontact"
+  data-username="{{ range $index := seq (sub (len $username) 1) 0 }}
+    {{ substr $username $index 1 }}
+  {{ end }}"
+  {{ with $domain }}
+    data-domain="{{ range $index := seq (sub (len $domain) 1) 0 }}
+      {{ substr $domain $index 1 }}
+    {{ end }}"
+  {{ end }}
+  id="span-{{ $uniqID }}"></span>
+
+
+<script id="script-{{ $uniqID }}">
+  var cloakScript = document.getElementById("script-{{ $uniqID }}");
+  var cloakLink = document.createElement("a");
+  var cloakAddress = "{{ range $index := seq (sub (len $username) 1) 0}}{{ substr $username $index 1}}{{ end }}".split('').reverse().join(''){{ with $domain }} + "@" + "{{ range $index := seq (sub (len $domain) 1) 0}}{{ substr $domain $index 1}}{{ end }}".split('').reverse().join(''){{ with $query }} + "?" + "{{ range $index := seq (sub (len $query) 1) 0}}{{ substr $query $index 1}}{{ end }}".split('').reverse().join(''){{ end }}{{ end }};
+
+  cloakLink.href = {{ $protocol }} + ":" + cloakAddress;
+  {{- with $display }}
+  cloakLink.innerText = {{ $display }};
+  {{- else }}
+  cloakLink.innerText = cloakAddress.split('?')[0];
+  {{- end }}
+  {{- with $class }}
+  cloakLink.className = "{{ $class }}";
+  {{- end }}
+
+  cloakScript.parentElement.insertBefore(cloakLink, cloakScript.previousElementSibling);
+  cloakScript.parentElement.removeChild(cloakScript.previousElementSibling)
+</script>
