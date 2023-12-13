@@ -13,7 +13,7 @@ Add the following code to your module list in the `config/_default/module.toml` 
 path = "github.com/gethugothemes/hugo-modules/search"
 ```
 
-Add the following code to your `asstes/scss/main.scss` or `asstes/scss/style.scss` file.
+Add the following code to your `assets/scss/main.scss` or `assets/scss/style.scss` file.
 
 ```scss
 @import 'search';
@@ -48,7 +48,6 @@ isPlainText = true
 notAlternative = true
 ```
 
-
 ### Configure Search
 
 Add the following configuration to your `config/_default/params.toml` file. You can just customize the params value according to your requirements.
@@ -67,7 +66,7 @@ show_categories = true
 
 ### i18n Translation
 
-Add the following translations to your `i18n/*.yaml` files if you use multilanguage on your site.
+Add the following translations to your `i18n/*.yaml` files if you use multi-language on your site.
 
 ```yaml
 - id: search_input_placeholder
@@ -106,7 +105,6 @@ and Add this partial to your `header.html` or inside your base template
 ```
 
 NOTE: Use `Ctrl + K` or `Command + K` to Search, `ESC` to close, `ArrowUp` and `ArrowDown` keys to navigate, and `Enter` keys to select.
-
 
 ### Use it as a page
 
@@ -149,14 +147,14 @@ Or customize the search page (don't remove any class names)
       </div>
     </script>
     <div
-      class="search-wrapper search-page"
-      data-image="{{ .show_image | default false }}"
-      data-description="{{ .show_description | default true }}"
-      data-tags="{{ .show_tags | default true }}"
-      data-categories="{{ .show_categories | default true }}"
-      style="--color-primary: {{ .primary_color | default `#7f0ec6` }}">
-      <div class="search-wrapper-content">
-        <div class="search-input-body">
+      class="search-page">
+      <div
+        class="search-wrapper"
+        data-image="{{ .show_image | default false }}"
+        data-description="{{ .show_description | default true }}"
+        data-tags="{{ .show_tags | default true }}"
+        data-categories="{{ .show_categories | default true }}">
+        <div class="search-wrapper-header">
           <input
             id="search-input"
             type="text"

@@ -3,17 +3,28 @@ const searchWrapper = document.querySelector(".search-wrapper");
 const searchModal = document.querySelector(".search-modal");
 const searchFooter = document.querySelector(".search-wrapper-footer");
 const searchResult = document.querySelectorAll("[data-search-result]");
-const searchResultItemTemplate = document.getElementById("search-result-item-template");
+const searchResultItemTemplate = document.getElementById(
+  "search-result-item-template"
+);
 const hasSearchWrapper = searchWrapper != null;
 const hasSearchModal = searchModal != null;
 const searchInput = document.querySelectorAll("[data-search-input]");
 const emptySearchResult = document.querySelectorAll(".search-result-empty");
-const openSearchModal = document.querySelectorAll('[data-target="search-modal"]');
-const closeSearchModal = document.querySelectorAll('[data-target="close-search-modal"]');
-const searchIcon = document.querySelector(".search-input-body label svg[data-type='search']");
-const searchIconReset = document.querySelector(".search-input-body label svg[data-type='reset']");
+const openSearchModal = document.querySelectorAll(
+  '[data-target="search-modal"]'
+);
+const closeSearchModal = document.querySelectorAll(
+  '[data-target="close-search-modal"]'
+);
+const searchIcon = document.querySelector(
+  ".search-wrapper-header label svg[data-type='search']"
+);
+const searchIconReset = document.querySelector(
+  ".search-wrapper-header label svg[data-type='reset']"
+);
 const searchResultInfo = document.querySelector(".search-result-info");
-let searchModalVisible = hasSearchModal && searchModal.classList.contains("show") ? true : false;
+let searchModalVisible =
+  hasSearchModal && searchModal.classList.contains("show") ? true : false;
 let jsonData = [];
 
 const loadJsonData = async () => {
@@ -46,10 +57,13 @@ if (hasSearchWrapper) {
   };
 
   // String to URL
-  const urlize = (string) => {
-    let lowercaseText = string.trim().replace(/[\s_]+/g, '-').toLowerCase();
+  const slugify = (string) => {
+    let lowercaseText = string
+      .trim()
+      .replace(/[\s_]+/g, "-")
+      .toLowerCase();
     return encodeURIComponent(lowercaseText);
-  }
+  };
 
   // options
   const image = searchWrapper.getAttribute("data-image");
@@ -61,7 +75,9 @@ if (hasSearchWrapper) {
 
   // get search string from url
   const urlParams = new URLSearchParams(window.location.search);
-  const urlSearchString = ( urlParams.get("s") ? encodeURIComponent( urlParams.get("s") ) : null );
+  const urlSearchString = urlParams.get("s")
+    ? encodeURIComponent(urlParams.get("s"))
+    : null;
 
   if (urlSearchString !== null) {
     searchString = urlSearchString.replace(/\+/g, " ");
@@ -78,7 +94,8 @@ if (hasSearchWrapper) {
       window.history.replaceState(
         {},
         "",
-        `${window.location.origin}${window.location.pathname
+        `${window.location.origin}${
+          window.location.pathname
         }?s=${searchString.replace(/ /g, "+")}`
       );
 
@@ -111,7 +128,7 @@ if (hasSearchWrapper) {
 
     let filteredJSON = includeSectionsInSearch.map((section) => {
       const data = jsonData.filter(
-        (item) => urlize(item.section) === urlize(section)
+        (item) => slugify(item.section) === slugify(section)
       );
 
       const sectionName = section.replace(/[-_]/g, " ");
@@ -195,27 +212,6 @@ if (hasSearchWrapper) {
 
   const displayResult = (searchItems, searchString) => {
     const generateSearchResultHTML = (item) => {
-      const contentValue = item.data
-        .filter((d) => d.content.toLowerCase().includes(searchString))
-        .map((innerItem) => {
-          const position = innerItem.content
-            .toLowerCase()
-            .indexOf(searchString.toLowerCase());
-          let matches = innerItem.content.substring(
-            position,
-            searchString.length + position
-          );
-          let matchesAfter = innerItem.content.substring(
-            searchString.length + position,
-            searchString.length + position + 80
-          );
-          const highlighted = innerItem.content.replace(
-            innerItem.content,
-            "<mark>" + matches + "</mark>" + matchesAfter
-          );
-          return highlighted;
-        });
-
       const highlightResult = (content) => {
         const regex = new RegExp(searchString, "i");
         return content.replace(regex, (match) => `<u>${match}</u>`);
@@ -253,18 +249,18 @@ if (hasSearchWrapper) {
           d.content.toLowerCase().includes(searchString)
       );
 
-      // pull template from hugo templarte definition
+      // pull template from hugo template definition
       let templateDefinition =
         searchResultItemTemplate != null
           ? searchResultItemTemplate.innerHTML
           : `
           <div class="search-result-item">
-          <div class="search-image">#{image}</div>
-          <div class="search-content-block">
-            <a href="#{slug}" class="search-title">#{title}</a>
-            <p class="search-description">#{description}</p>
-            <p class="search-content">#{content}</p>
-            <div class="search-info">
+          <div class="search-result-item-image">#{image}</div>
+          <div class="search-result-item-body">
+            <a href="#{slug}" class="search-result-item-title">#{title}</a>
+            <p class="search-result-item-description">#{description}</p>
+            <p class="search-result-item-content">#{content}</p>
+            <div class="search-result-item-taxonomies">
               <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-top:-2px">
                   <path d="M11 0H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2 2 2 0 0 0 2-2V4a2 2 0 0 0-2-2 2 2 0 0 0-2-2zm2 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1V3zM2 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2z"/>
@@ -390,7 +386,7 @@ if (hasSearchWrapper) {
 const renderResult = (templateString, data) => {
   var conditionalMatches, conditionalPattern, copy;
   conditionalPattern = /\#\{\s*isset ([a-zA-Z]*) \s*\}(.*)\#\{\s*end\s*}/g;
-  // since loop below depends on re.lastInxdex, we use a copy to capture any manipulations whilst inside the loop
+  // since loop below depends on re.lastIndex, we use a copy to capture any manipulations whilst inside the loop
   copy = templateString;
   while (
     (conditionalMatches = conditionalPattern.exec(templateString)) !== null
@@ -416,7 +412,7 @@ const renderResult = (templateString, data) => {
 
 // ========================================================================================
 
-// Reset Serach
+// Reset Search
 const resetSearch = () => {
   searchIcon && (searchIcon.style.display = "initial");
   searchIconReset && (searchIconReset.style.display = "none");
@@ -458,7 +454,7 @@ const disableBodyScroll = () => {
 
 // Show/Hide Search Modal
 const showModal = () => {
-  searchWrapper.classList.add("show");
+  searchModal.classList.add("show");
   window.setTimeout(
     () => document.querySelector("[data-search-input]").focus(),
     100
@@ -469,7 +465,7 @@ const showModal = () => {
   }
 };
 const closeModal = () => {
-  searchWrapper.classList.remove("show");
+  searchModal.classList.remove("show");
   resetSearch();
   if (hasSearchModal) {
     enableBodyScroll();

@@ -5,16 +5,17 @@
 {{ with site.Params.search }}
   {{ if .enable }}
     <div
-      class="search-wrapper search-modal {{ $class }}"
-      data-image="{{ site.Params.search.show_image | default false }}"
-      data-description="{{ site.Params.search.show_description | default true }}"
-      data-tags="{{ site.Params.search.show_tags | default true }}"
-      data-categories="{{ site.Params.search.show_categories | default true }}"
-      tabindex="-1"
+      class="search-modal {{ $class }}"
       aria-hidden="true"
       style="--color-primary: {{ site.Params.search.primary_color | default `#7f0ec6` }}">
-      <div class="search-wrapper-content">
-        <div class="search-input-body">
+      <div data-target="close-search-modal" class="search-modal-overlay"></div>
+      <div
+        class="search-wrapper"
+        data-image="{{ site.Params.search.show_image | default true }}"
+        data-description="{{ site.Params.search.show_description | default true }}"
+        data-tags="{{ site.Params.search.show_tags | default true }}"
+        data-categories="{{ site.Params.search.show_categories | default true }}">
+        <div class="search-wrapper-header">
           <label for="search-modal-input" style="margin-top:-1px">
             <span class="sr-only">search icon</span>
             <svg
@@ -62,7 +63,6 @@
                 width="14"
                 height="14"
                 fill="currentColor"
-                style="margin-top:-2px;"
                 viewBox="0 0 16 16">
                 <path
                   d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
