@@ -34,10 +34,18 @@
 
 
     <!-- if webp false -->
-    {{ if or (eq $webp "false") (eq $webp false) }}
-      {{ $option = add (add (add (add (string ($width | default $imageWidth)) "x") (string ($height | default $imageHeight))) " ") (string $option) }}
+    {{ if or ($width) ($height) }}
+    <!-- If either Width or Height is set, construct $option without default values -->
+    {{ $option = add (add (string $width) "x" (string $height)) " " }}
     {{ else }}
-      {{ $option = add (add (add (add (string ($width | default $imageWidth)) "x") (string ($height | default $imageHeight))) " webp ") (string $option) }}
+    <!-- Original logic if neither Width nor Height is set -->
+    {{ $option = add (add (add (add (string ($width | default $imageWidth)) "x") (string ($height | default $imageHeight)))
+    " ") (string $option) }}
+    {{ end }}
+    
+    <!-- Add "webp" if necessary -->
+    {{ if or (eq $webp "false") (eq $webp false) }}
+    {{ $option = add $option "webp " }}
     {{ end }}
 
 
