@@ -18,10 +18,8 @@
 
 
 <!-- check content image  -->
-{{ with $context.Resources }}
-  {{ if .GetMatch $imagePath }}
-    {{ $contentImage = true }}
-  {{ end }}
+{{ with $context.Resources.GetMatch $imagePath }}
+  {{ $contentImage = true }}
 {{ end }}
 <!-- /check content image -->
 
