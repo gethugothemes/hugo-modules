@@ -18,7 +18,7 @@ Add the following code to your js plugins list in the `config.toml` file.
 link = "plugins/glightbox.js"
 ```
 
-Add the following code to your `asstes/scss/main.scss` or `asstes/scss/style.scss` file.
+Add the following code to your `assets/scss/main.scss` or `assets/scss/style.scss` file.
 
 ```scss
 @import 'gallery';

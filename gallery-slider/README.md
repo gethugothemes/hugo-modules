@@ -26,7 +26,7 @@ link = "plugins/glightbox/glightbox.js"
 link = "js/gallery-slider.js"
 ```
 
-Add the following code to your `asstes/scss/main.scss` or `asstes/scss/style.scss` file.
+Add the following code to your `assets/scss/main.scss` or `assets/scss/style.scss` file.
 
 ```scss
 @import 'gallery-slider';
