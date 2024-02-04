@@ -9,7 +9,7 @@ Add the following code to your module list in the `config/_default/module.toml` 
 path = "github.com/gethugothemes/hugo-modules/images"
 ```
 
-Add the following code to your `asstes/scss/main.scss` or `asstes/scss/style.scss` file.
+Add the following code to your `assets/scss/main.scss` or `assets/scss/style.scss` file.
 
 ```scss
 @import 'images';
@@ -38,8 +38,9 @@ Define the logo in the `config/_default/params.toml` file.
 ```toml
 # logo
 logo = "images/logo.png"
-# logo_dark only used when theme has a dark mode
-logo_dark = "images/logo_darkmode.png"
+
+# logo_darkmode only used when theme has a dark mode
+logo_darkmode = "images/logo_darkmode.png"
 
 # use `px` or `x` with logo_width, example: "100px".
 # Note: logo_width is not work with .svg file
