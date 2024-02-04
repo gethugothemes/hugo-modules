@@ -130,7 +130,8 @@
 .search-result-item:focus mark,
 .search-result-item.search-item-selected mark,
 .search-result-item:hover mark {
-  background-color: #777;
+  background-color: #fef08a;
+  color: #060606;
 }
 
 .search-result-item [data-result-item] u {
