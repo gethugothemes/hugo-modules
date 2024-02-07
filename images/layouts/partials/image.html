@@ -1,9 +1,13 @@
-{{ $imagePath:= .Src }}
 {{ $image:= . }}
+{{ $imagePath:= .Src }}
 {{ $class:= .Class }}
 {{ $size:= .Size }}
-{{ $resize:= .Resize | default true }}
 {{ $alt:= .Alt }}
+{{ $displayXL:= .DisplayXL | default "1110x" }}
+{{ $displayLG:= .DisplayLG | default "700x" }}
+{{ $displayMD:= .DisplayMD | default "600x" }}
+{{ $displaySM:= .DisplaySM | default "545x" }}
+{{ $resize:= .Resize | default true }}
 {{ $loading:= .Loading | default "lazy" }}
 {{ $context:= .Context | default . }}
 {{ $contentImage:= false }}
@@ -71,7 +75,7 @@
     {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
       <img
         src="{{ $image.RelPermalink }}"
-        loading="{{$loading}}"
+        loading="{{ $loading }}"
         decoding="async"
         alt="{{ .Alt }}"
         class="{{ $class }} img"
@@ -119,7 +123,8 @@
             src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
             data-src={{ $imageWebp.RelPermalink }}
           {{ else }}
-            src="{{ $imageWebp.RelPermalink }}" loading="{{$loading}}" decoding="async"
+            src="{{ $imageWebp.RelPermalink }}" loading="{{ $loading }}"
+            decoding="async"
           {{ end }}
 
           alt="{{ .Alt }}"
@@ -136,7 +141,8 @@
             {{- $imageWebp.Height -}}
           {{- end -}}
           "
-          onerror="this.onerror='null';this.src='{{ $imageFallback.RelPermalink }}';" />
+          onerror="this.onerror='null';
+          this.src='{{ $imageFallback.RelPermalink }}';" />
 
         <!-- if image size less then 500x and size not defined -->
       {{ else if or (lt ($image.Width) 500) (not $resize) }}
@@ -176,8 +182,8 @@
             src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
             data-src={{ $imageWebp.RelPermalink }} alt="placeholder"
           {{ else }}
-            src="{{ $imageWebp.RelPermalink }}" loading="{{$loading}}" decoding="async"
-            alt="{{ .Alt }}"
+            src="{{ $imageWebp.RelPermalink }}" loading="{{ $loading }}"
+            decoding="async" alt="{{ .Alt }}"
           {{ end }}
 
           class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
@@ -198,16 +204,16 @@
         <!-- /if image size less then 500x and size not defined -->
 
         <!-- image processing for multiple device -->
-        {{ $imageFallback:= $image.Resize "1110x" }}
-        {{ $imageXL:= $image.Resize "1110x webp" }}
-        {{ $imageLG:= $image.Resize "700x webp" }}
-        {{ $imageMD:= $image.Resize "600x webp" }}
-        {{ $imageSM:= $image.Resize "545x webp" }}
+        {{ $imageFallback:= $image.Resize $displayXL }}
+        {{ $imageXL:= $image.Resize (add $displayXL " webp") }}
+        {{ $imageLG:= $image.Resize (add $displayLG " webp") }}
+        {{ $imageMD:= $image.Resize (add $displayMD " webp") }}
+        {{ $imageSM:= $image.Resize (add $displaySM " webp") }}
         {{ if not $webp }}
-          {{ $imageXL = $image.Resize "1110x" }}
-          {{ $imageLG = $image.Resize "700x" }}
-          {{ $imageMD = $image.Resize "600x" }}
-          {{ $imageSM = $image.Resize "545x" }}
+          {{ $imageXL = $image.Resize $displayXL }}
+          {{ $imageLG = $image.Resize $displayLG }}
+          {{ $imageMD = $image.Resize $displayMD }}
+          {{ $imageSM = $image.Resize $displaySM }}
         {{ end }}
 
 
@@ -252,7 +258,7 @@
               src="data:image/jpeg;base64,{{ $placeholderImage.Content | base64Encode }}"
               data-src={{ $imageFallback.RelPermalink }}
             {{ else }}
-              loading="{{$loading}}" decoding="async"
+              loading="{{ $loading }}" decoding="async"
               src="{{ $imageFallback.RelPermalink }}"
             {{ end }}class="{{ if $placeholder }}
               lazy

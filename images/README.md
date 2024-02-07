@@ -86,11 +86,15 @@ Available parameters:
 * `Alt`: image alt text
 * `Size`: image size (example: "100x100")
 * `Class`: image class
-* `Resize`: image resizer | default: true
+* `Resize`: image resize option | default: true
 * `Webp`: generate webp version | default: true
 * `Context`: image context | default: .
 * `Command`: image resizing command | default: "Resize"
 * `Placeholder`: image placeholder | default: false
+* `DisplayXL`: image size for extra large screen | default: "1110px"
+* `DisplayLG`: image size for large screen | default: "700px"
+* `DisplayMD`: image size for medium screen | default: "600px"
+* `DisplaySM`: image size for small screen | default: "545px"
 
 ```html
 <!-- simple image call -->
