@@ -28,11 +28,17 @@ Available parameters:
 * `Title`: share title
 * `Facebook`: share facebook | default true
 * `Twitter`: share twitter | default true
-* `Email`: share Email | default true
+* `Email`: share email | default true
 * `Reddit`: share reddit | default true
 * `Whatsapp`: share whatsapp | default true
 * `Telegram`: share telegram | default true
+* `Linkedin`: share linkedin | default true
+* `Instagram`: share instagram | default true
+* `Pinterest`: shate pinterest | default true
+* `Tumblr`: share tumblr | default true
+* `VK`: shatre vk | default true
 
+  
 ```html
 <!-- social share -->
 {{ partial "social-share.html" (dict "Context" .) }}
