@@ -127,9 +127,7 @@
         <meta name="twitter:image" content="{{ $image.Permalink }}" />
         <meta
           name="twitter:card"
-          content="summary{{ if (and (gt $imageWidth 300) (gt $imageHeight 157) (not (eq $imageWidth $imageHeight))) }}
-            _large_image
-          {{ end }}" />
+          content="{{ if (and (gt $imageWidth 300) (gt $imageHeight 157) (not (eq $imageWidth $imageHeight))) }}summary_large_image{{else}}summary{{ end }}" />
       {{ end }}
       <!-- /if image gt 144px -->
       <meta property="og:image:width" content="{{ $imageWidth }}" />
