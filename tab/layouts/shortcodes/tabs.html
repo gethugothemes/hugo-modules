@@ -1,5 +1,5 @@
 {{ with .Inner }}{{/* don't do anything, just call it */}}{{ end }}
-{{ $groupId := default "default" (.Get 0) }}
+{{ $groupId := default "" (.Get 0) }}
 
 <div class="tab" data-tab-group="{{ $groupId }}">
   <ul class="tab-nav" data-tab-nav>

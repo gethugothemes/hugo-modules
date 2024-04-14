@@ -5,10 +5,7 @@
   const tabGroups = document.querySelectorAll("[data-tab-group]");
   const tablist = document.querySelectorAll("[data-tab-nav] [data-tab]");
 
-  function setActiveTab(tabGroup, tabName) {
-    const tabsNav = tabGroup.querySelector("[data-tab-nav]");
-    const tabsContent = tabGroup.querySelector("[data-tab-content]");
-
+  function activate(tabsNav, tabsContent, tabName) {
     tabsNav.querySelectorAll("[data-tab]").forEach((tabNavItem) => {
       tabNavItem.classList.remove("active");
     });
@@ -22,6 +19,27 @@
       `[data-tab-panel="${tabName}"]`
     );
     selectedTabPane.classList.add("active");
+  }
+
+  function setActiveTab(tabGroup, tabName) {
+    if (!tabGroup.dataset.tabGroup) {
+      // tabs group name is falsy, process as an independent tabs group
+      const tabsNav = tabGroup.querySelector("[data-tab-nav]");
+      const tabsContent = tabGroup.querySelector("[data-tab-content]");
+      activate(tabsNav, tabsContent, tabName);
+    } else {
+      // Select for all tabs groups with the same non-falsy group name
+      const tabsNavAll = document.querySelectorAll(`[data-tab-group=${tabGroup.dataset.tabGroup}] > [data-tab-nav]`);
+      const tabsContentAll = document.querySelectorAll(`[data-tab-group=${tabGroup.dataset.tabGroup}] > [data-tab-content]`);
+
+      tabsNavAll.forEach((tabsNav, index) => {
+        const tabsContent = tabsContentAll[index];
+        if (tabsContent === undefined) {
+          return;
+        }
+        activate(tabsNav, tabsContent, tabName);
+      });
+    }
   }
 
   tabGroups.forEach((tabGroup) => {
