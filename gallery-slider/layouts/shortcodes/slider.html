@@ -31,6 +31,8 @@
           {{ partial "image-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
           {{ $imageHeight:= $scratch.Get "image-height" }}
           {{ $imageWidth:= $scratch.Get "image-width" }}
+          {{ $imagePaths:= split .Name "/" }}
+          {{ $imageAlt:= index $imagePaths (sub (len $imagePaths) 1)}}
 
 
           <div
@@ -45,7 +47,7 @@
                   src="{{ $scratch.Get `image` }}"
                   class="img"
                   style="margin: 0"
-                  alt="{{ .Name }}"
+                  alt="{{ $imageAlt }}"
                   onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
               </a>
             {{ else }}
@@ -54,7 +56,7 @@
                 src="{{ $scratch.Get `image` }}"
                 class="img"
                 style="margin: 0"
-                alt="{{ .Name }}"
+                alt="{{ $imageAlt }}"
                 onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
             {{ end }}
           </div>
@@ -76,6 +78,8 @@
           {{ partial "image-pipe.html" (dict "Context" $scratch "Height" $height "Width" $width "Command" $command "Webp" $webp "Image" $image "Option" $option "Zoomable" $zoomable) }}
           {{ $imageHeight:= $scratch.Get "image-height" }}
           {{ $imageWidth:= $scratch.Get "image-width" }}
+          {{ $imagePaths:= split .Name "/" }}
+          {{ $imageAlt:= index $imagePaths (sub (len $imagePaths) 1)}}
 
 
           <div
@@ -91,7 +95,7 @@
                     src="{{ $scratch.Get `image` }}"
                     class="img"
                     style="margin: 0"
-                    alt="{{ .Name }}"
+                    alt="{{ $imageAlt }}"
                     onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
                 </a>
               {{ else }}
@@ -100,7 +104,7 @@
                   src="{{ $scratch.Get `image` }}"
                   class="img"
                   style="margin: 0"
-                  alt="{{ .Name }}"
+                  alt="{{ $imageAlt }}"
                   onerror="this.onerror='null';this.src='{{ $scratch.Get `imageFallback` }}'" />
               {{ end }}
             </div>
@@ -119,6 +123,9 @@
           {{ $image := print "/" $folderDir "/" .Name }}
           {{ $imageExt := path.Ext $image }}
           {{ if or (eq $imageExt `.jpg`) (eq $imageExt `.jpeg`) (eq $imageExt `.png`) (eq $imageExt `.webp`) (eq $imageExt `.svg`) (eq $imageExt `.gif`) (eq $imageExt `.ico`) }}
+          {{ $imagePaths:= split .Name "/" }}
+          {{ $imageAlt:= index $imagePaths (sub (len $imagePaths) 1)}}
+
             <div
               class="swiper-slide {{ if eq $zoomable `true` }}
                 zoomable
@@ -134,7 +141,7 @@
                       src="{{ $image }}"
                       class="img"
                       style="margin: 0"
-                      alt="{{ .Name }}"
+                      alt="{{ $imageAlt }}"
                       height="{{ $height }}"
                       width="{{ $width }}" />
                   </a>
@@ -144,7 +151,7 @@
                     src="{{ $image }}"
                     class="img"
                     style="margin: 0"
-                    alt="{{ .Name }}"
+                    alt="{{ $imageAlt }}"
                     height="{{ $height }}"
                     width="{{ $width }}" />
                 {{ end }}
