@@ -13,6 +13,6 @@
 <script>
   let indexURL = {{ "searchindex.json" | absLangURL }};
   let includeSectionsInSearch = {{ $search_sections }};
-  let no_results_for = {{ i18n `no_results_for` | default "0 results for"}};
-  let empty_search_results_placeholder = {{ i18n `empty_search_results_placeholder`}};
+  let search_no_results = {{ i18n `search_no_results` | default "0 results for"}};
+  let search_initial_message = {{ i18n `search_initial_message`}};
 </script>

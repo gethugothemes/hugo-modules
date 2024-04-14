@@ -72,11 +72,20 @@ Add the following translations to your `i18n/*.yaml` files if you use multi-lang
 - id: search_input_placeholder
   translation: Search Here
 
-- id: no_results_for
+- id: search_no_results
   translation: No results for
 
-- id: empty_search_results_placeholder
+- id: search_initial_message
   translation: Type something to search...
+
+- id: search_navigate
+  translation: to navigate
+
+- id: search_select
+  translation: to select
+
+- id: search_close
+  translation: to close
 ```
 
 ---
@@ -170,7 +179,7 @@ Or customize the search page (don't remove any class names)
         <div class="search-wrapper-body">
           <div class="search-result" data-search-result></div>
           <label class="search-result-empty" for="search-input">
-            {{ i18n `empty_search_results_placeholder` }}
+            {{ i18n `search_initial_message` }}
           </label>
         </div>
       </div>
