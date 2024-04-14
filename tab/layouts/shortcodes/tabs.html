@@ -16,7 +16,7 @@
       <div
         class="tab-content-panel {{ cond (eq $idx 0) `active` `` }}"
         data-tab-panel="{{ .name | urlize }}">
-        {{ .content  | markdownify }}
+        {{ .content  | $.Page.RenderString (dict "display" "block") }}
       </div>
     {{ end }}
   </div>
