@@ -1,0 +1,18 @@
+<!-- announcement script -->
+{{ with site.Params.announcement }}
+  {{ if .enable }}
+    <script type="application/javascript">
+      const announcementBox = document.getElementById('announcement');
+      const announcementButton = document.getElementById('announcement-button');
+      if (!Cookies.get('announcement-close')) {
+        announcementBox.classList.remove('announcement-hide');
+        announcementButton.onclick = function () {
+          Cookies.set('announcement-close', true, {
+            expires: {{ .expire_days }}
+          });
+          announcementBox.classList.add('announcement-hide');
+        };
+      }
+    </script>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,47 @@
+<!-- announcement -->
+{{ with site.Params.announcement }}
+{{ if .enable }}
+  <div id="announcement" class="announcement announcement-hide">
+    {{ .content | markdownify }}
+    <button id="announcement-button" class="announcement-button">
+      &times;
+    </button>
+  </div>
+
+  <!-- announcement style -->
+  <style>
+    .announcement {
+      position: relative;
+      z-index: 999;
+      padding: 1rem;
+      padding-right: 2.8rem;
+      background-color: #fff;
+      box-shadow: 1px 0px 10px 7px rgba(154, 154, 154, 0.11);
+      font-size: 1.1rem;
+    }
+    .announcement-button {
+      cursor: pointer;
+      padding: 0 0.5rem;
+      border: 0;
+      font-size: 1.3rem;
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      border: 1px solid;
+      border-radius: 50%;
+      height: 1.1em;
+      width: 1.1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .announcement-hide {
+      display: none;
+    }
+    .dark .announcement {
+      background-color: #222;
+    }
+  </style>
+{{ end }}
+{{ end }}
