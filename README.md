@@ -19,6 +19,7 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
 
 * [Components](https://github.com/gethugothemes/hugo-modules/tree/master/components)
 
+  * [Announcement](https://github.com/gethugothemes/hugo-modules/tree/master/components/announcement)
   * [Cookie Consent](https://github.com/gethugothemes/hugo-modules/tree/master/components/cookie-consent)
   * [Crips Chat](https://github.com/gethugothemes/hugo-modules/tree/master/components/crisp-chat)
   * [Pre Loader](https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader)
