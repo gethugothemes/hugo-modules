@@ -33,7 +33,6 @@ Available parameters:
 * `Whatsapp`: share whatsapp | default true
 * `Telegram`: share telegram | default true
 * `Linkedin`: share linkedin | default true
-* `Instagram`: share instagram | default true
 * `Pinterest`: shate pinterest | default true
 * `Tumblr`: share tumblr | default true
 * `VK`: shatre vk | default true
