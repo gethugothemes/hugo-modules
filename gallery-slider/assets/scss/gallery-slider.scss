@@ -6,36 +6,40 @@
 /*!
  * Justified gallery style
  */
- .gallery {
+
+.gallery {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 1em;
-  column-gap: 1em;
+  margin-left: -10px;
+  margin-right: -10px;
 }
- @media (min-width: 460px) {
-  .gallery .glightbox {
-    width:100%;
-    height:100%;
-  }
-  .gallery .gallery-item {
-    height: 40vh;
-    flex-grow: 1;
-  }
-  .gallery .gallery-item img {
-    max-height: 100%;
-    min-width: 100%;
-    object-fit: cover;
-    vertical-align: bottom;
-  }
-  .gallery.zoomable .gallery-item:hover img {
-    transform: scale(1.05);
-    cursor: zoom-in;
-  }
+.gallery .gallery-item {
+  margin: 0 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  max-width: calc(100% - 20px);
 }
-
+.gallery .gallery-item img {
+  user-select: none;
+  width: 100%;
+  vertical-align: middle;
+  transition: 0.3s;
+}
+.gallery.zoomable .gallery-item:hover img {
+  transform: scale(1.05);
+  cursor: zoom-in;
+}
+.gallery::after {
+  content: "";
+  flex-grow: 99999;
+  min-width: calc(100vw / 3);
+}
 @media (max-width: 460px) {
   .gallery {
     flex-direction: column;
+  }
+  .gallery .gallery-item {
+    width: calc(100% - 20px) !important;
   }
 }
 
