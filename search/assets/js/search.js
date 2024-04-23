@@ -385,7 +385,6 @@ if (hasSearchWrapper) {
       });
     }
   };
-  loadJsonData();
 }
 
 // Render Result Template
