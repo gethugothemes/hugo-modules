@@ -1,5 +1,11 @@
 {{ $class:= .Class }}
-<details class="table-of-content {{$class}}">
+{{ $scratch := newScratch }}
+{{ if not (.Collapsed | default true) }} 
+  {{ $scratch.Set "openAttr" "open" }}
+{{ else }}
+  {{ $scratch.Set "openAttr" "" }}
+{{ end }}
+<details {{ $scratch.Get "openAttr" | safeHTMLAttr }} class="table-of-content {{$class}}">
   <summary>
     {{ with i18n "toc" }}
       {{ . }}
