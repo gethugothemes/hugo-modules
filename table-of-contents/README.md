@@ -40,7 +40,8 @@ ordered = true
 
 available parameters:
 
-* class = "your-class"
+* Class = "your-class"
+* Collapsed: display as collapsed | default true
 
 ```html
 {{ partial "toc.html" }}
