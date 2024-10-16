@@ -1,3 +1,3 @@
-module github.com/gethugothemes/hugo-modules/images
+module github.com/qima/hugo-modules/images
 
 go 1.19
