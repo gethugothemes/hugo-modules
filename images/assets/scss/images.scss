@@ -3,8 +3,7 @@
   height: auto;
 }
 
-// logo
-.logo {
+.img {
   &-light {
     display: initial;
   }
@@ -12,7 +11,7 @@
     display: none;
   }
 }
-.dark .logo {
+.dark .img {
   &-light {
     display: none;
   }
