@@ -1,7 +1,23 @@
+$note-color: #293df2;
+$abstract-color: #0ca68c;
+$info-color: #09c3ed;
+$todo-color: #8d05a8;
+$tip-color: #19cfb0;
+$success-color: #04d904;
+$question-color: #e38902;
+$warning-color: #e38902;
+$danger-color: #e31a00;
+$failure-color: #e31a00;
+$bug-color: #e31a00;
+$example-color: #b83acf;
+$quote-color: #918e91;
+
 .notice {
   margin-bottom: 1.5rem;
   border: 1px solid #e5e7eb;
   padding: 1.5rem;
+  border-radius: 5px;
+  border-color: currentColor;
 }
 
 .notice-head {
@@ -30,25 +46,69 @@
 }
 
 .notice.note {
-  color: #1b83e2;
-  border-color: currentColor;
+  color: $note-color;
+  background-color: rgba($note-color, 0.15);
 }
 
-.notice.tip {
-  color: #40d294;
-  border-color: currentColor;
+.notice.abstract {
+  color: $abstract-color;
+  background-color: rgba($abstract-color, 0.15);
 }
 
 .notice.info {
-  color: #e3a72c;
-  border-color: currentColor;
+  color: $info-color;
+  background-color: rgba($info-color, 0.15);
+}
+
+.notice.todo {
+  color: $todo-color;
+  background-color: rgba($todo-color, 0.15);
+}
+
+.notice.tip {
+  color: $tip-color;
+  background-color: rgba($tip-color, 0.15);
+}
+
+.notice.success {
+  color: $success-color;
+  background-color: rgba($success-color, 0.15);
+}
+
+.notice.question {
+  color: $question-color;
+  background-color: rgba($question-color, 0.15);
 }
 
 .notice.warning {
-  color: #db2c23;
-  border-color: currentColor;
+  color: $warning-color;
+  background-color: rgba($warning-color, 0.15);
 }
 
+.notice.failure {
+  color: $failure-color;
+  background-color: rgba($failure-color, 0.15);
+}
+
+.notice.danger {
+  color: $danger-color;
+  background-color: rgba($danger-color, 0.15);
+}
+
+.notice.bug {
+  color: $bug-color;
+  background-color: rgba($bug-color, 0.15);
+}
+
+.notice.example {
+  color: $example-color;
+  background-color: rgba($example-color, 0.15);
+}
+
+.notice.quote {
+  color: $quote-color;
+  background-color: rgba($quote-color, 0.15);
+}
 // darkmode
 .dark .notice-head p {
   color: #d1d5db;
