@@ -11,7 +11,7 @@
 {{- end -}}
 
 {{- $searchablePages := (where site.RegularPages "Section" "in" $search_sections) -}}
-{{- if site.Params.search.include_section_pages -}}
+{{- if site.Params.search.include_list_pages -}}
 {{- $searchablePages = (where site.Pages "Section" "in" $search_sections) -}}
 {{- end -}}
 
