@@ -1,3 +1,3 @@
-module github.com/qima/hugo-modules
+module github.com/gethugothemes/hugo-modules
 
 go 1.19
