@@ -28,7 +28,7 @@
 <!-- /check content image -->
 
 <!-- check asset image -->
-{{ if fileExists (add `assets/` (string $imagePath)) }}
+{{ if and (not (strings.HasPrefix $imagePath "http")) (fileExists (add `assets/` (string $imagePath))) }}
   {{ $assetImage = true }}
 {{ end }}
 <!-- /check asset image -->

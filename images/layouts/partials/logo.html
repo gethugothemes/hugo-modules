@@ -73,7 +73,8 @@
     {{ $scratch.Set "logo" $logo.RelPermalink }}
     <!-- logo processing to webp -->
   {{ else }}
-    {{ $logoWidth2x:= add (string (mul (int $logoWidth | default $logoDefaultWidth) 2)) `x` }}
+    {{ $logoWidth := default 100 $logoWidth }}  
+    {{ $logoWidth2x := add (string (mul (int $logoWidth) 2)) `x` }}  
     {{ $options:= add (string $logoWidth2x) " webp" }}
     {{ if not $logoWebp }}
       <!-- if webp false -->
