@@ -1,5 +1,4 @@
 # Notice Shortcode
-      },
 
 ## Installation for Gethugothemes themes
 
