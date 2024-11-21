@@ -10,9 +10,14 @@
 {{- $search_sections = site.Params.search.include_sections | default site.Params.mainSections -}}
 {{- end -}}
 
-{{- $totalPagesLength := len (where site.RegularPages "Section" "in" $search_sections) -}}
+{{- $searchablePages := (where site.RegularPages "Section" "in" $search_sections) -}}
+{{- if site.Params.search.include_list_pages -}}
+{{- $searchablePages = (where site.Pages "Section" "in" $search_sections) -}}
+{{- end -}}
 
-[{{- range $i, $e := (where site.RegularPages "Section" "in" $search_sections) -}}
+{{- $totalPagesLength := len $searchablePages -}}
+
+[{{- range $i, $e := $searchablePages -}}
 {{- if not .Params.ignoreSearch -}}
 
 {{- $date:= time.Format ":date_long" .PublishDate -}}
