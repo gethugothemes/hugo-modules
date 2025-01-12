@@ -4,25 +4,14 @@
 {{ $class:= .Get 3 }}
 {{ $rel:= .Get 4 }}
 
-{{ range $i, $e:= .Params }}
-  {{ if eq $i "label" }}{{ $label = $e }}{{ end }}
-{{ end }}
-
-{{ range $i, $e:= .Params }}
-  {{ if eq $i "link" }}{{ $link = $e }}{{ end }}
-{{ end }}
-
-{{ range $i, $e:= .Params }}
-  {{ if eq $i "style" }}{{ $style = $e }}{{ end }}
-{{ end }}
-
-{{ range $i, $e:= .Params }}
-  {{ if eq $i "class" }}{{ $class = $e }}{{ end }}
-{{ end }}
-
-{{ range $i, $e:= .Params }}
-  {{ if eq $i "rel" }}{{ $rel = $e }}{{ end }}
-{{ end }}
+{{ range $i, $e:= .Params }} 
+  {{ if eq $i "label" }}{{ $label = $e }}
+  {{ else if eq $i "link" }}{{ $link = $e }}
+  {{ else if eq $i "style" }}{{ $style = $e }}
+  {{ else if eq $i "class" }}{{ $class = $e }}
+  {{ else if eq $i "rel" }}{{ $rel = $e }}
+  {{ end }}
+{{ end }} 
 
 
 <a href="{{ $link | absLangURL }}" class="btn {{ if eq $style `outline` }}btn-outline-primary{{ else }}btn-primary{{ end }} {{ $class }}" {{ if strings.HasPrefix $link `http` }} target="_blank" rel="noopener {{ $rel }}" {{else}} rel="{{ $rel }}" {{ end }}>{{ $label }}</a>
