@@ -1,0 +1,35 @@
+.accordion {
+  border: 1px solid #ccc;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.1rem;
+  width: 100%;
+  font-weight: bold;
+  text-align: left;
+}
+
+.accordion-icon {
+  width: 0.78em;
+  height: 0.78em;
+  transform: rotate(-90deg);
+  transition: transform 0.2s ease;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1rem;
+}
+
+.accordion.active .accordion-icon {
+  transform: rotate(0deg);
+}
+
+.accordion.active .accordion-content {
+  max-height: max-content;
+}

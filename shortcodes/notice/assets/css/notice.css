@@ -1,0 +1,100 @@
+.notice {
+  margin-bottom: 1.5rem;
+  border: 1px solid;
+  padding: 1.5rem;
+  border-color: currentColor;
+}
+
+.notice-head {
+  display: flex;
+  align-items: center;
+}
+
+.notice-head svg {
+  margin-right: 0.75rem;
+}
+
+.notice-head p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  line-height: 1;
+}
+
+.notice-body {
+  margin-top: 0.75rem;
+}
+
+.notice-body p {
+  margin: 0;
+}
+
+.notice.note {
+  color: #293df2;
+  background-color: rgba(41, 61, 242, 0.15);
+}
+
+.notice.abstract {
+  color: #0ca68c;
+  background-color: rgba(12, 166, 140, 0.15);
+}
+
+.notice.info {
+  color: #09c3ed;
+  background-color: rgba(9, 195, 237, 0.15);
+}
+
+.notice.todo {
+  color: #8d05a8;
+  background-color: rgba(141, 5, 168, 0.15);
+}
+
+.notice.tip {
+  color: #19cfb0;
+  background-color: rgba(25, 207, 176, 0.15);
+}
+
+.notice.success {
+  color: #04d904;
+  background-color: rgba(4, 217, 4, 0.15);
+}
+
+.notice.question {
+  color: #e38902;
+  background-color: rgba(227, 137, 2, 0.15);
+}
+
+.notice.warning {
+  color: #e38902;
+  background-color: rgba(227, 137, 2, 0.15);
+}
+
+.notice.failure {
+  color: #e31a00;
+  background-color: rgba(227, 26, 0, 0.15);
+}
+
+.notice.danger {
+  color: #e31a00;
+  background-color: rgba(227, 26, 0, 0.15);
+}
+
+.notice.bug {
+  color: #e31a00;
+  background-color: rgba(227, 26, 0, 0.15);
+}
+
+.notice.example {
+  color: #b83acf;
+  background-color: rgba(184, 54, 207, 0.15);
+}
+
+.notice.quote {
+  color: #918e91;
+  background-color: rgba(145, 142, 145, 0.15);
+}
+
+.dark .notice-head p {
+  color: #d1d5db;
+}

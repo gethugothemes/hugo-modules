@@ -1,0 +1,94 @@
+.img {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-light {
+  display: initial;
+}
+
+.img-dark {
+  display: none;
+}
+
+.dark .img-light {
+  display: none;
+}
+
+.dark .img-dark {
+  display: initial;
+}
+
+/* shortcode image */
+.content img {
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+  height: auto;
+  display: inline-block;
+}
+
+.content img.glightbox {
+  cursor: pointer;
+}
+
+.content img.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content img.img-left {
+  display: block;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.content img.img-right {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.content img.img-float-left {
+  float: left;
+  margin-right: 1.5rem;
+}
+
+.content img.img-float-right {
+  float: right;
+  margin-left: 1.5rem;
+}
+
+.content figure {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.content figure img {
+  margin-bottom: 0.7rem;
+}
+
+.content figure.img-center {
+  display: block;
+  text-align: center;
+}
+
+.content figure.img-left {
+  display: block;
+  text-align: left;
+}
+
+.content figure.img-right {
+  display: block;
+  text-align: right;
+}
+
+.content figure.img-float-left {
+  float: left;
+  margin-right: 1.5rem;
+}
+
+.content figure.img-float-right {
+  float: right;
+  margin-left: 1.5rem;
+}
