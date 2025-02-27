@@ -19,7 +19,7 @@
 
   <!-- checking content/static -->
 {{ else }}
-  {{ .Scratch.Set "video_path" (print "/" $videoPath) }}
+  {{ .Scratch.Set "video_path" (relURL $videoPath) }}
 {{ end }}
 
 {{ $videoPath = .Scratch.Get "video_path" }}
