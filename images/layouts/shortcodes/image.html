@@ -190,6 +190,7 @@
 
   {{ else }}
     <!-- image not found -->
+    {{ warnf "Image file not found: %s (referenced by %s)" $imagePath .Page.File.Path }}
     <strong style="color:red; margin-bottom:15px; display:inline-block;"
       >{{ site.BaseURL }}{{ $imagePath }} does not exist</strong
     >
