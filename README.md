@@ -79,7 +79,7 @@ We welcome contributions from the community to help us improve and expand this p
 |:---:|:---:|:---:|
 | **Bigspring** | **Reader** | **Agico** |
 | [![Logbook](https://demo.gethugothemes.com/thumbnails/logbook.png)](https://gethugothemes.com/products/logbook/) | [![Copper](https://demo.gethugothemes.com/thumbnails/copper.png)](https://gethugothemes.com/products/copper/) | [![Mega-Bundle-HUGO](https://demo.gethugothemes.com/thumbnails/bundle.png?)](https://gethugothemes.com/bundle/?utm_source=hugo_modules_github&utm_medium=referral&utm_campaign=github_theme_readme) |
-| **Logbook** |  **Copper** | **56+ Themes Bundle** |
+| **Logbook** |  **Copper** | **60+ Themes Bundle** |
 
 ## 📝 License
 
