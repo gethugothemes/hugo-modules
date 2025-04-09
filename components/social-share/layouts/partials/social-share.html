@@ -2,7 +2,7 @@
 {{ $class:= .Class }}
 {{ $title:= .Title }}
 {{ $facebook:= .Facebook | default true }}
-{{ $twitter:= .Twitter | default true }}
+{{ $x:= .X | default true }}
 {{ $email:= .Email | default true }}
 {{ $reddit:= .Reddit | default true }}
 {{ $whatsapp:= .Whatsapp | default true }}
@@ -11,14 +11,13 @@
 {{ $pinterest:= .Pinterest | default true }}
 {{ $tumblr:= .Tumblr | default true }}
 {{ $vk:= .Vk | default true }}
+{{ $fediverse:= .Fediverse | default true }}
+{{ $copy:= .Copy | default true }}
 
 {{ $url := printf "%s" $context.Permalink | absLangURL }}
 
 
 <div class="{{ $class }}">
-  {{ with $title }}<h5 class="share-title">{{ . | markdownify }} :</h5>{{ end }}
-
-
   <!-- Facebook -->
   {{ if $facebook }}
     <a
@@ -37,18 +36,18 @@
   {{ end }}
 
 
-  <!-- Twitter -->
-  {{ if $twitter }}
+  <!-- x -->
+  {{ if $x }}
     <a
-      class="share-link share-twitter"
-      href="https://twitter.com/intent/tweet/?text={{ .Title }}&amp;url={{ $url }}"
+      class="share-link share-x"
+      href="https://x.com/intent/tweet/?text={{ .Title }}&amp;url={{ $url }}"
       target="_blank"
       rel="noopener"
-      aria-label="share twitter">
+      aria-label="share x">
       <span aria-hidden="true" class="share-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path 
-            d="M8 2H1l8.26 11.015L1.45 22H4.1l6.388-7.349L16 22h7l-8.608-11.478L21.8 2h-2.65l-5.986 6.886zm9 18L5 4h2l12 16z"/>
+          <path
+            d="M8 2H1l8.26 11.015L1.45 22H4.1l6.388-7.349L16 22h7l-8.608-11.478L21.8 2h-2.65l-5.986 6.886zm9 18L5 4h2l12 16z" />
         </svg>
       </span>
     </a>
@@ -130,16 +129,16 @@
   <!-- LinkedIn -->
   {{ if $linkedin }}
     <a
-      class="share-link share-linkedin" 
+      class="share-link share-linkedin"
       href="https://www.linkedin.com/sharing/share-offsite/?url={{ $url }}"
       target="_blank"
       rel="noopener"
       aria-label="share linkedin">
       <span aria-hidden="true" class="share-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path 
-            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/>
-          </svg>
+          <path
+            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z" />
+        </svg>
       </span>
     </a>
   {{ end }}
@@ -147,16 +146,16 @@
 
   <!-- Pinterest -->
   {{ if $pinterest }}
-    <a 
-      class="share-link share-pinterest" 
-      href="http://pinterest.com/pin/create/link/?url={{ $url }}" 
+    <a
+      class="share-link share-pinterest"
+      href="http://pinterest.com/pin/create/link/?url={{ $url }}"
       target="_blank"
       rel="noopener"
       aria-label="share linkedin">
       <span aria-hidden="true" class="share-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path  
-            d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162c-.105-.949-.199-2.403.041-3.439c.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911c1.024 0 1.518.769 1.518 1.688c0 1.029-.653 2.567-.992 3.992c-.285 1.193.6 2.165 1.775 2.165c2.128 0 3.768-2.245 3.768-5.487c0-2.861-2.063-4.869-5.008-4.869c-3.41 0-5.409 2.562-5.409 5.199c0 1.033.394 2.143.889 2.741c.099.12.112.225.085.345c-.09.375-.293 1.199-.334 1.363c-.053.225-.172.271-.401.165c-1.495-.69-2.433-2.878-2.433-4.646c0-3.776 2.748-7.252 7.92-7.252c4.158 0 7.392 2.967 7.392 6.923c0 4.135-2.607 7.462-6.233 7.462c-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146c1.123.345 2.306.535 3.55.535c6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026z"/>
+          <path
+            d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162c-.105-.949-.199-2.403.041-3.439c.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911c1.024 0 1.518.769 1.518 1.688c0 1.029-.653 2.567-.992 3.992c-.285 1.193.6 2.165 1.775 2.165c2.128 0 3.768-2.245 3.768-5.487c0-2.861-2.063-4.869-5.008-4.869c-3.41 0-5.409 2.562-5.409 5.199c0 1.033.394 2.143.889 2.741c.099.12.112.225.085.345c-.09.375-.293 1.199-.334 1.363c-.053.225-.172.271-.401.165c-1.495-.69-2.433-2.878-2.433-4.646c0-3.776 2.748-7.252 7.92-7.252c4.158 0 7.392 2.967 7.392 6.923c0 4.135-2.607 7.462-6.233 7.462c-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146c1.123.345 2.306.535 3.55.535c6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026z" />
         </svg>
       </span>
     </a>
@@ -165,16 +164,16 @@
 
   <!-- Tumblr -->
   {{ if $tumblr }}
-    <a 
-      class="share-link share-tumblr" 
-      href="https://www.tumblr.com/widgets/share/tool?canonicalUrl={{ $url }}&title={{ .Title }}" 
+    <a
+      class="share-link share-tumblr"
+      href="https://www.tumblr.com/widgets/share/tool?canonicalUrl={{ $url }}&title={{ .Title }}"
       target="_blank"
       rel="noopener"
       aria-label="share linkedin">
       <span aria-hidden="true" class="share-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path 
-            d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6s9.6-4.298 9.6-9.6S15.302.4 10 .4m2.577 13.741a5.508 5.508 0 0 1-1.066.395a4.543 4.543 0 0 1-1.031.113c-.42 0-.791-.055-1.114-.162a2.373 2.373 0 0 1-.826-.459a1.651 1.651 0 0 1-.474-.633c-.088-.225-.132-.549-.132-.973V9.16H6.918V7.846c.359-.119.67-.289.927-.512c.257-.221.464-.486.619-.797c.156-.31.263-.707.322-1.185h1.307v2.35h2.18V9.16h-2.18v2.385c0 .539.028.885.085 1.037a.7.7 0 0 0 .315.367c.204.123.437.185.697.185c.466 0 .928-.154 1.388-.461z"/>
+          <path
+            d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6s9.6-4.298 9.6-9.6S15.302.4 10 .4m2.577 13.741a5.508 5.508 0 0 1-1.066.395a4.543 4.543 0 0 1-1.031.113c-.42 0-.791-.055-1.114-.162a2.373 2.373 0 0 1-.826-.459a1.651 1.651 0 0 1-.474-.633c-.088-.225-.132-.549-.132-.973V9.16H6.918V7.846c.359-.119.67-.289.927-.512c.257-.221.464-.486.619-.797c.156-.31.263-.707.322-1.185h1.307v2.35h2.18V9.16h-2.18v2.385c0 .539.028.885.085 1.037a.7.7 0 0 0 .315.367c.204.123.437.185.697.185c.466 0 .928-.154 1.388-.461z" />
         </svg>
       </span>
     </a>
@@ -183,18 +182,133 @@
 
   <!-- VKontakte (VK) -->
   {{ if $vk }}
-    <a 
-      class="share-link share-vk" 
-      href="http://vk.com/share.php?url={{ $url }}&title={{ .Title }}" 
+    <a
+      class="share-link share-vk"
+      href="http://vk.com/share.php?url={{ $url }}&title={{ .Title }}"
       target="_blank"
       rel="noopener"
       aria-label="share linkedin">
       <span aria-hidden="true" class="share-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path 
-            d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/>
+          <path
+            d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.677.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z" />
         </svg>
       </span>
     </a>
   {{ end }}
+
+
+  <!-- Fediverse -->
+  {{ if $fediverse }}
+    <span class="fediverse-share">
+      <a
+        class="share-link share-fediverse"
+        href="javascript:void(0);"
+        onclick="toggleFediverseInput(this)"
+        aria-label="share fediverse">
+        <span aria-hidden="true" class="share-icon">
+          <svg
+            viewBox="-10 -5 1034 1034"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M539 176q-32 0 -55 22t-25 55t20.5 58t56 27t58.5 -20.5t27 -56t-20.5 -59t-56.5 -26.5h-5zM452 271l-232 118q20 20 25 48l231 -118q-19 -20 -24 -48zM619 298q-13 25 -38 38l183 184q13 -25 39 -38zM477 320l-135 265l40 40l143 -280q-28 -5 -48 -25zM581 336 q-22 11 -46 10l-8 -1l21 132l56 9zM155 370q-32 0 -55 22.5t-25 55t20.5 58t56.5 27t59 -21t26.5 -56t-21 -58.5t-55.5 -27h-6zM245 438q1 9 1 18q-1 19 -10 35l132 21l26 -50zM470 474l-26 51l311 49q-1 -8 -1 -17q1 -19 10 -36zM842 480q-32 1 -55 23t-24.5 55t21 58 t56 27t58.5 -20.5t27 -56.5t-20.5 -59t-56.5 -27h-6zM236 493q-13 25 -39 38l210 210l51 -25zM196 531q-21 11 -44 10l-9 -1l40 256q21 -10 45 -9l8 1zM560 553l48 311q21 -10 44 -9l10 1l-46 -294zM755 576l-118 60l8 56l135 -68q-20 -20 -25 -48zM781 625l-119 231 q28 5 48 25l119 -231q-28 -5 -48 -25zM306 654l-68 134q28 5 48 25l60 -119zM568 671l-281 143q19 20 24 48l265 -135zM513 771l-51 25l106 107q13 -25 39 -38zM222 795q-32 0 -55.5 22.5t-25 55t21 57.5t56 27t58.5 -20.5t27 -56t-20.5 -58.5t-56.5 -27h-5zM311 863 q2 9 1 18q-1 19 -9 35l256 41q-1 -9 -1 -18q1 -18 10 -35zM646 863q-32 0 -55 22.5t-24.5 55t20.5 58t56 27t59 -21t27 -56t-20.5 -58.5t-56.5 -27h-6z"></path>
+            </g>
+          </svg>
+        </span>
+      </a>
+      <span class="fediverse-input-wrapper" style="display: none;">
+        <input
+          type="text"
+          placeholder="Enter Fediverse Instance URL"
+          class="fediverse-input"
+          onkeypress="handleFediverseShare(event, '{{ $url }}', '{{ .Title }}')" />
+        <button
+          class="fediverse-check-button"
+          onclick="handleFediverseShareButton(this, '{{ $url }}', '{{ .Title }}')">
+          Share
+        </button>
+      </span>
+    </span>
+  {{ end }}
+
+
+  <!-- Copy Link -->
+  {{ if $copy }}
+    <button
+      class="share-link share-copy"
+      onclick="copyToClipboard(this, '{{ $url }}')">
+      <span class="share-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-1c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 17H5V5h14v14z" />
+        </svg>
+      </span>
+    </button>
+  {{ end }}
+
 </div>
+
+<script>
+  // This script handles the Fediverse share functionality
+  function toggleFediverseInput(element) {
+    const container = element.closest(".fediverse-share");
+    const inputContainer = container.querySelector(".fediverse-input-wrapper");
+    inputContainer.style.display =
+      inputContainer.style.display === "none" ? "block" : "none";
+  }
+
+  // This function handles the Enter key event for the Fediverse input
+  function handleFediverseShare(event, url, title) {
+    if (event.key === "Enter") {
+      const input = event.target;
+      let instanceUrl = input.value.trim();
+      if (instanceUrl) {
+        if (!instanceUrl.startsWith("https://")) {
+          instanceUrl = `https://${instanceUrl}`;
+        }
+        const shareUrl = `${instanceUrl}/share?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+        window.open(shareUrl, "_blank", "noopener");
+      }
+    }
+  }
+
+  // This function handles the click event for the Fediverse share button
+  function handleFediverseShareButton(button, url, title) {
+    const input = button.previousElementSibling;
+    let instanceUrl = input.value.trim();
+    if (instanceUrl) {
+      if (!instanceUrl.startsWith("https://")) {
+        instanceUrl = `https://${instanceUrl}`;
+      }
+      const shareUrl = `${instanceUrl}/share?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+      window.open(shareUrl, "_blank", "noopener");
+    }
+  }
+
+  // This function handles the copy to clipboard functionality
+  function copyToClipboard(button, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const icon = button.querySelector("svg path");
+      const originalIconPath =
+        "M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-1c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 17H5V5h14v14z";
+      const checkIconPath =
+        "M9 16.2l-3.5-3.5-1.4 1.4L9 19 20 8l-1.4-1.4L9 16.2z";
+
+      // Change to check mark icon
+      icon.setAttribute("d", checkIconPath);
+
+      // Revert back to original icon after 1 second
+      setTimeout(() => {
+        icon.setAttribute("d", originalIconPath);
+      }, 1000);
+    });
+  }
+</script>
