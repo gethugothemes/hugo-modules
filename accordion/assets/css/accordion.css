@@ -11,6 +11,7 @@
   width: 100%;
   font-weight: bold;
   text-align: left;
+  cursor: pointer;
 }
 
 .accordion-icon {
