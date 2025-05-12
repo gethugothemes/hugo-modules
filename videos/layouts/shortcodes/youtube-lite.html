@@ -6,7 +6,7 @@
 
 <div {{ with $class }}class="{{ . }}"{{ end }}
   style="overflow: hidden;{{ with $width }} width:{{ .| safeCSS }}; {{ end }}{{ with $style }}{{ .| safeCSS }}{{ end }}">
-  <youtube-lite
+  <lite-youtube
     videoid="{{ $videoid | default (.Get 0) }}"
-    {{ with $attr }}{{ . | safeHTMLAttr }}{{ end }}></youtube-lite>
+    {{ with $attr }}{{ . | safeHTMLAttr }}{{ end }}></lite-youtube>
 </div>
