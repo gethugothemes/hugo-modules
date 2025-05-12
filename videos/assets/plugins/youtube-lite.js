@@ -1,4 +1,4 @@
-// main author repo: https://github.com/justinribeiro/youtube-lite
+// main author repo: https://github.com/justinribeiro/lite-youtube
 // modified by: https://github.com/gethugothemes
 
 class LiteYTEmbed extends HTMLElement {
