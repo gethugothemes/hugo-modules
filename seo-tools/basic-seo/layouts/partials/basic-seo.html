@@ -115,7 +115,8 @@
 
 
     <!-- image extension -->
-    {{ $imageExt:= path.Ext $image }}
+    {{ $imageExt := replace (path.Ext $image) "." "" }}
+
 
 
     <!-- If not SVG  -->
