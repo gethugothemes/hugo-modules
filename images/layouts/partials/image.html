@@ -9,6 +9,7 @@
 {{ $displaySM:= .DisplaySM | default "545x" }}
 {{ $resize:= .Resize | default true }}
 {{ $loading:= .Loading | default "lazy" }}
+{{ $fetchpriority:= .FetchPriority | default "" }}
 {{ $context:= .Context | default . }}
 {{ $contentImage:= false }}
 {{ $assetImage:= false }}
@@ -38,6 +39,7 @@
   <img
     loading="{{ .Loading }}"
     decoding="async"
+    {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
     src="{{ $imagePath | absURL }}"
     alt="{{ .Alt }}"
     class="{{ $class }} img"
@@ -77,6 +79,7 @@
         src="{{ $image.RelPermalink }}"
         loading="{{ $loading }}"
         decoding="async"
+        {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
         alt="{{ .Alt }}"
         class="{{ $class }} img"
         width="{{ $width }}"
@@ -126,7 +129,7 @@
             src="{{ $imageWebp.RelPermalink }}" loading="{{ $loading }}"
             decoding="async"
           {{ end }}
-
+          {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
           alt="{{ .Alt }}"
           class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
           width="{{- with $width -}}
@@ -185,7 +188,7 @@
             src="{{ $imageWebp.RelPermalink }}" loading="{{ $loading }}"
             decoding="async" alt="{{ .Alt }}"
           {{ end }}
-
+          {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
           class="{{ if $placeholder }}lazy{{ end }} {{ $class }} img"
           width="{{- with $width -}}
             {{- . -}}
@@ -260,7 +263,9 @@
             {{ else }}
               loading="{{ $loading }}" decoding="async"
               src="{{ $imageFallback.RelPermalink }}"
-            {{ end }}class="{{ if $placeholder }}
+            {{ end }}
+            {{ if $fetchpriority }}fetchpriority="{{ $fetchpriority }}"{{ end }}
+            class="{{ if $placeholder }}
               lazy
             {{ end }} {{ $class }} img"
             alt="{{ .Alt }}"
