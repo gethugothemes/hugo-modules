@@ -74,7 +74,7 @@
 
 
     <!-- gif/svg image -->
-    {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
+    {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) (eq $imageExt `.webp`) }}
       <img
         src="{{ $image.RelPermalink }}"
         loading="{{ $loading }}"
