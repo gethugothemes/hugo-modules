@@ -5,7 +5,7 @@
 {{ end }}
 
 
-<!-- title -->
+<!-- checking title -->
 {{ $title := site.Title }}
 <!-- checking page meta title -->
 {{ if .Params.meta_title }}
@@ -15,6 +15,35 @@
   {{ $title = .Params.title }}
 {{ end }}
 
+
+<!-- checking description -->
+{{ $description := .Summary }}
+{{ if .Params.meta_description }}
+  {{ $description = .Params.meta_description }}
+  <!-- checking page description -->
+{{ else if .Params.description }}
+  {{ $description = .Params.description }}
+  <!-- checking page description -->
+{{ else if site.Params.metadata.description }}
+  {{ $description = site.Params.metadata.description }}
+{{ end }}
+
+
+<!-- checking og image -->
+{{ $imagePath := site.Params.metadata.image }}
+{{ if .Params.meta_image }}
+  {{ $imagePath = .Params.meta_image }}
+  <!-- checking multiple images -->
+{{ else if .Params.images }}
+  {{ range first 1 .Params.images }}
+    {{ $imagePath = . }}
+  {{ end }}
+  <!-- checking single images -->
+{{ else if .Params.image }}
+  {{ $imagePath = .Params.image }}
+{{ end }}
+
+<!-- title -->
 <title>{{ $title }}</title>
 
 <!-- meta noindex -->
@@ -49,9 +78,7 @@
 
 
 <!-- meta description -->
-<meta
-  name="description"
-  content="{{ .Params.description | default site.Params.metadata.description }}" />
+<meta name="description" content="{{ $description }}" />
 
 <!-- meta author -->
 {{ with site.Params.metadata.author }}
@@ -59,35 +86,7 @@
 {{ end }}
 
 
-<!-- checking og description -->
-{{ $description := .Summary }}
-{{ if .Params.meta_description }}
-  {{ $description = .Params.meta_description }}
-  <!-- checking page description -->
-{{ else if .Params.description }}
-  {{ $description = .Params.description }}
-  <!-- checking page description -->
-{{ else if site.Params.metadata.description }}
-  {{ $description = site.Params.metadata.description }}
-{{ end }}
-
-
-<!-- checking og image -->
-{{ $imagePath := site.Params.metadata.image }}
-{{ if .Params.meta_image }}
-  {{ $imagePath = .Params.meta_image }}
-  <!-- checking multiple images -->
-{{ else if .Params.images }}
-  {{ range first 1 .Params.images }}
-    {{ $imagePath = . }}
-  {{ end }}
-  <!-- checking single images -->
-{{ else if .Params.image }}
-  {{ $imagePath = .Params.image }}
-{{ end }}
-
-
-<!-- ######### Opengraph and Twitter image meta ############## -->
+<!-- ######### OpenGraph and Twitter image meta ############## -->
 
 <!-- check cdn/static image -->
 {{ if or (hasPrefix $imagePath "http") (fileExists (add `static/` (string $imagePath))) }}
@@ -149,9 +148,9 @@
   <!-- /if image exist -->
 {{ end }}
 <!-- /check cdn/static image -->
-<!-- ######### /Opengraph and Twitter image meta ############## -->
+<!-- ######### /OpenGraph and Twitter image meta ############## -->
 
-<!-- ######### opengraph others meta ############## -->
+<!-- ######### OpenGraph others meta ############## -->
 <meta property="og:title" content="{{ $title }}" />
 <meta property="og:description" content="{{ $description }}" />
 <meta property="og:type" content="website" />
