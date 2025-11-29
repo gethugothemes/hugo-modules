@@ -1,0 +1,9 @@
+{{ if eq .Type "mermaid" }}
+<pre class="mermaid">
+{{ .Inner | safeHTML }}
+</pre>
+{{ else }}
+{{ .Inner | safeHTML }}
+{{ end }}
+
+{{ partial "mermaid-js.html" }}
