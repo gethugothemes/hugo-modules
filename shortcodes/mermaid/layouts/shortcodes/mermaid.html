@@ -1,5 +1,5 @@
 <pre class="mermaid not-prose">
-    {{- .Inner | replaceRE "\n" "\n\t" -}}
+    {{ .Inner | safeHTML }}
 </pre>
 
 {{ partial "mermaid-js.html" }}
