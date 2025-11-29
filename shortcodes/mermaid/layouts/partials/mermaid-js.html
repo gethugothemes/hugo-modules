@@ -67,17 +67,23 @@
   }
 
   // Rerender all diagrams
-  function rerenderDiagrams() {
+  async function rerenderDiagrams() {
     const isDark = document.documentElement.classList.contains("dark");
-    document.querySelectorAll(".mermaid").forEach((element) => {
+    const elements = document.querySelectorAll(".mermaid");
+    
+    for (const element of elements) {
       const originalContent = element.getAttribute("data-original");
       if (originalContent) {
         const content = processContent(originalContent, isDark);
-        element.innerHTML = content;
+        element.textContent = content;
         element.removeAttribute("data-processed");
       }
-    });
-    mermaid.run();
+    }
+    
+    // Only run if there are elements to process
+    if (elements.length > 0) {
+      await mermaid.run({ nodes: elements });
+    }
   }
 
   // Initial setup
