@@ -1,6 +1,6 @@
 {{ if eq .Type "mermaid" }}
-<pre class="mermaid">
-{{ .Inner | safeHTML }}
+<pre class="mermaid not-prose">
+{{- .Inner | replaceRE "\n" "\n\t" -}}
 </pre>
 {{ else }}
 {{ .Inner | safeHTML }}
