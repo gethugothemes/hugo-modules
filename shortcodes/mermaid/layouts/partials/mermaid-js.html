@@ -73,16 +73,24 @@
     
     for (const element of elements) {
       const originalContent = element.getAttribute("data-original");
-      if (originalContent) {
+      if (originalContent && element.isConnected) {
         const content = processContent(originalContent, isDark);
         element.textContent = content;
         element.removeAttribute("data-processed");
       }
     }
     
-    // Only run if there are elements to process
-    if (elements.length > 0) {
-      await mermaid.run({ nodes: elements });
+    // Wait a tick for DOM to settle
+    await new Promise(resolve => setTimeout(resolve, 0));
+    
+    // Only run on elements that still exist in the DOM
+    const validElements = Array.from(elements).filter(el => el.isConnected);
+    if (validElements.length > 0) {
+      try {
+        await mermaid.run({ nodes: validElements });
+      } catch (error) {
+        console.error("Mermaid rendering error:", error);
+      }
     }
   }
 
