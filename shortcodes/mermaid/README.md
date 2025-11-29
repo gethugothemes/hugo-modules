@@ -9,15 +9,21 @@ Add the following code to your module list in the `config/_default/module.toml` 
 path = "github.com/gethugothemes/hugo-modules/shortcodes/mermaid"
 ```
 
+or run the following command in your terminal:
+
+```bash
+hugo mod get github.com/gethugothemes/hugo-modules/shortcodes/mermaid
+```
+
 <hr>
 
 ## Acknowledgments
 
 This shortcode is built using [mermaid-js](https://mermaid.js.org/).
 
-## Installation for other themes
+## Installation for others
 
-Add the following script to your theme header.
+Add the following script to your header.
 
 ```html
 <script type="module">
