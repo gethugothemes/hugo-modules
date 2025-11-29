@@ -41,6 +41,7 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
 * [Shortcodes](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes)
   * [Button](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/button)
   * [Codepen](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/codepen)
+  * [Mermaid](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/mermaid)
   * [Notice](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/notice)
   * [Cloak Contact](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/cloak-contact)
 
