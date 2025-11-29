@@ -1,0 +1,121 @@
+{{ if eq .Type "mermaid" }}
+<pre class="mermaid">
+{{ .Inner | safeHTML }}
+</pre>
+{{ else }}
+{{ .Inner | safeHTML }}
+{{ end }}
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/+esm";
+
+  // Build mermaid config
+  function getMermaidConfig(startOnLoad = true) {
+    return {
+      startOnLoad,
+      theme: "default",
+      securityLevel: "loose",
+      flowchart: { curve: "basis" },
+    };
+  }
+
+  // Process content for dark mode
+  function processContent(content, isDarkMode) {
+    if (!isDarkMode) return content;
+
+    // In dark mode, replace/add theme: dark in frontmatter config
+    const hasFrontmatter = /---\s*\n(?:.*\n)*?---/.test(content);
+
+    if (hasFrontmatter) {
+      // Remove existing theme and themeVariables, then add theme: dark
+      return content.replace(
+        /(---\s*\n(?:.*\n)*?config:\s*\n)((?:.*\n)*?)(---)/m,
+        (match, before, configContent, after) => {
+          const lines = configContent.split("\n");
+          const filtered = [];
+          let skipUntilDedent = false;
+          let themeVarIndent = 0;
+
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const indent = line.search(/\S/);
+
+            // Skip theme line
+            if (/^\s*theme:/.test(line)) continue;
+
+            // Skip themeVariables and its nested content
+            if (/^\s*themeVariables:/.test(line)) {
+              skipUntilDedent = true;
+              themeVarIndent = indent;
+              continue;
+            }
+
+            // Continue skipping nested themeVariables content
+            if (skipUntilDedent) {
+              if (line.trim() && indent > themeVarIndent) {
+                continue;
+              } else {
+                skipUntilDedent = false;
+              }
+            }
+
+            filtered.push(line);
+          }
+
+          // Add theme: dark at the beginning of config
+          filtered.unshift("  theme: dark");
+
+          return before + filtered.join("\n") + after;
+        },
+      );
+    } else {
+      // No frontmatter, add it with dark theme
+      return `---\nconfig:\n  theme: dark\n---\n${content}`;
+    }
+  }
+
+  // Rerender all diagrams
+  function rerenderDiagrams() {
+    const isDark = document.documentElement.classList.contains("dark");
+    document.querySelectorAll(".mermaid").forEach((element) => {
+      const originalContent = element.getAttribute("data-original");
+      if (originalContent) {
+        const content = processContent(originalContent, isDark);
+        element.innerHTML = content;
+        element.removeAttribute("data-processed");
+      }
+    });
+    mermaid.run();
+  }
+
+  // Initial setup
+  document.addEventListener("DOMContentLoaded", () => {
+    const isDark = document.documentElement.classList.contains("dark");
+
+    // Store and process content for initial render
+    document.querySelectorAll(".mermaid").forEach((element) => {
+      if (!element.hasAttribute("data-original")) {
+        const originalContent = element.textContent.trim();
+        element.setAttribute("data-original", originalContent);
+
+        // Process content for dark mode on initial load
+        const content = processContent(originalContent, isDark);
+        element.innerHTML = content;
+      }
+    });
+  });
+
+  mermaid.initialize(getMermaidConfig());
+
+  // Watch for dark mode changes
+  new MutationObserver((mutations) => {
+    if (mutations.some((m) => m.attributeName === "class")) {
+      const isDark = document.documentElement.classList.contains("dark");
+      mermaid.initialize(getMermaidConfig(false));
+      rerenderDiagrams();
+    }
+  }).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+</script>
