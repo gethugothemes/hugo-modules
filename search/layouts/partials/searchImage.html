@@ -69,8 +69,8 @@
     {{ $imageWidth:= .Scratch.Get "image-width" }}
 
 
-    <!-- gif/svg image -->
-    {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
+    <!-- gif/svg/webp image (no processing for animated formats) -->
+    {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) (eq $imageExt `.webp`) }}
       <img
         src="{{ $image.RelPermalink }}"
         loading="{{$loading}}"
