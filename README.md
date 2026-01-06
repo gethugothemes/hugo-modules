@@ -62,20 +62,6 @@ Our 'Exclusive Hugo Modules' are a set of custom-built Hugo modules that were or
 
 We believe in the power of open source software and in contributing back to the community. That's why we decided to make our amazing tool available to everyone. We welcome feedback, suggestions, and contributions from the community to help us improve and expand this project over time.
 
-<!-- edit with sitepins -->
-
-## 📝 Edit Content with CMS
-
-This template comes pre-configured with [**Sitepins**](https://sitepins.com), a Git-based Headless CMS designed for seamless content management. You can update your website’s text, images, and configuration without touching a single line of code.
-
-**How to get started:**
-
-Click the Edit with Sitepins button below and follow the on-screen instructions to start editing your content visually.
-
-  <a target="_blank" href="https://app.sitepins.com/new/clone?name=Hugo%20Modules&repository=https://github.com/gethugothemes/hugo-modules/">
-    <img src="https://sitepins.com/button.svg" alt="Edit with Sitepins">
-  </a>
-
 ## 🐞 Reporting Issues
 
 We use GitHub Issues as the official bug tracker for our Hugo Modules. Before submitting a report, please search [existing issues](https://github.com/gethugothemes/hugo-modules/issues) to see if your problem or idea has already been addressed. If not, feel free to [open a new issue](https://github.com/gethugothemes/hugo-modules/issues).
