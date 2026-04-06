@@ -1,0 +1,60 @@
+{{- /*
+  llms-full.txt — Hugo Module by GetHugoThemes
+  https://github.com/gethugothemes/hugo-modules/llms-txt
+
+  Generates /llms-full.txt — the full-content companion to llms.txt.
+  Always includes every page with no filtering, so LLMs can read
+  the entire site in a single request without following links.
+
+  Respects params.llms.enable only. Exclude/include do NOT apply here
+  by design — this file is meant to be the complete site dump.
+
+  Configuration (params.toml):
+    [llms]
+      enable = true
+*/ -}}
+
+{{- $llms := site.Params.llms | default dict -}}
+{{- if ne ($llms.enable | default true) false -}}
+
+# {{ site.Title }}
+
+> {{ site.Params.metadata.description | default site.Params.description | default site.Title }}
+
+{{- /* Standalone section pages: About, Features, Pricing, Contact, etc. */ -}}
+{{- range site.Sections }}
+{{- if not .RegularPages }}
+{{- if and .Title .Permalink }}
+
+--------------------------------------------------------------------------------
+title: "{{ .Title }}"
+url: {{ .Permalink }}
+{{ with .Params.description }}description: {{ . }}
+{{ end -}}
+--------------------------------------------------------------------------------
+{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Params.description }}{{ end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- /* Content sections: Blog, Docs, Case Studies, Careers, etc. */ -}}
+{{- range site.Sections }}
+{{- if .RegularPages }}
+{{- range where .RegularPages ".Permalink" "ne" "" }}
+{{- if .Title }}
+
+--------------------------------------------------------------------------------
+title: "{{ .Title }}"
+url: {{ .Permalink }}
+{{ with .Date }}date: "{{ .Format "2006-01-02" }}"
+{{ end -}}
+{{ with .Params.description }}description: {{ . }}
+{{ end -}}
+--------------------------------------------------------------------------------
+{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Summary | plainify }}{{ end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- end -}}
