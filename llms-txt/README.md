@@ -130,17 +130,6 @@ description: Post description
 
 ---
 
-## Page-level Control
-
-To mark a page as optional in `llms.txt` (LLMs may skip it for shorter context), add to its front matter:
-
-```yaml
----
-llms_optional: true
----
-```
-
----
 
 ## Description Source
 
@@ -156,7 +145,7 @@ Per-page descriptions are read from the `description` front matter field. If not
 
 ## Requirements
 
-- Hugo `v0.110.0` or later
+- Hugo `v0.128.0` or later
 - Site must be using [Hugo Modules](https://gohugo.io/hugo-modules/use-modules/) (`go.mod` present)
 
 ---
