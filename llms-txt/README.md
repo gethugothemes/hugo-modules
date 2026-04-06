@@ -19,6 +19,9 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
 ### Step 2 — Add the output formats to your `hugo.toml`
 
 ```toml
+[outputs]
+  home = ["HTML", "RSS", "llms", "llmsfull"]
+
 [outputFormats.llms]
   baseName    = "llms"
   mediaType   = "text/plain"
@@ -31,9 +34,6 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
   isPlainText = true
   notAlternative = true
 
-[outputs]
-  home = ["HTML", "RSS", "llms", "llmsfull"]
-  # Add any other output formats your site already uses
 ```
 
 ### Step 3 — Run `hugo mod get`
