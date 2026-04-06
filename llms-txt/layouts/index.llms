@@ -15,22 +15,13 @@
 {{- if ne ($llms.enable | default true) false -}}
 {{- $excludeList := $llms.exclude | default slice -}}
 
-{{- /* isExcluded: returns true if the page's RelPermalink starts with any exclude pattern */ -}}
-{{- define "_llms-excluded" -}}
-  {{- $excluded := false -}}
-  {{- range .patterns -}}
-    {{- if strings.HasPrefix $.permalink . -}}{{- $excluded = true -}}{{- end -}}
-  {{- end -}}
-  {{- return $excluded -}}
-{{- end -}}
-
 # {{ site.Title }}
 
 > {{ site.Params.metadata.description | default site.Params.description | default site.Title }}
 
 ## Pages
 
-{{- /* Standalone section pages: About, Features, Pricing, Contact, etc. */ -}}
+
 {{- range site.Sections }}
 {{- if not .RegularPages }}
 {{- if and .Title .Permalink }}
@@ -43,7 +34,6 @@
 {{- end }}
 {{- end }}
 
-{{- /* Content sections: Blog, Docs, Case Studies, etc. */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
 {{- $section := . }}
