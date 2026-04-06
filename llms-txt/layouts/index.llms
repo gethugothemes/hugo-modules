@@ -1,0 +1,70 @@
+{{- /*
+  llms.txt — Hugo Module by GetHugoThemes
+  https://github.com/gethugothemes/hugo-modules/llms-txt
+
+  Generates /llms.txt following the llmstxt.org specification.
+  Grouped by Hugo sections. Respects params.llms.enable and params.llms.exclude.
+
+  Configuration (params.toml):
+    [llms]
+      enable  = true
+      exclude = ["/signin/", "/signup/"]
+*/ -}}
+
+{{- $llms := site.Params.llms | default dict -}}
+{{- if ne ($llms.enable | default true) false -}}
+{{- $excludeList := $llms.exclude | default slice -}}
+
+{{- /* isExcluded: returns true if the page's RelPermalink starts with any exclude pattern */ -}}
+{{- define "_llms-excluded" -}}
+  {{- $excluded := false -}}
+  {{- range .patterns -}}
+    {{- if strings.HasPrefix $.permalink . -}}{{- $excluded = true -}}{{- end -}}
+  {{- end -}}
+  {{- return $excluded -}}
+{{- end -}}
+
+# {{ site.Title }}
+
+> {{ site.Params.metadata.description | default site.Params.description | default site.Title }}
+
+## Pages
+
+{{- /* Standalone section pages: About, Features, Pricing, Contact, etc. */ -}}
+{{- range site.Sections }}
+{{- if not .RegularPages }}
+{{- if and .Title .Permalink }}
+{{- $show := true }}
+{{- range $excludeList }}{{- if strings.HasPrefix $.RelPermalink . }}{{- $show = false }}{{- end }}{{- end }}
+{{- if $show }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Params.description }}: {{ . }}{{ end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- /* Content sections: Blog, Docs, Case Studies, etc. */ -}}
+{{- range site.Sections }}
+{{- if .RegularPages }}
+{{- $section := . }}
+{{- $validPages := where .RegularPages ".Permalink" "ne" "" }}
+{{- $filteredPages := slice }}
+{{- range $validPages }}
+  {{- $page := . }}
+  {{- $show := true }}
+  {{- range $excludeList }}{{- if strings.HasPrefix $page.RelPermalink . }}{{- $show = false }}{{- end }}{{- end }}
+  {{- if $show }}{{- $filteredPages = $filteredPages | append $page }}{{- end }}
+{{- end }}
+{{- if $filteredPages }}
+
+## {{ $section.Title }}
+{{ range $filteredPages }}
+{{- if .Title }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- end -}}
