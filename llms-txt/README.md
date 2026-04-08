@@ -94,10 +94,6 @@ Follows the [llmstxt.org](https://llmstxt.org) specification:
 - [Getting Started](https://example.com/docs/getting-started/): ...
 ```
 
-- **Standalone section pages** (About, Contact, Features, etc.) are listed under `## Pages`
-- **Content sections** (Blog, Docs, Careers, etc.) each get their own `## Section` heading
-- Pages with no valid URL are automatically skipped
-- Section headings are automatically skipped if all their pages are excluded
 
 ### `llms-full.txt`
 
@@ -123,33 +119,3 @@ description: Post description
 --------------------------------------------------------------------------------
 [full post content]
 ```
-
-- Uses `.RawContent` (markdown source) when available, falls back to `.Summary`
-- Always includes all pages — `exclude` has no effect here by design
-- Ideal for LLMs and AI tools that process the full site in one request
-
----
-
-
-## Description Source
-
-The module reads the site description in this order:
-
-1. `params.metadata.description`
-2. `params.description`
-3. Falls back to the site title
-
-Per-page descriptions are read from the `description` front matter field. If not set, the auto-generated `.Summary` is used (truncated to 120 characters).
-
----
-
-## Requirements
-
-- Hugo `v0.128.0` or later
-- Site must be using [Hugo Modules](https://gohugo.io/hugo-modules/use-modules/) (`go.mod` present)
-
----
-
-## License
-
-This module is part of [gethugothemes/hugo-modules](https://github.com/gethugothemes/hugo-modules) and is released under the MIT License.
