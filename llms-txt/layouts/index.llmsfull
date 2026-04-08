@@ -21,7 +21,9 @@
 
 > {{ site.Params.metadata.description | default site.Params.description | default site.Title }}
 
+
 {{- /* Home page */ -}}
+
 
 --------------------------------------------------------------------------------
 title: "{{ site.Home.Title | default "Home" }}"
