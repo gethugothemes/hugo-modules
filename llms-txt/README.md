@@ -2,7 +2,7 @@
 
 Automatically generates `/llms.txt` and `/llms-full.txt` for your Hugo site following the [llmstxt.org](https://llmstxt.org) specification. These files help AI assistants and LLMs understand and index your site's content.
 
-- **`/llms.txt`** — a concise index of all pages, grouped by section, with optional include/exclude filtering
+- **`/llms.txt`** — a concise index of all pages, grouped by section, with optional exclusions
 - **`/llms-full.txt`** — a complete full-content dump of every page for LLMs that can't follow links
 
 ---
@@ -19,8 +19,11 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
 ### Step 2 — Add the output formats to your `hugo.toml`
 
 ```toml
+
 [outputs]
-  home = [ "...rest",  "llms", "llmsfull"]
+  home = ["...rest", "llms", "llmsfull"]
+  # Add any other output formats your site already uses
+
 
 [outputFormats.llms]
   baseName    = "llms"
@@ -34,11 +37,9 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
   isPlainText = true
   notAlternative = true
 
+
 ```
-Note: If you already have a custom `outputs` configuration, just add `llms` and `llmsfull` to the list for `home`.
-
-
----
+Note: ...rest is a placeholder for any other output formats you may already have configured (e.g. "HTML", "RSS", etc.). Make sure to include those as well to avoid breaking existing functionality.
 
 ## Configuration
 
@@ -49,21 +50,25 @@ Add an `[llms]` block to your `config/_default/params.toml`:
   # Set to false to disable both llms.txt and llms-full.txt generation
   enable = true
 
-  # Include only these pages in llms.txt. Supports glob patterns.
-  # When non-empty, pages NOT matched are hidden — unless also matched by include.
-  # include always wins over exclude.
+  # Include only specific pages or directories.
+  # If empty, all pages are included by default.
+  # If populated, ONLY paths matching this list will be generated.
+  # Both llms.txt and llms-full.txt respect this setting.
   # Examples:
-  #   "/blog/**"        → all pages under /blog/ (recursive)
-  #   "/blog/*"         → direct children of /blog/ only
-  #   "/blog/post-1/"   → one specific page
+  #   "/blog/"      → include strictly the /blog/ page
+  #   "/blog/*"     → include immediate children of /blog/ (e.g. /blog/post-1/)
+  #   "/blog/**"    → include /blog/ and all nested pages and directories
   include = []
 
-  # Exclude pages from llms.txt. Supports glob patterns.
-  # Has no effect on a page that is also matched by include.
-  # Note: llms-full.txt always includes ALL pages regardless of this setting.
+  # Exclude specific pages or directories.
+  # Follows the same wildcard formats as include.
+  # Conflict handling: If the EXACT same path string is put in both include and exclude,
+  # the include rule has higher priority (the exclude rule is ignored).
+  # Both llms.txt and llms-full.txt respect this setting.
   # Examples:
-  #   "/careers/**"     → all pages under /careers/
-  #   "/blog/draft/"    → one specific page
+  #   "/careers/"       → exclude exactly /careers/
+  #   "/careers/**"     → exclude all pages under /careers/
+  #   "/blog/post-1/"   → exclude a specific page
   exclude = []
 ```
 
@@ -72,17 +77,8 @@ Add an `[llms]` block to your `config/_default/params.toml`:
 | Key | Type | Default | Description |
 |---|---|---|---|
 | `llms.enable` | bool | `true` | Enable/disable both output files |
-| `llms.include` | list | `[]` | Glob patterns — only matched pages appear in `llms.txt`. Empty means all pages included. `include` always wins over `exclude`. |
-| `llms.exclude` | list | `[]` | Glob patterns — matched pages are hidden from `llms.txt`. Ignored for pages also matched by `include`. |
-
-### Glob pattern syntax
-
-| Pattern | Matches |
-|---|---|
-| `/about/` | Exactly `/about/` |
-| `/blog/*` | Direct children of `/blog/` only |
-| `/blog/**` | `/blog/` itself and every page beneath it |
-| `/blog/post-1/` | One specific page |
+| `llms.include` | list | `[]` | URL patterns to include (overrides default all) |
+| `llms.exclude` | list | `[]` | URL patterns to exclude (supports `*` and `**`) |
 
 ---
 
@@ -133,3 +129,6 @@ description: Post description
 --------------------------------------------------------------------------------
 [full post content]
 ```
+
+
+---
