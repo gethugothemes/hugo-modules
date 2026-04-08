@@ -36,12 +36,6 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
 
 ```
 
-### Step 3 — Run `hugo mod get`
-
-```bash
-hugo mod get github.com/gethugothemes/hugo-modules/llms-txt
-hugo mod tidy
-```
 
 ---
 
