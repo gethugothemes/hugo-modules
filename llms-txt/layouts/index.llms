@@ -1,12 +1,12 @@
 {{- /*
-  llms-full.txt — Hugo Module by GetHugoThemes
+  llms.txt — Hugo Module by GetHugoThemes
   https://github.com/gethugothemes/hugo-modules/llms-txt
 
-  Generates /llms-full.txt — the full-content companion to llms.txt.
-  Respects params.llms.enable, include, and exclude settings.
+  Generates /llms.txt following the llmstxt.org specification.
+  Grouped by Hugo sections. Respects params.llms.enable, include, and exclude.
 */ -}}
 
-{{- define "partials/llms_full_is_valid_page.html" -}}
+{{- define "partials/llms_is_valid_page.html" -}}
 {{- $url := .url -}}
 {{- $includeList := .includeList -}}
 {{- $excludeList := .excludeList -}}
@@ -46,34 +46,20 @@
 
 > {{ site.Params.metadata.description | default site.Params.description | default site.Title }}
 
-{{- /* Home Page */ -}}
-{{- $home := site.Home }}
-{{- $showHome := partial "llms_full_is_valid_page.html" (dict "url" $home.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
-{{- if $showHome }}
+## Pages
 
---------------------------------------------------------------------------------
-title: "{{ $home.Title | default "Home" }}"
-url: {{ $home.Permalink }}
-{{ with $home.Params.description }}description: {{ . }}
-{{ end -}}
---------------------------------------------------------------------------------
-{{ if $home.RawContent }}{{ $home.RawContent }}{{ else }}{{ $home.Params.description }}{{ end }}
+{{- $home := site.Home }}
+{{- $showHome := partial "llms_is_valid_page.html" (dict "url" $home.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $showHome }}
+- [{{ $home.Title | default "Home" }}]({{ $home.Permalink }}){{ with $home.Params.description }}: {{ . }}{{ end }}
 {{- end }}
 
-{{- /* Standalone section pages: About, Features, Pricing, Contact, etc. */ -}}
 {{- range site.Sections }}
 {{- if not .RegularPages }}
 {{- if and .Title .Permalink }}
-{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- $show := partial "llms_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
-
---------------------------------------------------------------------------------
-title: "{{ .Title }}"
-url: {{ .Permalink }}
-{{ with .Params.description }}description: {{ . }}
-{{ end -}}
---------------------------------------------------------------------------------
-{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Params.description }}{{ end }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Params.description }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -82,20 +68,20 @@ url: {{ .Permalink }}
 {{- /* Content sections: Blog, Docs, Case Studies, Careers, etc. */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
-{{- range where .RegularPages ".Permalink" "ne" "" }}
-{{- if .Title }}
-{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
-{{- if $show }}
+{{- $section := . }}
+{{- $validPages := where .RegularPages ".Permalink" "ne" "" }}
+{{- $filteredPages := slice }}
+{{- range $validPages }}
+  {{- $page := . }}
+  {{- $show := partial "llms_is_valid_page.html" (dict "url" $page.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+  {{- if $show }}{{- $filteredPages = $filteredPages | append $page }}{{- end }}
+{{- end }}
+{{- if $filteredPages }}
 
---------------------------------------------------------------------------------
-title: "{{ .Title }}"
-url: {{ .Permalink }}
-{{ with .Date }}date: "{{ .Format "2006-01-02" }}"
-{{ end -}}
-{{ with .Params.description }}description: {{ . }}
-{{ end -}}
---------------------------------------------------------------------------------
-{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Summary | plainify }}{{ end }}
+## {{ $section.Title }}
+{{ range $filteredPages }}
+{{- if .Title }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}

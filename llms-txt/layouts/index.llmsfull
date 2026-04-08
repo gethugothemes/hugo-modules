@@ -3,28 +3,69 @@
   https://github.com/gethugothemes/hugo-modules/llms-txt
 
   Generates /llms-full.txt — the full-content companion to llms.txt.
-  Always includes every page with no filtering, so LLMs can read
-  the entire site in a single request without following links.
-
-  Respects params.llms.enable only. Exclude/include do NOT apply here
-  by design — this file is meant to be the complete site dump.
-
-  Configuration (params.toml):
-    [llms]
-      enable = true
+  Respects params.llms.enable, include, and exclude settings.
 */ -}}
+
+{{- define "partials/llms_full_is_valid_page.html" -}}
+{{- $url := .url -}}
+{{- $includeList := .includeList -}}
+{{- $excludeList := .excludeList -}}
+{{- $isIncluded := false -}}
+{{- if eq (len $includeList) 0 }}{{ $isIncluded = true }}{{ else -}}
+{{- range $includeList -}}
+  {{- if strings.HasSuffix . "/**" }}{{ if strings.HasPrefix $url (strings.TrimSuffix "/**" .) }}{{ $isIncluded = true }}{{ end -}}
+  {{- else if strings.HasSuffix . "/*" }}{{ $dir := strings.TrimSuffix "/*" . }}{{ if and (strings.HasPrefix $url $dir) (ne $url $dir) (not (strings.Contains (strings.TrimSuffix "/" (strings.TrimPrefix $dir $url)) "/")) }}{{ $isIncluded = true }}{{ end -}}
+  {{- else }}{{ if eq $url . }}{{ $isIncluded = true }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- end -}}
+{{- $isExcluded := false -}}
+{{- range $excludeList -}}
+  {{- if strings.HasSuffix . "/**" }}{{ if strings.HasPrefix $url (strings.TrimSuffix "/**" .) }}{{ $isExcluded = true }}{{ end -}}
+  {{- else if strings.HasSuffix . "/*" }}{{ $dir := strings.TrimSuffix "/*" . }}{{ if and (strings.HasPrefix $url $dir) (ne $url $dir) (not (strings.Contains (strings.TrimSuffix "/" (strings.TrimPrefix $dir $url)) "/")) }}{{ $isExcluded = true }}{{ end -}}
+  {{- else }}{{ if eq $url . }}{{ $isExcluded = true }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- return (and $isIncluded (not $isExcluded)) -}}
+{{- end -}}
 
 {{- $llms := site.Params.llms | default dict -}}
 {{- if ne ($llms.enable | default true) false -}}
+{{- $rawExcludeList := $llms.exclude | default slice -}}
+{{- $includeList := $llms.include | default slice -}}
+
+{{- /* Clean Exclude List (Include takes precedence for exact matches) */ -}}
+{{- $excludeList := slice -}}
+{{- range $rawExcludeList -}}
+  {{- if not (in $includeList .) -}}
+    {{- $excludeList = $excludeList | append . -}}
+  {{- end -}}
+{{- end -}}
 
 # {{ site.Title }}
 
 > {{ site.Params.metadata.description | default site.Params.description | default site.Title }}
 
+{{- /* Home Page */ -}}
+{{- $home := site.Home }}
+{{- $showHome := partial "llms_full_is_valid_page.html" (dict "url" $home.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $showHome }}
+
+--------------------------------------------------------------------------------
+title: "{{ $home.Title | default "Home" }}"
+url: {{ $home.Permalink }}
+{{ with $home.Params.description }}description: {{ . }}
+{{ end -}}
+--------------------------------------------------------------------------------
+{{ if $home.RawContent }}{{ $home.RawContent }}{{ else }}{{ $home.Params.description }}{{ end }}
+{{- end }}
+
 {{- /* Standalone section pages: About, Features, Pricing, Contact, etc. */ -}}
 {{- range site.Sections }}
 {{- if not .RegularPages }}
 {{- if and .Title .Permalink }}
+{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $show }}
 
 --------------------------------------------------------------------------------
 title: "{{ .Title }}"
@@ -36,12 +77,15 @@ url: {{ .Permalink }}
 {{- end }}
 {{- end }}
 {{- end }}
+{{- end }}
 
 {{- /* Content sections: Blog, Docs, Case Studies, Careers, etc. */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
 {{- range where .RegularPages ".Permalink" "ne" "" }}
 {{- if .Title }}
+{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $show }}
 
 --------------------------------------------------------------------------------
 title: "{{ .Title }}"
@@ -52,6 +96,7 @@ url: {{ .Permalink }}
 {{ end -}}
 --------------------------------------------------------------------------------
 {{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Summary | plainify }}{{ end }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
