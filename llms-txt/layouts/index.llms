@@ -3,17 +3,20 @@
   https://github.com/gethugothemes/hugo-modules/llms-txt
 
   Generates /llms.txt following the llmstxt.org specification.
-  Grouped by Hugo sections. Respects params.llms.enable and params.llms.exclude.
+  Grouped by Hugo sections. Respects params.llms.enable, params.llms.include,
+  and params.llms.exclude. Supports glob patterns (*, /**).
 
   Configuration (params.toml):
     [llms]
       enable  = true
-      exclude = ["/signin/", "/signup/"]
+      include = ["/blog/**", "/docs/**"]  # if set, only these pages appear
+      exclude = ["/blog/draft/"]          # include always wins over exclude
 */ -}}
 
 {{- $llms := site.Params.llms | default dict -}}
 {{- if ne ($llms.enable | default true) false -}}
 {{- $excludeList := $llms.exclude | default slice -}}
+{{- $includeList := $llms.include | default slice -}}
 
 # {{ site.Title }}
 
@@ -21,29 +24,31 @@
 
 ## Pages
 
+{{- $args := dict "include" $includeList "exclude" $excludeList -}}
 
+{{- /* Home page */ -}}
+{{- if partial "llms-show.html" (merge $args (dict "path" site.Home.RelPermalink)) }}
+- [{{ site.Home.Title | default "Home" }}]({{ site.Home.Permalink }}){{ with site.Home.Params.description | default site.Params.description }}: {{ . }}{{ end }}
+{{- end }}
+
+{{- /* Standalone section pages (no child pages — e.g. About, Contact, Pricing) */ -}}
 {{- range site.Sections }}
-{{- if not .RegularPages }}
-{{- if and .Title .Permalink }}
-{{- $show := true }}
-{{- range $excludeList }}{{- if strings.HasPrefix $.RelPermalink . }}{{- $show = false }}{{- end }}{{- end }}
-{{- if $show }}
+{{- if and (not .RegularPages) .Title .Permalink }}
+{{- if partial "llms-show.html" (merge $args (dict "path" .RelPermalink)) }}
 - [{{ .Title }}]({{ .Permalink }}){{ with .Params.description }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}
-{{- end }}
 
+{{- /* Content sections (Blog, Docs, etc.) */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
 {{- $section := . }}
-{{- $validPages := where .RegularPages ".Permalink" "ne" "" }}
 {{- $filteredPages := slice }}
-{{- range $validPages }}
-  {{- $page := . }}
-  {{- $show := true }}
-  {{- range $excludeList }}{{- if strings.HasPrefix $page.RelPermalink . }}{{- $show = false }}{{- end }}{{- end }}
-  {{- if $show }}{{- $filteredPages = $filteredPages | append $page }}{{- end }}
+{{- range where .RegularPages ".Permalink" "ne" "" }}
+  {{- if partial "llms-show.html" (merge $args (dict "path" .RelPermalink)) }}
+    {{- $filteredPages = $filteredPages | append . }}
+  {{- end }}
 {{- end }}
 {{- if $filteredPages }}
 

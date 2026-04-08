@@ -21,6 +21,16 @@
 
 > {{ site.Params.metadata.description | default site.Params.description | default site.Title }}
 
+{{- /* Home page */ -}}
+
+--------------------------------------------------------------------------------
+title: "{{ site.Home.Title | default "Home" }}"
+url: {{ site.Home.Permalink }}
+{{ with site.Home.Params.description | default site.Params.description }}description: {{ . }}
+{{ end -}}
+--------------------------------------------------------------------------------
+{{ if site.Home.RawContent }}{{ site.Home.RawContent }}{{ else }}{{ site.Home.Params.description | default site.Params.description }}{{ end }}
+
 {{- /* Standalone section pages: About, Features, Pricing, Contact, etc. */ -}}
 {{- range site.Sections }}
 {{- if not .RegularPages }}
