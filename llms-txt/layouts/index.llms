@@ -11,12 +11,25 @@
       enable  = true
       include = ["/blog/**", "/docs/**"]  # if set, only these pages appear
       exclude = ["/blog/draft/"]          # include always wins over exclude
+
+  Glob patterns:
+    /about/       exact match
+    /blog/*       direct children of /blog/ only
+    /blog/**      /blog/ itself and all pages beneath it
 */ -}}
 
 {{- $llms := site.Params.llms | default dict -}}
 {{- if ne ($llms.enable | default true) false -}}
-{{- $excludeList := $llms.exclude | default slice -}}
-{{- $includeList := $llms.include | default slice -}}
+{{- $exc := $llms.exclude | default slice -}}
+{{- $inc := $llms.include | default slice -}}
+
+{{- /*
+  llmsMatch: sets $matched = true if $p matches any pattern in $list.
+    - trailing slashes stripped from both sides before matching
+    - "/**"  → recursive: matches the root and all pages beneath it
+    - "*"    → single-level glob via path.Match
+    - exact  → path.Match with no wildcards
+*/ -}}
 
 # {{ site.Title }}
 
@@ -24,31 +37,102 @@
 
 ## Pages
 
-{{- $args := dict "include" $includeList "exclude" $excludeList -}}
-
-{{- /* Home page */ -}}
-{{- if partial "llms-show.html" (merge $args (dict "path" site.Home.RelPermalink)) }}
+{{- /* ---- Home page ---- */ -}}
+{{- $p := strings.TrimSuffix site.Home.RelPermalink "/" -}}
+{{- $inInc := false -}}
+{{- range $inc -}}
+  {{- $pat := strings.TrimSuffix . "/" -}}
+  {{- if strings.HasSuffix $pat "/**" -}}
+    {{- $pfx := strings.TrimSuffix $pat "/**" -}}
+    {{- if or (eq $p $pfx) (strings.HasPrefix $p (printf "%s/" $pfx)) -}}{{- $inInc = true -}}{{- end -}}
+  {{- else if path.Match $pat $p -}}{{- $inInc = true -}}
+  {{- end -}}
+{{- end -}}
+{{- $inExc := false -}}
+{{- range $exc -}}
+  {{- $pat := strings.TrimSuffix . "/" -}}
+  {{- if strings.HasSuffix $pat "/**" -}}
+    {{- $pfx := strings.TrimSuffix $pat "/**" -}}
+    {{- if or (eq $p $pfx) (strings.HasPrefix $p (printf "%s/" $pfx)) -}}{{- $inExc = true -}}{{- end -}}
+  {{- else if path.Match $pat $p -}}{{- $inExc = true -}}
+  {{- end -}}
+{{- end -}}
+{{- $show := false -}}
+{{- if $inInc -}}{{- $show = true -}}
+{{- else if $inExc -}}
+{{- else if gt (len $inc) 0 -}}
+{{- else -}}{{- $show = true -}}
+{{- end -}}
+{{- if $show }}
 - [{{ site.Home.Title | default "Home" }}]({{ site.Home.Permalink }}){{ with site.Home.Params.description | default site.Params.description }}: {{ . }}{{ end }}
 {{- end }}
 
-{{- /* Standalone section pages (no child pages — e.g. About, Contact, Pricing) */ -}}
+{{- /* ---- Standalone section pages (About, Contact, Pricing, etc.) ---- */ -}}
 {{- range site.Sections }}
 {{- if and (not .RegularPages) .Title .Permalink }}
-{{- if partial "llms-show.html" (merge $args (dict "path" .RelPermalink)) }}
+{{- $p := strings.TrimSuffix .RelPermalink "/" -}}
+{{- $inInc := false -}}
+{{- range $inc -}}
+  {{- $pat := strings.TrimSuffix . "/" -}}
+  {{- if strings.HasSuffix $pat "/**" -}}
+    {{- $pfx := strings.TrimSuffix $pat "/**" -}}
+    {{- if or (eq $p $pfx) (strings.HasPrefix $p (printf "%s/" $pfx)) -}}{{- $inInc = true -}}{{- end -}}
+  {{- else if path.Match $pat $p -}}{{- $inInc = true -}}
+  {{- end -}}
+{{- end -}}
+{{- $inExc := false -}}
+{{- range $exc -}}
+  {{- $pat := strings.TrimSuffix . "/" -}}
+  {{- if strings.HasSuffix $pat "/**" -}}
+    {{- $pfx := strings.TrimSuffix $pat "/**" -}}
+    {{- if or (eq $p $pfx) (strings.HasPrefix $p (printf "%s/" $pfx)) -}}{{- $inExc = true -}}{{- end -}}
+  {{- else if path.Match $pat $p -}}{{- $inExc = true -}}
+  {{- end -}}
+{{- end -}}
+{{- $show := false -}}
+{{- if $inInc -}}{{- $show = true -}}
+{{- else if $inExc -}}
+{{- else if gt (len $inc) 0 -}}
+{{- else -}}{{- $show = true -}}
+{{- end -}}
+{{- if $show }}
 - [{{ .Title }}]({{ .Permalink }}){{ with .Params.description }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}
 
-{{- /* Content sections (Blog, Docs, etc.) */ -}}
+{{- /* ---- Content sections (Blog, Docs, etc.) ---- */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
 {{- $section := . }}
 {{- $filteredPages := slice }}
 {{- range where .RegularPages ".Permalink" "ne" "" }}
-  {{- if partial "llms-show.html" (merge $args (dict "path" .RelPermalink)) }}
-    {{- $filteredPages = $filteredPages | append . }}
-  {{- end }}
+  {{- $p := strings.TrimSuffix .RelPermalink "/" -}}
+  {{- $inInc := false -}}
+  {{- range $inc -}}
+    {{- $pat := strings.TrimSuffix . "/" -}}
+    {{- if strings.HasSuffix $pat "/**" -}}
+      {{- $pfx := strings.TrimSuffix $pat "/**" -}}
+      {{- if or (eq $p $pfx) (strings.HasPrefix $p (printf "%s/" $pfx)) -}}{{- $inInc = true -}}{{- end -}}
+    {{- else if path.Match $pat $p -}}{{- $inInc = true -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $inExc := false -}}
+  {{- range $exc -}}
+    {{- $pat := strings.TrimSuffix . "/" -}}
+    {{- if strings.HasSuffix $pat "/**" -}}
+      {{- $pfx := strings.TrimSuffix $pat "/**" -}}
+      {{- if or (eq $p $pfx) (strings.HasPrefix $p (printf "%s/" $pfx)) -}}{{- $inExc = true -}}{{- end -}}
+    {{- else if path.Match $pat $p -}}{{- $inExc = true -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $show := false -}}
+  {{- if $inInc -}}{{- $show = true -}}
+  {{- else if $inExc -}}
+  {{- else if gt (len $inc) 0 -}}
+  {{- else -}}{{- $show = true -}}
+  {{- end -}}
+  {{- if $show }}{{- $filteredPages = $filteredPages | append . }}{{- end }}
 {{- end }}
 {{- if $filteredPages }}
 
