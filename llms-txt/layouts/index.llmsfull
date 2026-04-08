@@ -14,7 +14,7 @@
 {{- if eq (len $includeList) 0 }}{{ $isIncluded = true }}{{ else -}}
 {{- range $includeList -}}
   {{- if strings.HasSuffix . "/**" }}{{ if strings.HasPrefix $url (strings.TrimSuffix "/**" .) }}{{ $isIncluded = true }}{{ end -}}
-  {{- else if strings.HasSuffix . "/*" }}{{ $dir := strings.TrimSuffix "/*" . }}{{ if and (strings.HasPrefix $url $dir) (ne $url $dir) (not (strings.Contains (strings.TrimSuffix "/" (strings.TrimPrefix $dir $url)) "/")) }}{{ $isIncluded = true }}{{ end -}}
+  {{- else if strings.HasSuffix . "/*" }}{{ $dir := strings.TrimSuffix "*" . }}{{ if and (strings.HasPrefix $url $dir) (ne $url $dir) (not (strings.Contains (strings.TrimSuffix "/" (strings.TrimPrefix $dir $url)) "/")) }}{{ $isIncluded = true }}{{ end -}}
   {{- else }}{{ if eq $url . }}{{ $isIncluded = true }}{{ end -}}
   {{- end -}}
 {{- end -}}
@@ -22,7 +22,7 @@
 {{- $isExcluded := false -}}
 {{- range $excludeList -}}
   {{- if strings.HasSuffix . "/**" }}{{ if strings.HasPrefix $url (strings.TrimSuffix "/**" .) }}{{ $isExcluded = true }}{{ end -}}
-  {{- else if strings.HasSuffix . "/*" }}{{ $dir := strings.TrimSuffix "/*" . }}{{ if and (strings.HasPrefix $url $dir) (ne $url $dir) (not (strings.Contains (strings.TrimSuffix "/" (strings.TrimPrefix $dir $url)) "/")) }}{{ $isExcluded = true }}{{ end -}}
+  {{- else if strings.HasSuffix . "/*" }}{{ $dir := strings.TrimSuffix "*" . }}{{ if and (strings.HasPrefix $url $dir) (ne $url $dir) (not (strings.Contains (strings.TrimSuffix "/" (strings.TrimPrefix $dir $url)) "/")) }}{{ $isExcluded = true }}{{ end -}}
   {{- else }}{{ if eq $url . }}{{ $isExcluded = true }}{{ end -}}
   {{- end -}}
 {{- end -}}
