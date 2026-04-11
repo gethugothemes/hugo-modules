@@ -52,10 +52,10 @@ Add an `[llms]` block to your `config/_default/params.toml`:
 
   # Include only specific pages or directories.
   # If empty, all pages are included by default.
-  # If populated, ONLY paths matching this list will be generated.
+  # If populated, ONLY paths matching  list will be generated.
   # Both llms.txt and llms-full.txt respect this setting.
   # Examples:
-  #   "/blog/"      → include strictly the /blog/ page
+  #   "/about/"      → include strictly the /about/ page
   #   "/blog/*"     → include immediate children of /blog/ (e.g. /blog/post-1/)
   #   "/blog/**"    → include /blog/ and all nested pages and directories
   include = []
@@ -66,8 +66,8 @@ Add an `[llms]` block to your `config/_default/params.toml`:
   # the include rule has higher priority (the exclude rule is ignored).
   # Both llms.txt and llms-full.txt respect this setting.
   # Examples:
-  #   "/careers/"       → exclude exactly /careers/
-  #   "/careers/**"     → exclude all pages under /careers/
+  #   "/about/"       → exclude exactly /about/
+  #   "/blog/**"     → exclude all pages under /blog/
   #   "/blog/post-1/"   → exclude a specific page
   exclude = []
 ```
