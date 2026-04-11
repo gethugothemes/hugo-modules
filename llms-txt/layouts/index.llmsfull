@@ -60,7 +60,9 @@ url: {{ $home.Permalink }}
 {{ if $home.RawContent }}{{ $home.RawContent }}{{ else }}{{ $home.Params.description }}{{ end }}
 {{- end }}
 
-{{- /* Standalone section pages: About, Features, Pricing, Contact, etc. */ -}}
+
+
+{{- /* Standalone section pages */ -}}
 {{- range site.Sections }}
 {{- if not .RegularPages }}
 {{- if and .Title .Permalink }}
@@ -79,7 +81,24 @@ url: {{ .Permalink }}
 {{- end }}
 {{- end }}
 
-{{- /* Content sections: Blog, Docs, Case Studies, Careers, etc. */ -}}
+{{- /* Root-level regular pages: About, Contact, etc. (not in any section) */ -}}
+{{- range site.Home.RegularPages }}
+{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $show }}
+
+--------------------------------------------------------------------------------
+title: "{{ .Title }}"
+url: {{ .Permalink }}
+{{ with .Date }}date: "{{ .Format "2006-01-02" }}"
+{{ end -}}
+{{ with .Params.description }}description: {{ . }}
+{{ end -}}
+--------------------------------------------------------------------------------
+{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Summary | plainify }}{{ end }}
+{{- end }}
+{{- end }}
+
+{{- /* Content sections: Blog, Docs etc. */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
 {{- range where .RegularPages ".Permalink" "ne" "" }}

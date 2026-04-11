@@ -54,6 +54,7 @@
 - [{{ $home.Title | default "Home" }}]({{ $home.Permalink }}){{ with $home.Params.description }}: {{ . }}{{ end }}
 {{- end }}
 
+
 {{- range site.Sections }}
 {{- if not .RegularPages }}
 {{- if and .Title .Permalink }}
@@ -65,7 +66,14 @@
 {{- end }}
 {{- end }}
 
-{{- /* Content sections: Blog, Docs, Case Studies, Careers, etc. */ -}}
+{{- range site.Home.RegularPages }}
+{{- $show := partial "llms_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $show }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+{{- end }}
+{{- end }}
+
+{{- /* Content sections: Blog, Docs etc. */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
 {{- $section := . }}
