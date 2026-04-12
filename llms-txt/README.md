@@ -47,12 +47,15 @@ Add an `[llms]` block to your `config/_default/params.toml`:
 
 ```toml
 [llms]
-  # Set to false to disable both llms.txt and llms-full.txt generation
+  # Set to false to disable /llms.txt generation
   enable = true
+
+  # Set to false to disable /llms-full.txt generation
+  enable_full = true
 
   # Include only specific pages or directories.
   # If empty, all pages are included by default.
-  # If populated, ONLY paths matching  list will be generated.
+  # If populated, ONLY paths matching the list will be generated.
   # Both llms.txt and llms-full.txt respect this setting.
   # Examples:
   #   "/about/"      → include strictly the /about/ page
@@ -76,7 +79,8 @@ Add an `[llms]` block to your `config/_default/params.toml`:
 
 | Key | Type | Default | Description |
 |---|---|---|---|
-| `llms.enable` | bool | `true` | Enable/disable both output files |
+| `llms.enable` | bool | `true` | Enable/disable `/llms.txt` |
+| `llms.enable_full` | bool | `true` | Enable/disable `/llms-full.txt` |
 | `llms.include` | list | `[]` | URL patterns to include (overrides default all) |
 | `llms.exclude` | list | `[]` | URL patterns to exclude (supports `*` and `**`) |
 

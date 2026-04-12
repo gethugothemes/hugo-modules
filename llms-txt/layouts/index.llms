@@ -87,9 +87,35 @@
 {{- if $filteredPages }}
 
 ## {{ $section.Title }}
+{{- $showSection := partial "llms_is_valid_page.html" (dict "url" $section.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $showSection }}
+- [{{ $section.Title }}]({{ $section.Permalink }}){{ with $section.Params.description | default ($section.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+{{- end }}
 {{ range $filteredPages }}
 {{- if .Title }}
 - [{{ .Title }}]({{ .Permalink }}){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- /* Taxonomy list and term pages */ -}}
+{{- range $taxonomyName, $taxonomy := site.Taxonomies }}
+{{- $taxPage := site.GetPage $taxonomyName }}
+{{- if $taxPage }}
+{{- $showTax := partial "llms_is_valid_page.html" (dict "url" $taxPage.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $showTax }}
+
+## {{ $taxPage.Title | default ($taxonomyName | humanize) }}
+- [{{ $taxPage.Title | default ($taxonomyName | humanize) }}]({{ $taxPage.Permalink }}){{ with $taxPage.Params.description }}: {{ . }}{{ end }}
+{{- range $termName, $weightedPages := $taxonomy }}
+{{- $termPage := site.GetPage (printf "%s/%s" $taxonomyName $termName) }}
+{{- if $termPage }}
+{{- $showTerm := partial "llms_is_valid_page.html" (dict "url" $termPage.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $showTerm }}
+- [{{ $termPage.Title | default $termName }}]({{ $termPage.Permalink }}){{ with $termPage.Params.description }}: {{ . }}{{ end }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

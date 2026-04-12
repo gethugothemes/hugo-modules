@@ -30,7 +30,7 @@
 {{- end -}}
 
 {{- $llms := site.Params.llms | default dict -}}
-{{- if ne ($llms.enable | default true) false -}}
+{{- if ne ($llms.enable_full | default true) false -}}
 {{- $rawExcludeList := $llms.exclude | default slice -}}
 {{- $includeList := $llms.include | default slice -}}
 
@@ -101,6 +101,17 @@ url: {{ .Permalink }}
 {{- /* Content sections: Blog, Docs etc. */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
+{{- $showSection := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $showSection }}
+
+--------------------------------------------------------------------------------
+title: "{{ .Title }}"
+url: {{ .Permalink }}
+{{ with .Params.description }}description: {{ . }}
+{{ end -}}
+--------------------------------------------------------------------------------
+{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Params.description }}{{ end }}
+{{- end }}
 {{- range where .RegularPages ".Permalink" "ne" "" }}
 {{- if .Title }}
 {{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
@@ -115,6 +126,40 @@ url: {{ .Permalink }}
 {{ end -}}
 --------------------------------------------------------------------------------
 {{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Summary | plainify }}{{ end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{- /* Taxonomy list and term pages */ -}}
+{{- range $taxonomyName, $taxonomy := site.Taxonomies }}
+{{- $taxPage := site.GetPage $taxonomyName }}
+{{- if $taxPage }}
+{{- $showTax := partial "llms_full_is_valid_page.html" (dict "url" $taxPage.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $showTax }}
+
+--------------------------------------------------------------------------------
+title: "{{ $taxPage.Title | default ($taxonomyName | humanize) }}"
+url: {{ $taxPage.Permalink }}
+{{ with $taxPage.Params.description }}description: {{ . }}
+{{ end -}}
+--------------------------------------------------------------------------------
+{{ if $taxPage.RawContent }}{{ $taxPage.RawContent }}{{ else }}{{ $taxPage.Params.description }}{{ end }}
+{{- range $termName, $weightedPages := $taxonomy }}
+{{- $termPage := site.GetPage (printf "%s/%s" $taxonomyName $termName) }}
+{{- if $termPage }}
+{{- $showTerm := partial "llms_full_is_valid_page.html" (dict "url" $termPage.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- if $showTerm }}
+
+--------------------------------------------------------------------------------
+title: "{{ $termPage.Title | default $termName }}"
+url: {{ $termPage.Permalink }}
+{{ with $termPage.Params.description }}description: {{ . }}
+{{ end -}}
+--------------------------------------------------------------------------------
+{{ if $termPage.RawContent }}{{ $termPage.RawContent }}{{ else }}{{ $termPage.Params.description }}{{ end }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
