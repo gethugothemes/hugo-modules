@@ -3,7 +3,7 @@
   https://github.com/gethugothemes/hugo-modules/llms-txt
 
   Generates /llms-full.txt — the full-content companion to llms.txt.
-  Respects params.llms.enable, include, and exclude settings.
+  Respects params.llms.enable_full, include, and exclude settings.
 */ -}}
 
 {{- define "partials/llms_full_is_valid_page.html" -}}
