@@ -21,8 +21,11 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
 ```toml
 
 [outputs]
-  home = ["...rest", "llms", "llmsfull"]
-  page = ["...rest", "md"]
+  home     = ["...rest", "llms", "llmsfull", "md"]
+  page     = ["...rest", "md"]
+  section  = ["...rest", "md"]
+  taxonomy = ["...rest", "md"]
+  term     = ["...rest", "md"]
   # Add any other output formats your site already uses
 
 
