@@ -16,6 +16,7 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
 * [Modal](https://github.com/gethugothemes/hugo-modules/tree/master/modal)
 * [Table Of Contents](https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents)
 * [PWA - Progressive Web App](https://github.com/gethugothemes/hugo-modules/tree/master/pwa)
+* [LLMS.txt](https://github.com/gethugothemes/hugo-modules/tree/master/llms-txt)
 
 * [Components](https://github.com/gethugothemes/hugo-modules/tree/master/components)
 
