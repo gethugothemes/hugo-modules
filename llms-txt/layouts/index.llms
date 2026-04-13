@@ -57,9 +57,9 @@
 - [{{ $home.Title | default "Home" }}]({{ $homeUrl }}){{ with $home.Params.description }}: {{ . }}{{ end }}
 {{- end }}
 
-{{- /* Standalone section pages (sections with no child pages) */ -}}
-{{- range site.Sections }}
-{{- if not .RegularPages }}
+{{- /* Standalone section pages (top-level sections with no pages at any depth) */ -}}
+{{- range site.Home.Sections }}
+{{- if not .RegularPagesRecursive }}
 {{- if and .Title .Permalink }}
 {{- $show := partial "llms_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
@@ -81,11 +81,11 @@
 {{- end }}
 {{- end }}
 
-{{- /* Content sections: Blog, Docs, etc. */ -}}
-{{- range site.Sections }}
-{{- if .RegularPages }}
+{{- /* Content sections: Blog, Docs, etc. — top-level only, all nested pages included */ -}}
+{{- range site.Home.Sections }}
+{{- if .RegularPagesRecursive }}
 {{- $section := . }}
-{{- $validPages := where .RegularPages ".Permalink" "ne" "" }}
+{{- $validPages := where .RegularPagesRecursive ".Permalink" "ne" "" }}
 {{- $filteredPages := slice }}
 {{- range $validPages }}
   {{- $page := . }}
