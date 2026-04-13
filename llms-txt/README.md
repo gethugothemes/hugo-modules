@@ -7,6 +7,12 @@ Automatically generates `/llms.txt` and `/llms-full.txt` for your Hugo site foll
 
 ---
 
+## Requirements
+
+- Hugo **0.147.2** or later (extended edition recommended)
+
+---
+
 ## Installation
 
 ### Step 1 — Add the module to your `config/_default/module.toml`
@@ -22,11 +28,11 @@ The module auto-registers `llms`, `llmsfull`, and `md` output formats via its ow
 
 ```toml
 [outputs]
-  home     = ["HTML", "RSS", "llms", "llmsfull", "md"]
-  page     = ["HTML", "RSS", "md"]
-  section  = ["HTML", "RSS", "md"]
-  taxonomy = ["HTML", "RSS", "md"]
-  term     = ["HTML", "RSS", "md"]
+  home     = ["..rest", "HTML", "RSS", "llms", "llmsfull", "md"]
+  page     = ["..rest", "HTML", "RSS", "md"]
+  section  = ["..rest", "HTML", "RSS", "md"]
+  taxonomy = ["..rest", "HTML", "RSS", "md"]
+  term     = ["..rest", "HTML", "RSS", "md"]
 
 
 ```
@@ -91,14 +97,14 @@ Follows the [llmstxt.org](https://llmstxt.org) specification:
 > Site description
 
 ## Pages
-- [About](https://example.com/about/): About page description
-- [Pricing](https://example.com/pricing/): Pricing page description
+- [About](https://example.com/about/index.md): About page description
+- [Pricing](https://example.com/pricing/index.md): Pricing page description
 
 ## Blog
-- [Post Title](https://example.com/blog/my-post/): Post summary...
+- [Post Title](https://example.com/blog/my-post/index.md): Post summary...
 
 ## Docs
-- [Getting Started](https://example.com/docs/getting-started/): ...
+- [Getting Started](https://example.com/docs/getting-started/index.md): ...
 ```
 
 
@@ -113,14 +119,14 @@ Contains the complete content of every page separated by 80-dash dividers:
 
 --------------------------------------------------------------------------------
 title: "About Us"
-url: https://example.com/about/
+url: https://example.com/about/index.md
 description: Learn about our company
 --------------------------------------------------------------------------------
 [full page content]
 
 --------------------------------------------------------------------------------
 title: "My Blog Post"
-url: https://example.com/blog/my-post/
+url: https://example.com/blog/my-post/index.md
 date: "2024-01-15"
 description: Post description
 --------------------------------------------------------------------------------
