@@ -48,32 +48,40 @@
 
 ## Pages
 
+{{- /* Home page */ -}}
 {{- $home := site.Home }}
 {{- $showHome := partial "llms_is_valid_page.html" (dict "url" $home.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showHome }}
-- [{{ $home.Title | default "Home" }}]({{ $home.Permalink }}index.md){{ with $home.Params.description }}: {{ . }}{{ end }}
+{{- $homeUrl := $home.Permalink -}}
+{{- with $home.OutputFormats.Get "md" }}{{- $homeUrl = .Permalink -}}{{- end }}
+- [{{ $home.Title | default "Home" }}]({{ $homeUrl }}){{ with $home.Params.description }}: {{ . }}{{ end }}
 {{- end }}
 
-
+{{- /* Standalone section pages (sections with no child pages) */ -}}
 {{- range site.Sections }}
 {{- if not .RegularPages }}
 {{- if and .Title .Permalink }}
 {{- $show := partial "llms_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
-- [{{ .Title }}]({{ strings.TrimSuffix "/" .Permalink }}.md){{ with .Params.description }}: {{ . }}{{ end }}
+{{- $url := .Permalink -}}
+{{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
+- [{{ .Title }}]({{ $url }}){{ with .Params.description }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
 
+{{- /* Root-level regular pages: About, Contact, etc. */ -}}
 {{- range site.Home.RegularPages }}
 {{- $show := partial "llms_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
-- [{{ .Title }}]({{ strings.TrimSuffix "/" .Permalink }}.md){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+{{- $url := .Permalink -}}
+{{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
+- [{{ .Title }}]({{ $url }}){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 
-{{- /* Content sections: Blog, Docs etc. */ -}}
+{{- /* Content sections: Blog, Docs, etc. */ -}}
 {{- range site.Sections }}
 {{- if .RegularPages }}
 {{- $section := . }}
@@ -87,20 +95,18 @@
 {{- if $filteredPages }}
 
 ## {{ $section.Title }}
-{{- $showSection := partial "llms_is_valid_page.html" (dict "url" $section.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
-{{- if $showSection }}
-- [{{ $section.Title }}]({{ strings.TrimSuffix "/" $section.Permalink }}.md){{ with $section.Params.description | default ($section.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
-{{- end }}
 {{ range $filteredPages }}
 {{- if .Title }}
-- [{{ .Title }}]({{ strings.TrimSuffix "/" .Permalink }}.md){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+{{- $url := .Permalink -}}
+{{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
+- [{{ .Title }}]({{ $url }}){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
 
-{{- /* Taxonomy list and term pages */ -}}
+{{- /* Taxonomy pages */ -}}
 {{- range $taxonomyName, $taxonomy := site.Taxonomies }}
 {{- $taxPage := site.GetPage $taxonomyName }}
 {{- if $taxPage }}
@@ -108,13 +114,14 @@
 {{- if $showTax }}
 
 ## {{ $taxPage.Title | default ($taxonomyName | humanize) }}
-- [{{ $taxPage.Title | default ($taxonomyName | humanize) }}]({{ strings.TrimSuffix "/" $taxPage.Permalink }}.md){{ with $taxPage.Params.description }}: {{ . }}{{ end }}
 {{- range $termName, $weightedPages := $taxonomy }}
 {{- $termPage := site.GetPage (printf "%s/%s" $taxonomyName $termName) }}
 {{- if $termPage }}
 {{- $showTerm := partial "llms_is_valid_page.html" (dict "url" $termPage.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showTerm }}
-- [{{ $termPage.Title | default $termName }}]({{ strings.TrimSuffix "/" $termPage.Permalink }}.md){{ with $termPage.Params.description }}: {{ . }}{{ end }}
+{{- $url := $termPage.Permalink -}}
+{{- with $termPage.OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
+- [{{ $termPage.Title | default $termName }}]({{ $url }}){{ with $termPage.Params.description }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}

@@ -43,7 +43,6 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
   mediaType      = "text/markdown"
   isPlainText    = true
   notAlternative = true
-  uglyURLs       = true
 
 
 ```
