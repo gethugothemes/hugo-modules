@@ -51,7 +51,7 @@
 {{- $home := site.Home }}
 {{- $showHome := partial "llms_is_valid_page.html" (dict "url" $home.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showHome }}
-- [{{ $home.Title | default "Home" }}]({{ $home.Permalink }}){{ with $home.Params.description }}: {{ . }}{{ end }}
+- [{{ $home.Title | default "Home" }}]({{ $home.Permalink }}index.md){{ with $home.Params.description }}: {{ . }}{{ end }}
 {{- end }}
 
 
@@ -60,7 +60,7 @@
 {{- if and .Title .Permalink }}
 {{- $show := partial "llms_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
-- [{{ .Title }}]({{ .Permalink }}){{ with .Params.description }}: {{ . }}{{ end }}
+- [{{ .Title }}]({{ strings.TrimSuffix "/" .Permalink }}.md){{ with .Params.description }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -69,7 +69,7 @@
 {{- range site.Home.RegularPages }}
 {{- $show := partial "llms_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
-- [{{ .Title }}]({{ .Permalink }}){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+- [{{ .Title }}]({{ strings.TrimSuffix "/" .Permalink }}.md){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 
@@ -89,11 +89,11 @@
 ## {{ $section.Title }}
 {{- $showSection := partial "llms_is_valid_page.html" (dict "url" $section.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showSection }}
-- [{{ $section.Title }}]({{ $section.Permalink }}){{ with $section.Params.description | default ($section.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+- [{{ $section.Title }}]({{ strings.TrimSuffix "/" $section.Permalink }}.md){{ with $section.Params.description | default ($section.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
 {{- end }}
 {{ range $filteredPages }}
 {{- if .Title }}
-- [{{ .Title }}]({{ .Permalink }}){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
+- [{{ .Title }}]({{ strings.TrimSuffix "/" .Permalink }}.md){{ with .Params.description | default (.Summary | plainify | truncate 120) }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -108,13 +108,13 @@
 {{- if $showTax }}
 
 ## {{ $taxPage.Title | default ($taxonomyName | humanize) }}
-- [{{ $taxPage.Title | default ($taxonomyName | humanize) }}]({{ $taxPage.Permalink }}){{ with $taxPage.Params.description }}: {{ . }}{{ end }}
+- [{{ $taxPage.Title | default ($taxonomyName | humanize) }}]({{ strings.TrimSuffix "/" $taxPage.Permalink }}.md){{ with $taxPage.Params.description }}: {{ . }}{{ end }}
 {{- range $termName, $weightedPages := $taxonomy }}
 {{- $termPage := site.GetPage (printf "%s/%s" $taxonomyName $termName) }}
 {{- if $termPage }}
 {{- $showTerm := partial "llms_is_valid_page.html" (dict "url" $termPage.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showTerm }}
-- [{{ $termPage.Title | default $termName }}]({{ $termPage.Permalink }}){{ with $termPage.Params.description }}: {{ . }}{{ end }}
+- [{{ $termPage.Title | default $termName }}]({{ strings.TrimSuffix "/" $termPage.Permalink }}.md){{ with $termPage.Params.description }}: {{ . }}{{ end }}
 {{- end }}
 {{- end }}
 {{- end }}

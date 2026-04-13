@@ -53,7 +53,7 @@
 
 --------------------------------------------------------------------------------
 title: "{{ $home.Title | default "Home" }}"
-url: {{ $home.Permalink }}
+url: {{ $home.Permalink }}index.md
 {{ with $home.Params.description }}description: {{ . }}
 {{ end -}}
 --------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ url: {{ $home.Permalink }}
 
 --------------------------------------------------------------------------------
 title: "{{ .Title }}"
-url: {{ .Permalink }}
+url: {{ strings.TrimSuffix "/" .Permalink }}.md
 {{ with .Params.description }}description: {{ . }}
 {{ end -}}
 --------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ url: {{ .Permalink }}
 
 --------------------------------------------------------------------------------
 title: "{{ .Title }}"
-url: {{ .Permalink }}
+url: {{ strings.TrimSuffix "/" .Permalink }}.md
 {{ with .Date }}date: "{{ .Format "2006-01-02" }}"
 {{ end -}}
 {{ with .Params.description }}description: {{ . }}
@@ -106,7 +106,7 @@ url: {{ .Permalink }}
 
 --------------------------------------------------------------------------------
 title: "{{ .Title }}"
-url: {{ .Permalink }}
+url: {{ strings.TrimSuffix "/" .Permalink }}.md
 {{ with .Params.description }}description: {{ . }}
 {{ end -}}
 --------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ url: {{ .Permalink }}
 
 --------------------------------------------------------------------------------
 title: "{{ .Title }}"
-url: {{ .Permalink }}
+url: {{ strings.TrimSuffix "/" .Permalink }}.md
 {{ with .Date }}date: "{{ .Format "2006-01-02" }}"
 {{ end -}}
 {{ with .Params.description }}description: {{ . }}
@@ -141,7 +141,7 @@ url: {{ .Permalink }}
 
 --------------------------------------------------------------------------------
 title: "{{ $taxPage.Title | default ($taxonomyName | humanize) }}"
-url: {{ $taxPage.Permalink }}
+url: {{ strings.TrimSuffix "/" $taxPage.Permalink }}.md
 {{ with $taxPage.Params.description }}description: {{ . }}
 {{ end -}}
 --------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ url: {{ $taxPage.Permalink }}
 
 --------------------------------------------------------------------------------
 title: "{{ $termPage.Title | default $termName }}"
-url: {{ $termPage.Permalink }}
+url: {{ strings.TrimSuffix "/" $termPage.Permalink }}.md
 {{ with $termPage.Params.description }}description: {{ . }}
 {{ end -}}
 --------------------------------------------------------------------------------

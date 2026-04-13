@@ -22,6 +22,7 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
 
 [outputs]
   home = ["...rest", "llms", "llmsfull"]
+  page = ["...rest", "md"]
   # Add any other output formats your site already uses
 
 
@@ -37,9 +38,18 @@ path = "github.com/gethugothemes/hugo-modules/llms-txt"
   isPlainText = true
   notAlternative = true
 
+[outputFormats.md]
+  baseName       = "index"
+  mediaType      = "text/markdown"
+  isPlainText    = true
+  notAlternative = true
+  uglyURLs       = true
+
 
 ```
 Note: ...rest is a placeholder for any other output formats you may already have configured (e.g. "HTML", "RSS", etc.). Make sure to include those as well to avoid breaking existing functionality.
+
+The `md` output format causes Hugo to generate an `index.md` file alongside each page's `index.html`. These are the files that `/llms.txt` links to, so AI assistants can fetch raw Markdown content directly.
 
 ## Configuration
 
