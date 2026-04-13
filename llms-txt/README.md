@@ -16,36 +16,17 @@ Automatically generates `/llms.txt` and `/llms-full.txt` for your Hugo site foll
 path = "github.com/gethugothemes/hugo-modules/llms-txt"
 ```
 
-### Step 2 — Add the output formats to your `hugo.toml`
+### Step 2 — Enable the output formats in your `hugo.toml`
+
+The module auto-registers `llms`, `llmsfull`, and `md` output formats via its own `config.toml` — no need to define them manually. Just enable them for the relevant page kinds:
 
 ```toml
-
 [outputs]
-  home     = ["...rest", "llms", "llmsfull", "md"]
-  page     = ["...rest", "md"]
-  section  = ["...rest", "md"]
-  taxonomy = ["...rest", "md"]
-  term     = ["...rest", "md"]
-  # Add any other output formats your site already uses
-
-
-[outputFormats.llms]
-  baseName    = "llms"
-  mediaType   = "text/plain"
-  isPlainText = true
-  notAlternative = true
-
-[outputFormats.llmsfull]
-  baseName    = "llms-full"
-  mediaType   = "text/plain"
-  isPlainText = true
-  notAlternative = true
-
-[outputFormats.md]
-  baseName       = "index"
-  mediaType      = "text/markdown"
-  isPlainText    = true
-  notAlternative = true
+  home     = ["HTML", "RSS", "llms", "llmsfull", "md"]
+  page     = ["HTML", "RSS", "md"]
+  section  = ["HTML", "RSS", "md"]
+  taxonomy = ["HTML", "RSS", "md"]
+  term     = ["HTML", "RSS", "md"]
 
 
 ```
