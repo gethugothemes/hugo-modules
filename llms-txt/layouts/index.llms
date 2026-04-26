@@ -3,7 +3,7 @@
   https://github.com/gethugothemes/hugo-modules/llms-txt
 
   Generates /llms.txt following the llmstxt.org specification.
-  Grouped by Hugo sections. Respects params.llms.enable, include, and exclude.
+  Grouped by Hugo sections. Respects params.llms.generate_llms_txt, include, and exclude.
 */ -}}
 
 {{- define "partials/llms_is_valid_page.html" -}}
@@ -30,7 +30,7 @@
 {{- end -}}
 
 {{- $llms := site.Params.llms | default dict -}}
-{{- if ne ($llms.enable | default true) false -}}
+{{- if ne ($llms.generate_llms_txt | default true) false -}}
 {{- $rawExcludeList := $llms.exclude | default slice -}}
 {{- $includeList := $llms.include | default slice -}}
 
