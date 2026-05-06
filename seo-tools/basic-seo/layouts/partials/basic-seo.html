@@ -163,6 +163,7 @@
 {{ with site.Params.metadata.twitter }}
   <meta name="twitter:site" content="@{{ . }}" />
 {{ end }}
-{{ with site.Params.metadata.author }}
+{{ $twitterAuthor := site.Params.metadata.twitter_author | default site.Params.metadata.author }}
+{{ with $author }}
   <meta name="twitter:creator" content="@{{ . }}" />
 {{ end }}
