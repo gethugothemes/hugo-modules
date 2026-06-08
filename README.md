@@ -26,6 +26,7 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
   * [Pre Loader](https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader)
   * [Social Share](https://github.com/gethugothemes/hugo-modules/tree/master/components/social-share)
   * [Valine Comment](https://github.com/gethugothemes/hugo-modules/tree/master/components/valine-comment)
+  * [OpenRemark Comments](https://github.com/gethugothemes/hugo-modules/tree/master/components/open-remark)
   * [Render Link](https://github.com/gethugothemes/hugo-modules/tree/master/components/render-link)
   * [Custom Script](https://github.com/gethugothemes/hugo-modules/tree/master/components/custom-script)
 
