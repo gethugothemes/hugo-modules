@@ -22,6 +22,9 @@
 
 {{- $date:= time.Format ":date_long" .PublishDate -}}
 
+{{- $.Scratch.Delete "image" -}}
+{{- $.Scratch.Delete "imageSM" -}}
+
 {{- if .Params.image -}}
   {{- $.Scratch.Set "image" (partial "searchImage" (dict "Src" .Params.image "Size" "420x" "Command" "Resize")) -}}
   {{- $.Scratch.Set "imageSM" (partial "searchImage" (dict "Src" .Params.image "Size" "100x100" "Command" "Fill")) -}}

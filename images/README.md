@@ -91,6 +91,7 @@ Available parameters:
 * `Context`: image context | default: .
 * `Command`: image resizing command | default: "Resize"
 * `Placeholder`: image placeholder | default: false
+* `FetchPriority`: image loading priority | available: `"high"`, `"low"`, `"auto"` | default: `"auto"`
 * `DisplayXL`: image size for extra large screen | default: "1110px"
 * `DisplayLG`: image size for large screen | default: "700px"
 * `DisplayMD`: image size for medium screen | default: "600px"

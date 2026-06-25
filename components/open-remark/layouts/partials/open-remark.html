@@ -1,0 +1,19 @@
+{{ with site.Params.open_remark }}
+  {{ if .enable }}
+<div
+  data-open-remark
+  data-site-key="{{ .site_key }}"
+></div>
+<script async src="{{ .embed_url }}"></script>
+
+    {{ if or (eq .site_key "") (eq .embed_url "") }}
+      <p class="text-center mb-5">
+        "site_key" and "embed_url" are required, otherwise comments won't load. <br /><a
+          href="https://github.com/zeon-studio/open-remark"
+          target="_blank"
+          >Get your site key from the OpenRemark dashboard</a
+        >
+      </p>
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -16,6 +16,7 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
 * [Modal](https://github.com/gethugothemes/hugo-modules/tree/master/modal)
 * [Table Of Contents](https://github.com/gethugothemes/hugo-modules/tree/master/table-of-contents)
 * [PWA - Progressive Web App](https://github.com/gethugothemes/hugo-modules/tree/master/pwa)
+* [LLMS.txt](https://github.com/gethugothemes/hugo-modules/tree/master/llms-txt)
 
 * [Components](https://github.com/gethugothemes/hugo-modules/tree/master/components)
 
@@ -25,6 +26,7 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
   * [Pre Loader](https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader)
   * [Social Share](https://github.com/gethugothemes/hugo-modules/tree/master/components/social-share)
   * [Valine Comment](https://github.com/gethugothemes/hugo-modules/tree/master/components/valine-comment)
+  * [OpenRemark Comments](https://github.com/gethugothemes/hugo-modules/tree/master/components/open-remark)
   * [Render Link](https://github.com/gethugothemes/hugo-modules/tree/master/components/render-link)
   * [Custom Script](https://github.com/gethugothemes/hugo-modules/tree/master/components/custom-script)
 
@@ -76,11 +78,11 @@ We welcome contributions from the community to help us improve and expand this p
 
 ## 🚀 Our Hugo Modules Powered Themes
 
-| [![Bigspring](https://demo.gethugothemes.com/thumbnails/bigspring.png)](https://gethugothemes.com/products/bigspring/) | [![Reader](https://demo.gethugothemes.com/thumbnails/reader.png)](https://gethugothemes.com/products/reader/) | [![Agico](https://demo.gethugothemes.com/thumbnails/agico.png)](https://gethugothemes.com/products/agico/) |
+| [![Bigspring](https://assets.teamosis.com/thumbs/bigspring.png)](https://gethugothemes.com/products/bigspring/) | [![Reader](https://assets.teamosis.com/thumbs/reader.png)](https://gethugothemes.com/products/reader/) | [![Agico](https://assets.teamosis.com/thumbs/agico.png)](https://gethugothemes.com/products/agico/) |
 |:---:|:---:|:---:|
 | **Bigspring** | **Reader** | **Agico** |
-| [![Logbook](https://demo.gethugothemes.com/thumbnails/logbook.png)](https://gethugothemes.com/products/logbook/) | [![Copper](https://demo.gethugothemes.com/thumbnails/copper.png)](https://gethugothemes.com/products/copper/) | [![Mega-Bundle-HUGO](https://demo.gethugothemes.com/thumbnails/bundle.png?)](https://gethugothemes.com/bundle/?utm_source=hugo_modules_github&utm_medium=referral&utm_campaign=github_theme_readme) |
-| **Logbook** |  **Copper** | **60+ Themes Bundle** |
+| [![Logbook](https://assets.teamosis.com/thumbs/logbook.png)](https://gethugothemes.com/products/logbook/) | [![Copper](https://assets.teamosis.com/thumbs/copper.png)](https://gethugothemes.com/products/copper/) | [![Mega-Bundle-HUGO](https://assets.teamosis.com/thumbs/bundle.png?)](https://gethugothemes.com/bundle/?utm_source=hugo_modules_github&utm_medium=referral&utm_campaign=github_theme_readme) |
+| **Logbook** |  **Copper** | **68+ Themes Bundle** |
 
 ## 📝 License
 
