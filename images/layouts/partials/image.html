@@ -74,7 +74,7 @@
 
 
     <!-- gif/svg image -->
-    {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) (eq $imageExt `.webp`) }}
+    {{ if or (eq $imageExt `.gif`) (eq $imageExt `.svg`) }}
       <img
         src="{{ $image.RelPermalink }}"
         loading="{{ $loading }}"
@@ -207,11 +207,15 @@
         <!-- /if image size less then 500x and size not defined -->
 
         <!-- image processing for multiple device -->
+        {{ $formatString := "" }}
+        {{ if and $webp (ne $imageExt ".webp") }}
+          {{ $formatString = " webp" }}
+        {{ end }}
         {{ $imageFallback:= $image.Resize $displayXL }}
-        {{ $imageXL:= $image.Resize (add $displayXL " webp") }}
-        {{ $imageLG:= $image.Resize (add $displayLG " webp") }}
-        {{ $imageMD:= $image.Resize (add $displayMD " webp") }}
-        {{ $imageSM:= $image.Resize (add $displaySM " webp") }}
+        {{ $imageXL:= $image.Resize (add $displayXL $formatString) }}
+        {{ $imageLG:= $image.Resize (add $displayLG $formatString) }}
+        {{ $imageMD:= $image.Resize (add $displayMD $formatString) }}
+        {{ $imageSM:= $image.Resize (add $displaySM $formatString) }}
         {{ if not $webp }}
           {{ $imageXL = $image.Resize $displayXL }}
           {{ $imageLG = $image.Resize $displayLG }}
