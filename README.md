@@ -47,7 +47,7 @@ Explore our 30+ Hugo modules and use them for your own projects for free. Check 
   * [Notice](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/notice)
   * [Cloak Contact](https://github.com/gethugothemes/hugo-modules/tree/master/shortcodes/cloak-contact)
 
-* [Icons](https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools)
+* [Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons)
   * [Font Awesome Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/font-awesome)
   * [Themify Icons](https://github.com/gethugothemes/hugo-modules/tree/master/icons/themify-icons)
   
