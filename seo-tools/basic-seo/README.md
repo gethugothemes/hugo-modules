@@ -28,5 +28,7 @@ Add some following configuration to your `config/_default/params.toml` file.
 keywords = ["Boilerplate", "Hugo", "Themefisher", "GetHugoThemes"]
 description = "This is default meta description"
 author = "GetHugoThemes"
+twitter = "gethugothemes" # Twitter handle of the website, without "@" (twitter:site)
+twitter_author = "gethugothemes" # Twitter handle of the author, without "@" (twitter:creator)
 image = "images/website-thumb.png" # this image will be used as fallback if a page has no image of its own
 ```
