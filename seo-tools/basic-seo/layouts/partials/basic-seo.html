@@ -140,7 +140,7 @@
       content="image/{{- if eq $imageExt `.svg` -}}
         svg+xml
       {{- else -}}
-        {{- replaceRE `^jpg$` `jpeg` $imageExt -}}
+        {{- replaceRE `^\.jpe?g$` `jpeg` (lower $imageExt) | strings.TrimPrefix `.` -}}
       {{- end -}}" />
   {{ end }}
 
